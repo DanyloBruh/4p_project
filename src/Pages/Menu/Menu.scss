@@ -1,0 +1,138 @@
+.menu-content {
+  width: 100%;
+  height: 100%;
+  .menu-header {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    position: relative;
+    &__text-box {
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+    &__btn {
+      height: 75px;
+      width: 205px;
+      background-color: transparent;
+      border: 3px solid #fff;
+      margin-top: 30px;
+
+      color: #fff;
+      font-family: "Outfit", sans-serif;
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+    .carousel {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .carousel-item {
+      > img {
+        width: 100%;
+        height: 80vh;
+        object-fit: cover;
+      }
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 5%;
+    }
+    .container {
+      position: relative;
+      > h2 {
+        width: 85%;
+        //   margin-top:  calc(95px + 10%);
+        color: #fff;
+        font-family: "Outfit", sans-serif;
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.menu-main {
+  padding-top: 44px;
+  > h2 {
+    color: #fff;
+    font-family: "Outfit", sans-serif;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+  }
+  > p {
+    color: #fff;
+    text-align: center;
+    font-family: "Outfit", sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+  }
+  &__product {
+    margin-top: 60px !important;
+  }
+  &__filter {
+    margin-top: 70px;
+    button {
+      background-color: transparent;
+      border: none;
+
+      color: #fff;
+      text-align: center;
+      font-family: "Outfit", sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+    button {
+      letter-spacing: 0;
+    }
+
+    button:hover,
+    button:active {
+      letter-spacing: 5px;
+    }
+
+    button:after,
+    button:before {
+      backface-visibility: hidden;
+      border: 1px solid rgba(#fff, 0);
+      bottom: 0px;
+      content: " ";
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      transition: all 280ms ease-in-out;
+      width: 0;
+    }
+
+    button:hover:after,
+    button:hover:before {
+      backface-visibility: hidden;
+      border-color: #fff;
+      transition: width 350ms ease-in-out;
+      width: 70%;
+    }
+
+    button:hover:before {
+      bottom: auto;
+      top: 0;
+      width: 70%;
+    }
+  }
+}
