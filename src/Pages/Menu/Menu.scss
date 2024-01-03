@@ -31,6 +31,7 @@
       position: absolute;
       z-index: 0;
       top: 0;
+      bottom: 0;
       left: 0;
       right: 0;
     }
@@ -71,6 +72,7 @@
     font-style: normal;
     font-weight: 200;
     line-height: normal;
+    margin-bottom: 15px;
   }
   > p {
     color: #fff;
@@ -81,11 +83,9 @@
     font-weight: 200;
     line-height: normal;
   }
-  &__product {
-    margin-top: 60px !important;
-  }
   &__filter {
-    margin-top: 70px;
+    margin-top: 44px !important;
+    margin-bottom: 20px;
     button {
       background-color: transparent;
       border: none;

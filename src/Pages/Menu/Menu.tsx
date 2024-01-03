@@ -50,27 +50,28 @@ function Menu() {
           </Col>
         </Row>
         <Row className="menu-main__product">
-          <Col>
+          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
             <MenuProduct />
           </Col>
-          <Col>
+          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
             <MenuProduct />
           </Col>
-          <Col>
+          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <MenuProduct />
+          </Col>
+          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <MenuProduct />
+          </Col>
+          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <MenuProduct />
+          </Col>
+          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
             <MenuProduct />
           </Col>
         </Row>
-        <Row className="menu-main__product">
-          <Col>
-            <MenuProduct />
-          </Col>
-          <Col>
-            <MenuProduct />
-          </Col>
-          <Col>
-            <MenuProduct />
-          </Col>
-        </Row>
+        
+          
+
       </Container>
     </div>
   );
