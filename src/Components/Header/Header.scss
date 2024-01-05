@@ -16,17 +16,18 @@
     width: 67px;
     align-self: center;
   }
-  .nav-link {
+  a {
     color: #ffffff;
     font-size: 24px;
     font-family: "Outfit", sans-serif;
-    padding-left: 25px !important;
-    padding-right: 25px !important;
+    padding-left: 25px;
+    padding-right: 25px;
+    text-decoration: none;
   }
-  .nav-link:hover {
+  a:hover {
     color: #ffffff;
   }
-  .nav-link:after {
+  a:after {
     display: block;
     content: "";
     border-bottom: solid 3px #ffffff;
@@ -34,7 +35,15 @@
     transition: transform 150ms ease-in-out;
     transform-origin: 0% 50%;
   }
-  .nav-link:hover:after {
+  a:hover:after {
     transform: scaleX(1);
+  }
+  .active:after {
+    display: block;
+    content: "";
+    border-bottom: solid 3px #ffffff;
+    transform: scaleX(0);
+    transform-origin: 0% 50%;
+    transform: scaleX(1)
   }
 }
