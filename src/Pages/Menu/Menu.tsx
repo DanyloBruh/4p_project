@@ -1,9 +1,11 @@
-import { Carousel, Col, Container, Row } from "react-bootstrap";
-import "./Menu.scss";
-import Varenyk from "../../Assets/varenyk.png";
-import Dumplings from "../../Assets/dumplings.png";
-import Borsch from "../../Assets/borsch.png";
-import MenuProduct from "../../Components/MenuProduct/MenuProduct";
+import {
+  Carousel, Col, Container, Row,
+} from 'react-bootstrap';
+import './Menu.scss';
+import Varenyk from '../../Assets/varenyk.png';
+import Dumplings from '../../Assets/dumplings.png';
+import Borsch from '../../Assets/borsch.png';
+import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 
 function Menu() {
   return (
@@ -31,7 +33,7 @@ function Menu() {
       <Container className="menu-main">
         <h2>Menu</h2>
         <p>
-          Non voluptas minima et nobis debitis vel dolor nisi? Et esse similique{" "}
+          Non voluptas minima et nobis debitis vel dolor nisi? Et esse similique{' '}
           <br />
           ut corrupti repellat ea enim harum.
         </p>
@@ -69,8 +71,6 @@ function Menu() {
             <MenuProduct />
           </Col>
         </Row>
-        
-          
 
       </Container>
     </div>
