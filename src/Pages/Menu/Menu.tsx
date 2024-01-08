@@ -8,6 +8,10 @@ import Borsch from '../../Assets/borsch.png';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 
 function Menu() {
+
+
+
+  
   return (
     <div className="menu-content">
       <div className="menu-header">
