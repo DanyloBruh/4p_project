@@ -1,0 +1,95 @@
+.about-us {
+  margin-top: 95px;
+  position: relative;
+  &__header {
+    width: 100%;
+    height: 340px;
+    background-image: url("../../Assets//about-us-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > h2 {
+      color: #fff;
+      text-align: center;
+      font-family: "Outfit", sans-serif;
+      font-size: 64px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+  }
+  &__content {
+    position: relative;
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+    > h2 {
+      color: #fff;
+      text-align: center;
+      font-family: "Outfit", sans-serif;
+      font-size: 64px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: capitalize;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 8px;
+      margin-top: 40px;
+      margin-bottom: 60px;
+    }
+    > .row {
+      margin-bottom: 120px;
+    }
+    &__img {
+      width: calc(100% - 40px);
+      height: 330px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    &__header {
+      color: #fff;
+      font-family: "Outfit", sans-serif;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+      text-align: left;
+    }
+    &__text {
+      color: #fff;
+      text-align: justify;
+      font-family: "Outfit", sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      margin-top: 10px;
+    }
+
+  }
+  > .ornament-left {
+    height: 100%;
+    width: 100px;
+    background-image: url("../../Assets/ornament-about-us.png");
+    position: absolute;
+    top: 340px;
+    left: 40px;
+  }
+  > .ornament-rigth {
+    height: 100%;
+    width: 100px;
+    background-image: url("../../Assets/ornament-about-us.png");
+    position: absolute;
+    top: 340px;
+    right: 40px;
+  }
+}

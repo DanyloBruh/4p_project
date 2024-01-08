@@ -1,5 +1,6 @@
 .contacts-content {
-  height: 920px;
+  min-height: 700px;
+  height: 85vh;
   background-image: url("../../Assets/contacts-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -7,14 +8,25 @@
   position: relative;
   .contact-card {
     width: 800px;
-    height: 700px;
+    height: 65vh;
+    min-height: 500px;
+    max-height: 700px;
     border-radius: 10px;
     background: #232323;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -45%);
-    padding: 25PX;
+    padding: 25px;
+    > .row {
+      height: calc(100% - 81px - 8px);
+    }
+    .col-contacts-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
     > h2 {
       color: #fff;
       font-family: "Outfit", sans-serif;
@@ -25,6 +37,63 @@
       text-decoration-line: underline;
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
+    }
+    .contacts-info {
+      display: flex;
+      justify-content: start;
+      margin-top: auto;
+      > svg {
+        margin-top: 3px;
+      }
+      h2 {
+        color: #fff;
+        font-family: "Outfit", sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-transform: capitalize;
+      }
+      p {
+        color: #fff;
+        font-family: "Outfit", sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+      }
+      .contacts-info-text {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-left: 10px;
+        > div {
+          display: flex;
+          justify-content: space-between;
+          position: relative;
+          margin-bottom: 15px;
+          > p {
+            color: #fff;
+            font-family: "Outfit", sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            text-align: left;
+            margin: 0;
+          }
+        }
+        > div::before {
+          content: "";
+          width: 100%;
+          border-bottom: 1px solid #bebebe;
+          position: absolute;
+          bottom: -5px;
+        }
+      }
+    }
+    .contacts-info:first-child {
+      margin: 0;
     }
   }
 }

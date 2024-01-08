@@ -16,7 +16,7 @@ function Header() {
                 <NavLink to="/">menu</NavLink>
                 <NavLink to="link">promotions</NavLink>
                 <NavLink to="link">blog</NavLink>
-                <NavLink to="link">about us</NavLink>
+                <NavLink to="aboutus">about us</NavLink>
                 <NavLink to="contacts">contacts</NavLink>
               </Nav>
             </Navbar.Collapse>

@@ -7,28 +7,28 @@ function Footer() {
     <div className="footer-body">
       <Container>
         <Row>
-          <Col xs={3} className="col">
+          <Col xs={3} className="footer-col">
             <img src={Logo} alt="logo-footer" className="footer-logo" />
           </Col>
-          <Col xs={2} className="col">
+          <Col xs={2} className="footer-col">
             <h2>4P</h2>
             <p>menu</p>
             <p>about</p>
             <p>blog</p>
           </Col>
-          <Col xs={2} className="col">
+          <Col xs={2} className="footer-col">
             <h2>contacts</h2>
             <p>email</p>
             <p>instagram </p>
             <p>twitter</p>
           </Col>
-          <Col xs={2} className="col">
+          <Col xs={2} className="footer-col">
             <h2>useful info</h2>
             <p>return policy</p>
             <p>delivery</p>
             <p>where we deliver</p>
           </Col>
-          <Col xs={3} className="col">
+          <Col xs={3} className="footer-col">
             <h2>opening hours</h2>
             {/* <div> */}
             <div>

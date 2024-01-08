@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Menu from "./Pages/Menu/Menu";
 import Contacts from "./Pages/Contacts/Contacts";
 import Layout from "./Components/Layout/Layout";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Menu />} />
           <Route path="contacts" element={<Contacts />} />
+          <Route path="aboutus" element={<AboutUs />} />
           <Route path="*" element={<h1>Not found</h1>}/>
         </Route>
       </Routes>
