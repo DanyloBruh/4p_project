@@ -5,7 +5,8 @@ import Menu from "./Pages/Menu/Menu";
 import Contacts from "./Pages/Contacts/Contacts";
 import Layout from "./Components/Layout/Layout";
 import AboutUs from "./Pages/AboutUs/AboutUs";
-
+import NotFound from "./Pages/NotFound/NotFound";
+import Blog from "./Pages/Blog/Blog";
 function App() {
   return (
     <div className="App">
@@ -14,7 +15,8 @@ function App() {
           <Route index element={<Menu />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="aboutus" element={<AboutUs />} />
-          <Route path="*" element={<h1>Not found</h1>}/>
+          <Route path="blog" element={<Blog />} />
+          <Route path="*" element={<NotFound />}/>
         </Route>
       </Routes>
     </div>
