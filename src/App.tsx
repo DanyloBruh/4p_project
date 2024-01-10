@@ -8,6 +8,8 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import NotFound from "./Pages/NotFound/NotFound";
 import Blog from "./Pages/Blog/Blog";
 import Article from "./Pages/Article/Article";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
+
 function App() {
   return (
     <div className="App">
@@ -18,7 +20,8 @@ function App() {
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:id" element={<Article />} />
-          <Route path="*" element={<NotFound />}/>
+          <Route path="privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </div>
