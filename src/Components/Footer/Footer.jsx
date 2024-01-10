@@ -1,6 +1,6 @@
-import { Col, Container, Row } from "react-bootstrap";
-import "./Footer.scss";
-import Logo from "../../Assets/logo.png";
+import { Col, Container, Row } from 'react-bootstrap';
+import './Footer.scss';
+import Logo from '../../Assets/logo.png';
 
 function Footer() {
   return (

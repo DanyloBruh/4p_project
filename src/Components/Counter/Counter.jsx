@@ -1,4 +1,4 @@
-import "./Counter.scss";
+import './Counter.scss';
 
 function Counter() {
   return (
@@ -14,9 +14,9 @@ function Counter() {
           <path
             d="M4 10H16"
             stroke="white"
-            stroke-width="2"
-            stroke-linecap="square"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="square"
+            strokeLinejoin="round"
           />
         </svg>
       </button>
@@ -32,9 +32,9 @@ function Counter() {
           <path
             d="M3 10.5H18M10.5 3V18"
             stroke="white"
-            stroke-width="2"
-            stroke-linecap="square"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="square"
+            strokeLinejoin="round"
           />
         </svg>
       </button>

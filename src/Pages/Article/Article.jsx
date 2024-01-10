@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
-import "./Article.scss";
-import { Container } from "react-bootstrap";
-import Borch from "../../Assets/borsch.jpg";
+import { useParams } from 'react-router-dom';
+import './Article.scss';
+import { Container } from 'react-bootstrap';
+import Borch from '../../Assets/borsch.jpg';
 
 function Article() {
   const { id } = useParams();
@@ -26,20 +26,26 @@ function Article() {
             of the regional parts of Ukraine. The differences between the dishes
             of Chernihiv Oblast and Galicia, Poltava Oblast and Volhynia,
             Bukovyna and Kharkiv Oblast, Podillia and Transcarpathia have
-            survived to this day. <br />
+            survived to this day.
+            {' '}
+            <br />
             Peculiarities of Ukrainian cuisine are determined by the way of life
             of the people, who were engaged in hard agricultural work. In order
             to fulfill it, people needed hearty high-calorie food. National
             whims demanded that this food be tasty. Our ancestors from ancient
             times knew how to prepare nutritious vegetable, meat and fish food.
-            <br /> What are the names of the dishes worth, you can admire them.
+            <br />
+            {' '}
+            What are the names of the dishes worth, you can admire them.
             No amount of imagination is enough to imagine what delicacies are
             hidden behind incomprehensible words: taruta, shpundra, pechenya,
             krucheniki, shulik, potaptsi, uzvar, kulish... You can pronounce
             these words for quite a long time, but what is hidden behind them,
             what kind of dishes are these? It is very difficult to describe, you
             just have to taste it.
-            <br /> From time immemorial, Ukrainians endowed nature with holy
+            <br />
+            {' '}
+            From time immemorial, Ukrainians endowed nature with holy
             magical properties, they adored it, because the people made many
             dishes from the pasture, the most important of which was bread.
             Bread is a talisman, a symbol of well-being and wealth, which is
@@ -54,7 +60,8 @@ function Article() {
             that were a product of agriculture and had a ritual character were
             called ceremonial bread. This includes a loaf of bread, festive
             kalachs and bagels, meat dumplings, wedding divna and Christmas
-            knish, which are used in many ceremonies.{" "}
+            knish, which are used in many ceremonies.
+            {' '}
           </p>
         </div>
       </Container>

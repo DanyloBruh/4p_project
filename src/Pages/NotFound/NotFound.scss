@@ -1,7 +1,7 @@
 .not-found-content {
   height: 80vh;
   width: 80vw;
-  background-image: url("../../Assets/not-found-bg.png");
+  background-image: url('../../Assets/not-found-bg.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -13,7 +13,7 @@
   > h2 {
     color: #fff;
     text-align: center;
-    font-family: "Outfit", sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 200px;
     font-style: normal;
     font-weight: 500;
@@ -22,7 +22,7 @@
   > p {
     color: #fff;
     text-align: center;
-    font-family: "Outfit", sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 40px;
     font-style: normal;
     font-weight: 500;
