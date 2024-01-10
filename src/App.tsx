@@ -7,6 +7,7 @@ import Layout from "./Components/Layout/Layout";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import NotFound from "./Pages/NotFound/NotFound";
 import Blog from "./Pages/Blog/Blog";
+import Article from "./Pages/Article/Article";
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
           <Route path="contacts" element={<Contacts />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="blog/:id" element={<Article />} />
           <Route path="*" element={<NotFound />}/>
         </Route>
       </Routes>

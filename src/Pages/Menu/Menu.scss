@@ -111,11 +111,26 @@
     font-weight: 200;
     line-height: normal;
   }
-  > hr {
+  hr {
     color: white;
     border-top: 2px solid;
     opacity: 1;
     margin: 50px 0;
+  }
+}
+
+.main-page-blog {
+  margin-top: 100px;
+  > h2 {
+    color: #fff;
+    text-align: center;
+    font-family: "Outfit", sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    text-transform: capitalize;
+    margin-bottom: 36px;
   }
 }
 

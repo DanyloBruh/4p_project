@@ -4,6 +4,7 @@ import Varenyk from "../../Assets/varenyk.png";
 import Dumplings from "../../Assets/dumplings.png";
 import Borsch from "../../Assets/borsch.png";
 import MenuProduct from "../../Components/MenuProduct/MenuProduct";
+import SecondaryArticle from "../../Components/SecondaryArticle/SecondaryArticle";
 
 function Menu() {
   return (
@@ -55,46 +56,67 @@ function Menu() {
             <MenuProduct />
           </Col>
         </Row>
-        <hr />
-        <Row className="main-page-about-us">
-          <Col xs={8}>
-            <p>
-              Passion for cooking, love for Ukrainian cuisine, desire to be
-              useful and give joy to others - this is what prompted us to found
-              4p
-            </p>
-          </Col>
-          <Col xs={4}>
-            <img src={Dumplings} alt="" />
-          </Col>
-        </Row>
-        <Row className="main-page-about-us">
-          <Col xs={4}>
-            <img src={Varenyk} alt="" />
-          </Col>
-          <Col xs={8}>
-            <p>
-              4P - delivery of Ukrainian food in London with premium quality,
-              impeccable service and its own philosophy.
-            </p>
-          </Col>
-        </Row>
-        <Row className="main-page-about-us">
-          <Col xs={8}>
-            <p>
-              Our menu combines classic Ukrainian cuisine and the chef's
-              original recipes.We cook for you exclusively from the freshest and
-              highest quality products.
-            </p>
-          </Col>
-          <Col xs={4}>
-            <img src={Borsch} alt="" />
-          </Col>
-        </Row>
-
-        <div className="main-page-read-more-line">
+        <div>
           <hr />
-          <button>READ MORE</button>
+          <Row className="main-page-about-us">
+            <Col xs={8}>
+              <p>
+                Passion for cooking, love for Ukrainian cuisine, desire to be
+                useful and give joy to others - this is what prompted us to
+                found 4p
+              </p>
+            </Col>
+            <Col xs={4}>
+              <img src={Dumplings} alt="" />
+            </Col>
+          </Row>
+          <Row className="main-page-about-us">
+            <Col xs={4}>
+              <img src={Varenyk} alt="" />
+            </Col>
+            <Col xs={8}>
+              <p>
+                4P - delivery of Ukrainian food in London with premium quality,
+                impeccable service and its own philosophy.
+              </p>
+            </Col>
+          </Row>
+          <Row className="main-page-about-us">
+            <Col xs={8}>
+              <p>
+                Our menu combines classic Ukrainian cuisine and the chef's
+                original recipes.We cook for you exclusively from the freshest
+                and highest quality products.
+              </p>
+            </Col>
+            <Col xs={4}>
+              <img src={Borsch} alt="" />
+            </Col>
+          </Row>
+
+          <div className="main-page-read-more-line">
+            <hr />
+            <button>READ MORE</button>
+          </div>
+        </div>
+
+        <div className="main-page-blog">
+          <h2>more about our activities</h2>
+          <Row>
+            <Col>
+              <SecondaryArticle />
+            </Col>
+            <Col>
+              <SecondaryArticle />
+            </Col>
+            <Col>
+              <SecondaryArticle />
+            </Col>
+          </Row>
+          <div className="main-page-read-more-line">
+            <hr />
+            <button>READ MORE</button>
+          </div>
         </div>
       </Container>
       <div className="ornament-left" />
