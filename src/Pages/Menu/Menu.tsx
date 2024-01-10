@@ -35,20 +35,6 @@ function Menu() {
           <br />
           ut corrupti repellat ea enim harum.
         </p>
-        <Row className="menu-main__filter">
-          <Col>
-            <button>varenyky</button>
-          </Col>
-          <Col>
-            <button>pelmeni</button>
-          </Col>
-          <Col>
-            <button>shaurma</button>
-          </Col>
-          <Col>
-            <button>borsch</button>
-          </Col>
-        </Row>
         <Row className="menu-main__product">
           <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
             <MenuProduct />
@@ -69,10 +55,50 @@ function Menu() {
             <MenuProduct />
           </Col>
         </Row>
-        
-          
+        <hr />
+        <Row className="main-page-about-us">
+          <Col xs={8}>
+            <p>
+              Passion for cooking, love for Ukrainian cuisine, desire to be
+              useful and give joy to others - this is what prompted us to found
+              4p
+            </p>
+          </Col>
+          <Col xs={4}>
+            <img src={Dumplings} alt="" />
+          </Col>
+        </Row>
+        <Row className="main-page-about-us">
+          <Col xs={4}>
+            <img src={Varenyk} alt="" />
+          </Col>
+          <Col xs={8}>
+            <p>
+              4P - delivery of Ukrainian food in London with premium quality,
+              impeccable service and its own philosophy.
+            </p>
+          </Col>
+        </Row>
+        <Row className="main-page-about-us">
+          <Col xs={8}>
+            <p>
+              Our menu combines classic Ukrainian cuisine and the chef's
+              original recipes.We cook for you exclusively from the freshest and
+              highest quality products.
+            </p>
+          </Col>
+          <Col xs={4}>
+            <img src={Borsch} alt="" />
+          </Col>
+        </Row>
 
+        <div className="main-page-read-more-line">
+          <hr />
+          <button>READ MORE</button>
+        </div>
       </Container>
+      <div className="ornament-left" />
+      <div className="ornament-rigth" />
     </div>
   );
 }

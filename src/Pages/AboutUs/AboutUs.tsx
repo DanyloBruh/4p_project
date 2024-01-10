@@ -15,14 +15,14 @@ function AboutUs() {
       <Container className="about-us__content">
         <h2>about us</h2>
         <Row>
-          <Col xs={6}>
+          <Col lg={6}>
             <img
               src={Dumplings}
               alt="dumplings"
               className="about-us__content__img left"
             />
           </Col>
-          <Col xs={6}>
+          <Col lg={6}>
             <h2 className="about-us__content__header">fresh products</h2>
             <p className="about-us__content__text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -36,7 +36,7 @@ function AboutUs() {
           </Col>
         </Row>
         <Row>
-          <Col xs={6}>
+          <Col lg={6}>
             <h2 className="about-us__content__header">fast delivery</h2>
             <p className="about-us__content__text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -48,7 +48,7 @@ function AboutUs() {
               convallis posuere morbi leo.{" "}
             </p>
           </Col>
-          <Col xs={6}>
+          <Col lg={6}>
             <img
               src={Shawerma}
               alt="shawerma"
@@ -57,14 +57,14 @@ function AboutUs() {
           </Col>
         </Row>
         <Row>
-          <Col xs={6}>
+          <Col lg={6}>
             <img
               src={Borsch}
               alt="borsch"
               className="about-us__content__img left"
             />
           </Col>
-          <Col xs={6}>
+          <Col lg={6}>
             <h2 className="about-us__content__header">delicious food</h2>
             <p className="about-us__content__text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -78,7 +78,7 @@ function AboutUs() {
           </Col>
         </Row>
         <Row>
-          <Col xs={6}>
+          <Col lg={6}>
             <h2 className="about-us__content__header">made with love</h2>
             <p className="about-us__content__text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -90,7 +90,7 @@ function AboutUs() {
               convallis posuere morbi leo.{" "}
             </p>
           </Col>
-          <Col xs={6}>
+          <Col lg={6}>
             <img
               src={Dumplings_2}
               alt="dumplings"
