@@ -1,10 +1,10 @@
-import { Col, Container, Row } from "react-bootstrap";
-import "./AboutUs.scss";
+import { Col, Container, Row } from 'react-bootstrap';
+import './AboutUs.scss';
 
-import Dumplings from "../../Assets/dumplings-about-us.jpg";
-import Shawerma from "../../Assets/shawarma.jpg";
-import Borsch from "../../Assets/borsch.jpg";
-import Dumplings_2 from "../../Assets/dumplings-about-us_2.jpg";
+import Dumplings from '../../Assets/dumplings-about-us.jpg';
+import Shawerma from '../../Assets/shawarma.jpg';
+import Borsch from '../../Assets/borsch.jpg';
+import Dumplings_2 from '../../Assets/dumplings-about-us_2.jpg';
 
 function AboutUs() {
   return (
@@ -31,7 +31,8 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.{" "}
+              convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
         </Row>
@@ -45,7 +46,8 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.{" "}
+              convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
           <Col lg={6}>
@@ -73,7 +75,8 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.{" "}
+              convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
         </Row>
@@ -87,7 +90,8 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.{" "}
+              convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
           <Col lg={6}>

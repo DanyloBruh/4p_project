@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import "./TextArticle.scss";
+import { Link } from 'react-router-dom';
+import './TextArticle.scss';
 
 function TextArticle() {
   return (
