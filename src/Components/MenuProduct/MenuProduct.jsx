@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card } from 'react-bootstrap';
 import ProductImage from '../../Assets/product1.jpg';
 import './MenuProduct.scss';
@@ -17,7 +18,9 @@ function MenuProduct() {
           </Card.Text>
           <div className="btn-group">
             <Counter />
-            <button className="product-btn">add to cart</button>
+            <button type="button" className="product-btn">
+              add to cart
+            </button>
           </div>
         </Card.Body>
       </Card>

@@ -1,10 +1,10 @@
+import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './AboutUs.scss';
-
 import Dumplings from '../../Assets/dumplings-about-us.jpg';
 import Shawerma from '../../Assets/shawarma.jpg';
 import Borsch from '../../Assets/borsch.jpg';
-import Dumplings_2 from '../../Assets/dumplings-about-us_2.jpg';
+import Dumplings2 from '../../Assets/dumplings-about-us_2.jpg';
 
 function AboutUs() {
   return (
@@ -96,7 +96,7 @@ function AboutUs() {
           </Col>
           <Col lg={6}>
             <img
-              src={Dumplings_2}
+              src={Dumplings2}
               alt="dumplings"
               className="about-us__content__img right"
             />

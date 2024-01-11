@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React from 'react';
 import './Counter.scss';
 
 function Counter() {
   return (
     <div className="counter-body">
-      <button>
+      <button type="button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -21,7 +23,7 @@ function Counter() {
         </svg>
       </button>
       <p>1</p>
-      <button>
+      <button type="button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
