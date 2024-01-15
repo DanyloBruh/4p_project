@@ -1,25 +1,42 @@
+import React, { useState } from 'react';
 import {
   Carousel, Col, Container, Row,
 } from 'react-bootstrap';
+import { Link } from 'react-scroll';
 import './Menu.scss';
 import Varenyk from '../../Assets/varenyk.png';
 import Dumplings from '../../Assets/dumplings.png';
 import Borsch from '../../Assets/borsch.png';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
+import ProductCard from '../../Components/ProductCard/ProductCard';
 
 function Menu() {
+  const [selectProductId, setSelectProductId] = useState(null);
+
+  const handlerSelectProduct = (id) => {
+    setSelectProductId(id);
+  };
+
   return (
     <div className="menu-content">
       <div className="menu-header">
         <Container className="menu-header__text-box">
           <h2>
             Lorem ipsum dolor sit amet.
-            {' '}
             <br />
             Non animi minus ut eveniet illum et eligendi debitis.
           </h2>
-          <button className="menu-header__btn"> OPEN MENU</button>
+          <Link
+            // activeClass="active"
+            to="menu"
+            spy
+            offset={-90}
+            duration={200}
+            className="menu-header__btn"
+          >
+            OPEN MENU
+          </Link>
         </Container>
         <Carousel>
           <Carousel.Item>
@@ -34,33 +51,36 @@ function Menu() {
         </Carousel>
       </div>
       <Container className="menu-main">
-        <h2>Menu</h2>
-        <p>
-          Non voluptas minima et nobis debitis vel dolor nisi? Et esse similique
-          {' '}
-          <br />
-          ut corrupti repellat ea enim harum.
-        </p>
-        <Row className="menu-main__product">
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-        </Row>
+        <div id="menu">
+          <h2>Menu</h2>
+          <p>
+            Non voluptas minima et nobis debitis vel dolor nisi? Et esse
+            similique
+            <br />
+            ut corrupti repellat ea enim harum.
+          </p>
+          <Row className="menu-main__product">
+            <Col xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
+            </Col>
+            <Col xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
+            </Col>
+            <Col xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
+            </Col>
+            <Col xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
+            </Col>
+            <Col xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
+            </Col>
+            <Col xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
+            </Col>
+          </Row>
+        </div>
+
         <div>
           <hr />
           <Row className="main-page-about-us">
@@ -89,9 +109,9 @@ function Menu() {
           <Row className="main-page-about-us">
             <Col xs={8}>
               <p>
-                Our menu combines classic Ukrainian cuisine and the chef's
-                original recipes.We cook for you exclusively from the freshest
-                and highest quality products.
+                Our menu combines classic Ukrainian cuisine and the original
+                recipes.We cook for you exclusively from the freshest and
+                highest quality products.
               </p>
             </Col>
             <Col xs={4}>
@@ -101,7 +121,7 @@ function Menu() {
 
           <div className="main-page-read-more-line">
             <hr />
-            <button>READ MORE</button>
+            <button type="button">READ MORE</button>
           </div>
         </div>
 
@@ -120,12 +140,15 @@ function Menu() {
           </Row>
           <div className="main-page-read-more-line">
             <hr />
-            <button>READ MORE</button>
+            <button type="button">READ MORE</button>
           </div>
         </div>
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
+      {selectProductId !== null && (
+        <ProductCard handlerSelectProduct={handlerSelectProduct} />
+      )}
     </div>
   );
 }
