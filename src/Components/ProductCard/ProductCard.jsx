@@ -11,7 +11,6 @@ function ProductCard({ handlerSelectProduct }) {
   const ref = useRef();
   useEffect(() => {
     const listener = (event) => {
-      // Do nothing if clicking ref's element or descendent elements
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
@@ -27,11 +26,7 @@ function ProductCard({ handlerSelectProduct }) {
   return (
     <div className="product-modal">
       <div className="product-modal__card" ref={ref}>
-        <button
-          type="button"
-          className="product-modal__card__close"
-          onClick={() => handlerSelectProduct(null)}
-        >
+        <button type="button" onClick={() => handlerSelectProduct(null)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="50"
@@ -53,29 +48,25 @@ function ProductCard({ handlerSelectProduct }) {
               alt=""
             />
           </Col>
-          <Col xxl={5} xl={6} xs={5}>
-            <h2 className="product-modal__card__title">Ukrainian varenyky</h2>
-            <p className="product-modal__card__mass">240 g</p>
-            <p className="product-modal__card__text">
+          <Col xxl={5} xl={6} xs={5} className="product-modal__text">
+            <h2>Ukrainian varenyky</h2>
+            <p id="product-mass">240 g</p>
+            <p>
               <span>Dough: </span>
               Flour (high grade), kefir (2.5%), eggs, vegetable oil, sugar,
               salt, soda
             </p>
-            <p className="product-modal__card__text">
+            <p>
               <span>Filling: </span>
               potatoes, butter, sauteed onion, fresh dill, salt, pepper
             </p>
             <div className="product-modal__card__one-line">
-              <p className="product-modal__card__price">PRICE | 20$</p>
+              <p>PRICE | 20$</p>
               <Counter />
             </div>
             <div className="product-modal__card__one-line">
-              <button type="button" className="product-modal__card__btn">
-                by in one click
-              </button>
-              <button type="button" className="product-modal__card__btn">
-                add to cart
-              </button>
+              <button type="button">by in one click</button>
+              <button type="button">add to cart</button>
             </div>
           </Col>
         </Row>

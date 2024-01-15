@@ -1,14 +1,14 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import './Contacts.scss';
 
 function Contacts() {
   return (
-    <div className="contacts-content">
-      <Container className="contact-card">
+    <div className="contacts">
+      <div className="contacts__card">
         <h2>Contacts</h2>
         <Row>
-          <Col className="col-contacts-info">
+          <Col className="contacts__col">
             <div className="contacts-info">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ function Contacts() {
           </Col>
           <Col>12312</Col>
         </Row>
-      </Container>
+      </div>
     </div>
   );
 }

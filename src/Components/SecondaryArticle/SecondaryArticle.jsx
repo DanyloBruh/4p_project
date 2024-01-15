@@ -6,7 +6,7 @@ import './SecondaryArticle.scss';
 function SecondaryArticle() {
   return (
     <Link to={`/blog/${5987}`}>
-      <div className="secondary-article-content">
+      <div className="secondary-article">
         <img src={Borch} alt="" />
         <h2>
           Delightful Ukrainian Fare: A Journey Through Traditional Cuisine

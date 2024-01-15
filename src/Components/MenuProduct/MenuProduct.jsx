@@ -19,9 +19,7 @@ function MenuProduct({ handlerSelectProduct }) {
           </Card.Text>
           <div className="btn-group">
             <Counter />
-            <button type="button" className="product-btn">
-              add to cart
-            </button>
+            <button type="button">add to cart</button>
           </div>
         </Card.Body>
       </Card>

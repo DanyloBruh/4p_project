@@ -4,7 +4,7 @@ import './Counter.scss';
 
 function Counter() {
   return (
-    <div className="counter-body">
+    <div className="counter">
       <button type="button">
         <svg
           xmlns="http://www.w3.org/2000/svg"

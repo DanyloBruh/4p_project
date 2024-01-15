@@ -7,7 +7,7 @@ import TextArticle from '../../Components/TextArticle/TextArticle';
 
 function Blog() {
   return (
-    <div className="blog__content">
+    <div className="blog">
       <Container>
         <Row className="blog__main-article">
           <Col xxl={5} lg={6}>

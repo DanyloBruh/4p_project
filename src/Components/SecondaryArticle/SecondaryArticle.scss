@@ -1,7 +1,8 @@
 a {
   text-decoration: none !important;
 }
-.secondary-article-content {
+
+.secondary-article {
   width: 100%;
   min-height: 350px;
   > img {
@@ -32,7 +33,7 @@ a {
     line-height: normal;
     text-transform: capitalize;
   }
-  p {
+  > p {
     color: #fff;
     text-align: justify;
     font-family: 'Outfit', sans-serif;
@@ -45,5 +46,15 @@ a {
   > div {
     display: flex;
     justify-content: space-between;
+    > p {
+      color: #fff;
+      text-align: justify;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      text-transform: capitalize;
+    }
   }
 }

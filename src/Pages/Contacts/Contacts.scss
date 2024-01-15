@@ -1,4 +1,4 @@
-.contacts-content {
+.contacts {
   min-height: 700px;
   height: 85vh;
   background-image: url('../../Assets/contacts-bg.png');
@@ -6,7 +6,13 @@
   background-size: cover;
   background-position: bottom;
   position: relative;
-  .contact-card {
+  &__col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  &__card {
     width: 800px;
     height: 65vh;
     min-height: 500px;
@@ -66,10 +72,12 @@
         display: flex;
         flex-direction: column;
         align-items: start;
+        width: 100%;
         margin-left: 10px;
         > div {
           display: flex;
           justify-content: space-between;
+          width: 100%;
           position: relative;
           margin-bottom: 15px;
           > p {

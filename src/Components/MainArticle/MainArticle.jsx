@@ -6,9 +6,9 @@ import Borch from '../../Assets/borsch.jpg';
 function MainArticle() {
   return (
     <Link to={`/blog/${123}`}>
-      <div className="article-content">
+      <div className="main-article">
         <img src={Borch} alt="" />
-        <div>
+        <div className="main-article__text">
           <h2>10 unique borscht recipes from different regions of Ukraine</h2>
           <p>
             Culinary Diversity of Ukraine: A Look at Traditional Borscht through

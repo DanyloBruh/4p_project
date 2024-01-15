@@ -19,8 +19,8 @@ function Menu() {
   };
 
   return (
-    <div className="menu-content">
-      <div className="menu-header">
+    <div className="menu">
+      <div className="menu__header">
         <Container className="menu-header__text-box">
           <h2>
             Lorem ipsum dolor sit amet.
@@ -28,7 +28,6 @@ function Menu() {
             Non animi minus ut eveniet illum et eligendi debitis.
           </h2>
           <Link
-            // activeClass="active"
             to="menu"
             spy
             offset={-90}
@@ -50,7 +49,7 @@ function Menu() {
           </Carousel.Item>
         </Carousel>
       </div>
-      <Container className="menu-main">
+      <Container className="menu__main">
         <div id="menu">
           <h2>Menu</h2>
           <p>
@@ -83,7 +82,7 @@ function Menu() {
 
         <div>
           <hr />
-          <Row className="main-page-about-us">
+          <Row className="menu__about-us">
             <Col xs={8}>
               <p>
                 Passion for cooking, love for Ukrainian cuisine, desire to be
@@ -95,7 +94,7 @@ function Menu() {
               <img src={Dumplings} alt="" />
             </Col>
           </Row>
-          <Row className="main-page-about-us">
+          <Row className="menu__about-us">
             <Col xs={4}>
               <img src={Varenyk} alt="" />
             </Col>
@@ -106,7 +105,7 @@ function Menu() {
               </p>
             </Col>
           </Row>
-          <Row className="main-page-about-us">
+          <Row className="menu__about-us">
             <Col xs={8}>
               <p>
                 Our menu combines classic Ukrainian cuisine and the original
@@ -119,13 +118,13 @@ function Menu() {
             </Col>
           </Row>
 
-          <div className="main-page-read-more-line">
+          <div className="menu__read-more-line">
             <hr />
             <button type="button">READ MORE</button>
           </div>
         </div>
 
-        <div className="main-page-blog">
+        <div className="menu__blog">
           <h2>more about our activities</h2>
           <Row>
             <Col>
@@ -138,7 +137,7 @@ function Menu() {
               <SecondaryArticle />
             </Col>
           </Row>
-          <div className="main-page-read-more-line">
+          <div className="menu__read-more-line">
             <hr />
             <button type="button">READ MORE</button>
           </div>

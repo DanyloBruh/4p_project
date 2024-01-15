@@ -1,20 +1,18 @@
 .text-article {
-  &__content {
-    > h2 {
-      color: #fff;
-      text-align: justify;
-      font-family: 'Outfit', sans-serif;
-      font-size: 32px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      text-transform: capitalize;
-    }
-    > hr {
-      opacity: 1;
-      color: white;
-      border-top: 2px solid;
-    }
+  > h2 {
+    color: #fff;
+    text-align: justify;
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+  > hr {
+    opacity: 1;
+    color: white;
+    border-top: 2px solid;
   }
   &__post {
     margin-bottom: 15px;

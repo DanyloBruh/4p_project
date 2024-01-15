@@ -4,7 +4,7 @@ import './TextArticle.scss';
 
 function TextArticle() {
   return (
-    <div className="text-article__content">
+    <div className="text-article">
       <h2>Featured Posts</h2>
       <hr />
       <Link to={`/blog/${8952}`}>
