@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import ProductImage from '../../Assets/product1.jpg';
 import './MenuProduct.scss';
 import Counter from '../Counter/Counter';
 
-function MenuProduct() {
+function MenuProduct({ handlerSelectProduct }) {
   return (
     <div>
-      <Card className="product">
+      <Card className="product" onClick={() => handlerSelectProduct(4322)}>
         <Card.Img variant="top" src={ProductImage} />
         <Card.Body>
           <Card.Title>Ukrainian varenyky</Card.Title>
