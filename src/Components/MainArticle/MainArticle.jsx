@@ -1,6 +1,6 @@
-import "./MainArticle.scss";
-import Borch from "../../Assets/borsch.jpg";
-import { Link } from "react-router-dom";
+import './MainArticle.scss';
+import { Link } from 'react-router-dom';
+import Borch from '../../Assets/borsch.jpg';
 
 function MainArticle() {
   return (

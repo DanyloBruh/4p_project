@@ -4,7 +4,7 @@
   &__header {
     width: 100%;
     height: 340px;
-    background-image: url("../../Assets//about-us-bg.png");
+    background-image: url('../../Assets//about-us-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -14,7 +14,7 @@
     > h2 {
       color: #fff;
       text-align: center;
-      font-family: "Outfit", sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 64px;
       font-style: normal;
       font-weight: 600;
@@ -33,7 +33,7 @@
     > h2 {
       color: #fff;
       text-align: center;
-      font-family: "Outfit", sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 64px;
       font-style: normal;
       font-weight: 500;
@@ -70,7 +70,7 @@
     }
     &__header {
       color: #fff;
-      font-family: "Outfit", sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 36px;
       font-style: normal;
       font-weight: 600;
@@ -81,7 +81,7 @@
     &__text {
       color: #fff;
       text-align: justify;
-      font-family: "Outfit", sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 24px;
       font-style: normal;
       font-weight: 300;
@@ -92,7 +92,7 @@
   > .ornament-left {
     height: 100%;
     width: 100px;
-    background-image: url("../../Assets/ornaments/ornament-about-us.png");
+    background-image: url('../../Assets/ornaments/ornament-about-us.png');
     background-size: contain;
     position: absolute;
     z-index: -1;
@@ -105,7 +105,7 @@
   > .ornament-rigth {
     height: 100%;
     width: 100px;
-    background-image: url("../../Assets/ornaments/ornament-about-us.png");
+    background-image: url('../../Assets/ornaments/ornament-about-us.png');
     background-size: contain;
     position: absolute;
     z-index: -1;

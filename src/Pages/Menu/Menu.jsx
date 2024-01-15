@@ -1,10 +1,12 @@
-import { Carousel, Col, Container, Row } from "react-bootstrap";
-import "./Menu.scss";
-import Varenyk from "../../Assets/varenyk.png";
-import Dumplings from "../../Assets/dumplings.png";
-import Borsch from "../../Assets/borsch.png";
-import MenuProduct from "../../Components/MenuProduct/MenuProduct";
-import SecondaryArticle from "../../Components/SecondaryArticle/SecondaryArticle";
+import {
+  Carousel, Col, Container, Row,
+} from 'react-bootstrap';
+import './Menu.scss';
+import Varenyk from '../../Assets/varenyk.png';
+import Dumplings from '../../Assets/dumplings.png';
+import Borsch from '../../Assets/borsch.png';
+import MenuProduct from '../../Components/MenuProduct/MenuProduct';
+import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 
 function Menu() {
   return (
@@ -12,7 +14,9 @@ function Menu() {
       <div className="menu-header">
         <Container className="menu-header__text-box">
           <h2>
-            Lorem ipsum dolor sit amet. <br></br>
+            Lorem ipsum dolor sit amet.
+            {' '}
+            <br />
             Non animi minus ut eveniet illum et eligendi debitis.
           </h2>
           <button className="menu-header__btn"> OPEN MENU</button>
@@ -32,7 +36,8 @@ function Menu() {
       <Container className="menu-main">
         <h2>Menu</h2>
         <p>
-          Non voluptas minima et nobis debitis vel dolor nisi? Et esse similique{" "}
+          Non voluptas minima et nobis debitis vel dolor nisi? Et esse similique
+          {' '}
           <br />
           ut corrupti repellat ea enim harum.
         </p>

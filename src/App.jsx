@@ -12,6 +12,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import Recipes from "./Pages/Recipes/Recipes";
 import Recipe from "./Pages/Recipe/Recipe";
 
+
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,7 @@ function App() {
           <Route path="recipes" element={<Recipes />} />
           <Route path="recipe/:id" element={<Recipe />} />
           <Route path="privacypolicy" element={<PrivacyPolicy />} />
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

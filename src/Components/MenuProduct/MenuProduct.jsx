@@ -1,7 +1,7 @@
-import { Card } from "react-bootstrap";
-import ProductImage from "../../Assets/product1.jpg";
-import "./MenuProduct.scss";
-import Counter from "../Counter/Counter";
+import { Card } from 'react-bootstrap';
+import ProductImage from '../../Assets/product1.jpg';
+import './MenuProduct.scss';
+import Counter from '../Counter/Counter';
 
 function MenuProduct() {
   return (
