@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Carousel, Col, Container, Row,
 } from 'react-bootstrap';
@@ -9,8 +9,14 @@ import Dumplings from '../../Assets/dumplings.png';
 import Borsch from '../../Assets/borsch.png';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
+import ProductCard from '../../Components/ProductCard/ProductCard';
 
 function Menu() {
+  const [selectProductId, setSelectProductId] = useState(null);
+
+  const handlerSelectProduct = (id) => {
+    setSelectProductId(id);
+  };
   return (
     <div className="menu-content">
       <div className="menu-header">
@@ -54,22 +60,22 @@ function Menu() {
           </p>
           <Row className="menu-main__product">
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-              <MenuProduct />
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-              <MenuProduct />
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-              <MenuProduct />
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-              <MenuProduct />
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-              <MenuProduct />
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-              <MenuProduct />
+              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
           </Row>
         </div>
@@ -139,6 +145,9 @@ function Menu() {
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
+      {selectProductId !== null && (
+        <ProductCard handlerSelectProduct={handlerSelectProduct} />
+      )}
     </div>
   );
 }

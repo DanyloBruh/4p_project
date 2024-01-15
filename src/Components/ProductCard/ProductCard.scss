@@ -1,0 +1,114 @@
+.product-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 101;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    &__card {
+      width: 995px;
+      // min-height: 549px;
+      padding: 67px 25px;
+      border-radius: 10px;
+      background: #1f1f1f;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 102;
+      @media (max-width: 1200px) {
+        width: 795px;
+      }
+      @media (max-width: 992px) {
+        width: 695px;
+      }
+      > .row {
+        height: 100%;
+      }
+      &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        @media (max-width: 992px) {
+          object-fit: contain;
+        }
+      }
+      &__title {
+        color: #fff;
+        text-align: left;
+        font-family: 'Outfit', sans-serif;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: uppercase;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+        text-decoration-thickness: 2px;
+      }
+      &__mass {
+        color: #fff;
+        text-align: left;
+        font-family: 'Outfit', sans-serif;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        text-transform: capitalize;
+        margin: 17px 0;
+      }
+      &__text {
+        color: #fff;
+        text-align: left;
+        font-family: 'Outfit', sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        text-transform: capitalize;
+        > span {
+          font-weight: 500;
+        }
+      }
+      &__price {
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: capitalize;
+        margin: 0;
+      }
+      &__one-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+      }
+      &__btn {
+        width: 175px;
+        height: 42px;
+        background-color: transparent !important;
+        border: 2px solid #fff;
+  
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: uppercase;
+      }
+      &__close {
+        position: absolute;
+        top: 10px;
+        right: 17px;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+      }
+    }
+  }
