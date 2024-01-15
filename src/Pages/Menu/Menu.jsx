@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Carousel, Col, Container, Row,
 } from 'react-bootstrap';
+import { Link } from 'react-scroll';
 import './Menu.scss';
 import Varenyk from '../../Assets/varenyk.png';
 import Dumplings from '../../Assets/dumplings.png';
@@ -16,14 +17,19 @@ function Menu() {
         <Container className="menu-header__text-box">
           <h2>
             Lorem ipsum dolor sit amet.
-            {' '}
             <br />
             Non animi minus ut eveniet illum et eligendi debitis.
           </h2>
-          <button type="button" className="menu-header__btn">
-            {' '}
+          <Link
+            // activeClass="active"
+            to="menu"
+            spy
+            offset={-90}
+            duration={200}
+            className="menu-header__btn"
+          >
             OPEN MENU
-          </button>
+          </Link>
         </Container>
         <Carousel>
           <Carousel.Item>
@@ -38,33 +44,36 @@ function Menu() {
         </Carousel>
       </div>
       <Container className="menu-main">
-        <h2>Menu</h2>
-        <p>
-          Non voluptas minima et nobis debitis vel dolor nisi? Et esse similique
-          {' '}
-          <br />
-          ut corrupti repellat ea enim harum.
-        </p>
-        <Row className="menu-main__product">
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <MenuProduct />
-          </Col>
-        </Row>
+        <div id="menu">
+          <h2>Menu</h2>
+          <p>
+            Non voluptas minima et nobis debitis vel dolor nisi? Et esse
+            similique
+            <br />
+            ut corrupti repellat ea enim harum.
+          </p>
+          <Row className="menu-main__product">
+            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct />
+            </Col>
+            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct />
+            </Col>
+            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct />
+            </Col>
+            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct />
+            </Col>
+            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct />
+            </Col>
+            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+              <MenuProduct />
+            </Col>
+          </Row>
+        </div>
+
         <div>
           <hr />
           <Row className="main-page-about-us">
