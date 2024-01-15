@@ -118,6 +118,8 @@ function Recipe() {
           </ul>
         </div>
       </Container>
+      <div className="ornament-left" />
+      <div className="ornament-rigth" />
     </div>
   );
 }

@@ -216,4 +216,30 @@
       }
     }
   }
+  > .ornament-left {
+    height: 100%;
+    width: 100px;
+    background-image: url('../../Assets/ornaments/ornament-recipe.png');
+    background-size: contain;
+    position: absolute;
+    z-index: -2;
+    top: 40vh;
+    left: 22px;
+    @media (max-width: 1590px) {
+      display: none;
+    }
+  }
+  > .ornament-rigth {
+    height: 100%;
+    width: 100px;
+    background-image: url('../../Assets/ornaments/ornament-recipe.png');
+    background-size: contain;
+    position: absolute;
+    z-index: -2;
+    top: 40vh;
+    right: 22px;
+    @media (max-width: 1590px) {
+      display: none;
+    }
+  }
 }
