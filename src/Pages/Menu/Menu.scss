@@ -17,9 +17,11 @@
     &__btn {
       height: 75px;
       width: 205px;
-      background-color: transparent;
       border: 3px solid #fff;
       margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       color: #fff;
       font-family: 'Outfit', sans-serif;
@@ -70,7 +72,7 @@
     position: absolute;
     z-index: -1;
     top: 80vh;
-    left: 22px;
+    left: 18px;
     @media (max-width: 1590px) {
       display: none;
     }
@@ -83,7 +85,7 @@
     position: absolute;
     z-index: -1;
     top: 80vh;
-    right: 22px;
+    right: 18px;
     @media (max-width: 1590px) {
       display: none;
     }
@@ -93,29 +95,32 @@
 .menu-main {
   padding-top: 44px;
   position: relative;
-  > h2 {
-    color: #fff;
-    font-family: 'Outfit', sans-serif;
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: normal;
-    margin-bottom: 15px;
+  > #menu {
+    > h2 {
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 96px;
+      font-style: normal;
+      font-weight: 200;
+      line-height: normal;
+      margin-bottom: 15px;
+    }
+    > p {
+      color: #fff;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 200;
+      line-height: normal;
+    }
   }
-  > p {
-    color: #fff;
-    text-align: center;
-    font-family: 'Outfit', sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: normal;
-  }
+
   hr {
     color: white;
     border-top: 2px solid;
     opacity: 1;
-    margin: 50px 0;
+    margin: 100px 0;
   }
 }
 
@@ -160,7 +165,6 @@
     color: white;
     border-top: 2px solid;
     opacity: 1;
-    margin: 50px 0;
   }
   button {
     width: 165px;
