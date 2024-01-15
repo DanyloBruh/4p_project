@@ -1,10 +1,10 @@
-import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './AboutUs.scss';
+
 import Dumplings from '../../Assets/dumplings-about-us.jpg';
 import Shawerma from '../../Assets/shawarma.jpg';
 import Borsch from '../../Assets/borsch.jpg';
-import Dumplings2 from '../../Assets/dumplings-about-us_2.jpg';
+import Dumplings_2 from '../../Assets/dumplings-about-us_2.jpg';
 
 function AboutUs() {
   return (
@@ -32,6 +32,7 @@ function AboutUs() {
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
               convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
         </Row>
@@ -46,6 +47,7 @@ function AboutUs() {
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
               convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
           <Col lg={6}>
@@ -74,6 +76,7 @@ function AboutUs() {
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
               convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
         </Row>
@@ -88,11 +91,12 @@ function AboutUs() {
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
               convallis posuere morbi leo.
+              {' '}
             </p>
           </Col>
           <Col lg={6}>
             <img
-              src={Dumplings2}
+              src={Dumplings_2}
               alt="dumplings"
               className="about-us__content__img right"
             />
