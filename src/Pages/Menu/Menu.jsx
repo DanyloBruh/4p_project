@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Carousel, Col, Container, Row,
 } from 'react-bootstrap';
@@ -19,7 +20,10 @@ function Menu() {
             <br />
             Non animi minus ut eveniet illum et eligendi debitis.
           </h2>
-          <button className="menu-header__btn"> OPEN MENU</button>
+          <button type="button" className="menu-header__btn">
+            {' '}
+            OPEN MENU
+          </button>
         </Container>
         <Carousel>
           <Carousel.Item>
@@ -89,7 +93,7 @@ function Menu() {
           <Row className="main-page-about-us">
             <Col xs={8}>
               <p>
-                Our menu combines classic Ukrainian cuisine and the chef's
+                Our menu combines classic Ukrainian cuisine and the chefs
                 original recipes.We cook for you exclusively from the freshest
                 and highest quality products.
               </p>
@@ -101,7 +105,7 @@ function Menu() {
 
           <div className="main-page-read-more-line">
             <hr />
-            <button>READ MORE</button>
+            <button type="button">READ MORE</button>
           </div>
         </div>
 
@@ -120,7 +124,7 @@ function Menu() {
           </Row>
           <div className="main-page-read-more-line">
             <hr />
-            <button>READ MORE</button>
+            <button type="button">READ MORE</button>
           </div>
         </div>
       </Container>
