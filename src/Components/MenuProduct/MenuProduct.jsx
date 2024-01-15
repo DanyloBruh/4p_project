@@ -1,14 +1,12 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
 import { Card } from 'react-bootstrap';
 import ProductImage from '../../Assets/product1.jpg';
 import './MenuProduct.scss';
 import Counter from '../Counter/Counter';
 
-function MenuProduct({ handlerSelectProduct }) {
+function MenuProduct() {
   return (
     <div>
-      <Card className="product" onClick={() => handlerSelectProduct(4322)}>
+      <Card className="product">
         <Card.Img variant="top" src={ProductImage} />
         <Card.Body>
           <Card.Title>Ukrainian varenyky</Card.Title>
@@ -19,9 +17,7 @@ function MenuProduct({ handlerSelectProduct }) {
           </Card.Text>
           <div className="btn-group">
             <Counter />
-            <button type="button" className="product-btn">
-              add to cart
-            </button>
+            <button className="product-btn">add to cart</button>
           </div>
         </Card.Body>
       </Card>
