@@ -18,7 +18,6 @@ function PrivacyPolicy() {
           and Electronic Documents Act.
         </p>
         <hr />
-
         <div className="info-section">
           <h2>Introduction</h2>
           <p className="info-text">
