@@ -7,6 +7,9 @@
     border: none;
     border-radius: 10px;
     @media (max-width: 768px) {
+      margin: 100px 0;
+    }
+    @media (max-width: 1200px) {
       margin: 110px 0;
     }
     > .card-img {

@@ -14,7 +14,7 @@ function Header() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <NavLink to="/">menu</NavLink>
-                <NavLink to="link">promotions</NavLink>
+                <NavLink to="recipes">recipes</NavLink>
                 <NavLink to="blog">blog</NavLink>
                 <NavLink to="aboutus">about us</NavLink>
                 <NavLink to="contacts">contacts</NavLink>
