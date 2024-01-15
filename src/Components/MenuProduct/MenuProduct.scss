@@ -5,7 +5,7 @@
   margin-top: 24px;
 }
 .card-img-top {
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 .card-title {
   color: #fff !important;
@@ -18,7 +18,7 @@
   text-transform: uppercase;
   text-decoration: underline;
   text-align: left;
-  margin-bottom: 30px;
+  margin-bottom: 30px !important;
 }
 .card-body {
   background: #232323;
