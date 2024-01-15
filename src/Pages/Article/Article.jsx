@@ -1,11 +1,10 @@
-import React from 'react';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './Article.scss';
 import { Container } from 'react-bootstrap';
 import Borch from '../../Assets/borsch.jpg';
 
 function Article() {
-  // const { id } = useParams();
+  const { id } = useParams();
 
   return (
     <div className="article">
@@ -50,18 +49,18 @@ function Article() {
             magical properties, they adored it, because the people made many
             dishes from the pasture, the most important of which was bread.
             Bread is a talisman, a symbol of well-being and wealth, which is
-            called to the family by the magical wish `&quot;`bread -
-            salt`&quot;`. In ancient times, bread offerings were offered to
-            household spirits, for example, to the housekeeper, to the spirits
-            of the earth, so that the harvest would be good, to the waterman, so
-            that he would not drown livestock and people. Throwing even a small
-            piece of bread into the trash was considered a great sin. It was
-            once believed that in the next world, people who disrespected the
-            shrine would collect all the crumbs thrown away during their earthly
-            life. All dishes that were a product of agriculture and had a ritual
-            character were called ceremonial bread. This includes a loaf of
-            bread, festive kalachs and bagels, meat dumplings, wedding divna and
-            Christmas knish, which are used in many ceremonies.
+            called to the family by the magical wish "bread - salt". In ancient
+            times, bread offerings were offered to household spirits, for
+            example, to the housekeeper, to the spirits of the earth, so that
+            the harvest would be good, to the waterman, so that he would not
+            drown livestock and people. Throwing even a small piece of bread
+            into the trash was considered a great sin. It was once believed that
+            in the next world, people who disrespected the shrine would collect
+            all the crumbs thrown away during their earthly life. All dishes
+            that were a product of agriculture and had a ritual character were
+            called ceremonial bread. This includes a loaf of bread, festive
+            kalachs and bagels, meat dumplings, wedding divna and Christmas
+            knish, which are used in many ceremonies.
             {' '}
           </p>
         </div>
