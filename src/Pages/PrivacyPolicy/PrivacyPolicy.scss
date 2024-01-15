@@ -1,0 +1,78 @@
+.privacy-policy {
+  margin-top: 95px;
+  padding-top: 70px;
+  position: relative;
+  > div {
+    > h1 {
+      color: #fff;
+      text-align: left;
+      font-family: Outfit;
+      font-size: 96px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: capitalize;
+      @media (max-width: 768px) {
+        font-size: 70px;
+      }
+    }
+    > .update-time {
+      color: #fff;
+      text-align: left;
+      font-family: Outfit;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-decoration-line: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 8px;
+      text-transform: capitalize;
+    }
+    > .info-text {
+      color: #fff;
+      text-align: justify;
+      font-family: Outfit;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      margin: 48px 0 0 0;
+    }
+    hr {
+      color: white;
+      border-top: 2px solid;
+      opacity: 1;
+      margin: 127px 0 0 0;
+    }
+  }
+  .info-section {
+    margin: 44px 0 0 0;
+    > h2 {
+      color: #fff;
+      text-align: justify;
+      font-family: Outfit;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    > p {
+      color: #fff;
+      text-align: justify;
+      font-family: Outfit;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      margin: 21px 0 44px 0;
+    }
+    > hr {
+      color: white;
+      border-top: 2px solid;
+      opacity: 1;
+      margin: 0;
+    }
+  }
+}

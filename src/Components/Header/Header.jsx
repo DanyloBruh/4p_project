@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import './Header.scss';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
-import Logo from '../../Assets/logo.png';
+import React, { useState } from "react";
+import "./Header.scss";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import Logo from "../../Assets/logo.png";
+
 
 function Header() {
   return (
@@ -14,7 +15,7 @@ function Header() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <NavLink to="/">menu</NavLink>
-                <NavLink to="link">promotions</NavLink>
+                <NavLink to="recipes">recipes</NavLink>
                 <NavLink to="blog">blog</NavLink>
                 <NavLink to="aboutus">about us</NavLink>
                 <NavLink to="contacts">contacts</NavLink>

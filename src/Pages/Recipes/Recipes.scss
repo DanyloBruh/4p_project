@@ -1,0 +1,217 @@
+.recipes {
+  position: relative;
+  &__btn {
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin: 0;
+    padding: 10px 25px;
+    color: #fff;
+    font-family: "Outfit", sans-serif;
+    color: #fff;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    text-transform: uppercase;
+
+    @media (max-width: 992px) {
+      border: 2px solid #fff;
+      padding: 5px 12.5px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+  &__header {
+    width: 100vw;
+    height: 505px;
+    position: absolute;
+    background-image: url("../../Assets//recipe-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+  }
+  &__container {
+    > h2 {
+      padding: 195px 0 0 0;
+      margin: auto;
+      color: #fff;
+      text-align: center;
+      font-family: "Outfit", sans-serif;
+      font-size: 64px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    @media (max-width: 768px) {
+      > h2 {
+        font-size: 42px;
+      }
+    }
+    @media (max-width: 992px) {
+      > h2 {
+        font-size: 56px;
+      }
+    }
+    > .search-bar {
+      margin: 38px auto 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .carousel {
+    width: 100%;
+    margin-top: 216px;
+  }
+
+  .carousel-item {
+    width: 100%;
+    border-radius: 10px;
+    background: #1f1f1f;
+    > .item-cover {
+      display: flex;
+      > img {
+        width: 27vw;
+        border-radius: 10px;
+        margin: 20px 0 20px 55px;
+      }
+      > .carousel-text {
+        text-align: left;
+        margin: auto 55px auto 15px;
+        > h2 {
+          color: #fff;
+          font-family: "Outfit", sans-serif;
+          font-size: 2rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          margin: 0;
+        }
+        > p {
+          color: #fff;
+          text-align: justify;
+          font-family: "Outfit", sans-serif;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 300;
+          line-height: normal;
+          margin: 6px 0 6px 0;
+        }
+        @media (max-width: 992px) {
+          > h2 {
+            font-size: 24px;
+          }
+          > p {
+            font-size: 14px;
+          }
+        }
+      }
+      @media (max-width: 768px) {
+        display: block;
+        > img {
+          border-radius: 10px;
+          margin: 20px 0 0 0;
+          width: 90%;
+        }
+        > .carousel-text {
+          text-align: center;
+          margin: 20px 20px;
+          > h2 {
+            color: #fff;
+            font-family: "Outfit", sans-serif;
+            font-size: 2rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin: 0;
+          }
+          > p {
+            color: #fff;
+            text-align: justify;
+            font-family: "Outfit", sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            margin: 6px 0 6px 0;
+          }
+        }
+      }
+    }
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    position: absolute;
+    width: 56px;
+  }
+  .carousel-control-prev {
+    left: -30px;
+  }
+  .carousel-control-next {
+    right: -30px;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 56px;
+    width: 56px;
+    background-color: #1b1b1b;
+    border-radius: 50%;
+    background-size: 70%;
+  }
+  .carousel-control-next-icon {
+    background-image: url("../../Assets/arrow-forward.png");
+  }
+  .carousel-control-prev-icon {
+    background-image: url("../../Assets/arrow-backward.png");
+  }
+  .carousel-indicators {
+    margin: 0;
+    bottom: -29px;
+
+    > button {
+      margin: 0 14px;
+    }
+
+    @media (max-width: 992px) {
+      bottom: -25px;
+      > button {
+        margin: 0 4px;
+      }
+    }
+  }
+  // > .item-section {
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
+  > .ornament-left {
+    height: 100%;
+    width: 100px;
+    background-image: url("../../Assets/ornaments/ornament-recipe.png");
+    background-size: contain;
+    position: absolute;
+    z-index: -2;
+    top: 40vh;
+    left: 18px;
+    @media (max-width: 1590px) {
+      display: none;
+    }
+  }
+  > .ornament-rigth {
+    height: 100%;
+    width: 100px;
+    background-image: url("../../Assets/ornaments/ornament-recipe.png");
+    background-size: contain;
+    position: absolute;
+    z-index: -2;
+    top: 40vh;
+    right: 18px;
+    @media (max-width: 1590px) {
+      display: none;
+    }
+  }
+}
