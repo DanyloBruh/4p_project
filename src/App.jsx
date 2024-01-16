@@ -10,11 +10,13 @@ import Blog from './Pages/Blog/Blog';
 import Article from './Pages/Article/Article';
 import Recipes from './Pages/Recipes/Recipes';
 import Recipe from './Pages/Recipe/Recipe';
+import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 // import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
   return (
     <div className="App">
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Menu />} />
