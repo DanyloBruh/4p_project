@@ -52,20 +52,17 @@
     display: flex;
     justify-content: space-between;
   }
-  &__btn {
-    width: 120px;
+  .btn-outline-light {
+    max-width: 120px;
     height: 40px;
-    background-color: transparent;
+    border-radius: 0;
     border: 2px solid #fff;
-
-    color: #fff;
     font-family: 'Outfit', sans-serif;
     font-size: 14px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 900;
     line-height: normal;
     text-transform: uppercase;
+    margin: 0 20px;
   }
 }
-
-

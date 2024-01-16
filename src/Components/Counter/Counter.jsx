@@ -4,7 +4,7 @@ import './Counter.scss';
 
 function Counter() {
   return (
-    <div className="counter-body">
+    <div className="counter">
       <button type="button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +15,7 @@ function Counter() {
         >
           <path
             d="M4 10H16"
-            stroke="white"
+            stroke="#adaeaf"
             strokeWidth="2"
             strokeLinecap="square"
             strokeLinejoin="round"
@@ -33,7 +33,7 @@ function Counter() {
         >
           <path
             d="M3 10.5H18M10.5 3V18"
-            stroke="white"
+            stroke="#adaeaf"
             strokeWidth="2"
             strokeLinecap="square"
             strokeLinejoin="round"

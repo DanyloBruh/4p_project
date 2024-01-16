@@ -88,11 +88,11 @@
       align-items: center;
       margin-top: 25px;
     }
-    &__btn {
+    .btn {
       width: 175px;
       height: 42px;
-      background-color: transparent !important;
       border: 2px solid #fff;
+      border-radius: 0;
 
       color: #fff;
       font-family: 'Outfit', sans-serif;

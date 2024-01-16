@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import ProductImage from '../../Assets/product1.jpg';
 import './MenuProduct.scss';
 import Counter from '../Counter/Counter';
@@ -20,9 +21,7 @@ function MenuProduct({ handlerSelectProduct }) {
           </p>
           <div className="btn-group">
             <Counter />
-            <button type="button" className="product__btn">
-              add to cart
-            </button>
+            <Button variant="outline-light">add to cart</Button>
           </div>
         </div>
       </div>
