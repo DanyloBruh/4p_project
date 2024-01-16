@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Carousel, Col, Container, Row,
-} from 'react-bootstrap';
+// eslint-disable-next-line object-curly-newline
+import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import { NavLink } from 'react-router-dom';
 import './Menu.scss';
@@ -60,22 +59,22 @@ function Menu() {
             ut corrupti repellat ea enim harum.
           </p>
           <Row className="menu-main__product">
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <MenuProduct handlerSelectProduct={handlerSelectProduct} />
             </Col>
           </Row>
@@ -83,38 +82,38 @@ function Menu() {
 
         <div>
           <hr />
-          <Row className="main-page-about-us">
-            <Col xs={8}>
+          <Row className="main-page-about-us main-page-about-us__revers">
+            <Col lg={7} md={6}>
               <p>
                 Passion for cooking, love for Ukrainian cuisine, desire to be
                 useful and give joy to others - this is what prompted us to
                 found 4p
               </p>
             </Col>
-            <Col xs={4}>
+            <Col lg={5} md={6}>
               <img src={Dumplings} alt="" />
             </Col>
           </Row>
           <Row className="main-page-about-us">
-            <Col xs={4}>
+            <Col lg={5} md={6}>
               <img src={Varenyk} alt="" />
             </Col>
-            <Col xs={8}>
+            <Col lg={7} md={6}>
               <p>
                 4P - delivery of Ukrainian food in London with premium quality,
                 impeccable service and its own philosophy.
               </p>
             </Col>
           </Row>
-          <Row className="main-page-about-us">
-            <Col xs={8}>
+          <Row className="main-page-about-us main-page-about-us__revers">
+            <Col lg={7} md={6}>
               <p>
                 Our menu combines classic Ukrainian cuisine and the chefs
                 original recipes.We cook for you exclusively from the freshest
                 and highest quality products.
               </p>
             </Col>
-            <Col xs={4}>
+            <Col lg={5} md={6}>
               <img src={Borsch} alt="" />
             </Col>
           </Row>
@@ -130,13 +129,13 @@ function Menu() {
         <div className="main-page-blog">
           <h2>more about our activities</h2>
           <Row>
-            <Col>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <SecondaryArticle />
             </Col>
-            <Col>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <SecondaryArticle />
             </Col>
-            <Col>
+            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
               <SecondaryArticle />
             </Col>
           </Row>

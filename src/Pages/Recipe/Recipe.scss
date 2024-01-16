@@ -17,7 +17,7 @@
       color: #fff;
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 96px;
+      font-size: 6rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -33,7 +33,7 @@
           color: #b7b7b7;
           text-align: left;
           font-family: 'Outfit', sans-serif;
-          font-size: 24px;
+          font-size: 1.5rem;
           font-style: normal;
           font-weight: 400;
           line-height: normal;
@@ -42,7 +42,7 @@
           color: #fff;
           text-align: center;
           font-family: 'Outfit', sans-serif;
-          font-size: 36px;
+          font-size: 2.25rem;
           font-style: normal;
           font-weight: 600;
           line-height: normal;
@@ -51,10 +51,10 @@
       @media (max-width: 992px) {
         > .dop-info-item {
           > p {
-            font-size: 18px;
+            font-size: 1.125rem;
           }
           > h3 {
-            font-size: 28px;
+            font-size: 1.75rem;
           }
         }
       }
@@ -75,7 +75,7 @@
           text-align: left;
           color: #fff;
           font-family: 'Outfit', sans-serif;
-          font-size: 64px;
+          font-size: 4rem;
           font-style: normal;
           font-weight: 600;
           line-height: normal;
@@ -84,7 +84,7 @@
           color: #fff;
           text-align: justify;
           font-family: 'Outfit', sans-serif;
-          font-size: 32px;
+          font-size: 2rem;
           font-style: normal;
           font-weight: 300;
           line-height: normal;
@@ -106,7 +106,7 @@
               text-align: left;
               color: #fff;
               font-family: 'Outfit', sans-serif;
-              font-size: 20px;
+              font-size: 1.25rem;
               font-style: normal;
               font-weight: 400;
               line-height: normal;
@@ -125,7 +125,7 @@
           margin: 37px 48px 30px;
           color: #fff;
           font-family: 'Outfit', sans-serif;
-          font-size: 32px;
+          font-size: 2rem;
           font-style: normal;
           font-weight: 500;
           line-height: normal;
@@ -138,10 +138,10 @@
           width: 100%;
 
           > h2 {
-            font-size: 48px;
+            font-size: 3rem;
           }
           > p {
-            font-size: 24px;
+            font-size: 1.5rem;
           }
         }
         > .ingredients {
@@ -171,7 +171,7 @@
         margin-bottom: 56px;
         color: #fff;
         font-family: 'Outfit', sans-serif;
-        font-size: 64px;
+        font-size: 4rem;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
@@ -189,7 +189,7 @@
               color: #fff;
               text-align: justify;
               font-family: 'Outfit', sans-serif;
-              font-size: 24px;
+              font-size: 1.5rem;
               font-style: normal;
               font-weight: 300;
               line-height: normal;
@@ -200,7 +200,7 @@
               margin-bottom: auto;
               color: #fff;
               font-family: 'Outfit', sans-serif;
-              font-size: 96px;
+              font-size: 6rem;
               font-style: normal;
               font-weight: 300;
               line-height: normal;

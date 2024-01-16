@@ -9,20 +9,18 @@ import Counter from '../Counter/Counter';
 
 function MenuProduct({ handlerSelectProduct }) {
   return (
-    <div>
-      <div className="product" onClick={() => handlerSelectProduct(4322)}>
-        <img src={ProductImage} alt="" />
-        <div className="product__text">
-          <h2>Ukrainian varenyky</h2>
-          <p id="price">PRICE | 20$</p>
-          <p>
-            There are firewood and water present, if there were cheese and
-            flour, I would make varenyky!
-          </p>
-          <div className="btn-group">
-            <Counter />
-            <Button variant="outline-light">add to cart</Button>
-          </div>
+    <div className="product" onClick={() => handlerSelectProduct(4322)}>
+      <img src={ProductImage} alt="" />
+      <div className="product__text">
+        <h2>Ukrainian varenyky</h2>
+        <p id="price">PRICE | 20$</p>
+        <p>
+          There are firewood and water present, if there were cheese and flour,
+          I would make varenyky!
+        </p>
+        <div className="btn-group">
+          <Counter />
+          <Button variant="outline-light">add to cart</Button>
         </div>
       </div>
     </div>

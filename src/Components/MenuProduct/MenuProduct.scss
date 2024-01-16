@@ -1,19 +1,25 @@
 .product {
-  height: 580px;
+  height: 100%;
   border-radius: 0;
   border: none;
-  margin-top: 24px;
   background: #232323;
   > img {
     width: 100%;
   }
   &__text {
-    margin: 14px 17px 46px 17px;
+    margin: 14px 17px 45px 17px;
+    @media (max-width: 1400px) {
+      margin-bottom: 35px;
+    }
+    @media (max-width: 1200px) {
+      margin-bottom: 25px;
+    }
+
     > h2 {
       color: #fff;
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 24px;
+      font-size: 1.5rem;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
@@ -25,20 +31,25 @@
     > p {
       color: #fff;
       font-family: 'Outfit', sans-serif;
-      font-size: 14px;
+      font-size: 1rem;
       font-style: normal;
       font-weight: 300;
-      line-height: normal;
       text-transform: capitalize;
       text-align: left;
       line-height: 25px;
       margin-top: 20px;
       margin-bottom: 55px;
+      @media (max-width: 1400px) {
+        margin-bottom: 35px;
+      }
+      @media (max-width: 1200px) {
+        margin-bottom: 25px;
+      }
     }
     #price {
       color: #fff;
       font-family: 'Outfit', sans-serif;
-      font-size: 20px;
+      font-size: 1.25rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -58,11 +69,10 @@
     border-radius: 0;
     border: 2px solid #fff;
     font-family: 'Outfit', sans-serif;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
     text-transform: uppercase;
-    margin: 0 20px;
   }
 }
