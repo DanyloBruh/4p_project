@@ -1,68 +1,71 @@
 .product {
-  height: 580px !important;
-  border-radius: 0 !important;
-  border: none !important;
+  height: 580px;
+  border-radius: 0;
+  border: none;
   margin-top: 24px;
-}
-.card-img-top {
-  border-radius: 0 !important;
-}
-.card-title {
-  color: #fff !important;
-  text-align: center;
-  font-family: 'Outfit', sans-serif;
-  font-size: 24px !important;
-  font-style: normal;
-  font-weight: 600 !important;
-  line-height: normal !important;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-align: left;
-  margin-bottom: 30px !important;
-}
-.card-body {
   background: #232323;
-}
-.card-text {
-  color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-  text-transform: capitalize;
-  text-align: left;
-  line-height: 25px;
-  margin-top: 20px;
-  margin-bottom: 55px;
-}
-.product-price {
-  color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-transform: capitalize;
-  text-align: left;
-  margin: 0;
-}
-.product-btn {
-  width: 120px;
-  height: 40px;
-  background-color: transparent !important;
-  border: 2px solid #fff;
+  > img {
+    width: 100%;
+  }
+  &__text {
+    margin: 14px 17px 46px 17px;
+    > h2 {
+      color: #fff;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+      text-decoration: underline;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+    > p {
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      text-transform: capitalize;
+      text-align: left;
+      line-height: 25px;
+      margin-top: 20px;
+      margin-bottom: 55px;
+    }
+    #price {
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-transform: capitalize;
+      text-align: left;
+      margin: 0;
+    }
+  }
+  .btn-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__btn {
+    width: 120px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid #fff;
 
-  color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  text-transform: uppercase;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+  }
 }
-.btn-group {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
+
+
