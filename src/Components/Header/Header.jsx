@@ -1,12 +1,23 @@
-import React from 'react';
+/* eslint-disable no-undef */
+import React, { useState } from 'react';
 import './Header.scss';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../Assets/logo.png';
 
 function Header() {
+  const [color, setColor] = useState(false);
+
+  const changeColor = () => {
+    if (window.scrollY >= 100) {
+      setColor(true);
+    } else setColor(false);
+  };
+
+  window.addEventListener('scroll', changeColor);
+
   return (
-    <div className="header">
+    <div className={`header ${color ? 'header__bg-black' : 'header__bg'}`}>
       <Container className="header__container">
         <img src={Logo} alt="logo" />
         <Navbar data-bs-theme="dark">
