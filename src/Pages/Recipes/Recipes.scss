@@ -101,16 +101,8 @@
           line-height: normal;
           margin: 6px 0 6px 0;
         }
-        @media (max-width: 992px) {
-          > h2 {
-            font-size: 24px;
-          }
-          > p {
-            font-size: 14px;
-          }
-        }
       }
-      @media (max-width: 768px) {
+      @media (max-width: 992px) {
         display: block;
         > img {
           border-radius: 10px;
@@ -120,6 +112,13 @@
         > .carousel-text {
           text-align: center;
           margin: 20px 20px;
+          > p {
+            margin-bottom: 20px;
+          }
+        }
+      }
+      @media (max-width: 768px) {
+        > .carousel-text {
           > h2 {
             color: #fff;
             font-family: 'Outfit', sans-serif;
@@ -184,10 +183,9 @@
       }
     }
   }
-  // > .item-section {
-  //   display: flex;
-  //   justify-content: space-between;
-  // }
+  > .item-section {
+    margin-top: 47px;
+  }
   > .ornament-left {
     height: 100%;
     width: 100px;

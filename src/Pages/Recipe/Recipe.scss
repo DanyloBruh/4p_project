@@ -132,7 +132,11 @@
         }
       }
       @media (max-width: 992px) {
+        display: block;
+
         > .description {
+          width: 100%;
+
           > h2 {
             font-size: 48px;
           }
@@ -141,20 +145,14 @@
           }
         }
         > .ingredients {
+          width: 100%;
+          margin: 0;
           > h3 {
             text-align: center;
             margin: 30px 0;
           }
-        }
-      }
-      @media (max-width: 768px) {
-        display: block;
-        > .description {
-          width: 100%;
-        }
-        > .ingredients {
-          width: 100%;
           > ul {
+            padding: 0;
             > li {
               > p {
                 text-align: center;
@@ -185,7 +183,9 @@
             display: flex;
             align-items: center;
             > p {
-              margin: 0;
+              width: 100%;
+              margin-top: auto;
+              margin-bottom: auto;
               color: #fff;
               text-align: justify;
               font-family: 'Outfit', sans-serif;
@@ -195,9 +195,9 @@
               line-height: normal;
             }
             > .number {
+              width: 10%;
               margin-top: auto;
               margin-bottom: auto;
-              margin-right: 48px;
               color: #fff;
               font-family: 'Outfit', sans-serif;
               font-size: 96px;
