@@ -144,6 +144,11 @@
     opacity: 1;
     margin: 100px 0;
   }
+  &__product {
+    > div {
+      margin-top: 24px;
+    }
+  }
 }
 
 .main-page-blog {
