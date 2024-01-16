@@ -67,6 +67,11 @@
     .carousel-control-next {
       width: 5%;
     }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+      width: 4rem;
+      height: 4rem;
+    }
     .container {
       position: relative;
       > h2 {
@@ -221,10 +226,4 @@
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(#f8f9fa, 0.5);
   }
-}
-
-.carousel-control-next-icon,
-.carousel-control-prev-icon {
-  width: 4rem !important;
-  height: 4rem !important;
 }
