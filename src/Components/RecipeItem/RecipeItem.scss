@@ -1,44 +1,50 @@
 .recipe-item {
-  height: 483px;
-  margin: 63px 0 0 0;
-  border-radius: 10px;
-
-  > .card {
-    border: none;
+  > .recipe-card {
     border-radius: 10px;
-    @media (max-width: 768px) {
-      margin: 100px 0;
-    }
-    @media (max-width: 1200px) {
-      margin: 110px 0;
-    }
-    > .card-img {
-      border-radius: 10px;
+    margin: 12px 0;
+    border: none;
+    box-shadow: none;
+
+    > .recipe-card-img {
+      border-radius: 10px 10px 0 0;
+      width: 100%;
     }
 
-    > .card-body {
-      > .card-date {
+    > .recipe-card-body {
+      border-radius: 0 0 10px 10px;
+      text-align: left;
+      padding: 13px 0;
+      background-color: #1f1f1f;
+      > .recipe-card-date {
         display: flex;
-        > .card-text {
+        margin: 11px 0 0 11px;
+        > .recipe-card-text {
           margin: auto 0 auto 8px;
+          color: #fff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          text-transform: capitalize;
         }
       }
-      > .card-title {
+      > .recipe-card-title {
         color: #fff;
-        font-family: Outfit;
+        font-family: 'Outfit', sans-serif;
         font-size: 32px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
         text-transform: capitalize;
         text-decoration: none;
-        margin: 0;
+        margin: 0 0 0 15px;
       }
-      > .card-text {
-        margin: 8px 0 14px 0;
+      > .recipe-card-text {
+        margin: 8px 20px 14px 20px;
         color: #fff;
         text-align: justify;
-        font-family: Outfit;
+        font-family: 'Outfit', sans-serif;
         font-size: 15px;
         font-style: normal;
         font-weight: 300;
@@ -46,15 +52,17 @@
         text-transform: capitalize;
       }
       > button {
-        width: 100%;
+        width: 90%;
         height: 37px;
         border-radius: 0;
-        font-family: Outfit;
+        border: 2px solid #fff;
+        font-family: 'Outfit', sans-serif;
         font-size: 14px;
         font-style: normal;
         font-weight: 900;
         line-height: normal;
         text-transform: uppercase;
+        margin: 0 20px;
       }
     }
   }

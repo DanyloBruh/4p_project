@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import './Recipe.scss';
 
-import Dumplings from '../../Assets/recipe-dumplings.jpg';
+import axios from 'axios';
 
 function Recipe() {
+  const [product, setProduct] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:3005/product/').then((data) => {
+      setProduct(data.data);
+    });
+  }, []);
+
   return (
     <div className="recipe">
       <div className="recipe__header" />
@@ -32,7 +40,12 @@ function Recipe() {
               They are usually boiled until they float to the surface,
               indicating they are cooked and ready to be served.
             </p>
-            <img src={Dumplings} alt="dumplings-bg" />
+            {product && (
+              <img
+                src={`data:image/png;base64,${product[0].Image.imageData}`}
+                alt="dumplings-bg"
+              />
+            )}
           </div>
           <div className="ingredients">
             <h3>Ingredients</h3>
