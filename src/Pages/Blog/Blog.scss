@@ -13,7 +13,7 @@
       position: absolute;
       z-index: -1;
       top: 0;
-      left: 22px;
+      left: 18px;
       @media (max-width: 1590px) {
         display: none;
       }
@@ -26,7 +26,7 @@
       position: absolute;
       z-index: -1;
       top: 0;
-      right: 22px;
+      right: 18px;
       @media (max-width: 1590px) {
         display: none;
       }
@@ -35,7 +35,7 @@
   &__main-article {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
   }
   &__secondary-article {
     > .col-lg-4 {

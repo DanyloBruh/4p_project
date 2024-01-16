@@ -1,11 +1,17 @@
 .header {
-  background-color: #00000059;
   width: 100vw;
   height: 95px;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
+  transition: 0.3s ease-in;
+  &__bg {
+    background-color: #00000059;
+  }
+  &__bg-black {
+    background-color: rgb(0 0 0 / 80%);
+  }
   &__container {
     height: 100%;
     display: flex;

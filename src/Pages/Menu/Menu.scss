@@ -17,9 +17,12 @@
     &__btn {
       height: 75px;
       width: 205px;
-      background-color: transparent;
       border: 3px solid #fff;
       margin-top: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       color: #fff;
       font-family: 'Outfit', sans-serif;
@@ -27,6 +30,23 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+      transition:
+        color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+    }
+    &__btn:hover,
+    &__btn:active {
+      background-color: #f8f9fa;
+      color: #000;
+    }
+    &__btn:focus-visible {
+      background-color: #f8f9fa;
+      color: #000;
+      border-color: #f8f9fa;
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgba(#f8f9fa, 0.5);
     }
     .carousel {
       position: absolute;
@@ -46,6 +66,11 @@
     .carousel-control-prev,
     .carousel-control-next {
       width: 5%;
+    }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+      width: 4rem;
+      height: 4rem;
     }
     .container {
       position: relative;
@@ -70,7 +95,7 @@
     position: absolute;
     z-index: -1;
     top: 80vh;
-    left: 22px;
+    left: 18px;
     @media (max-width: 1590px) {
       display: none;
     }
@@ -83,7 +108,7 @@
     position: absolute;
     z-index: -1;
     top: 80vh;
-    right: 22px;
+    right: 18px;
     @media (max-width: 1590px) {
       display: none;
     }
@@ -93,29 +118,31 @@
 .menu-main {
   padding-top: 44px;
   position: relative;
-  > h2 {
-    color: #fff;
-    font-family: 'Outfit', sans-serif;
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: normal;
-    margin-bottom: 15px;
-  }
-  > p {
-    color: #fff;
-    text-align: center;
-    font-family: 'Outfit', sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: normal;
+  > #menu {
+    > h2 {
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 96px;
+      font-style: normal;
+      font-weight: 200;
+      line-height: normal;
+      margin-bottom: 15px;
+    }
+    > p {
+      color: #fff;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 200;
+      line-height: normal;
+    }
   }
   hr {
     color: white;
     border-top: 2px solid;
     opacity: 1;
-    margin: 50px 0;
+    margin: 100px 0;
   }
 }
 
@@ -160,18 +187,24 @@
     color: white;
     border-top: 2px solid;
     opacity: 1;
-    margin: 50px 0;
   }
-  button {
+  > a {
     width: 165px;
     height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0px;
     left: 50%;
     transform: translate(-50%, -50%);
-
     background-color: #111;
     border: 2px solid white;
+    transition:
+      color 0.15s ease-in-out,
+      background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
 
     color: #fff;
     text-align: center;
@@ -181,10 +214,16 @@
     font-weight: 400;
     line-height: normal;
   }
-}
-
-.carousel-control-next-icon,
-.carousel-control-prev-icon {
-  width: 4rem;
-  height: 4rem;
+  > a:hover,
+  a:active {
+    background-color: #f8f9fa;
+    color: #000;
+  }
+  > a:focus-visible {
+    background-color: #f8f9fa;
+    color: #000;
+    border-color: #f8f9fa;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(#f8f9fa, 0.5);
+  }
 }

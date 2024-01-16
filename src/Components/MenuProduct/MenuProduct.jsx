@@ -1,29 +1,30 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import ProductImage from '../../Assets/product1.jpg';
 import './MenuProduct.scss';
 import Counter from '../Counter/Counter';
 
-function MenuProduct() {
+function MenuProduct({ handlerSelectProduct }) {
   return (
     <div>
-      <Card className="product">
-        <Card.Img variant="top" src={ProductImage} />
-        <Card.Body>
-          <Card.Title>Ukrainian varenyky</Card.Title>
-          <Card.Text className="product-price">PRICE | 20$</Card.Text>
-          <Card.Text>
+      <div className="product" onClick={() => handlerSelectProduct(4322)}>
+        <img src={ProductImage} alt="" />
+        <div className="product__text">
+          <h2>Ukrainian varenyky</h2>
+          <p id="price">PRICE | 20$</p>
+          <p>
             There are firewood and water present, if there were cheese and
             flour, I would make varenyky!
-          </Card.Text>
+          </p>
           <div className="btn-group">
             <Counter />
-            <button type="button" className="product-btn">
-              add to cart
-            </button>
+            <Button variant="outline-light">add to cart</Button>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
