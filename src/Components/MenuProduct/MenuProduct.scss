@@ -7,7 +7,14 @@
     width: 100%;
   }
   &__text {
-    margin: 14px 17px 46px 17px;
+    margin: 14px 17px 45px 17px;
+    @media (max-width: 1400px) {
+      margin-bottom: 35px;
+    }
+    @media (max-width: 1200px) {
+      margin-bottom: 25px;
+    }
+
     > h2 {
       color: #fff;
       text-align: center;
@@ -24,15 +31,20 @@
     > p {
       color: #fff;
       font-family: 'Outfit', sans-serif;
-      font-size: 0.875rem;
+      font-size: 1rem;
       font-style: normal;
       font-weight: 300;
-      line-height: normal;
       text-transform: capitalize;
       text-align: left;
       line-height: 25px;
       margin-top: 20px;
       margin-bottom: 55px;
+      @media (max-width: 1400px) {
+        margin-bottom: 35px;
+      }
+      @media (max-width: 1200px) {
+        margin-bottom: 25px;
+      }
     }
     #price {
       color: #fff;
@@ -62,6 +74,5 @@
     font-weight: 900;
     line-height: normal;
     text-transform: uppercase;
-    margin: 0 20px;
   }
 }

@@ -1,5 +1,27 @@
 html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
   font-size: 16px;
+  @media (max-width: 1200px) {
+    font-size: 14px;
+  }
+  @media (max-width: 992px) {
+    font-size: 12px;
+  }
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='number'],
+  textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+  }
 }
 
 body {
