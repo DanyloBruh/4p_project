@@ -166,14 +166,16 @@
     border-top: 2px solid;
     opacity: 1;
   }
-  button {
+  a {
     width: 165px;
     height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0px;
     left: 50%;
     transform: translate(-50%, -50%);
-
     background-color: #111;
     border: 2px solid white;
 

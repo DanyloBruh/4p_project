@@ -3,6 +3,7 @@ import {
   Carousel, Col, Container, Row,
 } from 'react-bootstrap';
 import { Link } from 'react-scroll';
+import { NavLink } from 'react-router-dom';
 import './Menu.scss';
 import Varenyk from '../../Assets/varenyk.png';
 import Dumplings from '../../Assets/dumplings.png';
@@ -120,7 +121,9 @@ function Menu() {
 
           <div className="main-page-read-more-line">
             <hr />
-            <button type="button">READ MORE</button>
+            <NavLink to="aboutus" type="button">
+              READ MORE
+            </NavLink>
           </div>
         </div>
 
@@ -139,7 +142,9 @@ function Menu() {
           </Row>
           <div className="main-page-read-more-line">
             <hr />
-            <button type="button">READ MORE</button>
+            <NavLink to="blog" type="button">
+              READ MORE
+            </NavLink>
           </div>
         </div>
       </Container>
