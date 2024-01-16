@@ -17,7 +17,7 @@
     @media (max-width: 992px) {
       border: 2px solid #fff;
       padding: 5px 12.5px;
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 500;
     }
   }
@@ -40,7 +40,7 @@
       color: #fff;
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 64px;
+      font-size: 4rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -48,12 +48,12 @@
     }
     @media (max-width: 768px) {
       > h2 {
-        font-size: 42px;
+        font-size: 2.5rem;
       }
     }
     @media (max-width: 992px) {
       > h2 {
-        font-size: 56px;
+        font-size: 3.5rem;
       }
     }
     > .search-bar {
