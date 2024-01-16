@@ -5,7 +5,6 @@ import {
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import RecipeItem from '../../Components/RecipeItem/RecipeItem';
 
-import Borch from '../../Assets/recipe-item-borch.jpg';
 import Shawarma from '../../Assets/shawarma-recipe.png';
 import './Recipes.scss';
 
@@ -84,22 +83,22 @@ function Recipes() {
       <Container className="item-section">
         <Row>
           <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem img={Borch} />
+            <RecipeItem />
           </Col>
           <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem img={Borch} />
+            <RecipeItem />
           </Col>
           <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem img={Borch} />
+            <RecipeItem />
           </Col>
           <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem img={Borch} />
+            <RecipeItem />
           </Col>
           <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem img={Borch} />
+            <RecipeItem />
           </Col>
           <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem img={Borch} />
+            <RecipeItem />
           </Col>
         </Row>
       </Container>
