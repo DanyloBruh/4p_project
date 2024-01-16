@@ -30,6 +30,23 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+      transition:
+        color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+    }
+    &__btn:hover,
+    &__btn:active {
+      background-color: #f8f9fa;
+      color: #000;
+    }
+    &__btn:focus-visible {
+      background-color: #f8f9fa;
+      color: #000;
+      border-color: #f8f9fa;
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgba(#f8f9fa, 0.5);
     }
     .carousel {
       position: absolute;
@@ -166,7 +183,7 @@
     border-top: 2px solid;
     opacity: 1;
   }
-  a {
+  > a {
     width: 165px;
     height: 45px;
     display: flex;
@@ -178,7 +195,12 @@
     transform: translate(-50%, -50%);
     background-color: #111;
     border: 2px solid white;
-
+    transition:
+      color 0.15s ease-in-out,
+      background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+            
     color: #fff;
     text-align: center;
     font-family: 'Inter', sans-serif;
@@ -186,6 +208,18 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  > a:hover,
+  a:active {
+    background-color: #f8f9fa;
+    color: #000;
+  }
+  > a:focus-visible {
+    background-color: #f8f9fa;
+    color: #000;
+    border-color: #f8f9fa;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(#f8f9fa, 0.5);
   }
 }
 

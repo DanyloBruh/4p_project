@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useRef } from 'react';
 import './ProductCard.scss';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import ProductImage from '../../Assets/product1.jpg';
 import Counter from '../Counter/Counter';
 
@@ -70,12 +70,8 @@ function ProductCard({ handlerSelectProduct }) {
               <Counter />
             </div>
             <div className="product-modal__card__one-line">
-              <button type="button" className="product-modal__card__btn">
-                by in one click
-              </button>
-              <button type="button" className="product-modal__card__btn">
-                add to cart
-              </button>
+              <Button variant="outline-light"> by in one click</Button>
+              <Button variant="outline-light">add to cart</Button>
             </div>
           </Col>
         </Row>
