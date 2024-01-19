@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
@@ -15,12 +16,12 @@ function MenuProduct({
   handlerSelectProduct,
 }) {
   return (
-    <div
-      key={id}
-      className="product"
-      onClick={() => handlerSelectProduct(4322)}
-    >
-      <img src={`data:image/png;base64,${image}`} alt="dumplings-bg" />
+    <div key={id} className="product">
+      <img
+        onClick={() => handlerSelectProduct(4322)}
+        src={`data:image/png;base64,${image}`}
+        alt="dumplings-bg"
+      />
       <div className="product__text">
         <h2>{title}</h2>
         <p id="price">{`PRICE | ${price}$`}</p>
