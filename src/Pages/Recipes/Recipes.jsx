@@ -1,14 +1,20 @@
-import React from 'react';
-import {
-  Carousel, Col, Container, Row,
-} from 'react-bootstrap';
+/* eslint-disable object-curly-newline */
+import React, { useEffect, useState } from 'react';
+import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import RecipeItem from '../../Components/RecipeItem/RecipeItem';
 
 import Shawarma from '../../Assets/shawarma-recipe.png';
 import './Recipes.scss';
+import { getAllInstractions } from '../../Helper/requests';
 
 function Recipes() {
+  const [allRecipes, setAllRecipes] = useState();
+
+  useEffect(() => {
+    getAllInstractions().then(setAllRecipes);
+  }, []);
+
   return (
     <div className="recipes">
       <div className="recipes__header" />
@@ -82,24 +88,17 @@ function Recipes() {
       </Container>
       <Container className="item-section">
         <Row>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem />
-          </Col>
-          <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-            <RecipeItem />
-          </Col>
+          {allRecipes?.map((item) => (
+            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+              <RecipeItem
+                id={item.id}
+                data={item.createdAt}
+                title={item.name}
+                description={item.description}
+                // image={item.}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>
       <div className="ornament-left" />

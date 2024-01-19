@@ -7,11 +7,11 @@ export const getAllProducts = async () => {
 };
 
 export const getAllInstractions = async () => {
-  const res = await client.get('/instraction/');
-  return res;
+  const { data } = await client.get('/instraction/');
+  return data;
 };
 
 export const getAllBlogs = async () => {
-  const res = await client.get('/blog/');
-  return res;
+  const { data } = await client.get('/blog/');
+  return data;
 };
