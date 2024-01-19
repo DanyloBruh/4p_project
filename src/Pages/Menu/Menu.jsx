@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-scroll';
@@ -10,9 +10,19 @@ import Borsch from '../../Assets/borsch.png';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import ProductCard from '../../Components/ProductCard/ProductCard';
+import { getAllProducts } from '../../Helper/requests';
 
 function Menu() {
   const [selectProductId, setSelectProductId] = useState(null);
+
+  const [menuItems, setMenuItems] = useState();
+
+  useEffect(() => {
+    console.log();
+    getAllProducts().then(setMenuItems);
+  }, []);
+
+  console.log(menuItems);
 
   const handlerSelectProduct = (id) => {
     setSelectProductId(id);
@@ -59,24 +69,21 @@ function Menu() {
             ut corrupti repellat ea enim harum.
           </p>
           <Row className="menu-main__product">
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
-            </Col>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
-            </Col>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
-            </Col>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
-            </Col>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
-            </Col>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <MenuProduct handlerSelectProduct={handlerSelectProduct} />
-            </Col>
+            {menuItems?.map((item) => {
+              console.log(item);
+              return (
+                <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                  <MenuProduct
+                    id={item.id}
+                    image={item.Image.imageData}
+                    title={item.name}
+                    description={item.description}
+                    price={item.price}
+                    handlerSelectProduct={handlerSelectProduct}
+                  />
+                </Col>
+              );
+            })}
           </Row>
         </div>
 
