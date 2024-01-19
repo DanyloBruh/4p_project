@@ -11,6 +11,7 @@ import Article from './Pages/Article/Article';
 import Recipes from './Pages/Recipes/Recipes';
 import Recipe from './Pages/Recipe/Recipe';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
+import AdminPanel from './Pages/AdminPanel/AdminPanel';
 // import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="blog/:id" element={<Article />} />
           <Route path="recipes" element={<Recipes />} />
           <Route path="recipe/:id" element={<Recipe />} />
+          <Route path="admin" element={<AdminPanel />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
