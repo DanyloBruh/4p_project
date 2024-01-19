@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import moment from 'moment';
 import MainArticle from '../../Components/MainArticle/MainArticle';
 import './Blog.scss';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
@@ -12,7 +13,6 @@ function Blog() {
   useEffect(() => {
     getAllBlogs().then(setAllBlogs);
   }, []);
-  console.log(allBlogs);
   return (
     <div className="blog__content">
       <Container>
@@ -32,7 +32,7 @@ function Blog() {
                 title={item.name}
                 text={item.text}
                 createdBy={item.User.name}
-                createdAt={item.createdAt}
+                createdAt={moment(item.createdAt).format('DD/MM/YY')}
               />
             </Col>
           ))}
