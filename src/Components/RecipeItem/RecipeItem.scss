@@ -3,7 +3,7 @@
     margin: 12px 0;
     border: none;
     box-shadow: none;
-
+    
     > .recipe-card-img {
       width: 100%;
     }
@@ -23,13 +23,12 @@
           font-style: normal;
           font-weight: 600;
           line-height: normal;
-          text-transform: capitalize;
         }
       }
       > .recipe-card-title {
         color: #fff;
         font-family: 'Outfit', sans-serif;
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
@@ -46,7 +45,6 @@
         font-style: normal;
         font-weight: 300;
         line-height: normal;
-        text-transform: capitalize;
       }
       > button {
         width: 90%;
