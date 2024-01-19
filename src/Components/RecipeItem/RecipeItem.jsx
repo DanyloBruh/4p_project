@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import { Button } from 'react-bootstrap';
@@ -6,11 +7,16 @@ import './RecipeItem.scss';
 import { Link } from 'react-router-dom';
 import Borsh from '../../Assets/borsch.jpg';
 
-function RecipeItem() {
+function RecipeItem({
+  id, data, title, description,
+}) {
   return (
-    <Link to={`/recipe/${666}`}>
+    <Link key={id} to={`/recipe/${id}`}>
       <div className="recipe-item">
         <div className="recipe-card">
+          {/* <img className="recipe-card-img"
+          src={`data:image/png;base64,${image}`} alt="dumplings-bg" /> */}
+
           <img className="recipe-card-img" src={Borsh} alt="card-img" />
           <div className="recipe-card-body">
             <div className="recipe-card-date">
@@ -31,15 +37,10 @@ function RecipeItem() {
                   />
                 </svg>
               </span>
-              <div className="recipe-card-text">December 12, 2022</div>
+              <div className="recipe-card-text">{data}</div>
             </div>
-            <div className="recipe-card-title">borshch</div>
-            <div className="recipe-card-text">
-              Borscht is a traditional Ukrainian soup renowned for its vibrant
-              ruby-red color, prepared using beetroots, cabbage, potatoes,
-              carrots, onions, and sometimes meat, creating a hearty and
-              flavorful dish.
-            </div>
+            <div className="recipe-card-title">{title}</div>
+            <div className="recipe-card-text">{description}</div>
             <Button variant="outline-light">read more</Button>
           </div>
         </div>
