@@ -1,0 +1,96 @@
+.admin-panel {
+  &__header {
+    width: 100%;
+    margin: 153px 0 0 0;
+    > h2 {
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.5rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    > .manipulation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > .search-bar {
+        margin: 58px 0 43px 0;
+        > input[type='text'] {
+          border: none;
+          border-radius: 5px;
+          height: 65px;
+          width: 438px;
+          background-color: #3e3e3e;
+          background-image: url('../../Assets/searchicon.png');
+          background-position: 10px 15px;
+          background-repeat: no-repeat;
+          padding-left: 60px;
+          color: #fff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 300;
+          line-height: normal;
+        }
+      }
+      > .dropdown {
+        > button {
+          color: #fff;
+          text-align: center;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.5rem;
+          font-style: normal;
+          font-weight: 300;
+          line-height: normal;
+          border: none;
+          background: #3e3e3e;
+        }
+        > button::after {
+          color: #9c9c9c;
+        }
+      }
+    }
+  }
+  &__body {
+    > .table {
+      > thead {
+        > tr {
+          border-top: 1px solid #fff;
+          border-bottom: 1px solid #fff;
+          align-items: center;
+          > th {
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            background: none;
+            border: none;
+            padding-top: 54px;
+            padding-bottom: 54px;
+            > img {
+              height: 50px;
+              width: 50px;
+            }
+          }
+        }
+      }
+      > tbody {
+        > tr {
+          > td {
+            border: none;
+            background-color: #1f1f1f;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+          }
+        }
+      }
+    }
+  }
+}

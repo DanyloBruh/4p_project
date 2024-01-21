@@ -11,7 +11,7 @@ function SearchBar() {
             <input
               type="text"
               className="form-control form-input"
-              placeholder="Search recipe..."
+              placeholder="Search..."
             />
           </div>
         </div>
