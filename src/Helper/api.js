@@ -32,23 +32,6 @@ function request(url, method, data) {
     console.error(error);
     return null;
   }
-
-  //   if (data) {
-  //     options.body = JSON.stringify(data);
-  //     options.headers = {
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //     };
-  //   }
-
-  //   return wait(100)
-  //     .then(() => fetch(BASE_URL + url, options))
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error();
-  //       }
-
-  //       return response.json();
-  //     });
 }
 
 export const client = {

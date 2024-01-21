@@ -6,6 +6,7 @@ import './Blog.scss';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import TextArticle from '../../Components/TextArticle/TextArticle';
 import { getAllBlogs } from '../../Helper/requests';
+import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
 
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
@@ -36,6 +37,15 @@ function Blog() {
               />
             </Col>
           ))}
+          <Col lg={4}>
+            <SecondaryArticlePlaceholder />
+          </Col>
+          <Col lg={4}>
+            <SecondaryArticlePlaceholder />
+          </Col>
+          <Col lg={4}>
+            <SecondaryArticlePlaceholder />
+          </Col>
         </Row>
       </Container>
       <div className="ornament-left" />
