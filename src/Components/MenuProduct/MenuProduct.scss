@@ -32,7 +32,6 @@
     }
     @media (max-width: 575px) {
       padding: 14px;
-
     }
     > h2 {
       color: #fff;
@@ -98,7 +97,7 @@
     @media (max-width: 575px) {
       flex-direction: column;
     }
-    > .counter{
+    > .counter {
       @media (max-width: 575px) {
         width: 100%;
       }
