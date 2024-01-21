@@ -39,6 +39,9 @@
     font-weight: 900;
     line-height: normal;
     text-transform: uppercase;
+    @media (max-width: 767px) {
+      max-width: 95px;
+    }
   }
   .placeholder {
     margin-right: 10px;

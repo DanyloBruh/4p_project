@@ -17,7 +17,6 @@ function Menu() {
   const [selectProductId, setSelectProductId] = useState(null);
 
   const [menuItems, setMenuItems] = useState();
-
   useEffect(() => {
     getAllProducts().then(setMenuItems);
   }, []);
@@ -87,7 +86,14 @@ function Menu() {
                 <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <MenuProductPlaceholder />
                 </Col>
-                <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <Col
+                  xxl={4}
+                  xl={4}
+                  lg={4}
+                  md={6}
+                  sm={6}
+                  className="menu-product-third-placeholder"
+                >
                   <MenuProductPlaceholder />
                 </Col>
               </>
