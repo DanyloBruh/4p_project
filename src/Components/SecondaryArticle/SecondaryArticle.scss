@@ -33,6 +33,7 @@ a {
     text-transform: capitalize;
   }
   p {
+    height: 60px;
     color: #fff;
     text-align: justify;
     font-family: 'Outfit', sans-serif;
@@ -40,10 +41,16 @@ a {
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-    text-transform: capitalize;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   > div {
     display: flex;
     justify-content: space-between;
+    > p {
+      text-transform: capitalize;
+    }
   }
 }

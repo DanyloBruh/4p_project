@@ -1,6 +1,7 @@
 /* eslint-disable object-curly-newline */
 import React, { useEffect, useState } from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
+import moment from 'moment';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import RecipeItem from '../../Components/RecipeItem/RecipeItem';
 
@@ -92,7 +93,7 @@ function Recipes() {
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
               <RecipeItem
                 id={item.id}
-                data={item.createdAt}
+                data={moment(item.createdAt).format('MMMM DD, YYYY')}
                 title={item.name}
                 description={item.description}
                 // image={item.}
