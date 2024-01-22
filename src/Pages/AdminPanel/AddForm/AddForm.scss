@@ -1,0 +1,43 @@
+.add-form {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  > .form-bg {
+    width: 25%;
+    padding: 20px;
+    border: 1px solid #ffff;
+    background: #1f1f1f;
+    > h3 {
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    > form {
+      > .form-element {
+        margin-bottom: 20px;
+        > p {
+          color: #b4b4b4;
+          font-family: 'Outfit', sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 300;
+          line-height: normal;
+          text-transform: capitalize;
+          margin: 0 0 5px 0;
+        }
+        > input {
+            background: none;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+      }
+      
+    }
+  }
+}
