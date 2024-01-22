@@ -7,7 +7,6 @@
   margin-top: auto;
   @media (max-width: 575px) {
     padding-top: 15px;
-
   }
 }
 .footer-logo {
@@ -17,7 +16,7 @@
     margin-left: 15px;
   }
 }
-.footer-hours{
+.footer-hours {
   @media (max-width: 575px) {
     display: none !important;
   }
