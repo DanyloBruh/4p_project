@@ -1,60 +1,61 @@
 .sideBar {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateX(100%);
-  z-index: 99;
-  background: rgba(31, 31, 31, 0.95);
-  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.25);
-  transition: transform 300ms ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 70px;
-  padding-bottom: 40px;
-  &__info {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(100%);
+    z-index: 99;
+    background: rgba(31, 31, 31, 0.95);
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.25);
+    transition: transform 300ms ease-in-out;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    > p {
-      margin-left: 5px;
-      margin-bottom: 0;
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-style: normal;
-      font-weight: 300;
-      line-height: normal;
-      text-align: center;
-    }
-  }
-  > img {
-    height: 77px;
-    width: 77px;
-  }
-  #sidenbar-navbar-nav {
-    > .navbar-nav {
+    justify-content: space-between;
+    padding-top: 70px;
+    padding-bottom: 40px;
+    &__info {
       display: flex;
-      flex-direction: column;
-      > a {
-        margin-top: 44px;
+      align-items: center;
+      > p {
+        margin-left: 5px;
+        margin-bottom: 0;
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        text-align: center;
       }
     }
+    > img {
+      height: 77px;
+      width: 77px;
+    }
+    #sidenbar-navbar-nav {
+      > .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        > a {
+          margin-top: 44px;
+        }
+      }
+    }
+    > hr {
+      width: 90%;
+      color: white;
+      border-top: 2px solid;
+      opacity: 1;
+      margin: 0;
+    }
+    > .footer-col{
+      width: 60%;
+    }
   }
-  > hr {
-    width: 90%;
-    color: white;
-    border-top: 2px solid;
-    opacity: 1;
-    margin: 0;
+  
+  .open {
+    transform: translateX(0%);
   }
-  > .footer-col {
-    width: 60%;
-  }
-}
-
-.open {
-  transform: translateX(0%);
-}
+  
