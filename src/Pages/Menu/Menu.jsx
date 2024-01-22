@@ -11,6 +11,7 @@ import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import { getAllProducts } from '../../Helper/requests';
+
 import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/MenuProductPlaceholder';
 
 function Menu() {
@@ -20,7 +21,6 @@ function Menu() {
   useEffect(() => {
     getAllProducts().then(setMenuItems);
   }, []);
-
   const handlerSelectProduct = (id) => {
     setSelectProductId(id);
   };
@@ -100,7 +100,6 @@ function Menu() {
             )}
           </Row>
         </div>
-
         <div>
           <hr />
           <Row className="main-page-about-us main-page-about-us__revers">

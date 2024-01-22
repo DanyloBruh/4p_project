@@ -1,7 +1,35 @@
 .admin-panel {
   &__header {
     width: 100%;
-    margin: 153px 0 0 0;
+    margin: 80px 0 0 0;
+    > .selecte-table {
+      > .me-auto.nav {
+        justify-content: space-between;
+        margin: 0 0 50px 0;
+        > a {
+          color: #fff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+        > a:hover {
+          color: #ffffff;
+        }
+        > a:after {
+          display: block;
+          content: '';
+          border-bottom: solid 3px #ffffff;
+          transform: scaleX(0);
+          transition: transform 150ms ease-in-out;
+          transform-origin: 0% 50%;
+        }
+        > a:hover:after {
+          transform: scaleX(1);
+        }
+      }
+    }
     > h2 {
       color: #fff;
       font-family: 'Outfit', sans-serif;
@@ -35,25 +63,23 @@
         }
       }
       > .dropdown {
-        > button {
-          color: #fff;
-          text-align: center;
-          font-family: 'Outfit', sans-serif;
-          font-size: 1.5rem;
-          font-style: normal;
-          font-weight: 300;
-          line-height: normal;
-          border: none;
-          background: #3e3e3e;
-        }
-        > button::after {
-          color: #9c9c9c;
-        }
+        color: #fff;
+        text-align: center;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 200;
+        line-height: normal;
+        border: none;
+        border-radius: 5px;
+        background: #3e3e3e;
       }
     }
   }
   &__body {
     > .table {
+      text-align: center;
+      margin: 0 0 36px;
       > thead {
         > tr {
           border-top: 1px solid #fff;
@@ -88,9 +114,39 @@
             font-style: normal;
             font-weight: 300;
             line-height: normal;
+            > .button-edit {
+              background-color: none;
+              width: 50px;
+              height: 50px;
+              background: url('../../Assets/editicon.png');
+              background-position: center;
+              background-size: cover;
+            }
+            > .button-delete {
+              background-color: none;
+              width: 50px;
+              height: 50px;
+              background: url('../../Assets/deleteicon.png');
+              background-position: center;
+              background-size: cover;
+            }
           }
         }
       }
+    }
+    > .table-button {
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      display: block;
+      font-weight: 600;
+    }
+    > .table-button:hover {
+      border: 1px solid #1f1f1f;
+      background: #fff;
+      color: #1f1f1f;
     }
   }
 }

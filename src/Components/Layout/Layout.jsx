@@ -1,20 +1,33 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './Layout.scss';
 
 function Layout() {
+  const location = useLocation();
+  // eslint-disable-next-line
+  if (
+    !location.pathname.match('^/admin/')
+    && location.pathname !== '/addform'
+    && location.pathname !== '/admin'
+  ) {
+    return (
+      <>
+        <Header />
+
+        <div className="content">
+          <Outlet />
+        </div>
+
+        <Footer />
+      </>
+    );
+  }
   return (
-    <>
-      <Header />
-
-      <div className="content">
-        <Outlet />
-      </div>
-
-      <Footer />
-    </>
+    <div className="content">
+      <Outlet />
+    </div>
   );
 }
 
