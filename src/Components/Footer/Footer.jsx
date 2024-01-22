@@ -8,30 +8,29 @@ function Footer() {
     <div className="footer-body">
       <Container>
         <Row>
-          <Col xs={3} className="footer-col">
+          <Col md={3} sm={2} className="footer-col">
             <img src={Logo} alt="logo-footer" className="footer-logo" />
           </Col>
-          <Col xs={2} className="footer-col">
+          <Col md={2} sm={2} className="footer-col">
             <h2>4P</h2>
             <p>menu</p>
             <p>about</p>
             <p>blog</p>
           </Col>
-          <Col xs={2} className="footer-col">
+          <Col md={2} sm={2} className="footer-col">
             <h2>contacts</h2>
             <p>email</p>
             <p>instagram </p>
             <p>twitter</p>
           </Col>
-          <Col xs={2} className="footer-col">
+          <Col md={2} sm={2} className="footer-col">
             <h2>useful info</h2>
             <p>return policy</p>
             <p>delivery</p>
             <p>where we deliver</p>
           </Col>
-          <Col xs={3} className="footer-col">
+          <Col md={3} sm={4} className="footer-col footer-hours">
             <h2>opening hours</h2>
-            {/* <div> */}
             <div>
               <p>Mon-Fri:</p>
               <p>8am-9pm</p>
@@ -40,7 +39,6 @@ function Footer() {
               <p>Sat-Sun:</p>
               <p>8am-1am</p>
             </div>
-            {/* </div> */}
           </Col>
         </Row>
       </Container>
