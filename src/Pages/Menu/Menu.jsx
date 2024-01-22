@@ -12,18 +12,15 @@ import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import { getAllProducts } from '../../Helper/requests';
 
+import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/MenuProductPlaceholder';
+
 function Menu() {
   const [selectProductId, setSelectProductId] = useState(null);
 
   const [menuItems, setMenuItems] = useState();
-
   useEffect(() => {
-    console.log();
     getAllProducts().then(setMenuItems);
   }, []);
-
-  console.log(menuItems);
-
   const handlerSelectProduct = (id) => {
     setSelectProductId(id);
   };
@@ -69,24 +66,40 @@ function Menu() {
             ut corrupti repellat ea enim harum.
           </p>
           <Row className="menu-main__product">
-            {menuItems?.map((item) => {
-              console.log(item);
-              return (
+            {menuItems?.map((item) => (
+              <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <MenuProduct
+                  id={item.id}
+                  image={item.Image.imageData}
+                  title={item.name}
+                  description={item.description}
+                  price={item.price}
+                  handlerSelectProduct={handlerSelectProduct}
+                />
+              </Col>
+            ))}
+            {!menuItems && (
+              <>
                 <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <MenuProduct
-                    id={item.id}
-                    image={item.Image.imageData}
-                    title={item.name}
-                    description={item.description}
-                    price={item.price}
-                    handlerSelectProduct={handlerSelectProduct}
-                  />
+                  <MenuProductPlaceholder />
                 </Col>
-              );
-            })}
+                <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                  <MenuProductPlaceholder />
+                </Col>
+                <Col
+                  xxl={4}
+                  xl={4}
+                  lg={4}
+                  md={6}
+                  sm={6}
+                  className="menu-product-third-placeholder"
+                >
+                  <MenuProductPlaceholder />
+                </Col>
+              </>
+            )}
           </Row>
         </div>
-
         <div>
           <hr />
           <Row className="main-page-about-us main-page-about-us__revers">

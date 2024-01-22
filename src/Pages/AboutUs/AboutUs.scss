@@ -47,13 +47,19 @@
     }
     .row {
       margin-bottom: 120px;
+      @media (max-width: 991px) {
+        margin-bottom: 70px;
+      }
+      @media (max-width: 767px) {
+        margin-bottom: 50px;
+      }
     }
-    @media (max-width: 992px) {
+    @media (max-width: 991px) {
       .row:nth-child(even) {
         display: flex;
         flex-direction: column-reverse;
         p {
-          margin-bottom: 40px;
+          margin-bottom: 20px;
         }
       }
     }

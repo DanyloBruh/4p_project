@@ -7,7 +7,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 6px 0 6px;
-
+  @media (max-width: 767px) {
+    width: 95px;
+  }
   > p {
     color: #fff;
     font-family: 'Outfit', sans-serif;
