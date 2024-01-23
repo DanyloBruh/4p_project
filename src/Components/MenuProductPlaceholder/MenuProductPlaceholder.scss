@@ -7,26 +7,65 @@
   position: relative;
   &__img-placeholder {
     width: 100%;
-    height: 250px;
+    height: 270px;
     background-color: #3d3d3d;
+    @media (max-width: 1399px) {
+      height: 250px;
+    }
+    @media (max-width: 1199px) {
+      height: 230px;
+    }
+    @media (max-width: 991px) {
+      height: 200px;
+    }
+    @media (max-width: 767px) {
+      height: 150px;
+    }
   }
   &__text {
     color: white;
     text-align: left;
-    margin: 14px 17px 120px 17px;
-    @media (max-width: 1400px) {
-      margin-bottom: 115px;
+    height: calc(100% - 14px - 40px - 270px);
+    margin: 14px 17px 40px 17px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media (max-width: 1399px) {
+      height: calc(100% - 14px - 40px - 250px);
     }
-    @media (max-width: 1200px) {
-      margin-bottom: 105px;
+    @media (max-width: 1199px) {
+      height: calc(100% - 14px - 25px - 230px);
+      margin-bottom: 25px;
+    }
+    @media (max-width: 991px) {
+      height: calc(100% - 14px - 25px - 200px);
+    }
+    @media (max-width: 767px) {
+      height: calc(100% - 14px - 25px - 150px);
+    }
+    @media (max-width: 575px) {
+      margin: 14px;
+      height: calc(100% - 14px - 14px - 150px);
+     
     }
   }
   .btn-group {
-    position: absolute;
-    bottom: 40px;
-    width: calc(100% - 34px);
+    // position: absolute;
+    // bottom: 40px;
+    width: calc(100%);
     display: flex;
     justify-content: space-between;
+    @media (max-width: 575px) {
+      flex-direction: column;
+      > .placeholder {
+        margin-right: 0;
+        max-width: 100%;
+        width: 100%;
+      }
+      > .placeholder:last-child{
+        margin-top: 10px;
+      }
+    }
   }
   .btn-outline-light {
     max-width: 120px;
