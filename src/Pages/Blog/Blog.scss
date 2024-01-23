@@ -44,5 +44,16 @@
     > .col-lg-4:last-child {
       margin-bottom: 0;
     }
+    .col-sm-6 {
+      @media (max-width: 575px) {
+        width: 50%;
+        flex: 0 0 auto;
+      }
+    }
+  }
+  &__third-placeholder {
+    @media (max-width: 991px) {
+      display: none;
+    }
   }
 }

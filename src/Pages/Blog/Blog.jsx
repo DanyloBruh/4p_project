@@ -37,13 +37,13 @@ function Blog() {
               />
             </Col>
           ))}
-          <Col lg={4}>
+          <Col lg={4} sm={6}>
             <SecondaryArticlePlaceholder />
           </Col>
-          <Col lg={4}>
+          <Col lg={4} sm={6}>
             <SecondaryArticlePlaceholder />
           </Col>
-          <Col lg={4}>
+          <Col lg={4} className="blog__third-placeholder">
             <SecondaryArticlePlaceholder />
           </Col>
         </Row>

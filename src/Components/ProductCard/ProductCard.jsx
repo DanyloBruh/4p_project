@@ -46,14 +46,14 @@ function ProductCard({ handlerSelectProduct }) {
           </svg>
         </button>
         <Row>
-          <Col xxl={7} xl={6} xs={7}>
+          <Col xxl={7} xl={6} sm={5}>
             <img
               className="product-modal__card__img"
               src={ProductImage}
               alt=""
             />
           </Col>
-          <Col xxl={5} xl={6} xs={5}>
+          <Col xxl={5} xl={6} sm={7}>
             <h2 className="product-modal__card__title">Ukrainian varenyky</h2>
             <p className="product-modal__card__mass">240 g</p>
             <p className="product-modal__card__text">
@@ -70,7 +70,7 @@ function ProductCard({ handlerSelectProduct }) {
               <Counter />
             </div>
             <div className="product-modal__card__one-line">
-              <Button variant="outline-light"> by in one click</Button>
+              <Button variant="outline-light">by in one click</Button>
               <Button variant="outline-light">add to cart</Button>
             </div>
           </Col>

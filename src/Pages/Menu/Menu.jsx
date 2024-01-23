@@ -78,22 +78,15 @@ function Menu() {
                 />
               </Col>
             ))}
-            {!menuItems && (
+            {(!menuItems || menuItems.length === 0) && (
               <>
-                <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <Col lg={4} sm={6}>
                   <MenuProductPlaceholder />
                 </Col>
-                <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <Col lg={4} sm={6}>
                   <MenuProductPlaceholder />
                 </Col>
-                <Col
-                  xxl={4}
-                  xl={4}
-                  lg={4}
-                  md={6}
-                  sm={6}
-                  className="menu-product-third-placeholder"
-                >
+                <Col lg={4} sm={6} className="menu-product-third-placeholder">
                   <MenuProductPlaceholder />
                 </Col>
               </>

@@ -1,18 +1,35 @@
 .footer-body {
   width: 100%;
-  height: 270px;
+  min-height: 270px;
+  height: auto;
   background: #232323;
   padding-top: 30px;
   margin-top: auto;
+  @media (max-width: 575px) {
+    min-height: auto;
+    padding-top: 15px;
+  }
 }
 .footer-logo {
   width: 47px;
   height: 47px;
+  @media (max-width: 575px) {
+    margin-left: 15px;
+  }
+}
+.footer-hours {
+  @media (max-width: 575px) {
+    display: none !important;
+  }
 }
 .footer-col {
   display: flex;
   //   justify-content: start;
   flex-direction: column;
+  @media (max-width: 575px) {
+    flex: 0 0 auto;
+    width: 25% !important;
+  }
   > h2 {
     color: #fff;
     font-family: 'Outfit', sans-serif;
