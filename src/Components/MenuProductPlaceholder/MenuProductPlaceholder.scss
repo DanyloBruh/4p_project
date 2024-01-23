@@ -46,7 +46,6 @@
     @media (max-width: 575px) {
       margin: 14px;
       height: calc(100% - 14px - 14px - 150px);
-     
     }
   }
   .btn-group {
@@ -62,7 +61,7 @@
         max-width: 100%;
         width: 100%;
       }
-      > .placeholder:last-child{
+      > .placeholder:last-child {
         margin-top: 10px;
       }
     }
