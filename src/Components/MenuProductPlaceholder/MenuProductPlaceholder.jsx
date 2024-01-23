@@ -39,8 +39,8 @@ function MenuProductPlaceholder() {
           </Placeholder>
         </p>
         <div className="btn-group">
-          <Placeholder.Button variant="outline-light" xs={6} />
-          <Placeholder.Button variant="outline-light" xs={6} />
+          <Placeholder.Button variant="outline-light" sm={6} />
+          <Placeholder.Button variant="outline-light" sm={6} />
         </div>
       </div>
     </div>
