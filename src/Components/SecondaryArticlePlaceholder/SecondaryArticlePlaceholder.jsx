@@ -14,7 +14,7 @@ function SecondaryArticlePlaceholder() {
           <Placeholder xs={3} size="lg" />
         </Placeholder>
       </h2>
-      <p>
+      <p className="secondary-article-placeholder__text">
         <Placeholder animation="glow">
           <Placeholder xs={3} />
           <Placeholder xs={6} />
