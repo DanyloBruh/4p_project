@@ -1,7 +1,6 @@
 /* eslint-disable object-curly-newline */
 import React, { useEffect, useState } from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
-import moment from 'moment';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import RecipeItem from '../../Components/RecipeItem/RecipeItem';
 
@@ -15,7 +14,7 @@ function Recipes() {
   useEffect(() => {
     getAllInstractions().then(setAllRecipes);
   }, []);
-
+  console.log(allRecipes);
   return (
     <div className="recipes">
       <div className="recipes__header" />
@@ -93,10 +92,10 @@ function Recipes() {
             <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
               <RecipeItem
                 id={item.id}
-                data={moment(item.createdAt).format('MMMM DD, YYYY')}
                 title={item.name}
                 description={item.description}
-                // image={item.}
+                image={item.Image.imageData}
+                imageName={item.Image.imageName}
               />
             </Col>
           ))}

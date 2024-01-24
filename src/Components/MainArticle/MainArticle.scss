@@ -27,6 +27,10 @@
   > div {
     padding: 25px;
     > h2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       color: #fff;
       text-align: justify;
       font-family: 'Outfit', sans-serif;
@@ -42,6 +46,10 @@
       }
     }
     > p {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       color: #fff;
       text-align: justify;
       font-family: 'Outfit', sans-serif;
@@ -49,12 +57,11 @@
       font-style: normal;
       font-weight: 300;
       line-height: normal;
-      text-transform: capitalize;
     }
     > div {
       display: flex;
       justify-content: space-between;
-      margin-top: 40px;
+      margin-top: 30px;
       > p {
         color: #fff;
         text-align: right;
@@ -64,6 +71,7 @@
         font-weight: 300;
         line-height: normal;
         text-transform: capitalize;
+        margin: 0;
       }
     }
   }

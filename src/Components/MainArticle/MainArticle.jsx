@@ -1,22 +1,23 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import moment from 'moment';
 import './MainArticle.scss';
 import { Link } from 'react-router-dom';
-import Borch from '../../Assets/borsch.jpg';
 
-function MainArticle() {
+function MainArticle({ data }) {
   return (
-    <Link to={`/blog/${123}`}>
+    <Link to={`/blog/${data?.id}`}>
       <div className="article-content">
-        <img src={Borch} alt="" />
+        <img
+          src={`data:image/png;base64,${data?.Images[0].imageData}`}
+          alt={data?.Images[0].imageName}
+        />
         <div>
-          <h2>10 unique borscht recipes from different regions of Ukraine</h2>
-          <p>
-            Culinary Diversity of Ukraine: A Look at Traditional Borscht through
-            the Variety of Regional Recipes
-          </p>
+          <h2>{data?.name}</h2>
+          <p>{data?.text}</p>
           <div>
-            <p>Noah White</p>
-            <p>07/01/22</p>
+            <p>{data?.User.name}</p>
+            <p>{moment(data?.createdAt).format('DD/MM/YY')}</p>
           </div>
         </div>
       </div>
