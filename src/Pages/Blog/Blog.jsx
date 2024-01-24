@@ -1,3 +1,4 @@
+/* eslint-disable no-self-compare */
 /* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -13,7 +14,6 @@ import Article from '../../Components/Article/Article';
 
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
-  console.log(allBlogs);
   const { id } = useParams();
   useEffect(() => {
     getAllBlogs().then(setAllBlogs);
@@ -24,7 +24,13 @@ function Blog() {
       <Container>
         <Row className="blog__main-article">
           <Col xxl={5} lg={6}>
-            <MainArticle />
+            <MainArticle
+              data={
+                allBlogs?.sort(
+                  (item1, item2) => new Date(item2.createdAt) - new Date(item1.createdAt),
+                )[0]
+              }
+            />
           </Col>
           <Col xxl={7} lg={6}>
             <TextArticle />

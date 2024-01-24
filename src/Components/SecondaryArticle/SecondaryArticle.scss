@@ -2,8 +2,11 @@ a {
   text-decoration: none !important;
 }
 .secondary-article-content {
+  height: 100%;
   width: 100%;
   min-height: 350px;
+  display: flex;
+  flex-direction: column;
   > img {
     width: 100%;
     height: 255px;
@@ -31,6 +34,10 @@ a {
     font-weight: 500;
     line-height: normal;
     text-transform: capitalize;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   p {
     color: #fff;
@@ -48,6 +55,7 @@ a {
   > div {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
     > p {
       text-transform: capitalize;
     }
