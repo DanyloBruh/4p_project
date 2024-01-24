@@ -7,7 +7,6 @@ import Layout from './Components/Layout/Layout';
 import AboutUs from './Pages/AboutUs/AboutUs';
 import NotFound from './Pages/NotFound/NotFound';
 import Blog from './Pages/Blog/Blog';
-import Article from './Pages/Article/Article';
 import Recipes from './Pages/Recipes/Recipes';
 import Recipe from './Pages/Recipe/Recipe';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
@@ -25,10 +24,12 @@ function App() {
           <Route index element={<Menu />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="aboutus" element={<AboutUs />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="blog/:id" element={<Article />} />
-          <Route path="recipes" element={<Recipes />} />
-          <Route path="recipe/:id" element={<Recipe />} />
+          <Route path="blog">
+            <Route path=":id?" element={<Blog />} />
+          </Route>
+          <Route path="recipes" element={<Recipes />}>
+            <Route path=":id" element={<Recipe />} />
+          </Route>
           <Route path="admin" element={<AdminPanel />}>
             <Route path="product" element={<AdminPanel />} />
             <Route path="recipes" element={<AdminPanel />} />

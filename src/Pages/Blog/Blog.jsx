@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 import MainArticle from '../../Components/MainArticle/MainArticle';
 import './Blog.scss';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import TextArticle from '../../Components/TextArticle/TextArticle';
 import { getAllBlogs } from '../../Helper/requests';
 import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
+import Article from '../../Components/Article/Article';
 
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
+  const { id } = useParams();
 
   useEffect(() => {
     getAllBlogs().then(setAllBlogs);
   }, []);
-  return (
+
+  return !id ? (
     <div className="blog__content">
       <Container>
         <Row className="blog__main-article">
@@ -51,6 +55,8 @@ function Blog() {
       <div className="ornament-left" />
       <div className="ornament-rigth" />
     </div>
+  ) : (
+    <Article />
   );
 }
 
