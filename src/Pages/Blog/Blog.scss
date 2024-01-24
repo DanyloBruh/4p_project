@@ -38,12 +38,6 @@
     margin-bottom: 18px;
   }
   &__secondary-article {
-    > .col-lg-4 {
-      margin-bottom: 24px;
-    }
-    > .col-lg-4:last-child {
-      margin-bottom: 0;
-    }
     .col-sm-6 {
       @media (max-width: 575px) {
         width: 50%;

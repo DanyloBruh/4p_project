@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import moment from 'moment';
@@ -12,8 +13,8 @@ import Article from '../../Components/Article/Article';
 
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
+  console.log(allBlogs);
   const { id } = useParams();
-
   useEffect(() => {
     getAllBlogs().then(setAllBlogs);
   }, []);
@@ -30,33 +31,40 @@ function Blog() {
           </Col>
         </Row>
         <Row className="blog__secondary-article">
-          {allBlogs?.map((item) => (
-            <Col key={item.id} lg={4}>
-              <SecondaryArticle
-                id={item.id}
-                title={item.name}
-                text={item.text}
-                createdBy={item.User.name}
-                createdAt={moment(item.createdAt).format('DD/MM/YY')}
-              />
-            </Col>
-          ))}
-          <Col lg={4} sm={6}>
-            <SecondaryArticlePlaceholder />
-          </Col>
-          <Col lg={4} sm={6}>
-            <SecondaryArticlePlaceholder />
-          </Col>
-          <Col lg={4} className="blog__third-placeholder">
-            <SecondaryArticlePlaceholder />
-          </Col>
+          {allBlogs &&
+            allBlogs?.map((item) => (
+              <Col key={item.id} lg={4}>
+                <SecondaryArticle
+                  id={item.id}
+                  title={item.name}
+                  text={item.text}
+                  createdBy={item.User.name}
+                  image={item.Images[0].imageData}
+                  imageName={item.Images[0].imageName}
+                  createdAt={moment(item.createdAt).format('DD/MM/YY')}
+                />
+              </Col>
+            ))}
+          {!allBlogs && (
+            <>
+              <Col lg={4} sm={6}>
+                <SecondaryArticlePlaceholder />
+              </Col>
+              <Col lg={4} sm={6}>
+                <SecondaryArticlePlaceholder />
+              </Col>
+              <Col lg={4} className="blog__third-placeholder">
+                <SecondaryArticlePlaceholder />
+              </Col>
+            </>
+          )}
         </Row>
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
     </div>
   ) : (
-    <Article />
+    <Article blog={allBlogs?.find((item) => item.id === id)} />
   );
 }
 
