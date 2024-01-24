@@ -7,7 +7,7 @@ export const getAllProducts = async () => {
 };
 
 export const getAllInstractions = async () => {
-  const { data } = await client.get('/instraction/');
+  const { data } = await client.get('/instruction/');
   return data;
 };
 
