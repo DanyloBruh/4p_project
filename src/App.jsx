@@ -19,7 +19,9 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Menu />} />
+          <Route path="/">
+            <Route path=":id?" element={<Menu />} />
+          </Route>
           <Route path="contacts" element={<Contacts />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="blog">

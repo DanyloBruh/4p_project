@@ -3,19 +3,25 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useRef } from 'react';
 import './ProductCard.scss';
+import { useNavigate } from 'react-router-dom';
 import { Button, Col, Row } from 'react-bootstrap';
-import ProductImage from '../../Assets/product1.jpg';
 import Counter from '../Counter/Counter';
 
-function ProductCard({ handlerSelectProduct }) {
+function ProductCard({ data }) {
   const ref = useRef();
+  const navigate = useNavigate();
+  const routeChange = () => {
+    const path = '/';
+    navigate(path);
+  };
+  console.log(data);
   useEffect(() => {
     const listener = (event) => {
       // Do nothing if clicking ref's element or descendent elements
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
-      handlerSelectProduct(null);
+      routeChange();
     };
     document.addEventListener('mousedown', listener);
     document.addEventListener('touchstart', listener);
@@ -30,7 +36,7 @@ function ProductCard({ handlerSelectProduct }) {
         <button
           type="button"
           className="product-modal__card__close"
-          onClick={() => handlerSelectProduct(null)}
+          onClick={() => routeChange()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,24 +55,28 @@ function ProductCard({ handlerSelectProduct }) {
           <Col xxl={7} xl={6} sm={5}>
             <img
               className="product-modal__card__img"
-              src={ProductImage}
-              alt=""
+              src={`data:image/png;base64,${data?.Image.imageData}`}
+              alt={data?.Image.imageName}
             />
           </Col>
-          <Col xxl={5} xl={6} sm={7}>
-            <h2 className="product-modal__card__title">Ukrainian varenyky</h2>
-            <p className="product-modal__card__mass">240 g</p>
+          <Col
+            xxl={5}
+            xl={6}
+            sm={7}
+            className="product-modal__card__description"
+          >
+            <h2 className="product-modal__card__title">{data?.name}</h2>
+            <p className="product-modal__card__mass">{`${data?.weight} G`}</p>
             <p className="product-modal__card__text">
-              <span>Dough: </span>
-              Flour (high grade), kefir (2.5%), eggs, vegetable oil, sugar,
-              salt, soda
+              {/* <span>Dough: </span> */}
+              {data?.ingredients}
             </p>
-            <p className="product-modal__card__text">
+            {/* <p className="product-modal__card__text">
               <span>Filling: </span>
               potatoes, butter, sauteed onion, fresh dill, salt, pepper
-            </p>
+            </p> */}
             <div className="product-modal__card__one-line">
-              <p className="product-modal__card__price">PRICE | 20$</p>
+              <p className="product-modal__card__price">{`PRICE | ${data?.price}£`}</p>
               <Counter />
             </div>
             <div className="product-modal__card__one-line">
