@@ -184,8 +184,8 @@
   }
   > .item-section {
     margin-top: 47px;
-    > .row{
-      >.col-sm-6{
+    > .row {
+      > .col-sm-6 {
         @media (max-width: 575px) {
           width: 50%;
           flex: 0 0 auto;
