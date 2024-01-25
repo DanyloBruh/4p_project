@@ -1,21 +1,24 @@
 /* eslint-disable object-curly-newline */
 import React, { useEffect, useState } from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import RecipeItem from '../../Components/RecipeItem/RecipeItem';
 
 import Shawarma from '../../Assets/shawarma-recipe.png';
 import './Recipes.scss';
 import { getAllInstractions } from '../../Helper/requests';
+import Recipe from '../../Components/Recipe/Recipe';
 
 function Recipes() {
   const [allRecipes, setAllRecipes] = useState();
+  const { id } = useParams();
 
   useEffect(() => {
     getAllInstractions().then(setAllRecipes);
   }, []);
-  console.log(allRecipes);
-  return (
+  console.log(id);
+  return !id ? (
     <div className="recipes">
       <div className="recipes__header" />
 
@@ -104,6 +107,8 @@ function Recipes() {
       <div className="ornament-left" />
       <div className="ornament-rigth" />
     </div>
+  ) : (
+    <Recipe recipe={allRecipes?.find((item) => item.id === id)} />
   );
 }
 

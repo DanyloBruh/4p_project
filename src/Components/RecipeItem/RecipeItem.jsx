@@ -8,7 +8,7 @@ function RecipeItem({
 }) {
   return (
     <div className="recipe-card">
-      <Link to={`/recipe/${id}`}>
+      <Link to={`/recipes/${id}`}>
         <img
           className="recipe-card-img"
           src={`data:image/png;base64,${image}`}
@@ -18,7 +18,7 @@ function RecipeItem({
       <div className="recipe-card-body">
         <div className="recipe-card-title">{title}</div>
         <div className="recipe-card-text">{description}</div>
-        <Link to={`/recipe/${id}`} className="btn btn-outline-light">
+        <Link to={`/recipes/${id}`} className="btn btn-outline-light">
           read more
         </Link>
       </div>
