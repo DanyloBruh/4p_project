@@ -1,173 +1,35 @@
-/* eslint-disable */
-
 import React, { useState, useEffect } from 'react';
 
 import { Container, Nav } from 'react-bootstrap';
 
 import Table from 'react-bootstrap/Table';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import './AdminPanel.scss';
-
-import editIcon from '../../Assets/editicon.png';
-import deleteIcon from '../../Assets/deleteicon.png';
+import axios from 'axios';
+import RenderTableBody from './TableRenderComponent/RenderTableBody';
+import RenderTableSortBy from './TableRenderComponent/RenderTableSortBy';
+import RenderTableHeader from './TableRenderComponent/RenderTableHeader';
 
 function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
   const [search, setSearch] = useState('');
-  const dispatch = useDispatch();
 
-  const data = useSelector((state) => state.orderData);
-  console.log(data);
+  const [data, setData] = useState([]);
+
+  const orders = useSelector((state) => state.orderData.data);
 
   const location = useLocation();
+  const category = location.pathname.split('/')[2];
 
-  const RenderTableHeader = function () {
-    switch (location.pathname) {
-      case '/admin/product':
-        return (
-          <>
-            <th>name</th>
-            <th>description</th>
-            <th>weight</th>
-            <th>price</th>
-            <th>ingridients</th>
-            <th>
-              <img src={editIcon} alt="edit icon" />
-            </th>
-            <th>
-              <img src={deleteIcon} alt="delete icon" />
-            </th>
-          </>
-        );
-      case '/admin/recipes':
-        return (
-          <>
-            <th>name</th>
-            <th>difficulty</th>
-            <th>time</th>
-            <th>makes</th>
-            <th>description</th>
-            <th>ingredients</th>
-            <th>text</th>
-            <th>
-              <img src={editIcon} alt="edit icon" />
-            </th>
-            <th>
-              <img src={deleteIcon} alt="delete icon" />
-            </th>
-          </>
-        );
-      case '/admin/blog':
-        return (
-          <>
-            <th>name</th>
-            <th>text</th>
-            <th>
-              <img src={editIcon} alt="edit icon" />
-            </th>
-            <th>
-              <img src={deleteIcon} alt="delete icon" />
-            </th>
-          </>
-        );
-      case '/admin/orders':
-        return (
-          <>
-            <th>name</th>
-            <th>phoneNumber</th>
-            <th>adress</th>
-            <th>comment</th>
-            <th>paymentType</th>
-            <th>deliveryType</th>
-            <th>totalAmount</th>
-            <th>status</th>
-            <th>
-              <img src={editIcon} alt="edit icon" />
-            </th>
-            <th>
-              <img src={deleteIcon} alt="delete icon" />
-            </th>
-          </>
-        );
-      case '/admin/users':
-        return (
-          <>
-            <th>name</th>
-            <th>email</th>
-            <th>password</th>
-            <th>role</th>
-            <th>
-              <img src={editIcon} alt="edit icon" />
-            </th>
-            <th>
-              <img src={deleteIcon} alt="delete icon" />
-            </th>
-          </>
-        );
-      default:
-        return <div style={{ background: 'none' }}></div>;
-    }
-  };
-
-  const RenderSortBy = function () {
-    switch (location.pathname) {
-      case '/admin/product':
-        return (
-          <>
-            <option>name</option>
-            <option>description</option>
-            <option>weight</option>
-            <option>price</option>
-            <option>ingredients</option>
-          </>
-        );
-      case '/admin/recipes':
-        return (
-          <>
-            <option>name</option>
-            <option>difficulty</option>
-            <option>time</option>
-            <option>makes</option>
-            <option>description</option>
-            <option>ingredients</option>
-            <option>text</option>
-          </>
-        );
-      case '/admin/blog':
-        return (
-          <>
-            <option>name</option>
-            <option>text</option>
-          </>
-        );
-      case '/admin/orders':
-        return (
-          <>
-            <option>name</option>
-            <option>adress</option>
-            <option>comment</option>
-            <option>paymentType</option>
-            <option>deliveryType</option>
-            <option>totalAmount</option>
-            <option>status</option>
-          </>
-        );
-      case '/admin/users':
-        return (
-          <>
-            <option>name</option>
-            <option>email</option>
-            <option>password</option>
-            <option>role</option>
-          </>
-        );
-      default:
-        return <div style={{ background: 'none' }}></div>;
-    }
-  };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3005/${category}`)
+      .then((res) => setData(res.data))
+      .catch((er) => console.log(er));
+  }, [category]);
 
   return (
     <div className="admin-panel">
@@ -175,45 +37,60 @@ function AdminPanel() {
         <div className="selecte-table">
           <Nav className="me-auto">
             <NavLink to="product">product</NavLink>
-            <NavLink to="recipes">recipes</NavLink>
+            <NavLink to="instruction">recipes</NavLink>
             <NavLink to="blog">blog</NavLink>
-            <NavLink to="orders">orders</NavLink>
-            <NavLink to="users">users</NavLink>
+            <NavLink to="order">orders</NavLink>
+            <NavLink to="user">users</NavLink>
           </Nav>
         </div>
-        <h2>List of product</h2>
-        <div className="manipulation">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search anything..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <select
-            className="dropdown"
-            value={sortBy}
-            onChange={(e) => {
-              setSortBy(e.target.value);
-            }}
-          >
-            <RenderSortBy />
-          </select>
-        </div>
+        {category ? (
+          <>
+            <h2>List of product</h2>
+            <div className="manipulation">
+              <div className="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search anything..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+              {/* eslint-disable-next-line */}
+              <select
+                className="dropdown"
+                value={sortBy}
+                onChange={(e) => {
+                  setSortBy(e.target.value);
+                }}
+              >
+                <RenderTableSortBy category={category} />
+              </select>
+            </div>
+          </>
+        ) : (
+          <h2 className="">Choose category ^</h2>
+        )}
       </Container>
       <Container className="admin-panel__body">
         <Table>
           <thead>
             <tr>
-              <RenderTableHeader />
+              <RenderTableHeader category={category} />
             </tr>
           </thead>
-          <tbody></tbody>
+          {category ? (
+            <RenderTableBody category={category} data={data} orders={orders} />
+          ) : (
+            <tbody />
+          )}
         </Table>
-        <Link to="/addform" className="table-button">
-          ADD
-        </Link>
+        {category ? (
+          <Link to={`/addform/${category}`} className="table-button">
+            ADD
+          </Link>
+        ) : (
+          <div />
+        )}
       </Container>
     </div>
   );
