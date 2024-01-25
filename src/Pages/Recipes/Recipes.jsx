@@ -89,7 +89,7 @@ function Recipes() {
       <Container className="item-section">
         <Row>
           {allRecipes?.map((item) => (
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
+            <Col key={item.id} xxl={4} xl={4} lg={6} md={6} sm={12}>
               <RecipeItem
                 id={item.id}
                 title={item.name}
