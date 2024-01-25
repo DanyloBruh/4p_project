@@ -20,3 +20,8 @@ export const getAllUsers = async () => {
   const { data } = await client.get('/user/');
   return data;
 };
+
+export const postProduct = async () => {
+  const { data } = await client.post('/product/');
+  return data;
+};
