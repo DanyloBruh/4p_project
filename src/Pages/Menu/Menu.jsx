@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import './Menu.scss';
 import Varenyk from '../../Assets/varenyk.png';
 import Dumplings from '../../Assets/dumplings.png';
@@ -15,15 +15,14 @@ import { getAllProducts } from '../../Helper/requests';
 import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/MenuProductPlaceholder';
 
 function Menu() {
-  const [selectProductId, setSelectProductId] = useState(null);
-
   const [menuItems, setMenuItems] = useState();
+
+  const { id } = useParams();
+
   useEffect(() => {
     getAllProducts().then(setMenuItems);
   }, []);
-  const handlerSelectProduct = (id) => {
-    setSelectProductId(id);
-  };
+
   return (
     <div className="menu-content">
       <div className="menu-header">
@@ -74,7 +73,6 @@ function Menu() {
                   title={item.name}
                   description={item.description}
                   price={item.price}
-                  handlerSelectProduct={handlerSelectProduct}
                 />
               </Col>
             ))}
@@ -162,9 +160,7 @@ function Menu() {
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
-      {selectProductId !== null && (
-        <ProductCard handlerSelectProduct={handlerSelectProduct} />
-      )}
+      {id && <ProductCard data={menuItems?.find((item) => item.id === id)} />}
     </div>
   );
 }
