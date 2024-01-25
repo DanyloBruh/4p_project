@@ -15,3 +15,8 @@ export const getAllBlogs = async () => {
   const { data } = await client.get('/blog/');
   return data;
 };
+
+export const getAllUsers = async () => {
+  const { data } = await client.get('/user/');
+  return data;
+};

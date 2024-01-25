@@ -3,7 +3,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  data: [1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 54, 3, 234, 2345, 2],
+  data: [
+    {
+      id: 123120938448,
+      name: 'order',
+      phoneNumber: '30897879834',
+      address: 'yyeyeyey',
+      comment: 'pls',
+      paymentType: 'cash',
+      deliveryType: 'self',
+      totalAmount: 40,
+      status: 'online',
+    },
+  ],
 };
 
 const orderDataSlice = createSlice({
