@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './userSlice';
+import orderDataReducer from './orderDataSlice';
 
 /* eslint-disable import/prefer-default-export */
 export const store = configureStore({
   reducer: {
-    user: userReducer,
+    orderData: orderDataReducer,
   },
 });

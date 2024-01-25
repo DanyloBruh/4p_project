@@ -11,6 +11,7 @@ function Layout() {
     !location.pathname.match('^/admin/')
     && location.pathname !== '/addform'
     && location.pathname !== '/admin'
+    && !location.pathname.match('^/edit/')
   ) {
     return (
       <>

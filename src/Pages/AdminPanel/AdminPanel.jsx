@@ -8,7 +8,6 @@ import Table from 'react-bootstrap/Table';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { fetchUsers } from '../../redux/userSlice';
 
 import './AdminPanel.scss';
 
@@ -18,14 +17,10 @@ import deleteIcon from '../../Assets/deleteicon.png';
 function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
   const [search, setSearch] = useState('');
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  console.log(user);
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
+  const data = useSelector((state) => state.orderData);
+  console.log(data);
 
   const location = useLocation();
 
@@ -214,31 +209,7 @@ function AdminPanel() {
               <RenderTableHeader />
             </tr>
           </thead>
-          {user.loading && <div>Loading...</div>}
-          {!user.loading && user.error ? (
-            <div>
-              Error:
-              {user.error}
-            </div>
-          ) : null}
-          {!user.loading && user.users.length ? (
-            <tbody>
-              {user.users.map((el) => (
-                <tr key={el.id}>
-                  <td>{el.name}</td>
-                  <td>{el.description}</td>
-                  <td>{el.weight}</td>
-                  <td>{el.price}</td>
-                  <td>
-                    <button type="button" className="button-edit"></button>
-                  </td>
-                  <td>
-                    <button type="button" className="button-delete"></button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          ) : null}
+          <tbody></tbody>
         </Table>
         <Link to="/addform" className="table-button">
           ADD

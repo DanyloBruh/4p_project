@@ -13,6 +13,7 @@ import Recipe from './Pages/Recipe/Recipe';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import AddForm from './Pages/AdminPanel/AddForm/AddForm';
+import EditForm from './Pages/AdminPanel/EditForm/EditForm';
 // import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="users" element={<AdminPanel />} />
           </Route>
           <Route path="addform" element={<AddForm />} />
+          <Route path="edit/:id" element={<EditForm />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
