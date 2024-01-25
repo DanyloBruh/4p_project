@@ -7,9 +7,10 @@ import './Recipe.scss';
 function Recipe({ recipe }) {
   return (
     <div className="recipe">
-      <div className="recipe__header" />
-      <Container className="recipe__container">
+      <div className="recipe__header">
         <h2>{recipe?.name}</h2>
+      </div>
+      <Container className="recipe__container">
         <div className="dop-info">
           <div className="dop-info-item">
             <p>Difficulty</p>
