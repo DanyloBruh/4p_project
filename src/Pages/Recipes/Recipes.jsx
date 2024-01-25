@@ -1,21 +1,24 @@
 /* eslint-disable object-curly-newline */
 import React, { useEffect, useState } from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import RecipeItem from '../../Components/RecipeItem/RecipeItem';
 
 import Shawarma from '../../Assets/shawarma-recipe.png';
 import './Recipes.scss';
 import { getAllInstractions } from '../../Helper/requests';
+import Recipe from '../../Components/Recipe/Recipe';
+import RecipeItemPlaceholder from '../../Components/RecipeItemPlaceholder/RecipeItemPlaceholder';
 
 function Recipes() {
   const [allRecipes, setAllRecipes] = useState();
+  const { id } = useParams();
 
   useEffect(() => {
     getAllInstractions().then(setAllRecipes);
   }, []);
-  console.log(allRecipes);
-  return (
+  return !id ? (
     <div className="recipes">
       <div className="recipes__header" />
 
@@ -88,22 +91,45 @@ function Recipes() {
       </Container>
       <Container className="item-section">
         <Row>
-          {allRecipes?.map((item) => (
-            <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
-              <RecipeItem
-                id={item.id}
-                title={item.name}
-                description={item.description}
-                image={item.Image.imageData}
-                imageName={item.Image.imageName}
-              />
-            </Col>
-          ))}
+          {allRecipes
+            && allRecipes?.map((item) => (
+              <Col key={item.id} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <RecipeItem
+                  id={item.id}
+                  title={item.name}
+                  description={item.description}
+                  image={item.Image.imageData}
+                  imageName={item.Image.imageName}
+                />
+              </Col>
+            ))}
+          {!allRecipes && (
+            <>
+              <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <RecipeItemPlaceholder />
+              </Col>
+              <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <RecipeItemPlaceholder />
+              </Col>
+              <Col
+                xxl={4}
+                xl={4}
+                lg={4}
+                md={6}
+                sm={6}
+                className="menu-product-third-placeholder"
+              >
+                <RecipeItemPlaceholder />
+              </Col>
+            </>
+          )}
         </Row>
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
     </div>
+  ) : (
+    <Recipe recipe={allRecipes?.find((item) => item.id === id)} />
   );
 }
 

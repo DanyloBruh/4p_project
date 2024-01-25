@@ -3,8 +3,16 @@
     height: 100%;
     width: 100%;
     margin-top: 95px;
+    margin-bottom: 40px;
     padding-top: 44px;
     position: relative;
+    @media (max-width: 767px) {
+      margin-top: 85px;
+      padding-top: 33px;
+    }
+    @media (max-width: 575px) {
+      margin-top: 75px;
+    }
     > .ornament-left {
       height: calc(100% + 100px);
       width: 100px;

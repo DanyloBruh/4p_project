@@ -8,7 +8,6 @@ import AboutUs from './Pages/AboutUs/AboutUs';
 import NotFound from './Pages/NotFound/NotFound';
 import Blog from './Pages/Blog/Blog';
 import Recipes from './Pages/Recipes/Recipes';
-import Recipe from './Pages/Recipe/Recipe';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import AddForm from './Pages/AdminPanel/AddForm/AddForm';
@@ -21,14 +20,16 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Menu />} />
+          <Route path="/">
+            <Route path=":id?" element={<Menu />} />
+          </Route>
           <Route path="contacts" element={<Contacts />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="blog">
             <Route path=":id?" element={<Blog />} />
           </Route>
-          <Route path="recipes" element={<Recipes />}>
-            <Route path=":id" element={<Recipe />} />
+          <Route path="recipes">
+            <Route path=":id?" element={<Recipes />} />
           </Route>
           <Route path="admin" element={<AdminPanel />}>
             <Route path="product" element={<AdminPanel />} />

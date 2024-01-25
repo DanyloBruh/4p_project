@@ -39,7 +39,7 @@ function Blog() {
         <Row className="blog__secondary-article">
           {allBlogs &&
             allBlogs?.map((item) => (
-              <Col key={item.id} lg={4}>
+              <Col key={item.id} lg={4} sm={6}>
                 <SecondaryArticle
                   id={item.id}
                   title={item.name}
