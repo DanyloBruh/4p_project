@@ -3,7 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  data: [1,2,2,3,3,4,5,6,7,8,54,3,234,2345,2],
+  data: [1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 54, 3, 234, 2345, 2],
 };
 
 const orderDataSlice = createSlice({
@@ -15,7 +15,7 @@ const orderDataSlice = createSlice({
     },
     deleteOrderData: (state) => {
       state.data = initialState.data;
-    }
+    },
   },
 });
 
