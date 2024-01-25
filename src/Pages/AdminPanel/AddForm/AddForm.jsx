@@ -6,7 +6,6 @@ import './AddForm.scss';
 function AddForm() {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
-  console.log(category);
 
   const handleSubmit = (event) => {
     event.preventDefault();

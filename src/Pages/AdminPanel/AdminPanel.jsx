@@ -8,13 +8,6 @@ import { useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import './AdminPanel.scss';
-
-// import {
-//   getAllBlogs,
-//   getAllInstractions,
-//   getAllProducts,
-//   getAllUsers,
-// } from '../../Helper/requests';
 import axios from 'axios';
 import RenderTableBody from './TableRenderComponent/RenderTableBody';
 import RenderTableSortBy from './TableRenderComponent/RenderTableSortBy';
@@ -24,15 +17,9 @@ function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
   const [search, setSearch] = useState('');
 
-  // const [products, setAllProducts] = useState();
-  // const [recipes, setAllRecipes] = useState();
-  // const [blogs, setAllBlogs] = useState();
-  // const [users, setAllUsers] = useState();
-
   const [data, setData] = useState([]);
 
   const orders = useSelector((state) => state.orderData.data);
-  // const dispatch = useDispatch();
 
   const location = useLocation();
   const category = location.pathname.split('/')[2];
