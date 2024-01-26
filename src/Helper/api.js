@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
-import axios from 'axios';
-
 /* eslint-disable import/prefer-default-export */
-const BASE_URL = 'http://localhost:3005';
+import axios from 'axios';
 
 function request(url, method, data) {
   const options = { method };
@@ -10,20 +8,20 @@ function request(url, method, data) {
   try {
     switch (options.method) {
       case 'GET':
-        return axios.get(`${BASE_URL}${url}`);
+        return axios.get(`${process.env.REACT_APP_BASE_URL}${url}`);
 
       case 'POST':
         return axios
-          .post(`${BASE_URL}${url}`, data)
+          .post(`${process.env.BASE_URL}${url}`, data)
           .then((response) => response);
 
       case 'PATCH':
         return axios
-          .patch(`${BASE_URL}${url}`, data)
+          .patch(`${process.env.BASE_URL}${url}`, data)
           .then((response) => response);
 
       case 'DELETE':
-        return axios.delete(`${BASE_URL}${url}`).then((response) => response);
+        return axios.delete(`${process.env.BASE_URL}${url}`).then((response) => response);
 
       default:
         return null;
