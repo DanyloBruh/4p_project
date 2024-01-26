@@ -29,7 +29,7 @@ function AdminPanel() {
       .get(`http://localhost:3005/${category}`)
       .then((res) => setData(res.data))
       .catch((er) => console.log(er));
-  }, [category]);
+  }, [category, '']);
 
   return (
     <div className="admin-panel">

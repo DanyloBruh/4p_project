@@ -15,7 +15,10 @@ function RenderTableBody({ category, data, orders }) {
               <td>{product.ingredients}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${product.id}`} className="button-edit" />
+                <Link
+                  to={`/edit/product/${product.id}`}
+                  className="button-edit"
+                />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
@@ -39,7 +42,10 @@ function RenderTableBody({ category, data, orders }) {
               <td>{recipe.text}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${recipe.id}`} className="button-edit" />
+                <Link
+                  to={`/edit/instruction/${recipe.id}`}
+                  className="button-edit"
+                />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
@@ -58,7 +64,7 @@ function RenderTableBody({ category, data, orders }) {
               <td>{blog.text}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${blog.id}`} className="button-edit" />
+                <Link to={`/edit/blog/${blog.id}`} className="button-edit" />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
@@ -77,7 +83,7 @@ function RenderTableBody({ category, data, orders }) {
               <td>{user.email}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${user.id}`} className="button-edit" />
+                <Link to={`/edit/user/${user.id}`} className="button-edit" />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
@@ -102,7 +108,7 @@ function RenderTableBody({ category, data, orders }) {
               <td>{order.status}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${order.id}`} className="button-edit" />
+                <Link to={`/edit/order/${order.id}`} className="button-edit" />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
