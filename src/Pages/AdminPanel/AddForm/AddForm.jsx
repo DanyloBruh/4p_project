@@ -1,34 +1,95 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
 import './AddForm.scss';
+import RenderAddFormBody from './RenderAddFormBody';
 
 function AddForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    role: '',
-    email: '',
-    password: '',
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
 
+  let initialState = {};
+
+  switch (category) {
+    case 'user':
+      initialState = {
+        name: '',
+        role: '',
+        email: '',
+        password: '',
+      };
+      break;
+    case 'blog':
+      initialState = {
+        name: '',
+        text: '',
+        images: '',
+      };
+      break;
+    case 'product':
+      initialState = {
+        name: '',
+        weight: '',
+        description: '',
+        price: '',
+        ingredients: '',
+        image: '',
+      };
+      break;
+    case 'instruction':
+      initialState = {
+        name: '',
+        difficulty: '',
+        time: '',
+        makes: '',
+        description: '',
+        ingredients: '',
+        text: '',
+        image: '',
+      };
+      break;
+    default:
+      initialState = {};
+  }
+
+  const [formData, setFormData] = useState(initialState);
+  console.log(formData);
+
+  const handleInputChange = (e) => {
+    if (e.target.files) {
+      const uploadFile = e.target.files[0];
+      console.log({ ...uploadFile });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [e.target.name]: uploadFile,
+      }));
+    } else {
+      const { name, value } = e.target;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('id: ', uuidv4(), formData);
-    axios.post('http://localhost:3005/user/', { id: uuidv4(), ...formData });
+    const response = {
+      userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
+      ...formData,
+    };
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    console.log(response);
+    axios
+      .post(`http://localhost:3005/${category}/`, response, config)
+      .then((res) => console.log(res))
+      .catch((er) => console.log(er));
     navigate(`/admin/${category}`);
   };
 
@@ -40,44 +101,12 @@ function AddForm() {
           {` ${category}`}
         </h3>
         <form>
-          <div className="form-element">
-            <p>Name</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.name}
-              name="name"
-            />
-          </div>
-          <div className="form-element">
-            <p>role</p>
-            <select
-              onChange={handleInputChange}
-              value={formData.role}
-              name="role"
-            >
-              <option>admin</option>
-              <option>employee</option>
-            </select>
-          </div>
-          <div className="form-element">
-            <p>email</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.email}
-              name="email"
-            />
-          </div>
-          <div className="form-element">
-            <p>password</p>
-            <input
-              type="password"
-              onChange={handleInputChange}
-              value={formData.password}
-              name="password"
-            />
-          </div>
+          <RenderAddFormBody
+            handleInputChange={handleInputChange}
+            category={category}
+            formData={formData}
+            setFormData={setFormData}
+          />
           <br />
           <Button variant="outline-light" onClick={handleSubmit}>
             Submit
