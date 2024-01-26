@@ -21,7 +21,9 @@ function request(url, method, data) {
           .then((response) => response);
 
       case 'DELETE':
-        return axios.delete(`${process.env.BASE_URL}${url}`).then((response) => response);
+        return axios
+          .delete(`${process.env.BASE_URL}${url}`)
+          .then((response) => response);
 
       default:
         return null;
