@@ -8,7 +8,7 @@ import MainArticle from '../../Components/MainArticle/MainArticle';
 import './Blog.scss';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import TextArticle from '../../Components/TextArticle/TextArticle';
-import { getAllBlogs } from '../../Helper/requests';
+import { getAllBlogs } from '../../helper/requests';
 import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
 import Article from '../../Components/Article/Article';
 

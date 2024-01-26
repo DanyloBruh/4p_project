@@ -7,7 +7,7 @@ import RecipeItem from '../../Components/RecipeItem/RecipeItem';
 
 import Shawarma from '../../Assets/shawarma-recipe.png';
 import './Recipes.scss';
-import { getAllInstractions } from '../../Helper/requests';
+import { getAllInstractions } from '../../helper/requests';
 import Recipe from '../../Components/Recipe/Recipe';
 import RecipeItemPlaceholder from '../../Components/RecipeItemPlaceholder/RecipeItemPlaceholder';
 
