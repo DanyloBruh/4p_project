@@ -1,3 +1,5 @@
+// import axios from 'axios';
+import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 /* eslint-disable react/prop-types */
@@ -22,7 +24,19 @@ function RenderTableBody({ category, data, orders }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => {
+                    axios
+                      .delete(`http://localhost:3005/${category}/${product.id}`)
+                      .then((res) => {
+                        console.log('Blog deleted successfully :', res.data);
+                      })
+                      .catch((err) => {
+                        console.error('Error deleting blog: ', err);
+                      });
+                  }}
+                />
               </td>
             </tr>
           ))}
@@ -49,7 +63,19 @@ function RenderTableBody({ category, data, orders }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => {
+                    axios
+                      .delete(`http://localhost:3005/${category}/${recipe.id}`)
+                      .then((res) => {
+                        console.log('Blog deleted successfully :', res.data);
+                      })
+                      .catch((err) => {
+                        console.error('Error deleting blog: ', err);
+                      });
+                  }}
+                />
               </td>
             </tr>
           ))}
@@ -68,7 +94,19 @@ function RenderTableBody({ category, data, orders }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => {
+                    axios
+                      .delete(`http://localhost:3005/${category}/${blog.id}`)
+                      .then((res) => {
+                        console.log('Blog deleted successfully :', res.data);
+                      })
+                      .catch((err) => {
+                        console.error('Error deleting blog: ', err);
+                      });
+                  }}
+                />
               </td>
             </tr>
           ))}
@@ -87,7 +125,19 @@ function RenderTableBody({ category, data, orders }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => {
+                    axios
+                      .delete(`http://localhost:3005/${category}/${user.id}`)
+                      .then((res) => {
+                        console.log('Blog deleted successfully :', res.data);
+                      })
+                      .catch((err) => {
+                        console.error('Error deleting blog: ', err);
+                      });
+                  }}
+                />
               </td>
             </tr>
           ))}
@@ -112,7 +162,19 @@ function RenderTableBody({ category, data, orders }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => {
+                    axios
+                      .delete(`http://localhost:3005/${category}/${order.id}`)
+                      .then((res) => {
+                        console.log('Blog deleted successfully :', res.data);
+                      })
+                      .catch((err) => {
+                        console.error('Error deleting blog: ', err);
+                      });
+                  }}
+                />
               </td>
             </tr>
           ))}

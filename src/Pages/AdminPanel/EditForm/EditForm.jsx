@@ -8,7 +8,6 @@ import RenderEditFormBody from './RenderEditFormBody';
 function EditForm() {
   const category = useLocation().pathname.split('/')[2];
   const { id } = useParams();
-  console.log(id, category);
   const navigate = useNavigate();
 
   let initialState = {};
@@ -54,6 +53,9 @@ function EditForm() {
   }
 
   const [data, setData] = useState(initialState);
+  const [editedData, setEditedData] = useState(initialState);
+
+  console.log('editedData', editedData);
 
   useEffect(() => {
     console.log('API');
@@ -63,7 +65,7 @@ function EditForm() {
       .catch((er) => console.log(er));
   }, []);
 
-  console.log(data);
+  console.log('data', data);
 
   const handleInputChange = (e) => {
     if (e.target.files) {
@@ -73,9 +75,17 @@ function EditForm() {
         ...prevFormData,
         [e.target.name]: uploadFile,
       }));
+      setEditedData((prevFormData) => ({
+        ...prevFormData,
+        [e.target.name]: uploadFile,
+      }));
     } else {
       const { name, value } = e.target;
       setData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+      setEditedData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
       }));
@@ -85,19 +95,26 @@ function EditForm() {
   const handleUpdate = (event) => {
     event.preventDefault();
     const response = {
-      userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
-      ...data,
+      ...editedData,
     };
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    axios
-      .patch(`http://localhost:3005/${category}/${id}`, response, config)
-      .then((res) => console.log(res))
-      .catch((er) => console.log(er));
-    navigate(`/admin/${category}`);
+    if (!response.role) {
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+      axios
+        .patch(`http://localhost:3005/${category}/${id}`, response, config)
+        .then((res) => console.log(res))
+        .catch((er) => console.log(er));
+      navigate(`/admin/${category}`);
+    } else {
+      axios
+        .patch(`http://localhost:3005/${category}/${id}`, response)
+        .then((res) => console.log(res))
+        .catch((er) => console.log(er));
+      navigate(`/admin/${category}`);
+    }
   };
 
   return (
