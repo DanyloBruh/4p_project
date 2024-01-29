@@ -1,6 +1,8 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-undef */
 /* eslint-disable import/prefer-default-export */
-import axios from 'axios';
+// import axios from 'axios';
+import axios from './axios.js';
 
 function request(url, method, data) {
   const options = { method };
@@ -8,22 +10,16 @@ function request(url, method, data) {
   try {
     switch (options.method) {
       case 'GET':
-        return axios.get(`${process.env.REACT_APP_BASE_URL}${url}`);
+        return axios.get(url);
 
       case 'POST':
-        return axios
-          .post(`${process.env.BASE_URL}${url}`, data)
-          .then((response) => response);
+        return axios.post(url, data).then((response) => response);
 
       case 'PATCH':
-        return axios
-          .patch(`${process.env.BASE_URL}${url}`, data)
-          .then((response) => response);
+        return axios.patch(url, data).then((response) => response);
 
       case 'DELETE':
-        return axios
-          .delete(`${process.env.BASE_URL}${url}`)
-          .then((response) => response);
+        return axios.delete(url).then((response) => response);
 
       default:
         return null;

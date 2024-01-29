@@ -39,37 +39,49 @@
       line-height: normal;
       margin-bottom: 70px;
     }
-    > .form-floating {
-      > .form-control {
-        border-radius: 5px;
-        border: 1px solid #fff;
-        background: rgba(51, 45, 45, 0);
-        color: white;
+    > form {
+      .form-floating {
+        > .form-control {
+          border-radius: 5px;
+          border: 1px solid #fff;
+          background: rgba(51, 45, 45, 0);
+          color: white;
+        }
+        > label {
+          color: white !important;
+        }
+        > .form-control:focus ~ label {
+          color: white;
+        }
+        > .form-control:focus ~ label::after {
+          display: none;
+        }
+        > .form-control:not(:placeholder-shown) ~ label::after,
+        .form-floating > .form-select ~ label::after {
+          display: none;
+        }
+        .form-control:-webkit-autofill,
+        .form-control:-webkit-autofill:hover,
+        .form-control:-webkit-autofill:focus,
+        .form-control:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+          -webkit-text-fill-color: #ffffff;
+        }
       }
-      > label {
-        color: white !important;
+      > .btn {
+        width: 100%;
+        border-radius: 0;
+        margin-top: 85px;
+        text-align: center;
+        font-family: Outfit;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
       }
-      > .form-control:focus ~ label {
-        color: white;
+      > .btn:hover {
+        color: black;
       }
-      > .form-control:focus ~ label::after {
-        display: none;
-      }
-      > .form-control:not(:placeholder-shown) ~ label::after,
-      .form-floating > .form-select ~ label::after {
-        display: none;
-      }
-    }
-    > .btn {
-      border-radius: 0;
-      margin-top: 85px;
-      color: #fff;
-      text-align: center;
-      font-family: Outfit;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
     }
   }
 }
