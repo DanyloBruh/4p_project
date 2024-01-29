@@ -74,23 +74,32 @@ function AddForm() {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const response = {
       userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
       ...formData,
     };
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    console.log(response);
-    axios
-      .post(`http://localhost:3005/${category}/`, response, config)
-      .then((res) => console.log(res))
-      .catch((er) => console.log(er));
-    navigate(`/admin/${category}`);
+    if (!formData.role) {
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+      console.log(response);
+      axios
+        .post(`http://localhost:3005/${category}/`, response, config)
+        .then((res) => console.log(res))
+        .catch((er) => console.log(er));
+      navigate(`/admin/${category}`);
+    } else {
+      console.log(response);
+      axios
+        .post(`http://localhost:3005/${category}/`, response)
+        .then((res) => console.log(res))
+        .catch((er) => console.log(er));
+      navigate(`/admin/${category}`);
+    }
   };
 
   return (

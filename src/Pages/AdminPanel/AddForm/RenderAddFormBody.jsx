@@ -1,48 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FloatingLabel, Form } from 'react-bootstrap';
 
 /* eslint-disable react/prop-types */
 function RenderAddFormBody({ handleInputChange, category, formData }) {
+  const [confirmPass, setConfirmPass] = useState('');
+
   switch (category) {
     case 'user':
       return (
         <>
           <div className="form-element">
-            <p>Name</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.name}
-              name="name"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter user name"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                onChange={handleInputChange}
+                value={formData.name}
+                name="name"
+                autoComplete="off"
+                placeholder="user name"
+              />
+            </FloatingLabel>
           </div>
           <div className="form-element">
-            <p>role</p>
-            <select
+            <Form.Select
+              aria-label="Default select example"
               onChange={handleInputChange}
               value={formData.role}
               name="role"
             >
+              <option>Сhoose a role from the select menu</option>
               <option>admin</option>
               <option>employee</option>
-            </select>
+            </Form.Select>
           </div>
           <div className="form-element">
-            <p>email</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.email}
-              name="email"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter email"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                onChange={handleInputChange}
+                value={formData.email}
+                name="email"
+                autoComplete="off"
+                placeholder="email"
+              />
+            </FloatingLabel>
           </div>
           <div className="form-element">
-            <p>password</p>
-            <input
-              type="password"
-              onChange={handleInputChange}
-              value={formData.password}
-              name="password"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter password"
+              className="mb-3"
+            >
+              <Form.Control
+                type="password"
+                onChange={handleInputChange}
+                value={formData.password}
+                name="password"
+                placeholder="password"
+              />
+            </FloatingLabel>
+          </div>
+          <div className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Confirm password"
+              className="mb-3"
+            >
+              <Form.Control
+                type="password"
+                onChange={(e) => setConfirmPass(e.target.value)}
+                value={confirmPass}
+                name="password"
+                placeholder="password"
+              />
+            </FloatingLabel>
           </div>
         </>
       );
@@ -77,44 +116,70 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
       return (
         <>
           <div className="form-element">
-            <p>Name</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.name}
-              name="name"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter product name"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                onChange={handleInputChange}
+                value={formData.name}
+                name="name"
+                autoComplete="off"
+                placeholder="product name"
+              />
+            </FloatingLabel>
           </div>
           <div className="form-element">
-            <p>weight</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.weight}
-              name="weight"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter weight"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                onChange={handleInputChange}
+                value={formData.weight}
+                name="weight"
+                autoComplete="off"
+                placeholder="weight"
+              />
+            </FloatingLabel>
           </div>
           <div className="form-element">
-            <p>description</p>
-            <input
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter price"
+              className="mb-3"
+            >
+              <Form.Control
+                type="number"
+                onChange={handleInputChange}
+                value={formData.price}
+                name="price"
+                autoComplete="off"
+                placeholder="product name"
+              />
+            </FloatingLabel>
+          </div>
+          <div className="form-element">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={5}
               type="text"
               onChange={handleInputChange}
               value={formData.description}
               name="description"
             />
           </div>
+
           <div className="form-element">
-            <p>price</p>
-            <input
-              type="number"
-              onChange={handleInputChange}
-              value={formData.price}
-              name="price"
-            />
-          </div>
-          <div className="form-element">
-            <p>ingredients</p>
-            <input
+            <Form.Label>Ingredients</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={5}
               type="text"
               onChange={handleInputChange}
               value={formData.ingredients}
@@ -122,8 +187,12 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
             />
           </div>
           <div className="form-element">
-            <p>image</p>
-            <input type="file" onChange={handleInputChange} name="image" />
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={handleInputChange}
+              name="image"
+            />
           </div>
         </>
       );
@@ -131,47 +200,71 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
       return (
         <>
           <div className="form-element">
-            <p>Name</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.name}
-              name="name"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter instruction name"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                onChange={handleInputChange}
+                value={formData.name}
+                name="name"
+                autoComplete="off"
+                placeholder="instruction name"
+              />
+            </FloatingLabel>
           </div>
           <div className="form-element">
-            <p>difficulty</p>
-            <select
+            <Form.Select
+              aria-label="Default select example"
               onChange={handleInputChange}
               value={formData.difficulty}
               name="difficulty"
             >
+              <option>Сhoose a difficulty from the select menu</option>
               <option>easy</option>
               <option>medium</option>
               <option>hard</option>
-            </select>
+            </Form.Select>
           </div>
           <div className="form-element">
-            <p>time</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.time}
-              name="time"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter time"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                onChange={handleInputChange}
+                value={formData.time}
+                name="time"
+                autoComplete="off"
+                placeholder="time"
+              />
+            </FloatingLabel>
           </div>
           <div className="form-element">
-            <p>makes</p>
-            <input
-              type="number"
-              onChange={handleInputChange}
-              value={formData.makes}
-              name="makes"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter makes"
+              className="mb-3"
+            >
+              <Form.Control
+                type="number"
+                onChange={handleInputChange}
+                value={formData.makes}
+                name="makes"
+                autoComplete="off"
+                placeholder="time"
+              />
+            </FloatingLabel>
           </div>
           <div className="form-element">
-            <p>description</p>
-            <input
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={2}
               type="text"
               onChange={handleInputChange}
               value={formData.description}
@@ -179,8 +272,10 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
             />
           </div>
           <div className="form-element">
-            <p>ingredients</p>
-            <input
+            <Form.Label>Ingredients</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
               type="text"
               onChange={handleInputChange}
               value={formData.ingredients}
@@ -188,8 +283,10 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
             />
           </div>
           <div className="form-element">
-            <p>text</p>
-            <input
+            <Form.Label>Instruction text</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
               type="text"
               onChange={handleInputChange}
               value={formData.text}
@@ -197,8 +294,12 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
             />
           </div>
           <div className="form-element">
-            <p>image</p>
-            <input type="file" onChange={handleInputChange} name="image" />
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={handleInputChange}
+              name="image"
+            />
           </div>
         </>
       );
