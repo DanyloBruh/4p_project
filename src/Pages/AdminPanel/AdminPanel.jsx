@@ -7,8 +7,9 @@ import Table from 'react-bootstrap/Table';
 import { useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
+import { getDataByCategory } from '../../Helper/requests';
+
 import './AdminPanel.scss';
-import axios from 'axios';
 import RenderTableBody from './TableRenderComponent/RenderTableBody';
 import RenderTableSortBy from './TableRenderComponent/RenderTableSortBy';
 import RenderTableHeader from './TableRenderComponent/RenderTableHeader';
@@ -25,10 +26,9 @@ function AdminPanel() {
   const category = location.pathname.split('/')[2];
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3005/${category}`)
-      .then((res) => setData(res.data))
-      .catch((er) => console.log(er));
+    if (category) {
+      getDataByCategory(category).then(setData);
+    }
   }, [category, '']);
 
   return (
@@ -45,7 +45,10 @@ function AdminPanel() {
         </div>
         {category ? (
           <>
-            <h2>List of product</h2>
+            <h2>
+              List of
+              {` ${category}`}
+            </h2>
             <div className="manipulation">
               <div className="search-bar">
                 <input
@@ -75,11 +78,16 @@ function AdminPanel() {
         <Table>
           <thead>
             <tr>
-              <RenderTableHeader category={category} />
+              <RenderTableHeader category={category} data={data} />
             </tr>
           </thead>
           {category ? (
-            <RenderTableBody category={category} data={data} orders={orders} />
+            <RenderTableBody
+              category={category}
+              data={data}
+              setData={setData}
+              orders={orders}
+            />
           ) : (
             <tbody />
           )}

@@ -82,6 +82,15 @@
           background-color: #1f1f1f;
         }
       }
+      > p {
+        margin: 0 auto 20px auto;
+        border: 3px solid #881717;
+        padding: 10px;
+        color: #881717;
+        font-weight: 500;
+        font-size: 1.5rem;
+        width: fit-content;
+      }
     }
   }
 }

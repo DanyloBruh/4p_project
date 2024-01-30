@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FloatingLabel, Form } from 'react-bootstrap';
 
 /* eslint-disable react/prop-types */
 function RenderAddFormBody({ handleInputChange, category, formData }) {
-  const [confirmPass, setConfirmPass] = useState('');
-
   switch (category) {
     case 'user':
       return (
@@ -16,6 +14,7 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               className="mb-3"
             >
               <Form.Control
+                required
                 type="text"
                 onChange={handleInputChange}
                 value={formData.name}
@@ -27,6 +26,7 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
           </div>
           <div className="form-element">
             <Form.Select
+              required
               aria-label="Default select example"
               onChange={handleInputChange}
               value={formData.role}
@@ -44,6 +44,7 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               className="mb-3"
             >
               <Form.Control
+                required
                 type="text"
                 onChange={handleInputChange}
                 value={formData.email}
@@ -60,24 +61,10 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               className="mb-3"
             >
               <Form.Control
+                required
                 type="password"
                 onChange={handleInputChange}
                 value={formData.password}
-                name="password"
-                placeholder="password"
-              />
-            </FloatingLabel>
-          </div>
-          <div className="form-element">
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Confirm password"
-              className="mb-3"
-            >
-              <Form.Control
-                type="password"
-                onChange={(e) => setConfirmPass(e.target.value)}
-                value={confirmPass}
                 name="password"
                 placeholder="password"
               />

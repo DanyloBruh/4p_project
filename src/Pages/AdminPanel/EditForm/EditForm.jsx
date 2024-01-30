@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import './EditForm.scss';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import RenderEditFormBody from './RenderEditFormBody';
+import {
+  editData,
+  editDataConfig,
+  getDataByCategoryId,
+} from '../../../Helper/requests';
 
 function EditForm() {
   const category = useLocation().pathname.split('/')[2];
@@ -53,16 +57,10 @@ function EditForm() {
   }
 
   const [data, setData] = useState(initialState);
-  const [editedData, setEditedData] = useState(initialState);
-
-  console.log('editedData', editedData);
 
   useEffect(() => {
     console.log('API');
-    axios
-      .get(`http://localhost:3005/${category}/${id}`)
-      .then((res) => setData(res.data))
-      .catch((er) => console.log(er));
+    getDataByCategoryId(category, id).then(setData);
   }, []);
 
   console.log('data', data);
@@ -75,17 +73,9 @@ function EditForm() {
         ...prevFormData,
         [e.target.name]: uploadFile,
       }));
-      setEditedData((prevFormData) => ({
-        ...prevFormData,
-        [e.target.name]: uploadFile,
-      }));
     } else {
       const { name, value } = e.target;
       setData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-      setEditedData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
       }));
@@ -94,25 +84,20 @@ function EditForm() {
 
   const handleUpdate = (event) => {
     event.preventDefault();
-    const response = {
-      ...editedData,
-    };
-    if (!response.role) {
-      const config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      };
-      axios
-        .patch(`http://localhost:3005/${category}/${id}`, response, config)
-        .then((res) => console.log(res))
-        .catch((er) => console.log(er));
+
+    const response = Object.fromEntries(
+      Object.entries(data)
+        .filter(([key]) => Object.keys(initialState).includes(key))
+        .map(([key, value]) => [key, value]),
+    );
+
+    console.log(response);
+
+    if (category !== 'user') {
+      editDataConfig(category, id, response);
       navigate(`/admin/${category}`);
     } else {
-      axios
-        .patch(`http://localhost:3005/${category}/${id}`, response)
-        .then((res) => console.log(res))
-        .catch((er) => console.log(er));
+      editData(category, id, response);
       navigate(`/admin/${category}`);
     }
   };
