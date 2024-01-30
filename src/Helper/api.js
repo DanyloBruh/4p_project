@@ -17,9 +17,27 @@ function request(url, method, data) {
           .post(`${BASE_URL}${url}`, data)
           .then((response) => response);
 
+      case 'POSTCON':
+        return axios
+          .post(`${BASE_URL}${url}`, data, {
+            headers: {
+              'content-type': 'multipart/form-data',
+            },
+          })
+          .then((response) => response);
+
       case 'PATCH':
         return axios
           .patch(`${BASE_URL}${url}`, data)
+          .then((response) => response);
+
+      case 'PATCHCON':
+        return axios
+          .patch(`${BASE_URL}${url}`, data, {
+            headers: {
+              'content-type': 'multipart/form-data',
+            },
+          })
           .then((response) => response);
 
       case 'DELETE':
@@ -37,6 +55,8 @@ function request(url, method, data) {
 export const client = {
   get: (url) => request(url, 'GET'),
   post: (url, data) => request(url, 'POST', data),
+  postConfig: (url, data) => request(url, 'POSTCON', data),
   patch: (url, data) => request(url, 'PATCH', data),
+  patchConfig: (url, data) => request(url, 'PATCHCON', data),
   delete: (url) => request(url, 'DELETE'),
 };
