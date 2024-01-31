@@ -13,6 +13,7 @@ function Layout() {
     && location.pathname !== '/admin'
     && location.pathname !== '/login'
     && !location.pathname.match('^/edit/')
+    && !location.pathname.match('^/addform/')
   ) {
     return (
       <>

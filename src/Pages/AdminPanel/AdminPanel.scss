@@ -118,19 +118,21 @@
             font-style: normal;
             font-weight: 300;
             line-height: normal;
+            text-align: left;
             > a.button-edit {
               margin: auto;
               display: block;
-              width: 50px;
-              height: 50px;
+              width: 40px;
+              height: 40px;
               background: url('../../Assets/editicon.png');
               background-position: center;
               background-size: cover;
             }
-            > .button-delete {
-              background-color: none;
-              width: 50px;
-              height: 50px;
+            > a.button-delete {
+              margin: auto;
+              display: block;
+              width: 40px;
+              height: 40px;
               background: url('../../Assets/deleteicon.png');
               background-position: center;
               background-size: cover;

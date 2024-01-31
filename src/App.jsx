@@ -35,13 +35,25 @@ function App() {
           </Route>
           <Route path="admin" element={<AdminPanel />}>
             <Route path="product" element={<AdminPanel />} />
-            <Route path="recipes" element={<AdminPanel />} />
+            <Route path="instruction" element={<AdminPanel />} />
             <Route path="blog" element={<AdminPanel />} />
-            <Route path="orders" element={<AdminPanel />} />
-            <Route path="users" element={<AdminPanel />} />
+            <Route path="order" element={<AdminPanel />} />
+            <Route path="user" element={<AdminPanel />} />
           </Route>
-          <Route path="addform" element={<AddForm />} />
-          <Route path="edit/:id" element={<EditForm />} />
+          <Route path="addform" element={<AddForm />}>
+            <Route path="product" element={<AddForm />} />
+            <Route path="instruction" element={<AddForm />} />
+            <Route path="blog" element={<AddForm />} />
+            <Route path="order" element={<AddForm />} />
+            <Route path="user" element={<AddForm />} />
+          </Route>
+          <Route path="edit" element={<EditForm />}>
+            <Route path="product/:id" element={<EditForm />} />
+            <Route path="instruction/:id" element={<EditForm />} />
+            <Route path="blog/:id" element={<EditForm />} />
+            <Route path="order/:id" element={<EditForm />} />
+            <Route path="user/:id" element={<EditForm />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

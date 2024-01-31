@@ -1,64 +1,120 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import './EditForm.scss';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import RenderEditFormBody from './RenderEditFormBody';
+import {
+  editData,
+  editDataConfig,
+  getDataByCategoryId,
+} from '../../../Helper/requests';
 
 function EditForm() {
+  const category = useLocation().pathname.split('/')[2];
   const { id } = useParams();
-  const { users } = useSelector((state) => state.user);
-  const currentUser = users.filter((user) => user.id === id);
-  /* eslint-disable object-curly-newline */
-  const { name, email, password, role } = currentUser[0];
-
-  const [currentName, setName] = useState(name);
-  const [currentEmail, setEmail] = useState(email);
-  const [currentPassword, setPassword] = useState(password);
-  const [currentRole, setRole] = useState(role);
   const navigate = useNavigate();
+
+  let initialState = {};
+
+  switch (category) {
+    case 'user':
+      initialState = {
+        name: '',
+        email: '',
+      };
+      break;
+    case 'blog':
+      initialState = {
+        name: '',
+        text: '',
+        images: '',
+      };
+      break;
+    case 'product':
+      initialState = {
+        name: '',
+        weight: '',
+        description: '',
+        price: '',
+        ingredients: '',
+        image: '',
+      };
+      break;
+    case 'instruction':
+      initialState = {
+        name: '',
+        difficulty: '',
+        time: '',
+        makes: '',
+        description: '',
+        ingredients: '',
+        text: '',
+        image: '',
+      };
+      break;
+    default:
+      initialState = {};
+  }
+
+  const [data, setData] = useState(initialState);
+
+  useEffect(() => {
+    console.log('API');
+    getDataByCategoryId(category, id).then(setData);
+  }, []);
+
+  console.log('data', data);
+
+  const handleInputChange = (e) => {
+    if (e.target.files) {
+      const uploadFile = e.target.files[0];
+      console.log({ ...uploadFile });
+      setData((prevFormData) => ({
+        ...prevFormData,
+        [e.target.name]: uploadFile,
+      }));
+    } else {
+      const { name, value } = e.target;
+      setData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+  };
 
   const handleUpdate = (event) => {
     event.preventDefault();
-    navigate('/admin/users');
+
+    const response = Object.fromEntries(
+      Object.entries(data)
+        .filter(([key]) => Object.keys(initialState).includes(key))
+        .map(([key, value]) => [key, value]),
+    );
+
+    console.log(response);
+
+    if (category !== 'user') {
+      editDataConfig(category, id, response);
+      navigate(`/admin/${category}`);
+    } else {
+      editData(category, id, response);
+      navigate(`/admin/${category}`);
+    }
   };
 
   return (
     <div className="add-form">
       <div className="form-bg">
-        <h3>Edit user</h3>
+        <h3>
+          Edit
+          {` ${category}`}
+        </h3>
         <form>
-          <div className="form-element">
-            <p>Name</p>
-            <input
-              type="text"
-              value={currentName}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="form-element">
-            <p>email</p>
-            <input
-              type="text"
-              value={currentEmail}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="form-element">
-            <p>password</p>
-            <input
-              type="password"
-              value={currentPassword}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="form-element">
-            <p>Role</p>
-            <input
-              type="text"
-              value={currentRole}
-              onChange={(e) => setRole(e.target.value)}
-            />
-          </div>
+          <RenderEditFormBody
+            handleInputChange={handleInputChange}
+            category={category}
+            data={data}
+          />
           <br />
           <Button variant="outline-light" onClick={handleUpdate}>
             Update
