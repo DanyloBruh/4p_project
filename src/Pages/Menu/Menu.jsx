@@ -66,7 +66,7 @@ function Menu() {
           </p>
           <Row className="menu-main__product">
             {menuItems?.map((item) => (
-              <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+              <Col key={item.id} xxl={4} xl={4} lg={4} md={6} sm={6}>
                 <MenuProduct
                   id={item.id}
                   image={item.Image.imageData}
