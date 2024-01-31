@@ -17,6 +17,6 @@ export const getAllBlogs = async () => {
 };
 
 export const login = async (postData) => {
-  const { data } = await client.post('/user/login', postData);
+  const { data } = await client.post('/login', postData);
   return data;
 };

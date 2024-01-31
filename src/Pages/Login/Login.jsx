@@ -1,11 +1,16 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import './Login.scss';
+import { useDispatch } from 'react-redux';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import Logo from '../../Assets/logo.png';
-import { login } from '../../helper/requests';
+import { login } from '../../Helper/requests';
+import useRefreshToken from '../../Hooks/useRefreshToken';
+import { loginReducer } from '../../redux/authSlice';
+import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 
 function Login() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,6 +19,9 @@ function Login() {
 
   const [validated, setValidated] = useState(false);
   const isValidEmail = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+  const refresh = useRefreshToken();
+  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     if (!emailError && !passwordError) {
@@ -39,14 +47,41 @@ function Login() {
       && password
       && password.length >= 6
     ) {
-      const log = await login({
+      login({
         email,
         password,
+      }).then((data) => {
+        dispatch(
+          loginReducer({ user: data.user, accessToken: data.accesToken }),
+        );
       });
-      console.log(log);
-      sessionStorage.setItem('accesToken', log.accesToken);
-      sessionStorage.setItem('user', JSON.stringify(log.user));
     }
+  };
+
+  const getSmth = () => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getUsers = async () => {
+      try {
+        const response = await axiosPrivate.get('/user', {
+          signal: controller.signal,
+        });
+        if (isMounted) {
+          console.log(response.data);
+        }
+      } catch (err) {
+        console.error(err);
+        // navigate('/login', { state: { from: location }, replace: true });
+      }
+    };
+
+    getUsers();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   };
 
   return (
@@ -87,6 +122,12 @@ function Login() {
             LOGIN
           </Button>
         </Form>
+        <Button type="button" onClick={() => refresh()}>
+          click
+        </Button>
+        <Button type="button" onClick={() => getSmth()}>
+          click2
+        </Button>
       </div>
     </div>
   );

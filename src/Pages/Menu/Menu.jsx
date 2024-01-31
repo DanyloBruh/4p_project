@@ -10,7 +10,7 @@ import Borsch from '../../Assets/borsch.png';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import ProductCard from '../../Components/ProductCard/ProductCard';
-import { getAllProducts } from '../../helper/requests';
+import { getAllProducts } from '../../Helper/requests';
 
 import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/MenuProductPlaceholder';
 
