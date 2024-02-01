@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { deleteData } from '../../../Helper/requests';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 /* eslint-disable react/prop-types */
 function RenderTableBody({ category, data, orders }) {
+  const axiosPrivate = useAxiosPrivate();
+
   switch (category) {
     case 'product':
       return (
@@ -27,7 +30,7 @@ function RenderTableBody({ category, data, orders }) {
                   className="button-delete"
                   onClick={() => {
                     window.location.reload();
-                    deleteData(category, product.id);
+                    deleteData(category, product.id, axiosPrivate);
                   }}
                 />
               </td>
@@ -60,7 +63,7 @@ function RenderTableBody({ category, data, orders }) {
                   className="button-delete"
                   onClick={() => {
                     window.location.reload();
-                    deleteData(category, recipe.id);
+                    deleteData(category, recipe.id, axiosPrivate);
                   }}
                 />
               </td>
@@ -85,7 +88,7 @@ function RenderTableBody({ category, data, orders }) {
                   className="button-delete"
                   onClick={() => {
                     window.location.reload();
-                    deleteData(category, blog.id);
+                    deleteData(category, blog.id, axiosPrivate);
                   }}
                 />
               </td>
@@ -110,7 +113,7 @@ function RenderTableBody({ category, data, orders }) {
                   className="button-delete"
                   onClick={() => {
                     window.location.reload();
-                    deleteData(category, user.id);
+                    deleteData(category, user.id, axiosPrivate);
                   }}
                 />
               </td>
@@ -140,7 +143,7 @@ function RenderTableBody({ category, data, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    deleteData(category, order.id);
+                    deleteData(category, order.id, axiosPrivate);
                   }}
                 />
               </td>

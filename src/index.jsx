@@ -6,7 +6,6 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 import { store } from './redux/store';
-import { AuthProvider } from './context/AuthProvider';
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
@@ -15,11 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </AuthProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
 );

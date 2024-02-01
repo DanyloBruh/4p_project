@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './AddForm.scss';
 import RenderAddFormBody from './RenderAddFormBody';
 import { postData, postDataConfig } from '../../../Helper/requests';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 import {
   validateUser,
   validateBlog,
@@ -14,6 +15,7 @@ import {
 function AddForm() {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
 
   let initialState = {};
 
@@ -117,10 +119,10 @@ function AddForm() {
       ...formData,
     };
     if (category !== 'user') {
-      postDataConfig(category, response);
+      postDataConfig(category, axiosPrivate, response);
       navigate(`/admin/${category}`);
     } else {
-      postData(category, response);
+      postData(category, axiosPrivate, response);
       navigate(`/admin/${category}`);
     }
   };

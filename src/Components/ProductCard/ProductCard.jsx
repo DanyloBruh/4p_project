@@ -14,7 +14,6 @@ function ProductCard({ data }) {
     const path = '/';
     navigate(path);
   };
-  console.log(data);
   useEffect(() => {
     const listener = (event) => {
       // Do nothing if clicking ref's element or descendent elements

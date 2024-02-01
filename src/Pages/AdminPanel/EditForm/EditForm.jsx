@@ -8,6 +8,7 @@ import {
   editDataConfig,
   getDataByCategoryId,
 } from '../../../Helper/requests';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 import {
   validateUser,
@@ -20,8 +21,8 @@ function EditForm() {
   const category = useLocation().pathname.split('/')[2];
   const { id } = useParams();
   const navigate = useNavigate();
-  const [errorMsg, setErrorMsg] = useState('');
-  let isValidated = true;
+
+
   let initialState = {};
 
   switch (category) {
@@ -69,7 +70,8 @@ function EditForm() {
   const [data, setData] = useState(initialState);
 
   useEffect(() => {
-    getDataByCategoryId(category, id).then(setData);
+    console.log('API');
+    getDataByCategoryId(category, id, axiosPrivate).then(setData);
   }, []);
 
   console.log('data', data);
@@ -124,10 +126,10 @@ function EditForm() {
     if (!isValidated) return;
 
     if (category !== 'user') {
-      editDataConfig(category, id, response);
+      editDataConfig(category, id, axiosPrivate, response);
       navigate(`/admin/${category}`);
     } else {
-      editData(category, id, response);
+      editData(category, id, axiosPrivate, response);
       navigate(`/admin/${category}`);
     }
   };

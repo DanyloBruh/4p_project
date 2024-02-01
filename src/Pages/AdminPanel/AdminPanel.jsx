@@ -13,6 +13,7 @@ import './AdminPanel.scss';
 import RenderTableBody from './TableRenderComponent/RenderTableBody';
 import RenderTableSortBy from './TableRenderComponent/RenderTableSortBy';
 import RenderTableHeader from './TableRenderComponent/RenderTableHeader';
+import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 
 function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
@@ -25,9 +26,11 @@ function AdminPanel() {
   const location = useLocation();
   const category = location.pathname.split('/')[2];
 
+  const axiosPrivate = useAxiosPrivate();
+
   useEffect(() => {
     if (category) {
-      getDataByCategory(category).then(setData);
+      getDataByCategory(category, axiosPrivate).then(setData);
     }
   }, [category, '']);
 
