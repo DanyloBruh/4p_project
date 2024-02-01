@@ -1,6 +1,5 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-param-reassign */
+/* eslint-disable import/extensions */
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { axiosPrivate } from '../Helper/axios.js';
@@ -11,9 +10,14 @@ const useAxiosPrivate = () => {
   const auth = useSelector((state) => state.auth.auth);
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
-      (config) => {
+      async (config) => {
         if (!config.headers.Authorization) {
-          config.headers.Authorization = `Bearer ${auth?.accesToken}`;
+          if (auth.accesToken) {
+            config.headers.Authorization = `Bearer ${auth?.accesToken}`;
+          } else {
+            const newAccessToken = await refresh();
+            config.headers.Authorization = `Bearer ${newAccessToken}`;
+          }
         }
         return config;
       },

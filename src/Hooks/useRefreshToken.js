@@ -6,10 +6,14 @@ import { loginReducer } from '../redux/authSlice.js';
 const useRefreshToken = () => {
   const dispatch = useDispatch();
   const refresh = async () => {
-    const response = await axios.get('/refresh');
-    dispatch(loginReducer(response.data));
-    console.log(response.data);
-    return response.data.accesToken;
+    try {
+      const response = await axios.get('/refresh');
+      dispatch(loginReducer(response.data));
+      return response.data.accesToken;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
   return refresh;
 };
