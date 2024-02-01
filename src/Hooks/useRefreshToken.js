@@ -8,6 +8,7 @@ const useRefreshToken = () => {
   const refresh = async () => {
     const response = await axios.get('/refresh');
     dispatch(loginReducer(response.data));
+    console.log(response.data);
     return response.data.accesToken;
   };
   return refresh;
