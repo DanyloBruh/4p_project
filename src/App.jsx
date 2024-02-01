@@ -12,6 +12,7 @@ import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import AddForm from './Pages/AdminPanel/AddForm/AddForm';
 import EditForm from './Pages/AdminPanel/EditForm/EditForm';
+import Login from './Pages/Login/Login';
 // import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/">
             <Route path=":id?" element={<Menu />} />
           </Route>
+          <Route path="login" element={<Login />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="blog">
