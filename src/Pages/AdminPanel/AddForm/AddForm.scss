@@ -1,8 +1,8 @@
-.add-edit-form {  
+.add-edit-form {
   height: 100vh;
   display: flex;
   align-items: center;
-  &__body.container{
+  &__body.container {
     background-color: #1f1f1f;
     width: 40%;
     padding: 20px;
@@ -22,7 +22,7 @@
       }
       > .form-element {
         margin-bottom: 20px;
-  
+
         > textarea {
           resize: none;
           color: #fff;
@@ -33,7 +33,7 @@
         > label {
           color: #b4b4b4;
         }
-  
+
         > .form-floating {
           > .form-control {
             border-radius: 5px;
