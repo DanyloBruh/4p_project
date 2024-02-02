@@ -5,9 +5,8 @@ import { Button, Container, Nav } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 
 import { useSelector } from 'react-redux';
-import {
-  Link, NavLink, useLocation, useNavigate,
-} from 'react-router-dom';
+/* eslint-disable object-curly-newline */
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { getDataByCategory } from '../../Helper/requests';
 
@@ -17,17 +16,19 @@ import RenderTableSortBy from './TableRenderComponent/RenderTableSortBy';
 import RenderTableHeader from './TableRenderComponent/RenderTableHeader';
 import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 import useLogout from '../../Hooks/useLogout';
+import AddForm from './AddForm/AddForm';
+import EditForm from './EditForm/EditForm';
 
 function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
   const [search, setSearch] = useState('');
 
   const [data, setData] = useState([]);
-
   const orders = useSelector((state) => state.orderData.data);
 
   const location = useLocation();
   const category = location.pathname.split('/')[2];
+  const page = location.pathname.split('/')[1];
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -45,80 +46,121 @@ function AdminPanel() {
     }
   }, [category, '']);
 
-  return (
-    <div className="admin-panel">
-      <Container className="admin-panel__header">
-        <div className="selecte-table">
-          <Nav className="me-auto">
-            <NavLink to="product">product</NavLink>
-            <NavLink to="instruction">recipes</NavLink>
-            <NavLink to="blog">blog</NavLink>
-            <NavLink to="order">orders</NavLink>
-            <NavLink to="user">users</NavLink>
-            <Button variant="outline-light" onClick={signOut}>
-              LOGOUT
-            </Button>
-          </Nav>
-        </div>
-        {category ? (
-          <>
-            <h2>
-              List of
-              {` ${category}`}
-            </h2>
-            <div className="manipulation">
-              <div className="search-bar">
-                <input
-                  type="text"
-                  placeholder="Search anything..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-              </div>
-              {/* eslint-disable-next-line */}
-              <select
-                className="dropdown"
-                value={sortBy}
-                onChange={(e) => {
-                  setSortBy(e.target.value);
-                }}
-              >
-                <RenderTableSortBy category={category} />
-              </select>
+  switch (page) {
+    case 'admin':
+      return (
+        <div className="admin-panel">
+          <Container className="admin-panel__header">
+            <div className="selecte-table">
+              <Nav className="me-auto">
+                <NavLink
+                  to="product"
+                  onClick={() => {
+                    if (category !== 'product') setData([]);
+                  }}
+                >
+                  product
+                </NavLink>
+                <NavLink
+                  to="instruction"
+                  onClick={() => {
+                    if (category !== 'instruction') setData([]);
+                  }}
+                >
+                  recipes
+                </NavLink>
+                <NavLink
+                  to="blog"
+                  onClick={() => {
+                    if (category !== 'blog') setData([]);
+                  }}
+                >
+                  blog
+                </NavLink>
+                <NavLink
+                  to="order"
+                  onClick={() => {
+                    if (category !== 'order') setData([]);
+                  }}
+                >
+                  orders
+                </NavLink>
+                <NavLink
+                  to="user"
+                  onClick={() => {
+                    if (category !== 'order') setData([]);
+                  }}
+                >
+                  users
+                </NavLink>
+                <Button variant="outline-light" onClick={signOut}>
+                  LOGOUT
+                </Button>
+              </Nav>
             </div>
-          </>
-        ) : (
-          <h2 className="">Choose category ^</h2>
-        )}
-      </Container>
-      <Container className="admin-panel__body">
-        <Table>
-          <thead>
-            <tr>
-              <RenderTableHeader category={category} data={data} />
-            </tr>
-          </thead>
-          {category ? (
-            <RenderTableBody
-              category={category}
-              data={data}
-              setData={setData}
-              orders={orders}
-            />
-          ) : (
-            <tbody />
-          )}
-        </Table>
-        {category ? (
-          <Link to={`/addform/${category}`} className="table-button">
-            ADD
-          </Link>
-        ) : (
-          <div />
-        )}
-      </Container>
-    </div>
-  );
+            {category ? (
+              <>
+                <h2>
+                  List of
+                  {` ${category}`}
+                </h2>
+                <div className="manipulation">
+                  <div className="search-bar">
+                    <input
+                      type="text"
+                      placeholder="Search anything..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                    />
+                  </div>
+                  <Link to={`/addform/${category}`} className="table-button">
+                    {`ADD NEW ${category.toUpperCase()}`}
+                  </Link>
+
+                  {/* eslint-disable-next-line */}
+                  <select
+                    className="dropdown"
+                    value={sortBy}
+                    onChange={(e) => {
+                      setSortBy(e.target.value);
+                    }}
+                  >
+                    <RenderTableSortBy category={category} />
+                  </select>
+                </div>
+              </>
+            ) : (
+              <h2 className="">Choose category ^</h2>
+            )}
+          </Container>
+          <Container className="admin-panel__body">
+            <Table>
+              <thead>
+                <tr>
+                  <RenderTableHeader category={category} data={data} />
+                </tr>
+              </thead>
+              {category ? (
+                <RenderTableBody
+                  category={category}
+                  data={data}
+                  setData={setData}
+                  orders={orders}
+                />
+              ) : (
+                <tbody />
+              )}
+            </Table>
+          </Container>
+        </div>
+      );
+    case 'addform':
+      return <AddForm data={data} setData={setData} />;
+    case 'edit':
+      return <EditForm data={data} />;
+    default:
+      return <div />;
+  }
 }
 
 export default AdminPanel;

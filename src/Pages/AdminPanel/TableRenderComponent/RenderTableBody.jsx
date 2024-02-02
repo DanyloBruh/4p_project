@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 import { deleteData } from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 /* eslint-disable react/prop-types */
-function RenderTableBody({ category, data, orders }) {
+/* eslint-disable object-curly-newline */
+function RenderTableBody({ category, data, setData, orders }) {
   const axiosPrivate = useAxiosPrivate();
-
+  console.log(data.length);
+  if (!data || data.length === 0) return <Spinner animation="border" variant="light" className="spinner" />;
   switch (category) {
     case 'product':
       return (
@@ -29,7 +32,7 @@ function RenderTableBody({ category, data, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    window.location.reload();
+                    setData((prevState) => prevState.filter((item) => item.id !== product.id));
                     deleteData(category, product.id, axiosPrivate);
                   }}
                 />
@@ -62,7 +65,7 @@ function RenderTableBody({ category, data, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    window.location.reload();
+                    setData((prevState) => prevState.filter((item) => item.id !== recipe.id));
                     deleteData(category, recipe.id, axiosPrivate);
                   }}
                 />
@@ -87,7 +90,7 @@ function RenderTableBody({ category, data, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    window.location.reload();
+                    setData((prevState) => prevState.filter((item) => item.id !== blog.id));
                     deleteData(category, blog.id, axiosPrivate);
                   }}
                 />
@@ -112,7 +115,7 @@ function RenderTableBody({ category, data, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    window.location.reload();
+                    setData((prevState) => prevState.filter((item) => item.id !== user.id));
                     deleteData(category, user.id, axiosPrivate);
                   }}
                 />
@@ -143,6 +146,7 @@ function RenderTableBody({ category, data, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
+                    setData((prevState) => prevState.filter((item) => item.id !== order.id));
                     deleteData(category, order.id, axiosPrivate);
                   }}
                 />
