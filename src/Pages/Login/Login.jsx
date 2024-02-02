@@ -25,7 +25,7 @@ function Login() {
   const from = location.state?.from?.pathname || '/admin';
 
   useEffect(() => {
-    if (!emailError && !passwordError) {
+    if (!emailError && !passwordError && password.length > 6) {
       setValidated(true);
     } else setValidated(false);
   }, [emailError, passwordError]);

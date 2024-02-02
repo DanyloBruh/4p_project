@@ -58,7 +58,6 @@ function AddForm() {
   const [formData, setFormData] = useState(initialState);
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
-  console.log(formData, isValidated);
 
   const validateUser = () => {
     // name validation

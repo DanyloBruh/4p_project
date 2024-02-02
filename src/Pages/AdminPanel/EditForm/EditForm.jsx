@@ -61,11 +61,8 @@ function EditForm() {
   const [data, setData] = useState(initialState);
 
   useEffect(() => {
-    console.log('API');
     getDataByCategoryId(category, id, axiosPrivate).then(setData);
   }, []);
-
-  console.log('data', data);
 
   const handleInputChange = (e) => {
     if (e.target.files) {
@@ -92,8 +89,6 @@ function EditForm() {
         .filter(([key]) => Object.keys(initialState).includes(key))
         .map(([key, value]) => [key, value]),
     );
-
-    console.log(response);
 
     if (category !== 'user') {
       editDataConfig(category, id, axiosPrivate, response);

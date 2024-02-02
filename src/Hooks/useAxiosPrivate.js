@@ -12,12 +12,12 @@ const useAxiosPrivate = () => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
       async (config) => {
         if (!config.headers.Authorization) {
-          if (auth.accesToken) {
-            config.headers.Authorization = `Bearer ${auth?.accesToken}`;
-          } else {
-            const newAccessToken = await refresh();
-            config.headers.Authorization = `Bearer ${newAccessToken}`;
-          }
+          // if (auth.accesToken) {
+          config.headers.Authorization = `Bearer ${auth?.accesToken}`;
+          // } else {
+          //   const newAccessToken = await refresh();
+          //   config.headers.Authorization = `Bearer ${newAccessToken}`;
+          // }
         }
         return config;
       },

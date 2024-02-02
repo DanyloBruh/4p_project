@@ -21,6 +21,11 @@ export const login = async (postData) => {
   return data;
 };
 
+export const logout = async (axiosPrivate) => {
+  const { data } = await clientPrivate.post('/logout', axiosPrivate);
+  return data;
+};
+
 export const getDataByCategory = async (category, axiosPrivate) => {
   const { data } = await clientPrivate.get(`/${category}/`, axiosPrivate);
   return data;
