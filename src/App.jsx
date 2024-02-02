@@ -58,6 +58,7 @@ function App() {
                 <Route path="blog/:id" element={<AdminPanel />} />
                 <Route path="order/:id" element={<AdminPanel />} />
                 <Route path="user/:id" element={<AdminPanel />} />
+
               </Route>
             </Route>
           </Route>
