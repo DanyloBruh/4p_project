@@ -1,6 +1,5 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-param-reassign */
+/* eslint-disable import/extensions */
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { axiosPrivate } from '../Helper/axios.js';
@@ -9,12 +8,16 @@ import useRefreshToken from './useRefreshToken.js';
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
   const auth = useSelector((state) => state.auth.auth);
-  console.log(auth?.accessToken);
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
-      (config) => {
+      async (config) => {
         if (!config.headers.Authorization) {
-          config.headers.Authorization = `Bearer ${auth?.accessToken}`;
+          // if (auth.accesToken) {
+          config.headers.Authorization = `Bearer ${auth?.accesToken}`;
+          // } else {
+          //   const newAccessToken = await refresh();
+          //   config.headers.Authorization = `Bearer ${newAccessToken}`;
+          // }
         }
         return config;
       },
@@ -28,7 +31,6 @@ const useAxiosPrivate = () => {
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
-          console.log(newAccessToken);
           prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }

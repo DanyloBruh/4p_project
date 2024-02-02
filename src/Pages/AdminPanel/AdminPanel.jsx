@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, Nav } from 'react-bootstrap';
+import { Button, Container, Nav } from 'react-bootstrap';
 
 import Table from 'react-bootstrap/Table';
 
 import { useSelector } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import {
+  Link, NavLink, useLocation, useNavigate,
+} from 'react-router-dom';
 
 import { getDataByCategory } from '../../Helper/requests';
 
@@ -13,6 +15,8 @@ import './AdminPanel.scss';
 import RenderTableBody from './TableRenderComponent/RenderTableBody';
 import RenderTableSortBy from './TableRenderComponent/RenderTableSortBy';
 import RenderTableHeader from './TableRenderComponent/RenderTableHeader';
+import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
+import useLogout from '../../Hooks/useLogout';
 
 function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
@@ -25,9 +29,19 @@ function AdminPanel() {
   const location = useLocation();
   const category = location.pathname.split('/')[2];
 
+  const axiosPrivate = useAxiosPrivate();
+
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
+    navigate('/login');
+  };
+
   useEffect(() => {
     if (category) {
-      getDataByCategory(category).then(setData);
+      getDataByCategory(category, axiosPrivate).then(setData);
     }
   }, [category, '']);
 
@@ -41,6 +55,9 @@ function AdminPanel() {
             <NavLink to="blog">blog</NavLink>
             <NavLink to="order">orders</NavLink>
             <NavLink to="user">users</NavLink>
+            <Button variant="outline-light" onClick={signOut}>
+              LOGOUT
+            </Button>
           </Nav>
         </div>
         {category ? (
