@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import './EditForm.scss';
+import '../AddForm/AddForm.scss';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import RenderEditFormBody from './RenderEditFormBody';
 import {
@@ -10,19 +10,32 @@ import {
 } from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
+import {
+  validateUser,
+  validateBlog,
+  validateInstruction,
+  validateProduct,
+} from '../ValidationFunctions';
+
 function EditForm() {
   const category = useLocation().pathname.split('/')[2];
   const { id } = useParams();
   const navigate = useNavigate();
+  
   const axiosPrivate = useAxiosPrivate();
 
+  const [errorMsg, setErrorMsg] = useState('');
+  let isValidated = true;
+  
   let initialState = {};
 
   switch (category) {
     case 'user':
       initialState = {
         name: '',
+        role: '',
         email: '',
+        password: '',
       };
       break;
     case 'blog':
@@ -90,6 +103,29 @@ function EditForm() {
         .map(([key, value]) => [key, value]),
     );
 
+    switch (category) {
+      case 'user':
+        setErrorMsg(validateUser(data).msg);
+        isValidated = validateUser(data).isValidated;
+        break;
+      case 'product':
+        setErrorMsg(validateProduct(data).msg);
+        isValidated = validateProduct(data).isValidated;
+        break;
+      case 'blog':
+        setErrorMsg(validateBlog(data).msg);
+        isValidated = validateBlog(data).isValidated;
+        break;
+      case 'instruction':
+        setErrorMsg(validateInstruction(data).msg);
+        isValidated = validateInstruction(data).isValidated;
+        break;
+      default:
+        setErrorMsg('');
+    }
+
+    if (!isValidated) return;
+
     if (category !== 'user') {
       editDataConfig(category, id, axiosPrivate, response);
       navigate(`/admin/${category}`);
@@ -113,6 +149,7 @@ function EditForm() {
             data={data}
           />
           <br />
+          {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}
           <Button variant="outline-light" onClick={handleUpdate}>
             Update
           </Button>

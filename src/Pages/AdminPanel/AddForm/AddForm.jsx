@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './AddForm.scss';
 import RenderAddFormBody from './RenderAddFormBody';
 import { postData, postDataConfig } from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
+import {
+  validateUser,
+  validateBlog,
+  validateInstruction,
+  validateProduct,
+} from '../ValidationFunctions';
 
 function AddForm() {
   const category = useLocation().pathname.split('/')[2];
@@ -233,41 +239,53 @@ function AddForm() {
   };
 
   const handleInputChange = (e) => {
-    if (e.target.files) {
+    if (e.target && e.target.files) {
       const uploadFile = e.target.files[0];
-      console.log({ ...uploadFile });
       setFormData((prevFormData) => ({
         ...prevFormData,
         [e.target.name]: uploadFile,
       }));
-    } else {
+    } else if (e.target) {
       const { name, value } = e.target;
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        text: e,
       }));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (category === 'blog') {
+      formData.text = formData.text.replace(/"/g, "'");
+      // console.log(formData.text);
+    }
     switch (category) {
       case 'user':
-        setErrorMsg(validateUser());
+        setErrorMsg(validateUser(formData).msg);
+        isValidated = validateUser(formData).isValidated;
         break;
       case 'product':
-        setErrorMsg(validateProduct());
+        setErrorMsg(validateProduct(formData).msg);
+        isValidated = validateProduct(formData).isValidated;
         break;
       case 'blog':
-        setErrorMsg(validateBlog());
+        setErrorMsg(validateBlog(formData).msg);
+        isValidated = validateBlog(formData).isValidated;
         break;
       case 'instruction':
-        setErrorMsg(validateInstruction());
+        setErrorMsg(validateInstruction(formData).msg);
+        isValidated = validateInstruction(formData).isValidated;
         break;
       default:
         setErrorMsg('');
     }
-    console.log(errorMsg, isValidated);
+
     if (!isValidated) return;
     const response = {
       userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
@@ -284,12 +302,12 @@ function AddForm() {
 
   return (
     <div className="add-form">
-      <div className="form-bg">
+      <div className={category !== 'blog' ? 'form-bg' : 'form-bg blog'}>
         <h3>
           Add
           {` ${category}`}
         </h3>
-        <form>
+        <Form noValidate>
           <RenderAddFormBody
             handleInputChange={handleInputChange}
             category={category}
@@ -301,7 +319,7 @@ function AddForm() {
           <Button variant="outline-light" onClick={handleSubmit}>
             Submit
           </Button>
-        </form>
+        </Form>
       </div>
     </div>
   );

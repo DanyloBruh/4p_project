@@ -1,5 +1,7 @@
 import React from 'react';
+import 'react-quill/dist/quill.snow.css';
 import { FloatingLabel, Form } from 'react-bootstrap';
+import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
 
 /* eslint-disable react/prop-types */
 function RenderAddFormBody({ handleInputChange, category, formData }) {
@@ -7,7 +9,7 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
     case 'user':
       return (
         <>
-          <div className="form-element">
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter user name"
@@ -23,8 +25,9 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="user name"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Select
               required
               aria-label="Default select example"
@@ -36,8 +39,8 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               <option>admin</option>
               <option>employee</option>
             </Form.Select>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter email"
@@ -53,8 +56,8 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="email"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter password"
@@ -69,46 +72,60 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="password"
               />
             </FloatingLabel>
-          </div>
+          </Form.Group>
         </>
       );
     case 'blog':
       return (
         <>
-          <div className="form-element">
-            <p>name</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.name}
-              name="name"
-            />
-          </div>
-          <div className="form-element">
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Enter title"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="text"
+                onChange={handleInputChange}
+                value={formData.name}
+                name="name"
+                placeholder="Title"
+                autoComplete="off"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="form-element">
             <p>text</p>
-            <input
+
+            <BlogTextEditor
+              text={formData.text}
+              handleInputChange={handleInputChange}
+            />
+            {/* <input
               type="text"
               onChange={handleInputChange}
               value={formData.text}
               name="text"
-            />
-          </div>
-          <div className="form-element">
+            /> */}
+          </Form.Group>
+          <Form.Group className="form-element">
             <p>images</p>
             <input type="file" onChange={handleInputChange} name="images" />
-          </div>
+          </Form.Group>
         </>
       );
     case 'product':
       return (
         <>
-          <div className="form-element">
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter product name"
               className="mb-3"
             >
               <Form.Control
+                required
                 type="text"
                 onChange={handleInputChange}
                 value={formData.name}
@@ -117,14 +134,15 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="product name"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter weight"
               className="mb-3"
             >
               <Form.Control
+                required
                 type="text"
                 onChange={handleInputChange}
                 value={formData.weight}
@@ -133,14 +151,15 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="weight"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter price"
               className="mb-3"
             >
               <Form.Control
+                required
                 type="number"
                 onChange={handleInputChange}
                 value={formData.price}
@@ -149,10 +168,11 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="product name"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Label>Description</Form.Label>
             <Form.Control
+              required
               as="textarea"
               rows={5}
               type="text"
@@ -160,11 +180,12 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               value={formData.description}
               name="description"
             />
-          </div>
+          </Form.Group>
 
-          <div className="form-element">
+          <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
             <Form.Control
+              required
               as="textarea"
               rows={5}
               type="text"
@@ -172,21 +193,22 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               value={formData.ingredients}
               name="ingredients"
             />
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
             <Form.Control
+              required
               type="file"
               onChange={handleInputChange}
               name="image"
             />
-          </div>
+          </Form.Group>
         </>
       );
     case 'instruction':
       return (
         <>
-          <div className="form-element">
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter instruction name"
@@ -194,6 +216,7 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
             >
               <Form.Control
                 type="text"
+                required
                 onChange={handleInputChange}
                 value={formData.name}
                 name="name"
@@ -201,9 +224,10 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="instruction name"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Select
+              required
               aria-label="Default select example"
               onChange={handleInputChange}
               value={formData.difficulty}
@@ -214,8 +238,8 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               <option>medium</option>
               <option>hard</option>
             </Form.Select>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter time"
@@ -223,6 +247,7 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
             >
               <Form.Control
                 type="text"
+                required
                 onChange={handleInputChange}
                 value={formData.time}
                 name="time"
@@ -230,14 +255,15 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="time"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <FloatingLabel
               controlId="floatingInput"
               label="Enter makes"
               className="mb-3"
             >
               <Form.Control
+                required
                 type="number"
                 onChange={handleInputChange}
                 value={formData.makes}
@@ -246,10 +272,11 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
                 placeholder="time"
               />
             </FloatingLabel>
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Label>Description</Form.Label>
             <Form.Control
+              required
               as="textarea"
               rows={2}
               type="text"
@@ -257,10 +284,11 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               value={formData.description}
               name="description"
             />
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
             <Form.Control
+              required
               as="textarea"
               rows={3}
               type="text"
@@ -268,10 +296,11 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               value={formData.ingredients}
               name="ingredients"
             />
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Label>Instruction text</Form.Label>
             <Form.Control
+              required
               as="textarea"
               rows={3}
               type="text"
@@ -279,15 +308,16 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
               value={formData.text}
               name="text"
             />
-          </div>
-          <div className="form-element">
+          </Form.Group>
+          <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
             <Form.Control
+              required
               type="file"
               onChange={handleInputChange}
               name="image"
             />
-          </div>
+          </Form.Group>
         </>
       );
     default:
