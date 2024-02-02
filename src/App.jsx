@@ -10,8 +10,6 @@ import Blog from './Pages/Blog/Blog';
 import Recipes from './Pages/Recipes/Recipes';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
-import AddForm from './Pages/AdminPanel/AddForm/AddForm';
-import EditForm from './Pages/AdminPanel/EditForm/EditForm';
 import Login from './Pages/Login/Login';
 import RequireAuth from './Components/RequireAuth';
 import PersistLogin from './Components/PersistLogin';
@@ -45,19 +43,22 @@ function App() {
                 <Route path="order" element={<AdminPanel />} />
                 <Route path="user" element={<AdminPanel />} />
               </Route>
-              <Route path="addform" element={<AddForm />}>
-                <Route path="product" element={<AddForm />} />
-                <Route path="instruction" element={<AddForm />} />
-                <Route path="blog" element={<AddForm />} />
-                <Route path="order" element={<AddForm />} />
-                <Route path="user" element={<AddForm />} />
+
+              <Route path="addform" element={<AdminPanel />}>
+                <Route path="product" element={<AdminPanel />} />
+                <Route path="instruction" element={<AdminPanel />} />
+                <Route path="blog" element={<AdminPanel />} />
+                <Route path="order" element={<AdminPanel />} />
+                <Route path="user" element={<AdminPanel />} />
               </Route>
-              <Route path="edit" element={<EditForm />}>
-                <Route path="product/:id" element={<EditForm />} />
-                <Route path="instruction/:id" element={<EditForm />} />
-                <Route path="blog/:id" element={<EditForm />} />
-                <Route path="order/:id" element={<EditForm />} />
-                <Route path="user/:id" element={<EditForm />} />
+
+              <Route path="edit" element={<AdminPanel />}>
+                <Route path="product/:id" element={<AdminPanel />} />
+                <Route path="instruction/:id" element={<AdminPanel />} />
+                <Route path="blog/:id" element={<AdminPanel />} />
+                <Route path="order/:id" element={<AdminPanel />} />
+                <Route path="user/:id" element={<AdminPanel />} />
+
               </Route>
             </Route>
           </Route>

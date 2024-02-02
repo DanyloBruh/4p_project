@@ -1,29 +1,25 @@
-.add-form {
+.add-edit-form {
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  >.form-bg.blog {
-    margin: 0;
-    border: none;
-    width: 100%;
-  }
-  > .form-bg {
-    margin: 20px 0;
+  &__body.container {
+    background-color: #1f1f1f;
     width: 40%;
     padding: 20px;
-    border: 1px solid #ffff;
-    background: #1f1f1f;
-    > h3 {
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 36px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      text-transform: capitalize;
-    }
+    border: 1px solid #fff;
     > form {
-
+      > .form-label {
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: capitalize;
+        margin-bottom: 40px;
+      }
       > .form-element {
         margin-bottom: 20px;
 
@@ -96,6 +92,11 @@
         font-weight: 500;
         font-size: 1.5rem;
         width: fit-content;
+      }
+      > .button__submit {
+        width: 100%;
+        font-weight: 650;
+        font-size: 1.3rem;
       }
     }
   }
