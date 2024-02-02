@@ -13,6 +13,8 @@ import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import AddForm from './Pages/AdminPanel/AddForm/AddForm';
 import EditForm from './Pages/AdminPanel/EditForm/EditForm';
 import Login from './Pages/Login/Login';
+import RequireAuth from './Components/RequireAuth';
+import PersistLogin from './Components/PersistLogin';
 // import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
@@ -33,27 +35,33 @@ function App() {
           <Route path="recipes">
             <Route path=":id?" element={<Recipes />} />
           </Route>
-          <Route path="admin" element={<AdminPanel />}>
-            <Route path="product" element={<AdminPanel />} />
-            <Route path="instruction" element={<AdminPanel />} />
-            <Route path="blog" element={<AdminPanel />} />
-            <Route path="order" element={<AdminPanel />} />
-            <Route path="user" element={<AdminPanel />} />
+
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth />}>
+              <Route path="admin" element={<AdminPanel />}>
+                <Route path="product" element={<AdminPanel />} />
+                <Route path="instruction" element={<AdminPanel />} />
+                <Route path="blog" element={<AdminPanel />} />
+                <Route path="order" element={<AdminPanel />} />
+                <Route path="user" element={<AdminPanel />} />
+              </Route>
+              <Route path="addform" element={<AddForm />}>
+                <Route path="product" element={<AddForm />} />
+                <Route path="instruction" element={<AddForm />} />
+                <Route path="blog" element={<AddForm />} />
+                <Route path="order" element={<AddForm />} />
+                <Route path="user" element={<AddForm />} />
+              </Route>
+              <Route path="edit" element={<EditForm />}>
+                <Route path="product/:id" element={<EditForm />} />
+                <Route path="instruction/:id" element={<EditForm />} />
+                <Route path="blog/:id" element={<EditForm />} />
+                <Route path="order/:id" element={<EditForm />} />
+                <Route path="user/:id" element={<EditForm />} />
+              </Route>
+            </Route>
           </Route>
-          <Route path="addform" element={<AddForm />}>
-            <Route path="product" element={<AddForm />} />
-            <Route path="instruction" element={<AddForm />} />
-            <Route path="blog" element={<AddForm />} />
-            <Route path="order" element={<AddForm />} />
-            <Route path="user" element={<AddForm />} />
-          </Route>
-          <Route path="edit" element={<EditForm />}>
-            <Route path="product/:id" element={<EditForm />} />
-            <Route path="instruction/:id" element={<EditForm />} />
-            <Route path="blog/:id" element={<EditForm />} />
-            <Route path="order/:id" element={<EditForm />} />
-            <Route path="user/:id" element={<EditForm />} />
-          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

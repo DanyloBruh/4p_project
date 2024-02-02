@@ -70,11 +70,8 @@ function EditForm() {
   const [data, setData] = useState(initialState);
 
   useEffect(() => {
-    console.log('API');
     getDataByCategoryId(category, id, axiosPrivate).then(setData);
   }, []);
-
-  console.log('data', data);
 
   const handleInputChange = (e) => {
     if (e.target.files) {
