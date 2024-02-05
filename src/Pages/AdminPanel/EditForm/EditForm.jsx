@@ -19,7 +19,11 @@ function EditForm({ data }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(id);
+  const axiosPrivate = useAxiosPrivate();
+
+  const [errorMsg, setErrorMsg] = useState('');
+  let isValidated = true;
+
   let initialState = {};
 
   switch (category) {

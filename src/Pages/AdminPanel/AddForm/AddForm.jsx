@@ -66,9 +66,6 @@ function AddForm({ data, setData }) {
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
 
-  console.log(formData);
-  console.log('data: ', data);
-
   const handleInputChange = (e) => {
     if (e.target && e.target.files) {
       const uploadFile = e.target.files[0];
