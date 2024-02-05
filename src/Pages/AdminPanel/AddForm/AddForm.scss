@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  >.form-bg.blog {
+  > .form-bg.blog {
     margin: 0;
     border: none;
     width: 100%;
@@ -23,7 +23,6 @@
       text-transform: capitalize;
     }
     > form {
-
       > .form-element {
         margin-bottom: 20px;
 

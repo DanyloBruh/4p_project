@@ -21,12 +21,12 @@ function EditForm() {
   const category = useLocation().pathname.split('/')[2];
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const axiosPrivate = useAxiosPrivate();
 
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
-  
+
   let initialState = {};
 
   switch (category) {
