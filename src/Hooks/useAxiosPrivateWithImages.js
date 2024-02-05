@@ -2,14 +2,14 @@
 /* eslint-disable import/extensions */
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { axiosPrivate } from '../Helper/axios.js';
+import { axiosPrivateConfig } from '../Helper/axios.js';
 import useRefreshToken from './useRefreshToken.js';
 
-const useAxiosPrivate = () => {
+const useAxiosPrivateImages = () => {
   const refresh = useRefreshToken();
   const auth = useSelector((state) => state.auth.auth);
   useEffect(() => {
-    const requestIntercept = axiosPrivate.interceptors.request.use(
+    const requestIntercept = axiosPrivateConfig.interceptors.request.use(
       async (config) => {
         console.log(config);
         if (!config.headers.Authorization) {
@@ -20,7 +20,7 @@ const useAxiosPrivate = () => {
       (error) => Promise.reject(error),
     );
 
-    const responseIntercept = axiosPrivate.interceptors.response.use(
+    const responseIntercept = axiosPrivateConfig.interceptors.response.use(
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
@@ -28,19 +28,19 @@ const useAxiosPrivate = () => {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
           prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-          return axiosPrivate(prevRequest);
+          return axiosPrivateConfig(prevRequest);
         }
         return Promise.reject(error);
       },
     );
 
     return () => {
-      axiosPrivate.interceptors.request.eject(requestIntercept);
-      axiosPrivate.interceptors.response.eject(responseIntercept);
+      axiosPrivateConfig.interceptors.request.eject(requestIntercept);
+      axiosPrivateConfig.interceptors.response.eject(responseIntercept);
     };
   }, [auth, refresh]);
 
-  return axiosPrivate;
+  return axiosPrivateConfig;
 };
 
-export default useAxiosPrivate;
+export default useAxiosPrivateImages;

@@ -16,12 +16,14 @@ import {
   validateInstruction,
   validateProduct,
 } from '../ValidationFunctions';
+import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 
 /* eslint-disable react/prop-types */
 function AddForm({ setData, data }) {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const axiosPrivateConfig = useAxiosPrivateImages();
 
   let initialState = {};
 

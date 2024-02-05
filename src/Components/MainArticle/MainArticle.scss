@@ -37,10 +37,10 @@
   &__text-placeholder {
     width: 100px;
   }
-  > img {
-    width: 100%;
+  &__img-container {
     height: 450px;
-    object-fit: cover;
+    overflow: hidden;
+    padding: 0 !important;
     @media (max-width: 992px) {
       height: 400px;
     }
@@ -50,7 +50,14 @@
     @media (max-width: 575px) {
       height: 300px;
     }
+    > img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.25s;
+    }
   }
+
   > div {
     padding: 25px;
     > h2 {
@@ -102,4 +109,8 @@
       }
     }
   }
+}
+
+.article-content:hover img {
+  transform: scale(1.1);
 }
