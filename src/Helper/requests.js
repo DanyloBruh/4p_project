@@ -37,25 +37,45 @@ export const getDataByCategoryId = async (category, id, axiosPrivate) => {
 };
 
 export const postData = async (category, axiosPrivate, response) => {
-  await clientPrivate.post(`/${category}/`, axiosPrivate, response);
+  const { data } = await clientPrivate.post(
+    `/${category}/`,
+    axiosPrivate,
+    response,
+  );
+  return data;
 };
 
 export const postDataConfig = async (category, axiosPrivate, response) => {
-  await clientPrivate.postConfig(`/${category}/`, axiosPrivate, response);
+  const { data } = await clientPrivate.postConfig(
+    `/${category}/`,
+    axiosPrivate,
+    response,
+  );
+  return data;
 };
 
 export const deleteData = async (category, id, axiosPrivate) => {
-  await clientPrivate.delete(`/${category}/${id}/`, axiosPrivate);
+  const { data } = await clientPrivate.delete(
+    `/${category}/${id}/`,
+    axiosPrivate,
+  );
+  return data;
 };
 
 export const editData = async (category, id, axiosPrivate, response) => {
-  await clientPrivate.patch(`/${category}/${id}/`, axiosPrivate, response);
-};
-
-export const editDataConfig = async (category, id, axiosPrivate, response) => {
-  await clientPrivate.patchConfig(
+  const { data } = await clientPrivate.patch(
     `/${category}/${id}/`,
     axiosPrivate,
     response,
   );
+  return data;
+};
+
+export const editDataConfig = async (category, id, axiosPrivate, response) => {
+  const { data } = await clientPrivate.patchConfig(
+    `/${category}/${id}/`,
+    axiosPrivate,
+    response,
+  );
+  return data;
 };

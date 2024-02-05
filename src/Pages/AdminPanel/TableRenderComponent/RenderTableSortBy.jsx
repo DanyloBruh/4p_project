@@ -52,7 +52,7 @@ function RenderTableSortBy({ category }) {
         </>
       );
     default:
-      return <div style={{ background: 'none' }} />;
+      return <option>empty</option>;
   }
 }
 

@@ -104,23 +104,23 @@ export const validateInstruction = (formData) => {
     return { msg: 'Description must not contain double quotes', isValidated };
   }
 
-  if (formData.ingredients === '') {
-    isValidated = false;
-    return { msg: 'Ingredients is required', isValidated };
-  }
-  if (formData.ingredients.match('["]')) {
-    isValidated = false;
-    return { msg: 'Ingredients must not contain double quotes', isValidated };
-  }
+  // if (formData.ingredients === '') {
+  //   isValidated = false;
+  //   return { msg: 'Ingredients is required', isValidated };
+  // }
+  // if (formData.ingredients.match('["]')) {
+  //   isValidated = false;
+  //   return { msg: 'Ingredients must not contain double quotes', isValidated };
+  // }
 
-  if (formData.text === '') {
-    isValidated = false;
-    return { msg: 'Text is required', isValidated };
-  }
-  if (formData.text.match('["]')) {
-    isValidated = false;
-    return { msg: 'Text must not contain double quotes', isValidated };
-  }
+  // if (formData.text === '') {
+  //   isValidated = false;
+  //   return { msg: 'Text is required', isValidated };
+  // }
+  // if (formData.text.match('["]')) {
+  //   isValidated = false;
+  //   return { msg: 'Text must not contain double quotes', isValidated };
+  // }
   if (formData.image === '') {
     isValidated = false;
     return { msg: 'Image is required', isValidated };

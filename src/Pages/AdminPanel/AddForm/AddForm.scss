@@ -1,8 +1,20 @@
 .add-edit-form {
   margin: 20px 0;
-  display: flex;
   align-items: center;
   overflow: auto;
+  &__body.blog.container {
+    width: 100%;
+    > form {
+      > .form-element {
+        > .quill.editor {
+          height:400px;
+        }
+        > p{
+          margin-top: 50px;
+        }
+      }
+    }
+  }
   &__body.container {
     background-color: #1f1f1f;
     width: 40%;
@@ -35,6 +47,17 @@
               color: #fff;
               margin-right: 15px;
             }
+            > textarea {
+              resize: none;
+              color: #fff;
+              font-family: 'Outfit', sans-serif;
+              font-size: 1rem;
+              font-style: normal;
+              line-height: normal;
+              font-weight: 300;
+              margin-right: 15px;
+              background-color: #1f1f1f;
+            }
             margin-bottom: 20px;
           }
         }
@@ -47,7 +70,6 @@
           font-style: normal;
           line-height: normal;
           font-weight: 300;
-          text-transform: capitalize;
           margin-bottom: 40px;
           background-color: #1f1f1f;
         }
