@@ -32,7 +32,7 @@ function PersistLogin() {
     return () => (isMounted = false);
   }, []);
 
-  return isLoading ? <p>lol</p> : <Outlet />;
+  return isLoading ? <p> </p> : <Outlet />;
   // {!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}
 }
 

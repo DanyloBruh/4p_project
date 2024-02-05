@@ -41,25 +41,13 @@ function requestPrivate(url, method, axiosPrivate, data) {
         return axiosPrivate.post(url, data).then((response) => response);
 
       case 'POSTCON':
-        return axiosPrivate
-          .post(url, data, {
-            headers: {
-              'content-type': 'multipart/form-data',
-            },
-          })
-          .then((response) => response);
+        return axiosPrivate.post(url, data).then((response) => response);
 
       case 'PATCH':
         return axiosPrivate.patch(url, data).then((response) => response);
 
       case 'PATCHCON':
-        return axiosPrivate
-          .patch(url, data, {
-            headers: {
-              'content-type': 'multipart/form-data',
-            },
-          })
-          .then((response) => response);
+        return axiosPrivate.patch(url, data).then((response) => response);
 
       case 'DELETE':
         return axiosPrivate.delete(url).then((response) => response);

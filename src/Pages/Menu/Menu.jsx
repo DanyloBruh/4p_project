@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import { NavLink, useParams } from 'react-router-dom';
+import {
+  NavLink, useLocation, useNavigate, useParams,
+} from 'react-router-dom';
 import './Menu.scss';
 import Varenyk from '../../Assets/varenyk.png';
 import Dumplings from '../../Assets/dumplings.png';
@@ -18,6 +20,15 @@ function Menu() {
   const [menuItems, setMenuItems] = useState();
 
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '*';
+
+  useEffect(() => {
+    if (id && !menuItems?.find((item) => item.id === id)) {
+      navigate(from, { replace: true });
+    }
+  }, [id]);
 
   useEffect(() => {
     getAllProducts().then(setMenuItems);
@@ -160,7 +171,9 @@ function Menu() {
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
-      {id && <ProductCard data={menuItems?.find((item) => item.id === id)} />}
+      {id && menuItems?.find((item) => item.id === id) && (
+        <ProductCard data={menuItems?.find((item) => item.id === id)} />
+      )}
     </div>
   );
 }

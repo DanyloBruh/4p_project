@@ -16,12 +16,14 @@ import {
   validateInstruction,
   validateProduct,
 } from '../ValidationFunctions';
+import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 
 /* eslint-disable react/prop-types */
 function AddForm({ setData, data }) {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const axiosPrivateConfig = useAxiosPrivateImages();
 
   let initialState = {};
 
@@ -151,7 +153,7 @@ function AddForm({ setData, data }) {
 
     console.log('data', data);
     if (category !== 'user') {
-      postDataConfig(category, axiosPrivate, response).then((result) => {
+      postDataConfig(category, axiosPrivateConfig, response).then((result) => {
         setData((prevState) => [...prevState, result]);
       });
       navigate(`/admin/${category}`);
