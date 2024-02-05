@@ -7,7 +7,6 @@ import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 /* eslint-disable object-curly-newline */
 function RenderTableBody({ category, data, setData, orders }) {
   const axiosPrivate = useAxiosPrivate();
-  console.log(data.length);
   if (!data || data.length === 0) return <Spinner animation="border" variant="light" className="spinner" />;
 
   switch (category) {

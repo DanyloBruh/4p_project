@@ -1,7 +1,8 @@
 .add-edit-form {
-  height: 100vh;
+  margin: 20px 0;
   display: flex;
   align-items: center;
+  overflow: auto;
   &__body.container {
     background-color: #1f1f1f;
     width: 40%;
@@ -22,6 +23,20 @@
       }
       > .form-element {
         margin-bottom: 20px;
+
+        > .control-element {
+          display: block;
+          > .rendered-content {
+            display: flex;
+            > input {
+              background: none;
+              border: 1px solid #fff;
+              color: #fff;
+              margin-right: 15px;
+            }
+            margin-bottom: 20px;
+          }
+        }
 
         > textarea {
           resize: none;

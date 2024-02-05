@@ -1,10 +1,40 @@
 import React from 'react';
 import 'react-quill/dist/quill.snow.css';
-import { FloatingLabel, Form } from 'react-bootstrap';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
 
 /* eslint-disable react/prop-types */
-function RenderAddFormBody({ handleInputChange, category, formData }) {
+function RenderAddFormBody({
+  handleInputChange,
+  category,
+  formData,
+  ingredients,
+  setIngredients,
+}) {
+  const handleIngredient = (e, i) => {
+    const { name, value } = e.target;
+    /* eslint-disable prefer-const */
+    let newIngredients = [...ingredients];
+    newIngredients[i][name] = value;
+    setIngredients(newIngredients);
+  };
+
+  const handleAddIngredient = () => {
+    setIngredients([
+      ...ingredients,
+      {
+        ingredient: '',
+        timestamp: new Date().getTime(),
+      },
+    ]);
+  };
+
+  const handleDelete = (i) => {
+    let deleteInstruction = [...ingredients];
+    deleteInstruction.splice(i, 1);
+    setIngredients(deleteInstruction);
+  };
+
   switch (category) {
     case 'user':
       return (
@@ -184,15 +214,32 @@ function RenderAddFormBody({ handleInputChange, category, formData }) {
 
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              rows={5}
-              type="text"
-              onChange={handleInputChange}
-              value={formData.ingredients}
-              name="ingredients"
-            />
+            <Form.Group className="control-element">
+              {ingredients.map((ingredient, i) => (
+                <Form.Group
+                  className="rendered-content"
+                  key={ingredient.timestamp}
+                >
+                  <Form.Control
+                    required
+                    rows={5}
+                    type="text"
+                    onChange={(e) => handleIngredient(e, i)}
+                    name="ingredient"
+                    autoComplete="off"
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDelete(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddIngredient}>
+              click to add new Ingredient
+            </Button>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>

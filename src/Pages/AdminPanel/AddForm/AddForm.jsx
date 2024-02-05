@@ -13,7 +13,7 @@ import {
 } from '../ValidationFunctions';
 
 /* eslint-disable react/prop-types */
-function AddForm({ data, setData }) {
+function AddForm({ setData }) {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
@@ -42,7 +42,6 @@ function AddForm({ data, setData }) {
         weight: '',
         description: '',
         price: '',
-        ingredients: '',
         image: '',
       };
       break;
@@ -63,11 +62,17 @@ function AddForm({ data, setData }) {
   }
 
   const [formData, setFormData] = useState(initialState);
+  const [ingredients, setIngredients] = useState([
+    {
+      ingredient: '',
+      timestamp: new Date().getTime(),
+    },
+  ]);
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
 
-  console.log(formData);
-  console.log('data: ', data);
+  // console.log(formData);
+  // console.log('data: ', data);
 
   const handleInputChange = (e) => {
     if (e.target && e.target.files) {
@@ -122,7 +127,7 @@ function AddForm({ data, setData }) {
       userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
       ...formData,
     };
-
+    console.log(formData, ingredients);
     setData((prevState) => [...prevState, formData]);
 
     if (category !== 'user') {
@@ -161,7 +166,8 @@ function AddForm({ data, setData }) {
             handleInputChange={handleInputChange}
             category={category}
             formData={formData}
-            setFormData={setFormData}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
           />
           <br />
           {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}
