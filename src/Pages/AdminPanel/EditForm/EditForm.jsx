@@ -4,8 +4,7 @@ import '../AddForm/AddForm.scss';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import RenderEditFormBody from './RenderEditFormBody';
 import { editData, editDataConfig } from '../../../Helper/requests';
-import axiosPrivate from '../../../Hooks/useAxiosPrivate';
-
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 import {
   validateUser,
   validateBlog,
@@ -69,14 +68,13 @@ function EditForm({ data }) {
   }
 
   const [editedData, setEditedData] = useState(data.find((el) => el.id === id));
-  const [errorMsg, setErrorMsg] = useState('');
-  let isValidated = true;
+
   // useEffect(() => {
   //   getDataByCategoryId(category, id, axiosPrivate).then(setData);
   // }, []);
   console.log('data', data);
   console.log('edited', editedData);
-  
+
   const handleInputChange = (e) => {
     if (e.target.files) {
       const uploadFile = e.target.files[0];
