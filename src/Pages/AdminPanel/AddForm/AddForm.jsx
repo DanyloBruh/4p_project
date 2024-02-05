@@ -154,7 +154,7 @@ function AddForm({ setData, data }) {
 
     console.log('data', data);
     if (category !== 'user') {
-      postDataConfig(category, axiosPrivate, response).then((result) => {
+      postDataConfig(category, axiosPrivateConfig, response).then((result) => {
         setData((prevState) => [...prevState, result]);
       });
       navigate(`/admin/${category}`);
