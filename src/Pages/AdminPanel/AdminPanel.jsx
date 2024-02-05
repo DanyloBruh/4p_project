@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button, Container, Nav } from 'react-bootstrap';
+/* eslint-disable object-curly-newline */
+import { Button, Container, Nav, Spinner } from 'react-bootstrap';
 
 import Table from 'react-bootstrap/Table';
 
 import { useSelector } from 'react-redux';
 /* eslint-disable object-curly-newline */
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-
 import { getDataByCategory } from '../../Helper/requests';
 
 import './AdminPanel.scss';
@@ -43,8 +43,10 @@ function AdminPanel() {
   useEffect(() => {
     if (category) {
       getDataByCategory(category, axiosPrivate).then(setData);
+    } else {
+      navigate('product');
     }
-  }, [category, '']);
+  }, [category]);
 
   switch (page) {
     case 'admin':
@@ -98,7 +100,7 @@ function AdminPanel() {
                 </Button>
               </Nav>
             </div>
-            {category ? (
+            {category && (
               <>
                 <h2>
                   List of
@@ -129,28 +131,26 @@ function AdminPanel() {
                   </select>
                 </div>
               </>
-            ) : (
-              <h2 className="">Choose category ^</h2>
             )}
           </Container>
           <Container className="admin-panel__body">
-            <Table>
-              <thead>
-                <tr>
-                  <RenderTableHeader category={category} data={data} />
-                </tr>
-              </thead>
-              {category ? (
+            {data && data.length !== 0 ? (
+              <Table>
+                <thead>
+                  <tr>
+                    <RenderTableHeader category={category} data={data} />
+                  </tr>
+                </thead>
                 <RenderTableBody
                   category={category}
                   data={data}
                   setData={setData}
                   orders={orders}
                 />
-              ) : (
-                <tbody />
-              )}
-            </Table>
+              </Table>
+            ) : (
+              <Spinner animation="border" variant="light" className="spinner" />
+            )}
           </Container>
         </div>
       );
@@ -159,7 +159,7 @@ function AdminPanel() {
     case 'edit':
       return <EditForm data={data} />;
     default:
-      return <div />;
+      return <tbody />;
   }
 }
 

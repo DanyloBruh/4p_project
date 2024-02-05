@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Spinner } from 'react-bootstrap';
 import { deleteData } from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
 function RenderTableBody({ category, data, setData, orders }) {
   const axiosPrivate = useAxiosPrivate();
-  if (!data || data.length === 0) return <Spinner animation="border" variant="light" className="spinner" />;
 
   switch (category) {
     case 'product':
@@ -32,8 +30,9 @@ function RenderTableBody({ category, data, setData, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    setData((prevState) => prevState.filter((item) => item.id !== product.id));
-                    deleteData(category, product.id, axiosPrivate);
+                    deleteData(category, product.id, axiosPrivate).then(
+                      setData((prevState) => prevState.filter((item) => item.id !== product.id)),
+                    );
                   }}
                 />
               </td>
@@ -65,8 +64,9 @@ function RenderTableBody({ category, data, setData, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    setData((prevState) => prevState.filter((item) => item.id !== recipe.id));
-                    deleteData(category, recipe.id, axiosPrivate);
+                    deleteData(category, recipe.id, axiosPrivate).then(
+                      setData((prevState) => prevState.filter((item) => item.id !== recipe.id)),
+                    );
                   }}
                 />
               </td>
@@ -90,8 +90,9 @@ function RenderTableBody({ category, data, setData, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    setData((prevState) => prevState.filter((item) => item.id !== blog.id));
-                    deleteData(category, blog.id, axiosPrivate);
+                    deleteData(category, blog.id, axiosPrivate).then(
+                      setData((prevState) => prevState.filter((item) => item.id !== blog.id)),
+                    );
                   }}
                 />
               </td>
@@ -115,8 +116,9 @@ function RenderTableBody({ category, data, setData, orders }) {
                 <Link
                   className="button-delete"
                   onClick={() => {
-                    setData((prevState) => prevState.filter((item) => item.id !== user.id));
-                    deleteData(category, user.id, axiosPrivate);
+                    deleteData(category, user.id, axiosPrivate).then(
+                      setData((prevState) => prevState.filter((item) => item.id !== user.id)),
+                    );
                   }}
                 />
               </td>
@@ -147,7 +149,9 @@ function RenderTableBody({ category, data, setData, orders }) {
                   className="button-delete"
                   onClick={() => {
                     setData((prevState) => prevState.filter((item) => item.id !== order.id));
-                    deleteData(category, order.id, axiosPrivate);
+                    deleteData(category, order.id, axiosPrivate).then(
+                      setData((prevState) => prevState.filter((item) => item.id !== order.id)),
+                    );
                   }}
                 />
               </td>
@@ -156,7 +160,7 @@ function RenderTableBody({ category, data, setData, orders }) {
         </tbody>
       );
     default:
-      return <div />;
+      return <tbody />;
   }
 }
 

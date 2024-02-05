@@ -10,6 +10,8 @@ function RenderAddFormBody({
   formData,
   ingredients,
   setIngredients,
+  steps,
+  setSteps,
 }) {
   const handleIngredient = (e, i) => {
     const { name, value } = e.target;
@@ -30,9 +32,33 @@ function RenderAddFormBody({
   };
 
   const handleDelete = (i) => {
-    let deleteInstruction = [...ingredients];
-    deleteInstruction.splice(i, 1);
-    setIngredients(deleteInstruction);
+    let deleteIngredient = [...ingredients];
+    deleteIngredient.splice(i, 1);
+    setIngredients(deleteIngredient);
+  };
+
+  const handleStep = (e, i) => {
+    const { name, value } = e.target;
+    /* eslint-disable prefer-const */
+    let newSteps = [...steps];
+    newSteps[i][name] = value;
+    setSteps(newSteps);
+  };
+
+  const handleAddStep = () => {
+    setSteps([
+      ...steps,
+      {
+        text: '',
+        timestamp: new Date().getTime(),
+      },
+    ]);
+  };
+
+  const handleDeleteStep = (i) => {
+    let deleteStep = [...steps];
+    deleteStep.splice(i, 1);
+    setSteps(deleteStep);
   };
 
   switch (category) {
@@ -132,12 +158,6 @@ function RenderAddFormBody({
               text={formData.text}
               handleInputChange={handleInputChange}
             />
-            {/* <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.text}
-              name="text"
-            /> */}
           </Form.Group>
           <Form.Group className="form-element">
             <p>images</p>
@@ -334,27 +354,58 @@ function RenderAddFormBody({
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              rows={3}
-              type="text"
-              onChange={handleInputChange}
-              value={formData.ingredients}
-              name="ingredients"
-            />
+            <Form.Group className="control-element">
+              {ingredients.map((ingredient, i) => (
+                <Form.Group
+                  className="rendered-content"
+                  key={ingredient.timestamp}
+                >
+                  <Form.Control
+                    required
+                    type="text"
+                    onChange={(e) => handleIngredient(e, i)}
+                    name="ingredient"
+                    autoComplete="off"
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDelete(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddIngredient}>
+              click to add new Ingredient
+            </Button>
           </Form.Group>
           <Form.Group className="form-element">
-            <Form.Label>Instruction text</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              rows={3}
-              type="text"
-              onChange={handleInputChange}
-              value={formData.text}
-              name="text"
-            />
+            <Form.Label>Steps</Form.Label>
+            <Form.Group className="control-element">
+              {steps.map((step, i) => (
+                <Form.Group className="rendered-content" key={step.timestamp}>
+                  <Form.Control
+                    required
+                    rows={3}
+                    as="textarea"
+                    type="text"
+                    onChange={(e) => handleStep(e, i)}
+                    name="text"
+                    autoComplete="off"
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDeleteStep(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddStep}>
+              click to add new Step
+            </Button>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
