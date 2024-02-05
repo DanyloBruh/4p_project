@@ -19,7 +19,6 @@ import useLogout from '../../Hooks/useLogout';
 import AddForm from './AddForm/AddForm';
 import EditForm from './EditForm/EditForm';
 
-
 function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
   const [search, setSearch] = useState('');
@@ -30,16 +29,6 @@ function AdminPanel() {
   const location = useLocation();
   const category = location.pathname.split('/')[2];
   const page = location.pathname.split('/')[1];
-
-  const axiosPrivate = useAxiosPrivate();
-
-  const navigate = useNavigate();
-  const logout = useLogout();
-
-  const signOut = async () => {
-    await logout();
-    navigate('/login');
-  };
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -108,7 +97,6 @@ function AdminPanel() {
                   LOGOUT
                 </Button>
               </Nav>
-
             </div>
             {category ? (
               <>

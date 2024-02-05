@@ -9,101 +9,102 @@
   }
   > .form-bg {
     margin: 20px 0;
-  &__body.container {
-    background-color: #1f1f1f;
-    width: 40%;
-    padding: 20px;
-    border: 1px solid #fff;
-    > form {
-      > .form-label {
-        display: flex;
-        justify-content: space-between;
-        color: #fff;
-        font-family: 'Outfit', sans-serif;
-        font-size: 48px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        text-transform: capitalize;
-        margin-bottom: 40px;
-      }
-      > .form-element {
-        margin-bottom: 20px;
-
-        > textarea {
-          resize: none;
+    &__body.container {
+      background-color: #1f1f1f;
+      width: 40%;
+      padding: 20px;
+      border: 1px solid #fff;
+      > form {
+        > .form-label {
+          display: flex;
+          justify-content: space-between;
           color: #fff;
-          background-color: #1f1f1f;
-          outline: 0px;
-          box-shadow: none !important;
+          font-family: 'Outfit', sans-serif;
+          font-size: 48px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          text-transform: capitalize;
+          margin-bottom: 40px;
         }
-        > label {
-          color: #b4b4b4;
-        }
+        > .form-element {
+          margin-bottom: 20px;
 
-        > .form-floating {
-          > .form-control {
-            border-radius: 5px;
-            border: 1px solid #fff;
-            background: rgba(51, 45, 45, 0);
-            color: white;
+          > textarea {
+            resize: none;
+            color: #fff;
+            background-color: #1f1f1f;
+            outline: 0px;
+            box-shadow: none !important;
           }
           > label {
-            color: white !important;
+            color: #b4b4b4;
           }
-          > .form-control:focus ~ label {
-            color: white;
+
+          > .form-floating {
+            > .form-control {
+              border-radius: 5px;
+              border: 1px solid #fff;
+              background: rgba(51, 45, 45, 0);
+              color: white;
+            }
+            > label {
+              color: white !important;
+            }
+            > .form-control:focus ~ label {
+              color: white;
+            }
+            > .form-control:focus ~ label::after {
+              display: none;
+            }
+            > .form-control:not(:placeholder-shown) ~ label::after,
+            .form-floating > .form-select ~ label::after {
+              display: none;
+            }
           }
-          > .form-control:focus ~ label::after {
-            display: none;
+          > p {
+            color: #b4b4b4;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            text-transform: capitalize;
+            margin: 0 0 5px 0;
           }
-          > .form-control:not(:placeholder-shown) ~ label::after,
-          .form-floating > .form-select ~ label::after {
-            display: none;
+          > input {
+            background: none;
+            border: 1px solid #fff;
+            color: #fff;
+          }
+          > select {
+            color: #fff;
+            text-align: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 200;
+            line-height: normal;
+            border: 1px solid #fff;
+            background: none;
+            padding: 10px;
+            background-color: #1f1f1f;
           }
         }
         > p {
-          color: #b4b4b4;
-          font-family: 'Outfit', sans-serif;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 300;
-          line-height: normal;
-          text-transform: capitalize;
-          margin: 0 0 5px 0;
-        }
-        > input {
-          background: none;
-          border: 1px solid #fff;
-          color: #fff;
-        }
-        > select {
-          color: #fff;
-          text-align: center;
-          font-family: 'Outfit', sans-serif;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 200;
-          line-height: normal;
-          border: 1px solid #fff;
-          background: none;
+          margin: 0 auto 20px auto;
+          border: 3px solid #b4b4b4;
           padding: 10px;
-          background-color: #1f1f1f;
+          color: #b4b4b4;
+          font-weight: 500;
+          font-size: 1.5rem;
+          width: fit-content;
         }
-      }
-      > p {
-        margin: 0 auto 20px auto;
-        border: 3px solid #b4b4b4;
-        padding: 10px;
-        color: #b4b4b4;
-        font-weight: 500;
-        font-size: 1.5rem;
-        width: fit-content;
-      }
-      > .button__submit {
-        width: 100%;
-        font-weight: 650;
-        font-size: 1.3rem;
+        > .button__submit {
+          width: 100%;
+          font-weight: 650;
+          font-size: 1.3rem;
+        }
       }
     }
   }
