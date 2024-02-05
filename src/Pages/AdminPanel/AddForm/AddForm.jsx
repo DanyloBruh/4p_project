@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -70,9 +71,6 @@ function AddForm({ setData }) {
   ]);
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
-
-  // console.log(formData);
-  // console.log('data: ', data);
 
   const handleInputChange = (e) => {
     if (e.target && e.target.files) {
