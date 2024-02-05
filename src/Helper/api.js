@@ -42,7 +42,7 @@ function requestPrivate(url, method, axiosPrivate, data) {
 
       case 'POSTCON':
         return axiosPrivate
-          .post(`${BASE_URL}${url}`, data, {
+          .post(url, data, {
             headers: {
               'content-type': 'multipart/form-data',
             },
@@ -54,7 +54,7 @@ function requestPrivate(url, method, axiosPrivate, data) {
 
       case 'PATCHCON':
         return axiosPrivate
-          .patch(`${BASE_URL}${url}`, data, {
+          .patch(url, data, {
             headers: {
               'content-type': 'multipart/form-data',
             },

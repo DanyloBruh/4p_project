@@ -77,6 +77,7 @@
       > .dropdown {
         color: #fff;
         text-align: center;
+        padding: 10px;
         font-family: 'Outfit', sans-serif;
         font-size: 1.5rem;
         font-style: normal;
@@ -86,12 +87,33 @@
         border-radius: 5px;
         background: #3e3e3e;
       }
+      > .table-button {
+        color: #fff;
+        border: 1px solid #fff;
+        padding: 10px;
+        border-radius: 5px;
+        width: 30%;
+        display: block;
+        font-weight: 600;
+      }
+      > .table-button:hover {
+        border: 1px solid #1f1f1f;
+        background: #fff;
+        color: #1f1f1f;
+      }
     }
   }
   &__body {
     > .table {
-      text-align: center;
-      margin: 0 0 36px;
+      > .spinner {
+        position: fixed;
+        top: 60%;
+        left: 50%;
+        height: 5rem;
+        width: 5rem;
+        border-width: 10px;
+        margin-left: 0 auto;
+      }
       > thead {
         > tr {
           border-top: 1px solid #fff;
@@ -148,20 +170,6 @@
           }
         }
       }
-    }
-    > .table-button {
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 10px;
-      border-radius: 5px;
-      width: 100%;
-      display: block;
-      font-weight: 600;
-    }
-    > .table-button:hover {
-      border: 1px solid #1f1f1f;
-      background: #fff;
-      color: #1f1f1f;
     }
   }
 }
