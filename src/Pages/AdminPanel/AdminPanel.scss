@@ -104,16 +104,16 @@
     }
   }
   &__body {
+    > .spinner {
+      position: fixed;
+      top: 65%;
+      left: 50%;
+      height: 5rem;
+      width: 5rem;
+      border-width: 10px;
+      margin-left: 0 auto;
+    }
     > .table {
-      > .spinner {
-        position: fixed;
-        top: 60%;
-        left: 50%;
-        height: 5rem;
-        width: 5rem;
-        border-width: 10px;
-        margin-left: 0 auto;
-      }
       > thead {
         > tr {
           border-top: 1px solid #fff;

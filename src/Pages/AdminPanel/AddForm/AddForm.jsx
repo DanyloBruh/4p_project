@@ -4,7 +4,11 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './AddForm.scss';
 import RenderAddFormBody from './RenderAddFormBody';
-import { postData, postDataConfig } from '../../../Helper/requests';
+import {
+  getDataByCategory,
+  postData,
+  postDataConfig,
+} from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 import {
   validateUser,
@@ -14,7 +18,7 @@ import {
 } from '../ValidationFunctions';
 
 /* eslint-disable react/prop-types */
-function AddForm({ setData }) {
+function AddForm({ setData, data }) {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
@@ -44,6 +48,7 @@ function AddForm({ setData }) {
         description: '',
         price: '',
         image: '',
+        ingredients: '',
       };
       break;
     case 'instruction':
@@ -63,14 +68,24 @@ function AddForm({ setData }) {
   }
 
   const [formData, setFormData] = useState(initialState);
-  const [ingredients, setIngredients] = useState([
+
+  const [ingredientsArray, setIngredients] = useState([
     {
       ingredient: '',
       timestamp: new Date().getTime(),
     },
   ]);
+  const [stepsArray, setSteps] = useState([
+    {
+      text: '',
+      timestamp: new Date().getTime(),
+    },
+  ]);
+
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
+
+  console.log(formData, stepsArray);
 
   const handleInputChange = (e) => {
     if (e.target && e.target.files) {
@@ -97,7 +112,6 @@ function AddForm({ setData }) {
     e.preventDefault();
     if (category === 'blog') {
       formData.text = formData.text.replace(/"/g, "'");
-      // console.log(formData.text);
     }
     switch (category) {
       case 'user':
@@ -121,25 +135,43 @@ function AddForm({ setData }) {
     }
 
     if (!isValidated) return;
+
+    const ingredients = ingredientsArray
+      .map((ingredient) => ingredient.ingredient)
+      .join(', ');
+
+    const text = stepsArray.map((step) => step.text).join(', ');
+
+    const newState = { ...formData, ingredients, text };
+
     const response = {
       userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
-      ...formData,
+      ...newState,
     };
-    console.log(formData, ingredients);
-    setData((prevState) => [...prevState, formData]);
 
+    console.log('data', data);
     if (category !== 'user') {
-      postDataConfig(category, axiosPrivate, response);
+      postDataConfig(category, axiosPrivate, response).then((result) => {
+        setData((prevState) => [...prevState, result]);
+      });
       navigate(`/admin/${category}`);
     } else {
-      postData(category, axiosPrivate, response);
+      postData(category, axiosPrivate, response).then((result) => {
+        setData((prevState) => [...prevState, result]);
+      });
       navigate(`/admin/${category}`);
     }
   };
 
   return (
     <div className="add-edit-form">
-      <Container className="add-edit-form__body">
+      <Container
+        className={
+          category !== 'blog'
+            ? 'add-edit-form__body'
+            : 'add-edit-form__body blog'
+        }
+      >
         <Form noValidate className="form">
           <Form.Label>
             Add
@@ -164,8 +196,10 @@ function AddForm({ setData }) {
             handleInputChange={handleInputChange}
             category={category}
             formData={formData}
-            ingredients={ingredients}
+            ingredients={ingredientsArray}
             setIngredients={setIngredients}
+            steps={stepsArray}
+            setSteps={setSteps}
           />
           <br />
           {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}

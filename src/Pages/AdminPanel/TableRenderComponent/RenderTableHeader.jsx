@@ -86,7 +86,7 @@ function RenderTableHeader({ category }) {
         </>
       );
     default:
-      return <div style={{ background: 'none' }} />;
+      return <th>Choose category</th>;
   }
 }
 
