@@ -15,7 +15,9 @@ function SecondaryArticle({
   return (
     <Link to={`/blog/${id}`}>
       <div className="secondary-article-content">
-        <img src={`data:image/png;base64,${image}`} alt={imageName} />
+        <div className="secondary-article-content__img-container">
+          <img src={`data:image/png;base64,${image}`} alt={imageName} />
+        </div>
 
         <h2>{title}</h2>
         <p>{text}</p>

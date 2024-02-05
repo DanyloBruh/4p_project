@@ -12,12 +12,14 @@ import {
   validateInstruction,
   validateProduct,
 } from '../ValidationFunctions';
+import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 
 /* eslint-disable react/prop-types */
 function AddForm({ setData }) {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const axiosPrivateConfig = useAxiosPrivateImages();
 
   let initialState = {};
 
@@ -122,14 +124,14 @@ function AddForm({ setData }) {
 
     if (!isValidated) return;
     const response = {
-      userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
+      userId: '7b73c848-22bb-4f38-9b4a-60175bbd4cb4',
       ...formData,
     };
     console.log(formData, ingredients);
     setData((prevState) => [...prevState, formData]);
 
     if (category !== 'user') {
-      postDataConfig(category, axiosPrivate, response);
+      postDataConfig(category, axiosPrivateConfig, response);
       navigate(`/admin/${category}`);
     } else {
       postData(category, axiosPrivate, response);

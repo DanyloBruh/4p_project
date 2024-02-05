@@ -11,6 +11,7 @@ import {
   validateInstruction,
   validateProduct,
 } from '../ValidationFunctions';
+import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 
 /* eslint-disable react/prop-types */
 function EditForm({ data }) {
@@ -19,6 +20,7 @@ function EditForm({ data }) {
   const navigate = useNavigate();
 
   const axiosPrivate = useAxiosPrivate();
+  const axiosPrivateConfig = useAxiosPrivateImages();
 
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
@@ -69,9 +71,6 @@ function EditForm({ data }) {
 
   const [editedData, setEditedData] = useState(data.find((el) => el.id === id));
 
-  // useEffect(() => {
-  //   getDataByCategoryId(category, id, axiosPrivate).then(setData);
-  // }, []);
   console.log('data', data);
   console.log('edited', editedData);
   const handleInputChange = (e) => {
@@ -124,7 +123,7 @@ function EditForm({ data }) {
     if (!isValidated) return;
 
     if (category !== 'user') {
-      editDataConfig(category, id, axiosPrivate, response);
+      editDataConfig(category, id, axiosPrivateConfig, response);
       navigate(`/admin/${category}`);
     } else {
       editData(category, id, axiosPrivate, response);
