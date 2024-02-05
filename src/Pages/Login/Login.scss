@@ -41,10 +41,10 @@
     }
     > form {
       .form-floating {
-        > .form-control {
+        .form-control {
           border-radius: 5px;
           border: 1px solid #fff;
-          background: rgba(51, 45, 45, 0);
+          background-color: rgba(51, 45, 45, 0);
           color: white;
         }
         > label {
