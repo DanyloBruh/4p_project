@@ -1,23 +1,45 @@
 .add-edit-form {
-  height: 100vh;
+  margin: 20px 0;
   display: flex;
   align-items: center;
-  > .form-bg.blog {
-    margin: 0;
-    border: none;
-    width: 100%;
-  }
-  > .form-bg {
-    margin: 20px 0;
-    &__body.container {
-      background-color: #1f1f1f;
-      width: 40%;
-      padding: 20px;
-      border: 1px solid #fff;
-      > form {
-        > .form-label {
-          display: flex;
-          justify-content: space-between;
+  overflow: auto;
+  &__body.container {
+    background-color: #1f1f1f;
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #fff;
+    > form {
+      > .form-label {
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: capitalize;
+        margin-bottom: 40px;
+      }
+      > .form-element {
+        margin-bottom: 20px;
+
+        > .control-element {
+          display: block;
+          > .rendered-content {
+            display: flex;
+            > input {
+              background: none;
+              border: 1px solid #fff;
+              color: #fff;
+              margin-right: 15px;
+            }
+            margin-bottom: 20px;
+          }
+        }
+
+        > textarea {
+          resize: none;
           color: #fff;
           font-family: 'Outfit', sans-serif;
           font-size: 48px;

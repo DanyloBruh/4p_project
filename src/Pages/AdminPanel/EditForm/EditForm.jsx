@@ -74,7 +74,6 @@ function EditForm({ data }) {
   // }, []);
   console.log('data', data);
   console.log('edited', editedData);
-
   const handleInputChange = (e) => {
     if (e.target.files) {
       const uploadFile = e.target.files[0];
