@@ -444,6 +444,15 @@ function RenderAddFormBody({
               name="image"
             />
           </Form.Group>
+          <Form.Group className="form-element">
+            <Form.Check // prettier-ignore
+              type="switch"
+              label="Add this recipe to the carousel"
+              name="carrousel"
+              onChange={handleInputChange}
+              checked={formData.carrousel}
+            />
+          </Form.Group>
         </>
       );
     default:

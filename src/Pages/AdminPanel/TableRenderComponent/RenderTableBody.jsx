@@ -1,12 +1,11 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable function-paren-newline */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { deleteData } from '../../../Helper/requests';
-import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
-function RenderTableBody({ category, data, setData, orders }) {
-  const axiosPrivate = useAxiosPrivate();
-
+function RenderTableBody({ category, data, openConfirmDeleteModal, orders }) {
   switch (category) {
     case 'product':
       return (
@@ -29,11 +28,7 @@ function RenderTableBody({ category, data, setData, orders }) {
                 {/* eslint-disable-next-line */}
                 <Link
                   className="button-delete"
-                  onClick={() => {
-                    deleteData(category, product.id, axiosPrivate).then(
-                      setData((prevState) => prevState.filter((item) => item.id !== product.id)),
-                    );
-                  }}
+                  onClick={() => openConfirmDeleteModal(product.id)}
                 />
               </td>
             </tr>
@@ -52,6 +47,7 @@ function RenderTableBody({ category, data, setData, orders }) {
               <td>{recipe.description}</td>
               <td>{recipe.ingredients}</td>
               <td>{recipe.text}</td>
+              <td>{recipe.carrousel ? 'yes' : 'no'}</td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link
@@ -63,11 +59,7 @@ function RenderTableBody({ category, data, setData, orders }) {
                 {/* eslint-disable-next-line */}
                 <Link
                   className="button-delete"
-                  onClick={() => {
-                    deleteData(category, recipe.id, axiosPrivate).then(
-                      setData((prevState) => prevState.filter((item) => item.id !== recipe.id)),
-                    );
-                  }}
+                  onClick={() => openConfirmDeleteModal(recipe.id)}
                 />
               </td>
             </tr>
@@ -81,6 +73,7 @@ function RenderTableBody({ category, data, setData, orders }) {
             <tr key={blog.id}>
               <td>{blog.name}</td>
               <td>{blog.text}</td>
+              <td>{blog.displayType}</td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link to={`/edit/blog/${blog.id}`} className="button-edit" />
@@ -89,11 +82,7 @@ function RenderTableBody({ category, data, setData, orders }) {
                 {/* eslint-disable-next-line */}
                 <Link
                   className="button-delete"
-                  onClick={() => {
-                    deleteData(category, blog.id, axiosPrivate).then(
-                      setData((prevState) => prevState.filter((item) => item.id !== blog.id)),
-                    );
-                  }}
+                  onClick={() => openConfirmDeleteModal(blog.id)}
                 />
               </td>
             </tr>
@@ -115,11 +104,7 @@ function RenderTableBody({ category, data, setData, orders }) {
                 {/* eslint-disable-next-line */}
                 <Link
                   className="button-delete"
-                  onClick={() => {
-                    deleteData(category, user.id, axiosPrivate).then(
-                      setData((prevState) => prevState.filter((item) => item.id !== user.id)),
-                    );
-                  }}
+                  onClick={() => openConfirmDeleteModal(user.id)}
                 />
               </td>
             </tr>
@@ -147,12 +132,7 @@ function RenderTableBody({ category, data, setData, orders }) {
                 {/* eslint-disable-next-line */}
                 <Link
                   className="button-delete"
-                  onClick={() => {
-                    setData((prevState) => prevState.filter((item) => item.id !== order.id));
-                    deleteData(category, order.id, axiosPrivate).then(
-                      setData((prevState) => prevState.filter((item) => item.id !== order.id)),
-                    );
-                  }}
+                  onClick={() => openConfirmDeleteModal(order.id)}
                 />
               </td>
             </tr>

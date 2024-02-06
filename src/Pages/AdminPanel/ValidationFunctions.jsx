@@ -77,9 +77,9 @@ export const validateInstruction = (formData) => {
   }
   if (
     /* eslint-disable operator-linebreak */
-    formData.difficulty !== 'easy' &&
-    formData.difficulty !== 'medium' &&
-    formData.difficulty !== 'hard'
+    formData.difficulty !== 'Easy' &&
+    formData.difficulty !== 'Medium' &&
+    formData.difficulty !== 'Hard'
   ) {
     isValidated = false;
     return { msg: 'Difficulty is not valid', isValidated };

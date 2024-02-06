@@ -32,6 +32,7 @@ function RenderTableHeader({ category }) {
           <th>description</th>
           <th>ingredients</th>
           <th>text</th>
+          <th>show in carousels</th>
           <th>
             <img src={editIcon} alt="edit icon" />
           </th>
@@ -45,6 +46,7 @@ function RenderTableHeader({ category }) {
         <>
           <th>name</th>
           <th>text</th>
+          <th>show place</th>
           <th>
             <img src={editIcon} alt="edit icon" />
           </th>

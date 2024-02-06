@@ -3,12 +3,9 @@ import React, { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './AddForm.scss';
+import { useSelector } from 'react-redux';
 import RenderAddFormBody from './RenderAddFormBody';
-import {
-  getDataByCategory,
-  postData,
-  postDataConfig,
-} from '../../../Helper/requests';
+import { postData, postDataConfig } from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 import {
   validateUser,
@@ -24,6 +21,7 @@ function AddForm({ setData, data }) {
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   const axiosPrivateConfig = useAxiosPrivateImages();
+  const userId = useSelector((state) => state.auth.auth.user.id);
 
   let initialState = {};
 
@@ -64,6 +62,7 @@ function AddForm({ setData, data }) {
         ingredients: '',
         text: '',
         image: '',
+        carrousel: false,
       };
       break;
     default:
@@ -99,10 +98,17 @@ function AddForm({ setData, data }) {
       }));
     } else if (e.target) {
       const { name, value } = e.target;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
+      if (name === 'carrousel') {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: e.target.checked,
+        }));
+      } else {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+      }
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -144,11 +150,21 @@ function AddForm({ setData, data }) {
       .join(', ');
 
     const text = stepsArray.map((step) => step.text).join(', ');
+    let newState;
 
-    const newState = { ...formData, ingredients, text };
+    switch (category) {
+      case 'product':
+        newState = { ...formData, ingredients };
+        break;
+      case 'instruction':
+        newState = { ...formData, ingredients, text };
+        break;
+      default:
+        newState = { ...formData };
+    }
 
     const response = {
-      userId: '2dc855a1-6c19-40fa-bf15-31005ed3013e',
+      userId,
       ...newState,
     };
 
