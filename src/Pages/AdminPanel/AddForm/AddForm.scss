@@ -34,8 +34,47 @@
         margin-bottom: 40px;
       }
 
+      > .form-element.radiobtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > .centered {
+          margin: 0 20px;
+        }
+      }
+
       > .form-element {
         margin-bottom: 20px;
+        > .form-check {
+          margin: 0;
+          > input {
+            box-sizing: border-box;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border: 2px solid #7e7e7e;
+            border-radius: 0%;
+            appearance: none;
+            background-color: transparent;
+            outline: none;
+          }
+          > input:checked {
+            border: 2px solid #fff;
+            outline: none;
+            -fx-focus-traversable: false;
+          }
+          > label {
+            margin: auto 0;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            text-transform: capitalize;
+          }
+        }
 
         > .control-element {
           display: block;

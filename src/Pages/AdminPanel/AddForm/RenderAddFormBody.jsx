@@ -163,6 +163,33 @@ function RenderAddFormBody({
             <p>images</p>
             <input type="file" onChange={handleInputChange} name="images" />
           </Form.Group>
+          <Form.Group className="form-element radiobtn">
+            <Form.Check
+              inline
+              label="firstPage"
+              name="displayType"
+              type="radio"
+              onChange={handleInputChange}
+              value="firstPage"
+            />
+            <Form.Check
+              className="centered"
+              inline
+              label="featured"
+              name="displayType"
+              type="radio"
+              onChange={handleInputChange}
+              value="featured"
+            />
+            <Form.Check
+              inline
+              label="default"
+              name="displayType"
+              type="radio"
+              onChange={handleInputChange}
+              value="default"
+            />
+          </Form.Group>
         </>
       );
     case 'product':
@@ -231,7 +258,6 @@ function RenderAddFormBody({
               name="description"
             />
           </Form.Group>
-
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
             <Form.Group className="control-element">
@@ -301,9 +327,11 @@ function RenderAddFormBody({
               name="difficulty"
             >
               <option>Сhoose a difficulty from the select menu</option>
-              <option>easy</option>
-              <option>medium</option>
-              <option>hard</option>
+              <option>Very easy</option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+              <option>Very hard</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="form-element">

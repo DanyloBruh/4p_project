@@ -41,6 +41,7 @@ function AddForm({ setData, data }) {
         name: '',
         text: '',
         images: '',
+        displayType: 'default',
       };
       break;
     case 'product':
