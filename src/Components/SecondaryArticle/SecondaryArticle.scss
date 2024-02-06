@@ -12,6 +12,7 @@ a {
     height: 255px;
     margin-bottom: 10px;
     overflow: hidden;
+    margin-top: 0 !important;
     @media (min-width: 1200px) {
       height: 300px;
     }
