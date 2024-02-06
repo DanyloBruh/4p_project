@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './Header.scss';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../../Assets/logo.png';
 import SideBar from '../SideBar/SideBar';
 
@@ -21,7 +21,9 @@ function Header() {
   return (
     <div className={`header ${color ? 'header__bg-black' : 'header__bg'}`}>
       <Container className="header__container">
-        <img src={Logo} alt="logo" />
+        <Link to="/" className="header__logo">
+          <img src={Logo} alt="logo" />
+        </Link>
         <Navbar data-bs-theme="dark" className="header__navbar">
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
