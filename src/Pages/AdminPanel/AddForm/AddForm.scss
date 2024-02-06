@@ -34,7 +34,7 @@
         margin-bottom: 40px;
       }
 
-      > .form-element.radiobtn{
+      > .form-element.radiobtn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -59,13 +59,13 @@
             background-color: transparent;
             outline: none;
           }
-          > input:checked{
+          > input:checked {
             border: 2px solid #fff;
             outline: none;
             -fx-focus-traversable: false;
           }
           > label {
-            margin:auto 0;
+            margin: auto 0;
             color: #fff;
             font-family: 'Outfit', sans-serif;
             font-size: 1.2rem;
