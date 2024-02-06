@@ -16,6 +16,11 @@ export const getAllBlogs = async () => {
   return data;
 };
 
+export const getMainBlogs = async () => {
+  const { data } = await client.get('/blogFirst/');
+  return data;
+};
+
 export const login = async (postData) => {
   const { data } = await client.post('/login', postData);
   return data;

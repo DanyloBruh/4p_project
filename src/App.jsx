@@ -13,7 +13,7 @@ import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import Login from './Pages/Login/Login';
 import RequireAuth from './Components/RequireAuth';
 import PersistLogin from './Components/PersistLogin';
-// import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
+import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
   return (
@@ -61,6 +61,7 @@ function App() {
               </Route>
             </Route>
           </Route>
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
