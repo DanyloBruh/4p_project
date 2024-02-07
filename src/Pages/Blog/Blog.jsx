@@ -27,7 +27,8 @@ function Blog() {
             <MainArticle
               data={
                 allBlogs?.sort(
-                  (item1, item2) => new Date(item2.createdAt) - new Date(item1.createdAt),
+                  (item1, item2) =>
+                    new Date(item2.createdAt) - new Date(item1.createdAt),
                 )[0]
               }
             />
