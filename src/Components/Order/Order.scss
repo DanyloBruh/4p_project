@@ -1,0 +1,336 @@
+.orderBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  z-index: 101;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.order {
+  background-color: #1f1f1f;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  overflow: hidden;
+
+  &__cross {
+    background-image: url('../../Assets/crossorder.svg');
+    background-size: contain;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 8px;
+    right: 18px;
+  }
+
+  &__content {
+    padding: 35px 85px 80px;
+  }
+
+  .idpc-select-container {
+    position: relative;
+    background-color: #3e3e3e;
+    margin-top: 20px;
+    select {
+      color: #fff;
+      font-family: Outfit;
+      font-size: 1rem;
+      font-style: normal;
+      line-break: loose;
+      font-weight: 300;
+      line-height: normal;
+      border: none;
+      background-color: #3e3e3e;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      &:active,
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+    &:after {
+      content: ' ';
+      position: absolute;
+      top: 50%;
+      margin-top: -2px;
+      right: 8px;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #aaa;
+    }
+  }
+
+  &__title {
+    margin: 0 0 5px;
+    text-align: left;
+    color: #fff;
+    font-family: Outfit;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+  &__product {
+    margin: 20px 0;
+    display: flex;
+
+    &__cross {
+      background-image: url('../../Assets/cross.svg');
+      background-size: contain;
+      width: 2.3rem;
+      height: 2rem;
+      margin-left: 8px;
+    }
+
+    &__group {
+      flex-grow: 2;
+      display: flex;
+      margin-left: 18px;
+      flex-direction: column;
+      justify-content: end;
+
+      > .counter {
+        margin-top: 9px;
+        height: 30px;
+
+        width: 80px;
+
+        > button {
+          width: 15px;
+          > svg {
+            width: 15px;
+          }
+        }
+      }
+    }
+
+    &__textGroup {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    &__img {
+      width: 115px;
+      height: 103px;
+      border-radius: 8px;
+    }
+
+    &__nameCount {
+      display: flex;
+    }
+
+    &__text {
+      color: #fff;
+      font-family: Outfit;
+      font-size: 1.3rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+  }
+  &__total {
+    padding-top: 15px;
+    text-align: right;
+    display: block;
+    color: #fff;
+    font-family: Outfit;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+
+  &__input {
+    color: #fff;
+    font-family: Outfit;
+    font-style: normal;
+    margin: 25px 0;
+    width: 100%;
+    font-weight: 300;
+    line-height: normal;
+    text-transform: capitalize;
+
+    .form-control:-webkit-autofill,
+    .form-control:-webkit-autofill:hover,
+    .form-control:-webkit-autofill:focus,
+    .form-control:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px #3e3e3e inset !important;
+      -webkit-text-fill-color: #ffffff;
+    }
+
+    > .form-control:focus ~ label::after {
+      display: none;
+    }
+    > .form-control:not(:placeholder-shown) ~ label::after,
+    .form-floating > .form-select ~ label::after {
+      display: none;
+    }
+
+    > input {
+      border: none;
+      width: 100%;
+      background-color: #3e3e3e;
+      color: #fff;
+    }
+
+    > label {
+      color: #fff !important;
+    }
+    > input:focus label {
+      color: #fff !important;
+    }
+    > input:focus ~ label::after {
+      background-color: #3e3e3e !important;
+    }
+    > input:focus {
+      width: 100%;
+      background-color: #3e3e3e;
+      color: #fff;
+    }
+  }
+
+  &__checkBoxes {
+    margin: 0;
+    display: flex;
+    gap: 130px;
+  }
+
+  &__inputs {
+    padding: 0 45px;
+  }
+
+  &__postcode {
+    display: flex;
+    align-items: center;
+    > * {
+      margin: 0;
+    }
+  }
+
+  &__button {
+    margin-top: 35px;
+    border: 2.5px solid #fff !important;
+    border-radius: 0 !important;
+    width: 100%;
+    background: transparent;
+
+    &--findPostcode {
+      margin: 0 0 0 20px;
+      width: 38%;
+      height: 10%;
+    }
+  }
+  &__line {
+    display: block;
+    margin: 0;
+    height: 1px;
+    border-top: 1px solid #fff;
+    opacity: 1;
+  }
+  &__radioTitle {
+    color: #fff;
+    text-align: left;
+    font-family: Outfit;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.ornament {
+  height: 100%;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  background-image: url('../../Assets/ornaments/ornament-about-us.png');
+  background-size: contain;
+  &--left {
+    left: 18px;
+  }
+
+  &--right {
+    top: 65px;
+    right: 18px;
+  }
+}
+
+.sq-radio {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  color: #fff;
+  font-family: Outfit;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  text-align: left;
+}
+
+/* Hide the browser's default radio button */
+.sq-radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkmark::after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.sq-radio input:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.sq-radio .checkmark::after {
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+}
+
+.errorRadio {
+  color: var(--bs-form-invalid-color);
+}

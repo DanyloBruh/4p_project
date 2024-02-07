@@ -91,8 +91,8 @@ function Recipes() {
       </Container>
       <Container className="item-section">
         <Row>
-          {allRecipes
-            && allRecipes?.map((item) => (
+          {allRecipes &&
+            allRecipes?.map((item) => (
               <Col key={item.id} xxl={4} xl={4} lg={4} md={6} sm={6}>
                 <RecipeItem
                   id={item.id}

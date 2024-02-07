@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import './Counter.scss';
 
-function Counter() {
+function Counter({ count = 1, incr = () => {}, decr = () => {}, id = 0 }) {
   return (
     <div className="counter">
-      <button type="button">
+      <button type="button" onClick={() => decr(id)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -22,8 +23,8 @@ function Counter() {
           />
         </svg>
       </button>
-      <p>1</p>
-      <button type="button">
+      <p>{count}</p>
+      <button type="button" onClick={() => incr(id)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"

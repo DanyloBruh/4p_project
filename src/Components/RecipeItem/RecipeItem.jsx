@@ -3,9 +3,7 @@ import React from 'react';
 import './RecipeItem.scss';
 import { Link } from 'react-router-dom';
 
-function RecipeItem({
-  id, title, description, image, imageName,
-}) {
+function RecipeItem({ id, title, description, image, imageName }) {
   return (
     <div className="recipe-card">
       <Link to={`/recipes/${id}`}>
