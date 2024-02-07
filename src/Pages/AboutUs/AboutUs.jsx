@@ -31,8 +31,7 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.
-              {' '}
+              convallis posuere morbi leo.{' '}
             </p>
           </Col>
         </Row>
@@ -46,8 +45,7 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.
-              {' '}
+              convallis posuere morbi leo.{' '}
             </p>
           </Col>
           <Col lg={6}>
@@ -75,8 +73,7 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.
-              {' '}
+              convallis posuere morbi leo.{' '}
             </p>
           </Col>
         </Row>
@@ -90,8 +87,7 @@ function AboutUs() {
               scelerisque purus semper eget duis at. Eget nunc lobortis mattis
               aliquam faucibus purus. Urna et pharetra pharetra massa massa
               ultricies mi quis. Fames ac turpis egestas maecenas pharetra
-              convallis posuere morbi leo.
-              {' '}
+              convallis posuere morbi leo.{' '}
             </p>
           </Col>
           <Col lg={6}>
