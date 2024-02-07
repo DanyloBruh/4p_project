@@ -78,7 +78,7 @@ const orderDataSlice = createSlice({
       state.data = data;
     },
     deleteOrderData: (state) => {
-      state.data = initialState.data;
+      state.data = [];
     },
   },
 });

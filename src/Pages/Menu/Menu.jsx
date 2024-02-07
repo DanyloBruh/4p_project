@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import {
-  NavLink, useLocation, useNavigate, useParams,
-} from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import './Menu.scss';
 import moment from 'moment';
 import Varenyk from '../../Assets/varenyk.png';
@@ -151,8 +149,8 @@ function Menu() {
         <div className="main-page-blog">
           <h2>more about our activities</h2>
           <Row>
-            {blogItems
-              && blogItems?.map((item) => (
+            {blogItems &&
+              blogItems?.map((item) => (
                 <Col key={item.id} lg={4} sm={6}>
                   <SecondaryArticle
                     id={item.id}

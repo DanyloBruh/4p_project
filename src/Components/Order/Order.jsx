@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -8,8 +9,12 @@ import './Order.scss';
 import { PostcodeLookup } from '@ideal-postcodes/postcode-lookup';
 import { Button, FloatingLabel, Form, InputGroup } from 'react-bootstrap';
 import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import Product from './product';
+import { orderComplite } from '../../Helper/requests';
+import { deleteOrderData } from '../../redux/orderDataSlice';
+import ToastNotification from '../Toast/Toast';
 
 const regexes = {
   regexPostcode: /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i,
@@ -27,6 +32,8 @@ function Order({
   const [products, setProducts] = useState([]);
   const [addressFinder, setAddressFinder] = useState(false);
   const [schema, setSchema] = useState({});
+  const dispath = useDispatch();
+
   useEffect(() => {
     if (addressFinder) {
       PostcodeLookup.setup({
@@ -119,7 +126,51 @@ function Order({
   }, [products]);
 
   const handleSubmit = (values) => {
-    console.log(values);
+    const addressLine =
+      values.town +
+      ', ' +
+      values.addressLine1 +
+      ', ' +
+      values.addressLine2 +
+      ', ' +
+      values.addressLine3 +
+      ', ';
+
+    const productIds = products.map((product) => {
+      const ret = {
+        productId: product.product.id,
+        count: product.count,
+      };
+      return ret;
+    });
+    const total = getTotalAmount();
+    const request = {
+      name: values.name,
+      phoneNamber: values.phone,
+      adress: addressLine,
+      comment: values.comment,
+      paymentType: values.payment,
+      deliveryType: values.delivery,
+      totalAmount: total,
+      productIds,
+    };
+
+    orderComplite(request)
+      .then((response) => {
+        if (response) {
+          dispath(deleteOrderData());
+          ToastNotification(
+            'success',
+            'Thank you for your order! we will call you back soon',
+          );
+        }
+      })
+      .catch(() => {
+        ToastNotification(
+          'error',
+          'We cannot create an order. Try again or call us to order',
+        );
+      });
   };
 
   const initialValues = {
@@ -178,7 +229,7 @@ function Order({
                           value={values.name}
                           onChange={handleChange}
                           isValid={touched.name && !errors.name}
-                          isInvalid={!!errors.name}
+                          isInvalid={touched.name && errors.name}
                         />
                         <Form.Control.Feedback type="invalid">
                           {errors.name}
@@ -199,7 +250,7 @@ function Order({
                             value={values.phone}
                             onChange={handleChange}
                             isValid={touched.phone && !errors.phone}
-                            isInvalid={!!errors.phone}
+                            isInvalid={touched.phone && errors.phone}
                           />
                           <Form.Control.Feedback type="invalid">
                             {errors.phone}
@@ -288,8 +339,10 @@ function Order({
                                   id="postcode_input"
                                   value={values.postcode}
                                   onChange={handleChange}
-                                  isValid={touched.phone && !errors.postcode}
-                                  isInvalid={!!errors.postcode}
+                                  isValid={touched.postcode && !errors.postcode}
+                                  isInvalid={
+                                    touched.postcode && errors.postcode
+                                  }
                                 />
                                 <Form.Control.Feedback type="invalid">
                                   {errors.postcode}
@@ -324,7 +377,9 @@ function Order({
                                 isValid={
                                   touched.addressLine1 && !errors.addressLine1
                                 }
-                                isInvalid={!!errors.addressLine1}
+                                isInvalid={
+                                  touched.addressLine1 && errors.addressLine1
+                                }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.addressLine1}
@@ -349,7 +404,9 @@ function Order({
                                 isValid={
                                   touched.addressLine2 && !errors.addressLine2
                                 }
-                                isInvalid={!!errors.addressLine2}
+                                isInvalid={
+                                  touched.addressLine2 && errors.addressLine2
+                                }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.addressLine2}
@@ -374,7 +431,9 @@ function Order({
                                 isValid={
                                   touched.addressLine3 && !errors.addressLine3
                                 }
-                                isInvalid={!!errors.addressLine3}
+                                isInvalid={
+                                  touched.addressLine3 && errors.addressLine3
+                                }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.addressLine3}
@@ -397,7 +456,7 @@ function Order({
                                 value={values.town}
                                 onChange={handleChange}
                                 isValid={touched.town && !errors.town}
-                                isInvalid={!!errors.town}
+                                isInvalid={touched.town && errors.town}
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.town}
@@ -420,7 +479,7 @@ function Order({
                                 value={values.postcode}
                                 onChange={handleChange}
                                 isValid={touched.postcode && !errors.postcode}
-                                isInvalid={!!errors.postcode}
+                                isInvalid={touched.postcode && errors.postcode}
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.postcode}
@@ -444,7 +503,7 @@ function Order({
                             value={values.comment}
                             onChange={handleChange}
                             isValid={touched.comment && !errors.comment}
-                            isInvalid={!!errors.comment}
+                            isInvalid={touched.comment && errors.comment}
                           />
                           <Form.Control.Feedback type="invalid">
                             {errors.comment}
