@@ -1,26 +1,146 @@
-.add-form {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
+.add-edit-form {
+  margin: 20px 0;
   align-items: center;
-  > .form-bg {
-    width: 25%;
-    padding: 20px;
-    border: 1px solid #ffff;
-    background: #1f1f1f;
-    > h3 {
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 36px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      text-transform: capitalize;
-    }
+  overflow: auto;
+  &__body.blog.container {
+    width: 100%;
     > form {
       > .form-element {
+        > .quill.editor {
+          height: 400px;
+        }
+        > p {
+          margin-top: 50px;
+        }
+      }
+    }
+  }
+  &__body.container {
+    background-color: #1f1f1f;
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #fff;
+    > form {
+      > .form-label {
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: capitalize;
+        margin-bottom: 40px;
+      }
+
+      > .form-element.radiobtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > .centered {
+          margin: 0 20px;
+        }
+      }
+
+      > .form-element {
         margin-bottom: 20px;
+        > .form-check {
+          margin: 0;
+          > input[type='radio'] {
+            box-sizing: border-box;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border: 2px solid #7e7e7e;
+            border-radius: 0%;
+            appearance: none;
+            background-color: transparent;
+            outline: none;
+          }
+          > input[type='checkbox'] {
+            width: 50px;
+            height: 20px;
+          }
+          > input[type='radio']:checked {
+            border: 2px solid #fff;
+            outline: none;
+            -fx-focus-traversable: false;
+          }
+          > label {
+            margin: auto 0;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            text-transform: capitalize;
+          }
+        }
+
+        > .control-element {
+          display: block;
+          > .rendered-content {
+            display: flex;
+            > input {
+              background: none;
+              border: 1px solid #fff;
+              color: #fff;
+              margin-right: 15px;
+            }
+            > textarea {
+              resize: none;
+              color: #fff;
+              font-family: 'Outfit', sans-serif;
+              font-size: 1rem;
+              font-style: normal;
+              line-height: normal;
+              font-weight: 300;
+              margin-right: 15px;
+              background-color: #1f1f1f;
+            }
+            margin-bottom: 20px;
+          }
+        }
+
+        > textarea {
+          resize: none;
+          color: #fff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          font-style: normal;
+          line-height: normal;
+          font-weight: 300;
+          margin-bottom: 40px;
+          background-color: #1f1f1f;
+        }
+        > label {
+          color: #b4b4b4;
+        }
+
+        > .form-floating {
+          > .form-control {
+            border-radius: 5px;
+            border: 1px solid #fff;
+            background: rgba(51, 45, 45, 0);
+            color: white;
+          }
+          > label {
+            color: white !important;
+          }
+          > .form-control:focus ~ label {
+            color: white;
+          }
+          > .form-control:focus ~ label::after {
+            display: none;
+          }
+          > .form-control:not(:placeholder-shown) ~ label::after,
+          .form-floating > .form-select ~ label::after {
+            display: none;
+          }
+        }
         > p {
           color: #b4b4b4;
           font-family: 'Outfit', sans-serif;
@@ -49,6 +169,20 @@
           padding: 10px;
           background-color: #1f1f1f;
         }
+      }
+      > p {
+        margin: 0 auto 20px auto;
+        border: 3px solid #b4b4b4;
+        padding: 10px;
+        color: #b4b4b4;
+        font-weight: 500;
+        font-size: 1.5rem;
+        width: fit-content;
+      }
+      > .button__submit {
+        width: 100%;
+        font-weight: 650;
+        font-size: 1.3rem;
       }
     }
   }

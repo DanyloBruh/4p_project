@@ -1,89 +1,236 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
-
+import { Button, Container, Form } from 'react-bootstrap';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './AddForm.scss';
+import { useSelector } from 'react-redux';
+import RenderAddFormBody from './RenderAddFormBody';
+import { postData, postDataConfig } from '../../../Helper/requests';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
+import {
+  validateUser,
+  validateBlog,
+  validateInstruction,
+  validateProduct,
+} from '../ValidationFunctions';
+import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 
-function AddForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    role: '',
-    email: '',
-    password: '',
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
+/* eslint-disable react/prop-types */
+function AddForm({ setData, data }) {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
+  const axiosPrivateConfig = useAxiosPrivateImages();
+  const userId = useSelector((state) => state.auth.auth.user.id);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('id: ', uuidv4(), formData);
-    axios.post('http://localhost:3005/user/', { id: uuidv4(), ...formData });
-    navigate(`/admin/${category}`);
+  let initialState = {};
+
+  switch (category) {
+    case 'user':
+      initialState = {
+        name: '',
+        role: '',
+        email: '',
+        password: '',
+      };
+      break;
+    case 'blog':
+      initialState = {
+        name: '',
+        text: '',
+        images: '',
+        displayType: 'default',
+      };
+      break;
+    case 'product':
+      initialState = {
+        name: '',
+        weight: '',
+        description: '',
+        price: '',
+        image: '',
+        ingredients: '',
+      };
+      break;
+    case 'instruction':
+      initialState = {
+        name: '',
+        difficulty: '',
+        time: '',
+        makes: '',
+        description: '',
+        ingredients: '',
+        text: '',
+        image: '',
+        carrousel: false,
+      };
+      break;
+    default:
+      initialState = {};
+  }
+
+  const [formData, setFormData] = useState(initialState);
+
+  const [ingredientsArray, setIngredients] = useState([
+    {
+      ingredient: '',
+      timestamp: new Date().getTime(),
+    },
+  ]);
+  const [stepsArray, setSteps] = useState([
+    {
+      text: '',
+      timestamp: new Date().getTime(),
+    },
+  ]);
+
+  const [errorMsg, setErrorMsg] = useState('');
+  let isValidated = true;
+
+  console.log(formData, stepsArray);
+
+  const handleInputChange = (e) => {
+    if (e.target && e.target.files) {
+      const uploadFile = e.target.files[0];
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [e.target.name]: uploadFile,
+      }));
+    } else if (e.target) {
+      const { name, value } = e.target;
+      if (name === 'carrousel') {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: e.target.checked,
+        }));
+      } else {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+      }
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        text: e,
+      }));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (category === 'blog') {
+      formData.text = formData.text.replace(/"/g, "'");
+    }
+    switch (category) {
+      case 'user':
+        setErrorMsg(validateUser(formData).msg);
+        isValidated = validateUser(formData).isValidated;
+        break;
+      case 'product':
+        setErrorMsg(validateProduct(formData).msg);
+        isValidated = validateProduct(formData).isValidated;
+        break;
+      case 'blog':
+        setErrorMsg(validateBlog(formData).msg);
+        isValidated = validateBlog(formData).isValidated;
+        break;
+      case 'instruction':
+        setErrorMsg(validateInstruction(formData).msg);
+        isValidated = validateInstruction(formData).isValidated;
+        break;
+      default:
+        setErrorMsg('');
+    }
+
+    if (!isValidated) return;
+
+    const ingredients = ingredientsArray
+      .map((ingredient) => ingredient.ingredient)
+      .join(', ');
+
+    const text = stepsArray.map((step) => step.text).join(', ');
+    let newState;
+
+    switch (category) {
+      case 'product':
+        newState = { ...formData, ingredients };
+        break;
+      case 'instruction':
+        newState = { ...formData, ingredients, text };
+        break;
+      default:
+        newState = { ...formData };
+    }
+
+    const response = {
+      userId,
+      ...newState,
+    };
+
+    console.log('data', data);
+    if (category !== 'user') {
+      postDataConfig(category, axiosPrivateConfig, response).then((result) => {
+        setData((prevState) => [...prevState, result]);
+      });
+      navigate(`/admin/${category}`);
+    } else {
+      postData(category, axiosPrivate, response).then((result) => {
+        setData((prevState) => [...prevState, result]);
+      });
+      navigate(`/admin/${category}`);
+    }
   };
 
   return (
-    <div className="add-form">
-      <div className="form-bg">
-        <h3>
-          Add
-          {` ${category}`}
-        </h3>
-        <form>
-          <div className="form-element">
-            <p>Name</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.name}
-              name="name"
-            />
-          </div>
-          <div className="form-element">
-            <p>role</p>
-            <select
-              onChange={handleInputChange}
-              value={formData.role}
-              name="role"
-            >
-              <option>admin</option>
-              <option>employee</option>
-            </select>
-          </div>
-          <div className="form-element">
-            <p>email</p>
-            <input
-              type="text"
-              onChange={handleInputChange}
-              value={formData.email}
-              name="email"
-            />
-          </div>
-          <div className="form-element">
-            <p>password</p>
-            <input
-              type="password"
-              onChange={handleInputChange}
-              value={formData.password}
-              name="password"
-            />
-          </div>
+    <div className="add-edit-form">
+      <Container
+        className={
+          category !== 'blog'
+            ? 'add-edit-form__body'
+            : 'add-edit-form__body blog'
+        }
+      >
+        <Form noValidate className="form">
+          <Form.Label>
+            Add
+            {` ${category}`}
+            <Link to={`/admin/${category}`}>
+              <svg
+                width="50"
+                height="50"
+                viewBox="0 0 50 50"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M39.1659 35.9052C39.6413 36.4195 39.8992 37.0978 39.8856 37.7979C39.872 38.4981 39.5879 39.1659 39.0928 39.6612C38.5978 40.1566 37.9303 40.4411 37.2301 40.4552C36.5299 40.4693 35.8515 40.2119 35.3369 39.7368L25.0001 29.4L14.6632 39.7368C14.4155 40.0048 14.1161 40.22 13.7832 40.3695C13.4502 40.519 13.0905 40.5997 12.7256 40.6068C12.3607 40.6139 11.9981 40.5473 11.6596 40.4108C11.3211 40.2744 11.0136 40.071 10.7556 39.8128C10.4976 39.5546 10.2945 39.247 10.1582 38.9084C10.022 38.5698 9.95561 38.2072 9.96295 37.8423C9.9703 37.4774 10.0513 37.1177 10.201 36.7849C10.3507 36.452 10.5661 36.1528 10.8343 35.9052L21.1711 25.5684L10.8343 15.2368C10.5661 14.9893 10.3507 14.6901 10.201 14.3572C10.0513 14.0244 9.9703 13.6647 9.96295 13.2998C9.95561 12.9349 10.022 12.5723 10.1582 12.2337C10.2945 11.8951 10.4976 11.5874 10.7556 11.3293C11.0136 11.0711 11.3211 10.8677 11.6596 10.7313C11.9981 10.5948 12.3607 10.5281 12.7256 10.5352C13.0905 10.5423 13.4502 10.6231 13.7832 10.7726C14.1161 10.922 14.4155 11.1373 14.6632 11.4052L25.0001 21.7395L35.3369 11.4026C35.8515 10.9276 36.5299 10.6701 37.2301 10.6842C37.9303 10.6983 38.5978 10.9828 39.0928 11.4782C39.5879 11.9736 39.872 12.6413 39.8856 13.3415C39.8992 14.0417 39.6413 14.72 39.1659 15.2342L28.829 25.5684L39.1659 35.9052Z"
+                  fill="#8D8D8D"
+                />
+              </svg>
+            </Link>
+          </Form.Label>
+
+          <RenderAddFormBody
+            handleInputChange={handleInputChange}
+            category={category}
+            formData={formData}
+            ingredients={ingredientsArray}
+            setIngredients={setIngredients}
+            steps={stepsArray}
+            setSteps={setSteps}
+          />
           <br />
-          <Button variant="outline-light" onClick={handleSubmit}>
+          {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}
+          <Button
+            variant="outline-light"
+            className="button__submit"
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
-        </form>
-      </div>
+        </Form>
+      </Container>
     </div>
   );
 }

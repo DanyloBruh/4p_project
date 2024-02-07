@@ -10,9 +10,10 @@ import Blog from './Pages/Blog/Blog';
 import Recipes from './Pages/Recipes/Recipes';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
-import AddForm from './Pages/AdminPanel/AddForm/AddForm';
-import EditForm from './Pages/AdminPanel/EditForm/EditForm';
-// import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
+import Login from './Pages/Login/Login';
+import RequireAuth from './Components/RequireAuth';
+import PersistLogin from './Components/PersistLogin';
+import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
   return (
@@ -20,8 +21,10 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="backet" />
-          <Route path=":id?" element={<Menu />} />
+          <Route path="/">
+            <Route path=":id?" element={<Menu />} />
+          </Route>
+          <Route path="login" element={<Login />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="blog">
@@ -30,21 +33,36 @@ function App() {
           <Route path="recipes">
             <Route path=":id?" element={<Recipes />} />
           </Route>
-          <Route path="admin" element={<AdminPanel />}>
-            <Route path="product" element={<AdminPanel />} />
-            <Route path="instruction" element={<AdminPanel />} />
-            <Route path="blog" element={<AdminPanel />} />
-            <Route path="order" element={<AdminPanel />} />
-            <Route path="user" element={<AdminPanel />} />
+
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth />}>
+              <Route path="admin" element={<AdminPanel />}>
+                <Route path="product" element={<AdminPanel />} />
+                <Route path="instruction" element={<AdminPanel />} />
+                <Route path="blog" element={<AdminPanel />} />
+                <Route path="order" element={<AdminPanel />} />
+                <Route path="user" element={<AdminPanel />} />
+              </Route>
+
+              <Route path="addform" element={<AdminPanel />}>
+                <Route path="product" element={<AdminPanel />} />
+                <Route path="instruction" element={<AdminPanel />} />
+                <Route path="blog" element={<AdminPanel />} />
+                <Route path="order" element={<AdminPanel />} />
+                <Route path="user" element={<AdminPanel />} />
+              </Route>
+
+              <Route path="edit" element={<AdminPanel />}>
+                <Route path="product/:id" element={<AdminPanel />} />
+                <Route path="instruction/:id" element={<AdminPanel />} />
+                <Route path="blog/:id" element={<AdminPanel />} />
+                <Route path="order/:id" element={<AdminPanel />} />
+                <Route path="user/:id" element={<AdminPanel />} />
+              </Route>
+            </Route>
           </Route>
-          <Route path="addform" element={<AddForm />}>
-            <Route path="product" element={<AddForm />} />
-            <Route path="instruction" element={<AddForm />} />
-            <Route path="blog" element={<AddForm />} />
-            <Route path="order" element={<AddForm />} />
-            <Route path="user" element={<AddForm />} />
-          </Route>
-          <Route path="edit/:id" element={<EditForm />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

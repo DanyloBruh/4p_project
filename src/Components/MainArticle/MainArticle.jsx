@@ -10,10 +10,12 @@ function MainArticle({ data }) {
     <Link to={`/blog/${data?.id}`}>
       <div className="article-content">
         {data ? (
-          <img
-            src={`data:image/png;base64,${data.Images[0].imageData}`}
-            alt={data.Images[0].imageName}
-          />
+          <div className="article-content__img-container">
+            <img
+              src={`data:image/png;base64,${data.Images[0].imageData}`}
+              alt={data.Images[0].imageName}
+            />
+          </div>
         ) : (
           <div className="article-content__image-placeholder" />
         )}

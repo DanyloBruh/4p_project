@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import { client } from './api.js';
+import { client, clientPrivate } from './api.js';
 
 export const getAllProducts = async () => {
   const { data } = await client.get('/product/');
@@ -16,12 +16,71 @@ export const getAllBlogs = async () => {
   return data;
 };
 
-export const getAllUsers = async () => {
-  const { data } = await client.get('/user/');
+export const getMainBlogs = async () => {
+  const { data } = await client.get('/blogFirst/');
   return data;
 };
 
-export const postProduct = async () => {
-  const { data } = await client.post('/product/');
+export const login = async (postData) => {
+  const { data } = await client.post('/login', postData);
+  return data;
+};
+
+export const logout = async (axiosPrivate) => {
+  const { data } = await clientPrivate.post('/logout', axiosPrivate);
+  return data;
+};
+
+export const getDataByCategory = async (category, axiosPrivate) => {
+  const { data } = await clientPrivate.get(`/${category}/`, axiosPrivate);
+  return data;
+};
+
+export const getDataByCategoryId = async (category, id, axiosPrivate) => {
+  const { data } = await clientPrivate.get(`/${category}/${id}/`, axiosPrivate);
+  return data;
+};
+
+export const postData = async (category, axiosPrivate, response) => {
+  const { data } = await clientPrivate.post(
+    `/${category}/`,
+    axiosPrivate,
+    response,
+  );
+  return data;
+};
+
+export const postDataConfig = async (category, axiosPrivate, response) => {
+  const { data } = await clientPrivate.postConfig(
+    `/${category}/`,
+    axiosPrivate,
+    response,
+  );
+  return data;
+};
+
+export const deleteData = async (category, id, axiosPrivate) => {
+  const { data } = await clientPrivate.delete(
+    `/${category}/${id}/`,
+    axiosPrivate,
+  );
+  return data;
+};
+
+export const editData = async (category, id, axiosPrivate, response) => {
+  const { data } = await clientPrivate.patch(
+    `/${category}/${id}/`,
+    axiosPrivate,
+    response,
+  );
+  return data;
+};
+
+export const editDataConfig = async (category, id, axiosPrivate, response) => {
+  const { data } = await clientPrivate.patchConfig(
+    `/${category}/${id}/`,
+    axiosPrivate,
+    response,
+  );
   return data;
 };

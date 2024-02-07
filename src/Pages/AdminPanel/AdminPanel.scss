@@ -1,11 +1,25 @@
 .admin-panel {
   &__header {
     width: 100%;
-    margin: 80px 0 0 0;
+    margin: 20px 0 0 0;
+    > .user-name {
+      text-align: left;
+      font-size: 1.8rem;
+      color: #5f5f5f;
+      margin-bottom: 20px;
+    }
     > .selecte-table {
       > .me-auto.nav {
         justify-content: space-between;
         margin: 0 0 50px 0;
+        > button {
+          border-radius: 0;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
         > a {
           color: #fff;
           font-family: 'Outfit', sans-serif;
@@ -69,6 +83,7 @@
       > .dropdown {
         color: #fff;
         text-align: center;
+        padding: 10px;
         font-family: 'Outfit', sans-serif;
         font-size: 1.5rem;
         font-style: normal;
@@ -78,12 +93,33 @@
         border-radius: 5px;
         background: #3e3e3e;
       }
+      > .table-button {
+        color: #fff;
+        border: 1px solid #fff;
+        padding: 10px;
+        border-radius: 5px;
+        width: 30%;
+        display: block;
+        font-weight: 600;
+      }
+      > .table-button:hover {
+        border: 1px solid #1f1f1f;
+        background: #fff;
+        color: #1f1f1f;
+      }
     }
   }
   &__body {
+    > .spinner {
+      position: fixed;
+      top: 65%;
+      left: 50%;
+      height: 5rem;
+      width: 5rem;
+      border-width: 10px;
+      margin-left: 0 auto;
+    }
     > .table {
-      text-align: center;
-      margin: 0 0 36px;
       > thead {
         > tr {
           border-top: 1px solid #fff;
@@ -118,11 +154,12 @@
             font-style: normal;
             font-weight: 300;
             line-height: normal;
+            text-align: left;
             > a.button-edit {
               margin: auto;
               display: block;
-              width: 50px;
-              height: 50px;
+              width: 40px;
+              height: 40px;
               background: url('../../Assets/editicon.png');
               background-position: center;
               background-size: cover;
@@ -130,8 +167,8 @@
             > a.button-delete {
               margin: auto;
               display: block;
-              width: 50px;
-              height: 50px;
+              width: 40px;
+              height: 40px;
               background: url('../../Assets/deleteicon.png');
               background-position: center;
               background-size: cover;
@@ -139,20 +176,6 @@
           }
         }
       }
-    }
-    > .table-button {
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 10px;
-      border-radius: 5px;
-      width: 100%;
-      display: block;
-      font-weight: 600;
-    }
-    > .table-button:hover {
-      border: 1px solid #1f1f1f;
-      background: #fff;
-      color: #1f1f1f;
     }
   }
 }

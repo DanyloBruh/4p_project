@@ -2,25 +2,42 @@ import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import { NavLink, useParams } from 'react-router-dom';
+import {
+  NavLink, useLocation, useNavigate, useParams,
+} from 'react-router-dom';
 import './Menu.scss';
+import moment from 'moment';
 import Varenyk from '../../Assets/varenyk.png';
 import Dumplings from '../../Assets/dumplings.png';
 import Borsch from '../../Assets/borsch.png';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import ProductCard from '../../Components/ProductCard/ProductCard';
-import { getAllProducts } from '../../Helper/requests';
+import { getAllProducts, getMainBlogs } from '../../Helper/requests';
 
 import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/MenuProductPlaceholder';
+import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
 
 function Menu() {
   const [menuItems, setMenuItems] = useState();
+  const [blogItems, setBlogItems] = useState();
 
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '*';
+
+  useEffect(() => {
+    if (id && !menuItems?.find((item) => item.id === id)) {
+      navigate(from, { replace: true });
+    }
+  }, [id]);
 
   useEffect(() => {
     getAllProducts().then(setMenuItems);
+    getMainBlogs()
+      .then(setBlogItems)
+      .catch((e) => console.log(e));
   }, []);
 
   return (
@@ -134,15 +151,33 @@ function Menu() {
         <div className="main-page-blog">
           <h2>more about our activities</h2>
           <Row>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <SecondaryArticle />
-            </Col>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <SecondaryArticle />
-            </Col>
-            <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-              <SecondaryArticle />
-            </Col>
+            {blogItems
+              && blogItems?.map((item) => (
+                <Col key={item.id} lg={4} sm={6}>
+                  <SecondaryArticle
+                    id={item.id}
+                    title={item.name}
+                    text={item.text}
+                    createdBy={item.User.name}
+                    image={item.Images[0].imageData}
+                    imageName={item.Images[0].imageName}
+                    createdAt={moment(item.createdAt).format('DD/MM/YY')}
+                  />
+                </Col>
+              ))}
+            {!blogItems && (
+              <>
+                <Col lg={4} sm={6}>
+                  <SecondaryArticlePlaceholder />
+                </Col>
+                <Col lg={4} sm={6}>
+                  <SecondaryArticlePlaceholder />
+                </Col>
+                <Col lg={4} className="blog__third-placeholder">
+                  <SecondaryArticlePlaceholder />
+                </Col>
+              </>
+            )}
           </Row>
           <div className="main-page-read-more-line">
             <hr />
@@ -154,7 +189,9 @@ function Menu() {
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
-      {id && <ProductCard data={menuItems?.find((item) => item.id === id)} />}
+      {id && menuItems?.find((item) => item.id === id) && (
+        <ProductCard data={menuItems?.find((item) => item.id === id)} />
+      )}
     </div>
   );
 }

@@ -12,11 +12,12 @@ function Layout() {
   const location = useLocation();
   // eslint-disable-next-line
   if (
-    !location.pathname.match('^/admin/') &&
-    location.pathname !== '/addform' &&
-    location.pathname !== '/admin' &&
-    !location.pathname.match('^/edit/') &&
-    !location.pathname.match('^/addform/')
+    !location.pathname.match('^/admin/')
+    && location.pathname !== '/addform'
+    && location.pathname !== '/admin'
+    && location.pathname !== '/login'
+    && !location.pathname.match('^/edit/')
+    && !location.pathname.match('^/addform/')
   ) {
     return (
       <>

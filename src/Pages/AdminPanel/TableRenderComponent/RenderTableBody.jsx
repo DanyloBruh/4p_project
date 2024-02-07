@@ -1,7 +1,11 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable function-paren-newline */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 /* eslint-disable react/prop-types */
-function RenderTableBody({ category, data, orders }) {
+/* eslint-disable object-curly-newline */
+function RenderTableBody({ category, data, openConfirmDeleteModal, orders }) {
   switch (category) {
     case 'product':
       return (
@@ -15,11 +19,17 @@ function RenderTableBody({ category, data, orders }) {
               <td>{product.ingredients}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${product.id}`} className="button-edit" />
+                <Link
+                  to={`/edit/product/${product.id}`}
+                  className="button-edit"
+                />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => openConfirmDeleteModal(product.id)}
+                />
               </td>
             </tr>
           ))}
@@ -37,13 +47,20 @@ function RenderTableBody({ category, data, orders }) {
               <td>{recipe.description}</td>
               <td>{recipe.ingredients}</td>
               <td>{recipe.text}</td>
+              <td>{recipe.carrousel ? 'yes' : 'no'}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${recipe.id}`} className="button-edit" />
+                <Link
+                  to={`/edit/instruction/${recipe.id}`}
+                  className="button-edit"
+                />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => openConfirmDeleteModal(recipe.id)}
+                />
               </td>
             </tr>
           ))}
@@ -56,13 +73,17 @@ function RenderTableBody({ category, data, orders }) {
             <tr key={blog.id}>
               <td>{blog.name}</td>
               <td>{blog.text}</td>
+              <td>{blog.displayType}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${blog.id}`} className="button-edit" />
+                <Link to={`/edit/blog/${blog.id}`} className="button-edit" />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => openConfirmDeleteModal(blog.id)}
+                />
               </td>
             </tr>
           ))}
@@ -77,11 +98,14 @@ function RenderTableBody({ category, data, orders }) {
               <td>{user.email}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${user.id}`} className="button-edit" />
+                <Link to={`/edit/user/${user.id}`} className="button-edit" />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => openConfirmDeleteModal(user.id)}
+                />
               </td>
             </tr>
           ))}
@@ -102,18 +126,21 @@ function RenderTableBody({ category, data, orders }) {
               <td>{order.status}</td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/${order.id}`} className="button-edit" />
+                <Link to={`/edit/order/${order.id}`} className="button-edit" />
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link className="button-delete" />
+                <Link
+                  className="button-delete"
+                  onClick={() => openConfirmDeleteModal(order.id)}
+                />
               </td>
             </tr>
           ))}
         </tbody>
       );
     default:
-      return <div />;
+      return <tbody />;
   }
 }
 
