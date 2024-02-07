@@ -83,11 +83,15 @@ function AddForm({ setData, data }) {
       timestamp: new Date().getTime(),
     },
   ]);
+  const [imagesArray, setImages] = useState([
+    {
+      images: {},
+      timestamp: new Date().getTime(),
+    },
+  ]);
 
   const [errorMsg, setErrorMsg] = useState('');
   let isValidated = true;
-
-  console.log(formData, stepsArray);
 
   const handleInputChange = (e) => {
     if (e.target && e.target.files) {
@@ -150,7 +154,12 @@ function AddForm({ setData, data }) {
       .join(', ');
 
     const text = stepsArray.map((step) => step.text).join(', ');
+
+    const images = imagesArray.map((image) => image.images);
+
     let newState;
+
+    console.log(formData);
 
     switch (category) {
       case 'product':
@@ -159,6 +168,9 @@ function AddForm({ setData, data }) {
       case 'instruction':
         newState = { ...formData, ingredients, text };
         break;
+      // case 'blog':
+      //   newState = { ...formData, ...images };
+      //   break;
       default:
         newState = { ...formData };
     }
@@ -168,7 +180,7 @@ function AddForm({ setData, data }) {
       ...newState,
     };
 
-    console.log('data', data);
+    console.log(response);
     if (category !== 'user') {
       postDataConfig(category, axiosPrivateConfig, response).then((result) => {
         setData((prevState) => [...prevState, result]);
@@ -219,6 +231,8 @@ function AddForm({ setData, data }) {
             setIngredients={setIngredients}
             steps={stepsArray}
             setSteps={setSteps}
+            images={imagesArray}
+            setImages={setImages}
           />
           <br />
           {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}

@@ -12,6 +12,8 @@ function RenderAddFormBody({
   setIngredients,
   steps,
   setSteps,
+  images,
+  setImages,
 }) {
   const handleIngredient = (e, i) => {
     const { name, value } = e.target;
@@ -59,6 +61,32 @@ function RenderAddFormBody({
     let deleteStep = [...steps];
     deleteStep.splice(i, 1);
     setSteps(deleteStep);
+  };
+
+  const handleImage = (e, i) => {
+    console.log(e.target.files[0]);
+    const { name } = e.target;
+    const value = e.target.files[0];
+    /* eslint-disable prefer-const */
+    let newImages = [...images];
+    newImages[i][name] = value;
+    setImages(newImages);
+  };
+
+  const handleAddImage = () => {
+    setImages([
+      ...images,
+      {
+        images: '',
+        timestamp: new Date().getTime(),
+      },
+    ]);
+  };
+
+  const handleDeleteImages = (i) => {
+    let deleteImages = [...images];
+    deleteImages.splice(i, 1);
+    setImages(deleteImages);
   };
 
   switch (category) {
@@ -159,9 +187,29 @@ function RenderAddFormBody({
               handleInputChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group className="form-element">
-            <p>images</p>
-            <input type="file" onChange={handleInputChange} name="images" />
+          <Form.Group className="form-element images">
+            <Form.Label>Images</Form.Label>
+            <Form.Group className="control-element">
+              {images.map((image, i) => (
+                <Form.Group className="rendered-content" key={image.timestamp}>
+                  <Form.Control
+                    required
+                    type="file"
+                    name="images"
+                    onChange={(e) => handleImage(e, i)}
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDeleteImages(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddImage}>
+              click to add new Image
+            </Button>
           </Form.Group>
           <Form.Group className="form-element radiobtn">
             <Form.Check
