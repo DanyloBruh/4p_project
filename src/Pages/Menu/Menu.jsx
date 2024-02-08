@@ -83,14 +83,8 @@ function Menu() {
           </p>
           <Row className="menu-main__product">
             {menuItems?.map((item) => (
-              <Col key={item.id} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                <MenuProduct
-                  id={item.id}
-                  image={item.Image.imageData}
-                  title={item.name}
-                  description={item.description}
-                  price={item.price}
-                />
+              <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <MenuProduct product={item} />
               </Col>
             ))}
             {(!menuItems || menuItems.length === 0) && (

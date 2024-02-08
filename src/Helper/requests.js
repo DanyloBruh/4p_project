@@ -26,6 +26,11 @@ export const login = async (postData) => {
   return data;
 };
 
+export const orderComplite = async (postData) => {
+  const { data } = await client.post('/order', postData);
+  return data;
+};
+
 export const logout = async (axiosPrivate) => {
   const { data } = await clientPrivate.post('/logout', axiosPrivate);
   return data;

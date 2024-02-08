@@ -1,11 +1,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './ProductCard.scss';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button, Col, Row } from 'react-bootstrap';
 import Counter from '../Counter/Counter';
+import { addOrderData, setVisible } from '../../redux/orderDataSlice';
 
 function ProductCard({ data }) {
   const ref = useRef();
@@ -14,6 +16,39 @@ function ProductCard({ data }) {
     const path = '/';
     navigate(path);
   };
+  const [count, setCount] = useState(1);
+  const dispath = useDispatch();
+
+  const incCount = () => {
+    setCount((current) => current + 1);
+  };
+
+  const decCount = () => {
+    setCount((current) => current - 1);
+  };
+
+  const handleReduxAdd = () => {
+    dispath(
+      addOrderData({
+        product: data,
+        count,
+      }),
+    );
+    setCount(1);
+  };
+
+  const handleSetVisible = () => {
+    dispath(
+      addOrderData({
+        product: data,
+        count,
+      }),
+    );
+    setCount(1);
+    dispath(setVisible(true));
+    routeChange();
+  };
+
   useEffect(() => {
     const listener = (event) => {
       // Do nothing if clicking ref's element or descendent elements
@@ -76,11 +111,11 @@ function ProductCard({ data }) {
             </p> */}
             <div className="product-modal__card__one-line">
               <p className="product-modal__card__price">{`PRICE | ${data?.price}£`}</p>
-              <Counter />
+              <Counter count={count} decr={decCount} incr={incCount} />
             </div>
             <div className="product-modal__card__one-line">
-              <Button variant="outline-light">by in one click</Button>
-              <Button variant="outline-light">add to cart</Button>
+              <Button variant="outline-light" onClick={handleSetVisible}>by in one click</Button>
+              <Button variant="outline-light" onClick={handleReduxAdd}>add to cart</Button>
             </div>
           </Col>
         </Row>
