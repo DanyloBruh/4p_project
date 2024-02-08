@@ -1,11 +1,10 @@
-/* eslint-disable object-curly-newline */
 import React, { useEffect, useState } from 'react';
-import { Carousel, Col, Container, Row } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import {
+  Carousel, Col, Container, Placeholder, Row,
+} from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import RecipeItem from '../../Components/RecipeItem/RecipeItem';
-
-import Shawarma from '../../Assets/shawarma-recipe.png';
 import './Recipes.scss';
 import { getAllInstractions } from '../../Helper/requests';
 import Recipe from '../../Components/Recipe/Recipe';
@@ -18,6 +17,7 @@ function Recipes() {
   useEffect(() => {
     getAllInstractions().then(setAllRecipes);
   }, []);
+  console.log(allRecipes);
   return !id ? (
     <div className="recipes">
       <div className="recipes__header" />
@@ -30,63 +30,62 @@ function Recipes() {
       </Container>
       <Container>
         <Carousel>
-          <Carousel.Item interval={10000}>
-            <div className="item-cover">
-              <img src={Shawarma} alt="" />
-              <div className="carousel-text">
-                <h2>Chicken Shawarma Lavash</h2>
-                <p>
-                  This Chicken Shawarma Lavash takes the flavors you crave when
-                  you want shawarma, but rolls it into a lavash. The crispy
-                  lettuce (or arugula) and tomato blend perfectly with the
-                  chicken shawarma and garlic dill sauce. This is envy inducing
-                  lunch, but it also a great after-school snack. It will hold
-                  even hungry teens over til dinner.
-                </p>
-                <button type="button" className="recipes__btn">
-                  Jump to recipe
-                </button>
+          {allRecipes
+            && allRecipes
+              ?.filter((recipe) => recipe.carrousel === true)
+              ?.map((recipe) => (
+                <Carousel.Item interval={10000}>
+                  <div className="item-cover">
+                    <img
+                      className="recipe-card-img"
+                      src={`data:image/png;base64,${recipe.Image.imageData}`}
+                      alt={recipe.Image.imageName}
+                    />
+                    <div className="carousel-text">
+                      <h2>{recipe.name}</h2>
+                      <p>{recipe.description}</p>
+                      <Link
+                        to={`/recipes/${recipe.id}`}
+                        className="btn btn-outline-light"
+                      >
+                        Jump to recipe
+                      </Link>
+                    </div>
+                  </div>
+                </Carousel.Item>
+              ))}
+          {!allRecipes && (
+            <Carousel.Item interval={10000}>
+              <div className="item-cover">
+                <div className="placeholder-img" />
+
+                <div className="carousel-placeholder-text">
+                  <h2>
+                    <Placeholder animation="glow">
+                      <Placeholder xs={4} />
+                      <Placeholder xs={1} />
+                      <Placeholder xs={3} />
+                      <Placeholder xs={2} />
+                    </Placeholder>
+                  </h2>
+                  <p>
+                    {' '}
+                    <Placeholder animation="glow">
+                      <Placeholder xs={2} />
+                      <Placeholder xs={4} />
+                      <Placeholder xs={3} />
+                      <Placeholder xs={5} />
+                      <Placeholder xs={2} />
+                      <Placeholder xs={3} />
+                      <Placeholder xs={4} />
+                      <Placeholder xs={2} />
+                    </Placeholder>
+                  </p>
+                  <Placeholder.Button variant="outline-light" />
+                </div>
               </div>
-            </div>
-          </Carousel.Item>
-          <Carousel.Item interval={10000}>
-            <div className="item-cover">
-              <img src={Shawarma} alt="" />
-              <div className="carousel-text">
-                <h2>2</h2>
-                <p>
-                  This Chicken Shawarma Lavash takes the flavors you crave when
-                  you want shawarma, but rolls it into a lavash. The crispy
-                  lettuce (or arugula) and tomato blend perfectly with the
-                  chicken shawarma and garlic dill sauce. This is envy inducing
-                  lunch, but it also a great after-school snack. It will hold
-                  even hungry teens over til dinner.
-                </p>
-                <button type="button" className="recipes__btn">
-                  Jump to recipe
-                </button>
-              </div>
-            </div>
-          </Carousel.Item>
-          <Carousel.Item interval={10000}>
-            <div className="item-cover">
-              <img src={Shawarma} alt="" />
-              <div className="carousel-text">
-                <h2>3</h2>
-                <p>
-                  This Chicken Shawarma Lavash takes the flavors you crave when
-                  you want shawarma, but rolls it into a lavash. The crispy
-                  lettuce (or arugula) and tomato blend perfectly with the
-                  chicken shawarma and garlic dill sauce. This is envy inducing
-                  lunch, but it also a great after-school snack. It will hold
-                  even hungry teens over til dinner.
-                </p>
-                <button type="button" className="recipes__btn">
-                  Jump to recipe
-                </button>
-              </div>
-            </div>
-          </Carousel.Item>
+            </Carousel.Item>
+          )}
         </Carousel>
       </Container>
       <Container className="item-section">
