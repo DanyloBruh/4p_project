@@ -147,9 +147,9 @@ function AddForm({ setData, data }) {
 
     const ingredients = ingredientsArray
       .map((ingredient) => ingredient.ingredient)
-      .join(', ');
+      .join(' | ');
 
-    const text = stepsArray.map((step) => step.text).join(', ');
+    const text = stepsArray.map((step) => step.text).join(' | ');
     let newState;
 
     switch (category) {
