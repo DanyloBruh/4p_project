@@ -58,11 +58,32 @@ a {
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+  }
+  &__text {
+    margin-top: 0 !important;
     display: -webkit-box;
+    color: #fff;
+    text-align: justify;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    > p {
+      display: none;
+    }
+    > p:first-child {
+      display: -webkit-box;
+
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   }
+
   > div {
     display: flex;
     justify-content: space-between;
