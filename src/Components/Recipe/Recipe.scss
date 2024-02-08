@@ -21,7 +21,7 @@
       transform: translate(-50%, -50%);
       width: 100%;
     }
-    > img{
+    > img {
       position: absolute;
       top: 0;
       left: 0;
@@ -177,9 +177,7 @@
                 transition: opacity 0.3s;
               }
 
-              .checkbox-wrapper-32
-                input[type='checkbox']:checked
-                + label{
+              .checkbox-wrapper-32 input[type='checkbox']:checked + label {
                 text-decoration: line-through;
               }
 
