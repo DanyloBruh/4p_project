@@ -10,6 +10,7 @@ import Table from 'react-bootstrap/Table';
 import { useSelector } from 'react-redux';
 /* eslint-disable object-curly-newline */
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { getDataByCategory, deleteData } from '../../Helper/requests';
 
 import './AdminPanel.scss';
@@ -21,6 +22,7 @@ import useLogout from '../../Hooks/useLogout';
 import AddForm from './AddForm/AddForm';
 import EditForm from './EditForm/EditForm';
 import DeleteConfirmModel from '../../Components/DeleteConfirmModel/DeleteConfirmModel';
+import ToastNotification from '../../Components/Toast/Toast';
 
 function AdminPanel() {
   const [sortBy, setSortBy] = useState('');
@@ -46,6 +48,7 @@ function AdminPanel() {
 
     socket.onmessage = (event) => {
       const order = JSON.parse(event.data);
+      ToastNotification('info', 'A new order has been created');
       setData((d) => [order, ...d]);
     };
   }, []);
@@ -87,6 +90,7 @@ function AdminPanel() {
     case 'admin':
       return (
         <>
+          <ToastContainer />
           <DeleteConfirmModel
             show={show}
             setShow={setShow}
