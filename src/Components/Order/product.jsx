@@ -6,7 +6,9 @@ import './Order.scss';
 
 import Counter from '../Counter/Counter';
 
-function Product({ product, count, incCount, decCount, deleteProduct }) {
+function Product({
+  product, count, incCount, decCount, deleteProduct,
+}) {
   return (
     <div className="order__product">
       <img

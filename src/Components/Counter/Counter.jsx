@@ -3,7 +3,9 @@
 import React from 'react';
 import './Counter.scss';
 
-function Counter({ count = 1, incr = () => {}, decr = () => {}, id = 0 }) {
+function Counter({
+  count = 1, incr = () => {}, decr = () => {}, id = 0,
+}) {
   return (
     <div className="counter">
       <button type="button" onClick={() => decr(id)}>

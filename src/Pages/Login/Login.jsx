@@ -7,7 +7,9 @@ import { useDispatch } from 'react-redux';
 import * as formik from 'formik';
 import * as yup from 'yup';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, FloatingLabel, Form, InputGroup } from 'react-bootstrap';
+import {
+  Button, FloatingLabel, Form, InputGroup,
+} from 'react-bootstrap';
 import Logo from '../../Assets/logo.png';
 import { login } from '../../Helper/requests';
 import { loginReducer } from '../../redux/authSlice';
@@ -125,14 +127,14 @@ function Login() {
                       onBlur={handleBlur}
                       isValid={touched.email && !errors.email}
                       isInvalid={
-                        (touched.email && errors.email) ||
-                        errorMessage.email.emailError
+                        (touched.email && errors.email)
+                        || errorMessage.email.emailError
                       }
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.email ||
-                        (errorMessage.email.emailError &&
-                          errorMessage.email.emailErrorMessage)}
+                      {errors.email
+                        || (errorMessage.email.emailError
+                          && errorMessage.email.emailErrorMessage)}
                     </Form.Control.Feedback>
                   </FloatingLabel>
                 </InputGroup>
@@ -165,14 +167,14 @@ function Login() {
                       onBlur={handleBlur}
                       isValid={touched.password && !errors.password}
                       isInvalid={
-                        (touched.password && errors.password) ||
-                        errorMessage.password.passwordError
+                        (touched.password && errors.password)
+                        || errorMessage.password.passwordError
                       }
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.password ||
-                        (errorMessage.password.passwordError &&
-                          errorMessage.password.passwordErrorMessage)}
+                      {errors.password
+                        || (errorMessage.password.passwordError
+                          && errorMessage.password.passwordErrorMessage)}
                     </Form.Control.Feedback>
                   </FloatingLabel>
                 </InputGroup>

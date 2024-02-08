@@ -29,7 +29,6 @@ function AdminPanel() {
   const [deleteId, setDeleteId] = useState('');
 
   const [data, setData] = useState([]);
-  const orders = useSelector((state) => state.orderData.data);
   const user = useSelector((state) => state.auth.auth.user);
 
   // const accepted = false;
@@ -37,6 +36,19 @@ function AdminPanel() {
   const location = useLocation();
   const category = location.pathname.split('/')[2];
   const page = location.pathname.split('/')[1];
+  // eslint-disable-next-line no-undef
+  const socket = new WebSocket('ws://localhost:3005');
+
+  useEffect(() => {
+    socket.onopen = () => {
+      console.log('Connected to WebSocket server');
+    };
+
+    socket.onmessage = (event) => {
+      const order = JSON.parse(event.data);
+      setData((d) => [order, ...d]);
+    };
+  }, []);
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -124,7 +136,7 @@ function AdminPanel() {
                   <NavLink
                     to="user"
                     onClick={() => {
-                      if (category !== 'order') setData([]);
+                      if (category !== 'user') setData([]);
                     }}
                   >
                     users
@@ -178,7 +190,6 @@ function AdminPanel() {
                   <RenderTableBody
                     category={category}
                     data={data}
-                    orders={orders}
                     openConfirmDeleteModal={openConfirmDeleteModal}
                   />
                 </Table>

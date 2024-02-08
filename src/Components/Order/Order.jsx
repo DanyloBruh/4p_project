@@ -7,7 +7,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './Order.scss';
 import { PostcodeLookup } from '@ideal-postcodes/postcode-lookup';
-import { Button, FloatingLabel, Form, InputGroup } from 'react-bootstrap';
+import {
+  Button,
+  FloatingLabel,
+  Form,
+  InputGroup,
+} from 'react-bootstrap';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -126,15 +131,10 @@ function Order({
   }, [products]);
 
   const handleSubmit = (values) => {
-    const addressLine =
-      values.town +
-      ', ' +
-      values.addressLine1 +
-      ', ' +
-      values.addressLine2 +
-      ', ' +
-      values.addressLine3 +
-      ', ';
+    const addressLine = values.town + ', '
+      + values.addressLine1 + ', '
+      + values.addressLine2 + ', '
+      + values.addressLine3 + ', ';
 
     const productIds = products.map((product) => {
       const ret = {
@@ -213,7 +213,13 @@ function Order({
               validationSchema={schema}
               onSubmit={handleSubmit}
             >
-              {({ errors, handleSubmit, values, handleChange, touched }) => (
+              {({
+                errors,
+                handleSubmit,
+                values,
+                handleChange,
+                touched,
+              }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="order__inputs">
                     <Form.Group controlId="floatingInput">
