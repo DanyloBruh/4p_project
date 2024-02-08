@@ -18,7 +18,7 @@ function Blog() {
   useEffect(() => {
     getAllBlogs().then(setAllBlogs);
   }, []);
-
+  console.log(allBlogs);
   return !id ? (
     <div className="blog__content">
       <Container>
@@ -33,7 +33,9 @@ function Blog() {
             />
           </Col>
           <Col xxl={7} lg={6}>
-            <TextArticle />
+            <TextArticle
+              data={allBlogs?.filter((e) => e.displayType === 'featured')}
+            />
           </Col>
         </Row>
         <Row className="blog__secondary-article">

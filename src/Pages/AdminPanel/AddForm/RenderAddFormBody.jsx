@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-quill/dist/quill.snow.css';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
 

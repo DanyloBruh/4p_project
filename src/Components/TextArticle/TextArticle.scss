@@ -1,4 +1,32 @@
 .text-article {
+  &__placeholder {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid #b7b7b7;
+
+    h2 {
+      color: #fff;
+      text-align: left;
+    }
+    p {
+      color: #fff;
+      width: 100%;
+    }
+    .placeholder {
+      margin-right: 5px;
+    }
+    > div {
+      width: 100%;
+      .placeholder-glow {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        > .placeholder {
+          margin-right: 0;
+        }
+      }
+    }
+  }
   &__content {
     > h2 {
       color: #fff;
@@ -33,6 +61,7 @@
     > div {
       display: flex;
       justify-content: space-between;
+
       > p {
         color: #b7b7b7;
         text-align: justify;
