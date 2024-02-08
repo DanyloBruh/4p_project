@@ -5,7 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
-function RenderTableBody({ category, data, openConfirmDeleteModal, orders }) {
+function RenderTableBody({ category, data, openConfirmDeleteModal }) {
   switch (category) {
     case 'product':
       return (
@@ -114,11 +114,11 @@ function RenderTableBody({ category, data, openConfirmDeleteModal, orders }) {
     case 'order':
       return (
         <tbody>
-          {orders.map((order) => (
+          {data.map((order) => (
             <tr key={order.id}>
               <td>{order.name}</td>
-              <td>{order.phoneNumber}</td>
-              <td>{order.address}</td>
+              <td>{order.phoneNamber}</td>
+              <td>{order.adress}</td>
               <td>{order.comment}</td>
               <td>{order.paymentType}</td>
               <td>{order.deliveryType}</td>

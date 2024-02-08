@@ -1,0 +1,30 @@
+.buyList {
+  width: 100px;
+  height: 100px;
+
+  background-color: rgba(0, 0, 0, 0.863);
+  background-image: url('../../Assets/paketOrder.svg');
+  background-size: 50%;
+  background-position: center 35%;
+  cursor: pointer;
+  background-repeat: no-repeat;
+
+  position: fixed;
+  z-index: 2;
+  top: 120px;
+  right: 41px;
+  border-radius: 50%;
+
+  &__text {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -25%);
+    color: #fff;
+    font-family: Outfit;
+    font-size: 1.7rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}

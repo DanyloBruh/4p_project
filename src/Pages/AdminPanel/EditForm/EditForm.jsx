@@ -144,7 +144,9 @@ function EditForm({ data, setData }) {
       );
       navigate(`/admin/${category}`);
     } else {
-      editData(category, id, axiosPrivate, response);
+      editData(category, id, axiosPrivate, response).then(
+        replaceItem(id, { ...response, id }),
+      );
       navigate(`/admin/${category}`);
     }
   };

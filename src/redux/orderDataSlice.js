@@ -1,21 +1,10 @@
 /* eslint-disable */
 
 import { createSlice } from '@reduxjs/toolkit';
-
+const myStorage = window.localStorage;
 const initialState = {
-  data: [
-    {
-      id: 123120938448,
-      name: 'order',
-      phoneNumber: '30897879834',
-      address: 'yyeyeyey',
-      comment: 'pls',
-      paymentType: 'cash',
-      deliveryType: 'self',
-      totalAmount: 40,
-      status: 'online',
-    },
-  ],
+  data: JSON.parse(myStorage.getItem('order')) || [],
+  visible: false,
 };
 
 const orderDataSlice = createSlice({
@@ -23,14 +12,85 @@ const orderDataSlice = createSlice({
   initialState,
   reducers: {
     addOrderData: (state, action) => {
-      state.data.push(action.payload);
+      const addDate = action.payload;
+      let data = state.data;
+      const findProd = data.find(
+        (product) => product.product.id === addDate.product.id,
+      );
+      if (findProd) {
+        data = data.map((pr) => {
+          if (pr.product.id === findProd.product.id) {
+            const coun = pr.count + addDate.count;
+            return {
+              product: pr.product,
+              count: coun,
+            };
+          }
+          return pr;
+        });
+      } else {
+        data.push(addDate);
+      }
+      myStorage.setItem('order', JSON.stringify(data));
+      state.data = data;
     },
-    deleteOrderData: (state) => {
-      state.data = initialState.data;
+    addCountData: (state, action) => {
+      const id = action.payload;
+      let data = state.data;
+      data = data.map((pr) => {
+        if (pr.product.id === id) {
+          return {
+            product: pr.product,
+            count: pr.count + 1,
+          };
+        }
+        return pr;
+      });
+
+      myStorage.setItem('order', JSON.stringify(data));
+      state.data = data;
+    },
+    decCountData: (state, action) => {
+      const id = action.payload;
+      let data = state.data;
+      data = data.map((pr) => {
+        if (pr.product.id === id) {
+          if (pr.count - 1 === 0) {
+            console.log('error 1 is min value');
+            return pr;
+          }
+          return {
+            product: pr.product,
+            count: pr.count - 1,
+          };
+        }
+        return pr;
+      });
+
+      myStorage.setItem('order', JSON.stringify(data));
+      state.data = data;
+    },
+    deleteItem: (state, action) => {
+      const id = action.payload;
+      let data = state.data;
+      data = data.filter((pr) => pr.product.id !== id);
+
+      myStorage.setItem('order', JSON.stringify(data));
+      state.data = data;
+    },
+    setVisible: (state, action) => {
+      state.visible = action.payload;
     },
   },
 });
 
-export const { addOrderData, deleteOrderData } = orderDataSlice.actions;
+export const {
+  addOrderData,
+  deleteOrderData,
+  decCountData,
+  addCountData,
+  deleteItem,
+  setVisible,
+} = orderDataSlice.actions;
 
 export default orderDataSlice.reducer;
