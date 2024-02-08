@@ -70,13 +70,9 @@ export const client = {
 
 export const clientPrivate = {
   get: (url, axiosPrivate) => requestPrivate(url, 'GET', axiosPrivate),
-  post: (url, axiosPrivate, data) =>
-    requestPrivate(url, 'POST', axiosPrivate, data),
-  postConfig: (url, axiosPrivate, data) =>
-    requestPrivate(url, 'POSTCON', axiosPrivate, data),
-  patch: (url, axiosPrivate, data) =>
-    requestPrivate(url, 'PATCH', axiosPrivate, data),
-  patchConfig: (url, axiosPrivate, data) =>
-    requestPrivate(url, 'PATCHCON', axiosPrivate, data),
+  post: (url, axiosPrivate, data) => requestPrivate(url, 'POST', axiosPrivate, data),
+  postConfig: (url, axiosPrivate, data) => requestPrivate(url, 'POSTCON', axiosPrivate, data),
+  patch: (url, axiosPrivate, data) => requestPrivate(url, 'PATCH', axiosPrivate, data),
+  patchConfig: (url, axiosPrivate, data) => requestPrivate(url, 'PATCHCON', axiosPrivate, data),
   delete: (url, axiosPrivate) => requestPrivate(url, 'DELETE', axiosPrivate),
 };

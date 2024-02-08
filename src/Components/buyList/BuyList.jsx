@@ -9,10 +9,11 @@ import {
   addCountData,
   decCountData,
   deleteItem,
+  setVisible,
 } from '../../redux/orderDataSlice';
 
 function BuyList() {
-  const [activeOrder, setActiveOrder] = useState(false);
+  const activeOrder = useSelector((state) => state.orderData.visible);
   const orderRed = useSelector((state) => state.orderData.data);
   const [orders, setOrders] = useState([]);
   const dispath = useDispatch();
@@ -23,11 +24,10 @@ function BuyList() {
 
   useEffect(() => {
     setOrders(orderRed);
-    setActiveOrder(false);
   }, []);
 
   const handleClickOrder = () => {
-    setActiveOrder(true);
+    dispath(setVisible(true));
   };
 
   const deleteProduct = (ProdId) => {
@@ -59,7 +59,7 @@ function BuyList() {
           {activeOrder && (
             <Order
               setOrderVisibleFalse={() => {
-                setActiveOrder(false);
+                dispath(setVisible(false));
               }}
               productDedux={orders}
               deleteProduct={deleteProduct}

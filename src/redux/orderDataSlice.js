@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const myStorage = window.localStorage;
 const initialState = {
   data: JSON.parse(myStorage.getItem('order')) || [],
+  visible: false,
 };
 
 const orderDataSlice = createSlice({
@@ -77,8 +78,8 @@ const orderDataSlice = createSlice({
       myStorage.setItem('order', JSON.stringify(data));
       state.data = data;
     },
-    deleteOrderData: (state) => {
-      state.data = [];
+    setVisible: (state, action) => {
+      state.visible = action.payload;
     },
   },
 });
@@ -89,6 +90,7 @@ export const {
   decCountData,
   addCountData,
   deleteItem,
+  setVisible,
 } = orderDataSlice.actions;
 
 export default orderDataSlice.reducer;

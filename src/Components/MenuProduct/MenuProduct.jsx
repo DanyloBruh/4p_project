@@ -21,13 +21,13 @@ function MenuProduct({ product }) {
   };
 
   const handleReduxAdd = () => {
-    setCount(1);
     dispath(
       addOrderData({
         product,
         count,
       }),
     );
+    setCount(1);
   };
 
   return (
