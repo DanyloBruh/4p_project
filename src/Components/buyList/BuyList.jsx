@@ -50,8 +50,8 @@ function BuyList() {
   }, [orders]);
 
   return (
-    <div>
-      {orders.length && (
+    <div className="dsfsdfd">
+      {orders.length > 0 && (
         <>
           <div className="buyList" onClick={handleClickOrder}>
             <span className="buyList__text">{deliveryCount()}</span>
