@@ -155,7 +155,6 @@ function AddForm({ setData, data }) {
       .map((ingredient) => ingredient.ingredient)
       .join(' | ');
 
-
     const text = stepsArray.map((step) => step.text).join(' | ');
 
     const images = imagesArray.map((image) => image.images);
