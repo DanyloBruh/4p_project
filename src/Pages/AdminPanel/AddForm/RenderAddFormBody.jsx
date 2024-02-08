@@ -8,6 +8,7 @@ function RenderAddFormBody({
   handleInputChange,
   category,
   formData,
+  setFormData,
   ingredients,
   setIngredients,
   steps,
@@ -182,10 +183,7 @@ function RenderAddFormBody({
           <Form.Group className="form-element">
             <p>text</p>
 
-            <BlogTextEditor
-              text={formData.text}
-              handleInputChange={handleInputChange}
-            />
+            <BlogTextEditor setFormData={setFormData} formData={formData} />
           </Form.Group>
           <Form.Group className="form-element images">
             <Form.Label>Images</Form.Label>

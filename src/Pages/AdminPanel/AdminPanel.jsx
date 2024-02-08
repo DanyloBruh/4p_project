@@ -124,7 +124,7 @@ function AdminPanel() {
                   <NavLink
                     to="user"
                     onClick={() => {
-                      if (category !== 'order') setData([]);
+                      if (category !== 'user') setData([]);
                     }}
                   >
                     users

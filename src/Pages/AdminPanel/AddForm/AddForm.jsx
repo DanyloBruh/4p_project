@@ -121,6 +121,8 @@ function AddForm({ setData, data }) {
     }
   };
 
+  console.log(formData);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (category === 'blog') {
@@ -151,9 +153,9 @@ function AddForm({ setData, data }) {
 
     const ingredients = ingredientsArray
       .map((ingredient) => ingredient.ingredient)
-      .join(', ');
+      .join(' | ');
 
-    const text = stepsArray.map((step) => step.text).join(', ');
+    const text = stepsArray.map((step) => step.text).join(' | ');
 
     const images = imagesArray.map((image) => image.images);
 
@@ -227,6 +229,7 @@ function AddForm({ setData, data }) {
             handleInputChange={handleInputChange}
             category={category}
             formData={formData}
+            setFormData={setFormData}
             ingredients={ingredientsArray}
             setIngredients={setIngredients}
             steps={stepsArray}
