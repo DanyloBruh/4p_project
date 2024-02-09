@@ -1,17 +1,32 @@
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useEffect, useLayoutEffect, useRef, useState,
+} from 'react';
 import { Container } from 'react-bootstrap';
 import './Recipe.scss';
 
 function Recipe({ recipe }) {
-  const [height, setHeight] = useState(0);
   const ref = useRef(null);
+  const [height, setHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    setHeight(ref.current.clientHeight);
+  }, [ref?.current?.clientHeight]);
 
   useEffect(() => {
-    setHeight(ref.current.clientHeight);
-  });
+    function handleWindowResize() {
+      setHeight(ref.current.clientHeight);
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
   return (
     <div className="recipe">
       <div className="recipe__header">
