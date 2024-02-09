@@ -24,6 +24,9 @@ function ProductCard({ data }) {
   };
 
   const decCount = () => {
+    if (count === 1) {
+      return;
+    }
     setCount((current) => current - 1);
   };
 

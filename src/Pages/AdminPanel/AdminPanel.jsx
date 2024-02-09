@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 /* eslint-disable object-curly-newline */
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { getDataByCategory, deleteData } from '../../Helper/requests';
+import { getDataByCategory, deleteData, getDataByCategoryId } from '../../Helper/requests';
 
 import './AdminPanel.scss';
 import RenderTableBody from './TableRenderComponent/RenderTableBody';
@@ -38,25 +38,28 @@ function AdminPanel() {
   const location = useLocation();
   const category = location.pathname.split('/')[2];
   const page = location.pathname.split('/')[1];
-  // eslint-disable-next-line no-undef
-  const socket = new WebSocket('ws://localhost:3005');
-
-  useEffect(() => {
-    socket.onopen = () => {
-      console.log('Connected to WebSocket server');
-    };
-
-    socket.onmessage = (event) => {
-      const order = JSON.parse(event.data);
-      ToastNotification('info', 'A new order has been created');
-      setData((d) => [order, ...d]);
-    };
-  }, []);
-
   const axiosPrivate = useAxiosPrivate();
-
   const navigate = useNavigate();
   const logout = useLogout();
+
+  useEffect(() => {
+    if (category === 'order') {
+      // eslint-disable-next-line no-undef
+      const socket = new WebSocket('ws://localhost:3005');
+      socket.onopen = () => {
+        console.log('Connected to WebSocket server');
+      };
+
+      socket.onmessage = (event) => {
+        const id = JSON.parse(event.data);
+        getDataByCategoryId('order', id, axiosPrivate)
+          .then((order) => {
+            ToastNotification('info', 'A new order has been created');
+            setData((d) => [order, ...d]);
+          });
+      };
+    }
+  }, [category]);
 
   const signOut = async () => {
     await logout();
