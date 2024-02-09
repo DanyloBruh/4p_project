@@ -17,17 +17,17 @@ function Recipes() {
   useEffect(() => {
     getAllInstractions().then(setAllRecipes);
   }, []);
-  console.log(allRecipes);
   return !id ? (
     <div className="recipes">
-      <div className="recipes__header" />
+      <div className="recipes__header">
+        <Container className="recipes__container">
+          <h2>Search the recipe you need</h2>
+          <div className="search-bar">
+            <SearchBar />
+          </div>
+        </Container>
+      </div>
 
-      <Container className="recipes__container">
-        <h2>Search the recipe you need</h2>
-        <div className="search-bar">
-          <SearchBar />
-        </div>
-      </Container>
       <Container>
         <Carousel>
           {allRecipes
