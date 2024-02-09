@@ -6,6 +6,9 @@
     height: 80vh;
     position: relative;
     z-index: -1;
+    @media (max-width: 575px) {
+      height: 60vh;
+    }
     > h2 {
       color: #fff;
       text-align: center;
@@ -80,6 +83,9 @@
           width: 100%;
           border-radius: 10px;
           object-fit: cover;
+          @media (max-width: 575px) {
+            height: 300px;
+          }
         }
         > h2 {
           text-align: left;
@@ -308,7 +314,7 @@
               color: #fff;
               text-align: justify;
               font-family: 'Outfit', sans-serif;
-              font-size: 1.5rem;
+              font-size: 1.25rem;
               font-style: normal;
               font-weight: 300;
               line-height: normal;
