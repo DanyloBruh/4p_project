@@ -56,10 +56,10 @@ export const validateBlog = (formData) => {
     isValidated = false;
     return { msg: 'Text must not contain double quotes', isValidated };
   }
-  if (formData.images === '') {
-    isValidated = false;
-    return { msg: 'Image is required', isValidated };
-  }
+  // if (formData.images === '') {
+  //   isValidated = false;
+  //   return { msg: 'Image is required', isValidated };
+  // }
   isValidated = true;
   return { msg: 'validation for blog complete', isValidated };
 };

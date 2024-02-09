@@ -6,6 +6,10 @@
     width: 100%;
     > form {
       > .form-element {
+        > p {
+          font-size: 1.2rem;
+          margin-bottom: 10px;
+        }
         > .quill.editor {
           height: 400px;
         }
@@ -44,6 +48,10 @@
         }
       }
 
+      > .form-element.images {
+        margin-top: 50px;
+      }
+
       > .form-element {
         margin-bottom: 20px;
         > .form-check {
@@ -66,7 +74,6 @@
           > input[type='radio']:checked {
             border: 2px solid #fff;
             outline: none;
-            -fx-focus-traversable: false;
           }
           > label {
             margin: auto 0;
@@ -118,6 +125,50 @@
         }
         > label {
           color: #b4b4b4;
+          font-size: 1.2rem;
+        }
+
+        > .text-editor-header {
+          align-items: center;
+          border-radius: 0.5rem;
+          padding: 0.75rem;
+          border: 1px solid #fff;
+          text-align: left;
+          margin-bottom: 0px;
+          border-bottom: none;
+          > button {
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+            // border-left: 1px solid #fff;
+            // border-right: 1px solid #fff;
+            // margin-right: 10px;
+            > svg {
+              width: 40px;
+              height: 40px;
+              border: none;
+            }
+            > svg:hover {
+              width: 42px;
+              height: 42px;
+              background-color: #111111;
+            }
+            > p {
+              margin: 0;
+              width: 40px;
+              height: 40px;
+              border: none;
+              font-size: 1.6rem;
+              font-weight: 600;
+              color: #fff;
+            }
+            > p:hover {
+              width: 42px;
+              height: 42px;
+              background-color: #111111;
+            }
+          }
         }
 
         > .form-floating {

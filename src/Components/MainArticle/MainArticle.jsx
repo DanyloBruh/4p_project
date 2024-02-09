@@ -2,10 +2,12 @@
 import React from 'react';
 import moment from 'moment';
 import './MainArticle.scss';
+import HtmlToReactParser from 'html-to-react';
 import { Link } from 'react-router-dom';
 import { Placeholder } from 'react-bootstrap';
 
 function MainArticle({ data }) {
+  const Parser = new HtmlToReactParser.Parser();
   return (
     <Link to={`/blog/${data?.id}`}>
       <div className="article-content">
@@ -35,7 +37,9 @@ function MainArticle({ data }) {
             </h2>
           )}
           {data ? (
-            <p>{data?.text}</p>
+            <div className="article-content__text">
+              {Parser.parse(data?.text)}
+            </div>
           ) : (
             <p>
               <Placeholder animation="glow">

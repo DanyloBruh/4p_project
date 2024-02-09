@@ -2,9 +2,12 @@
 import React from 'react';
 import './Article.scss';
 import moment from 'moment';
+import HtmlToReactParser from 'html-to-react';
 import { Container } from 'react-bootstrap';
 
 function Article({ blog }) {
+  const Parser = new HtmlToReactParser.Parser();
+
   return (
     <div className="article">
       <Container>
@@ -18,7 +21,7 @@ function Article({ blog }) {
             src={`data:image/png;base64,${blog?.Images[0].imageData}`}
             alt={blog?.Images[0].imageName}
           />
-          <p>{blog?.text}</p>
+          {Parser.parse(blog?.text)}
         </div>
       </Container>
       <div className="ornament-left" />
