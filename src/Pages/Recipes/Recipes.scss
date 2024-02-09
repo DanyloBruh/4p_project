@@ -227,6 +227,20 @@
           }
         }
       }
+      @media (max-width: 575px) {
+        > img {
+          margin: 10px 10px 0 10px;
+          width: calc(100% - 20px);
+        }
+        > .carousel-text {
+          height: calc(100% - 250px - 10px);
+          text-align: center;
+          padding: 20px 10px 10px 10px;
+          > p {
+            margin-bottom: 20px;
+          }
+        }
+      }
       @media (max-width: 767px) {
         > .carousel-text {
           > h2 {
