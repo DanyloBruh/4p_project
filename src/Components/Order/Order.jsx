@@ -130,7 +130,7 @@ function Order({
     return '0';
   }, [products]);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const addressLine = values.town + ', '
       + values.addressLine1 + ', '
       + values.addressLine2 + ', '
@@ -155,15 +155,13 @@ function Order({
       productIds,
     };
 
-    orderComplite(request)
-      .then((response) => {
-        if (response) {
-          dispath(deleteOrderData());
-          ToastNotification(
-            'success',
-            'Thank you for your order! we will call you back soon',
-          );
-        }
+    await orderComplite(request)
+      .then(() => {
+        dispath(deleteOrderData());
+        ToastNotification(
+          'success',
+          'Thank you for your order! we will call you back soon',
+        );
       })
       .catch(() => {
         ToastNotification(

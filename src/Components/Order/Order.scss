@@ -29,6 +29,13 @@
     right: 18px;
   }
 
+  &__cross:hover,
+  &__cross:active,
+  &__cross:focus-visible {
+  }
+
+  
+
   &__content {
     padding: 35px 85px 80px;
   }

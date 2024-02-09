@@ -11,6 +11,7 @@ import {
   deleteItem,
   setVisible,
 } from '../../redux/orderDataSlice';
+import { offScroll, onScroll } from '../../redux/scrollSlice';
 
 function BuyList() {
   const activeOrder = useSelector((state) => state.orderData.visible);
@@ -20,14 +21,25 @@ function BuyList() {
 
   useEffect(() => {
     setOrders(orderRed);
+    if (orderRed.length === 0) {
+      dispath(onScroll());
+    }
   }, [orderRed]);
 
-  useEffect(() => {
-    setOrders(orderRed);
-  }, []);
+  const getTotalAmount = useCallback(() => {
+    if (orders.length) {
+      return orders.reduce(
+        (pre, curr) => pre + +curr.product.price * curr.count,
+        0,
+      );
+    }
+
+    return '0';
+  }, [orders]);
 
   const handleClickOrder = () => {
     dispath(setVisible(true));
+    dispath(offScroll());
   };
 
   const deleteProduct = (ProdId) => {
@@ -50,16 +62,20 @@ function BuyList() {
   }, [orders]);
 
   return (
-    <div className="dsfsdfd">
+    <div>
       {orders.length > 0 && (
         <>
-          <div className="buyList" onClick={handleClickOrder}>
-            <span className="buyList__text">{deliveryCount()}</span>
+          <div className="buyContainer">
+            <div className="buyHover">{`= ${getTotalAmount()} £`}</div>
+            <div className="buyList" onClick={handleClickOrder}>
+              <span className="buyList__text">{deliveryCount()}</span>
+            </div>
           </div>
           {activeOrder && (
             <Order
               setOrderVisibleFalse={() => {
                 dispath(setVisible(false));
+                dispath(onScroll());
               }}
               productDedux={orders}
               deleteProduct={deleteProduct}
