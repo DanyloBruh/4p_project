@@ -6,47 +6,47 @@ function RenderTableSortBy({ category }) {
     case 'product':
       return (
         <>
+          <option>none</option>
           <option>name</option>
-          <option>description</option>
           <option>weight</option>
           <option>price</option>
-          <option>ingredients</option>
         </>
       );
     case 'instruction':
       return (
         <>
+          <option>none</option>
           <option>name</option>
           <option>difficulty</option>
-          <option>time</option>
           <option>makes</option>
-          <option>description</option>
-          <option>ingredients</option>
-          <option>text</option>
+          <option>carrousel</option>
         </>
       );
     case 'blog':
       return (
         <>
+          <option>none</option>
           <option>name</option>
-          <option>text</option>
+          <option>show place</option>
         </>
       );
     case 'order':
       return (
         <>
+          <option>none</option>
           <option>name</option>
-          <option>address</option>
-          <option>comment</option>
           <option>paymentType</option>
           <option>deliveryType</option>
           <option>totalAmount</option>
           <option>status</option>
+          <option>createdAt</option>
+          <option>updatedAt</option>
         </>
       );
     case 'user':
       return (
         <>
+          <option>none</option>
           <option>name</option>
           <option>email</option>
         </>

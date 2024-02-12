@@ -9,6 +9,29 @@ import HtmlToReactParser from 'html-to-react';
 function RenderTableBody({ category, data, openConfirmDeleteModal }) {
   const Parser = new HtmlToReactParser.Parser();
 
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      hour12: true,
+      minute: 'numeric',
+    };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
+  const getOrderColor = (status) => {
+    switch (status) {
+      case 'ordered, not processed': return 'newOrder';
+      case 'ordered, processed': return 'processed';
+      case 'courier on the way': return 'onWay';
+      case 'delivered': return 'delivered';
+      case 'requires processing': return 'requiresProcessing';
+      default: return '';
+    }
+  };
+
   switch (category) {
     case 'product':
       return (
@@ -118,15 +141,21 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
       return (
         <tbody>
           {data.map((order) => (
-            <tr key={order.id}>
+            <tr key={order.id} className={getOrderColor(order.status)}>
               <td>{order.name}</td>
-              <td>{order.phoneNamber}</td>
+              <td>{order.phoneNumber}</td>
               <td>{order.adress}</td>
               <td>{order.comment}</td>
               <td>{order.paymentType}</td>
               <td>{order.deliveryType}</td>
               <td>{order.totalAmount}</td>
               <td>{order.status}</td>
+              <td>
+                {formatDate(order.createdAt)}
+              </td>
+              <td>
+                {formatDate(order.updatedAt)}
+              </td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link to={`/edit/order/${order.id}`} className="button-edit" />
