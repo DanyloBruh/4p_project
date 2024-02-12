@@ -1,9 +1,10 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import './Article.scss';
 import moment from 'moment';
 import HtmlToReactParser from 'html-to-react';
-import { Container, Placeholder } from 'react-bootstrap';
+import { Carousel, Container, Placeholder } from 'react-bootstrap';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getBlogById } from '../../Helper/requests';
 
@@ -28,6 +29,7 @@ function Article({ blog }) {
       navigate(from, { replace: true });
     }
   }, []);
+  console.log(blogInfo);
   return (
     <div className="article">
       <Container>
@@ -72,10 +74,23 @@ function Article({ blog }) {
         </div>
         <div className="article__main-content">
           {blogInfo ? (
-            <img
-              src={`data:image/png;base64,${blogInfo?.Images[0].imageData}`}
-              alt={blogInfo?.Images[0].imageName}
-            />
+            blogInfo.Images.length > 1 ? (
+              <Carousel>
+                {blogInfo?.Images.map((data) => (
+                  <Carousel.Item key={data.id}>
+                    <img
+                      src={`data:image/png;base64,${data.imageData}`}
+                      alt={data.imageName}
+                    />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            ) : (
+              <img
+                src={`data:image/png;base64,${blogInfo?.Images[0].imageData}`}
+                alt={blogInfo?.Images[0].imageName}
+              />
+            )
           ) : (
             <div className="article__img-placeholder" />
           )}
