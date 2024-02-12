@@ -6,7 +6,6 @@ import moment from 'moment';
 import { Placeholder } from 'react-bootstrap';
 
 function TextArticle({ data }) {
-  console.log(data);
   return (
     <div className="text-article__content">
       <h2>Featured Posts</h2>

@@ -13,10 +13,11 @@ import RecipeItemPlaceholder from '../../Components/RecipeItemPlaceholder/Recipe
 function Recipes() {
   const [allRecipes, setAllRecipes] = useState();
   const { id } = useParams();
-
   useEffect(() => {
-    getAllInstractions().then(setAllRecipes);
-  }, []);
+    if (!id && !allRecipes) {
+      getAllInstractions().then(setAllRecipes);
+    }
+  }, [id]);
   return !id ? (
     <div className="recipes">
       <div className="recipes__header">

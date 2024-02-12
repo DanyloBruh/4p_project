@@ -15,6 +15,8 @@ function RenderEditFormBody({
   images,
   setImages,
 }) {
+  console.log(data);
+
   const handleIngredient = (e, i) => {
     const { name, value } = e.target;
     /* eslint-disable prefer-const */
@@ -64,11 +66,10 @@ function RenderEditFormBody({
   };
 
   const handleImage = (e, i) => {
-    const { name } = e.target;
+    // const { name } = e.target;
     const value = e.target.files[0];
-    /* eslint-disable prefer-const */
-    let newImages = [...images];
-    newImages[i][name] = value;
+    const newImages = [...images];
+    newImages[i] = { images: value, timestamp: new Date().getTime() };
     setImages(newImages);
   };
 
@@ -87,6 +88,9 @@ function RenderEditFormBody({
     deleteImages.splice(i, 1);
     setImages(deleteImages);
   };
+
+  // console.log(URL.createObjectURL(images[2].images));
+  console.log(images);
 
   switch (category) {
     case 'user':
@@ -191,20 +195,38 @@ function RenderEditFormBody({
             <Form.Label>Images</Form.Label>
             <Form.Group className="control-element">
               {images.map((image, i) => (
-                <Form.Group className="rendered-content" key={image.id}>
-                  <Form.Control
-                    required
-                    type="file"
-                    name="images"
-                    onChange={(e) => handleImage(e, i)}
-                  />
-                  <Button
-                    variant="outline-light"
-                    onClick={() => handleDeleteImages(i)}
+                <>
+                  <Form.Group
+                    className="rendered-content images"
+                    key={image.id}
                   >
-                    remove
-                  </Button>
-                </Form.Group>
+                    <Form.Control
+                      required
+                      type="file"
+                      name="images"
+                      onChange={(e) => handleImage(e, i)}
+                    />
+                    <Button
+                      variant="outline-light"
+                      onClick={() => handleDeleteImages(i)}
+                    >
+                      remove
+                    </Button>
+                  </Form.Group>
+                  {image.images.imageData ? (
+                    <img
+                      key={image.imageName}
+                      src={`data:image/png;base64,${image.images.imageData}`}
+                      alt={image.imageName}
+                    />
+                  ) : (
+                    <img
+                      key={image.imageName}
+                      src={image.images && URL.createObjectURL(image.images)}
+                      alt={image.imageName}
+                    />
+                  )}
+                </>
               ))}
             </Form.Group>
             <Button variant="outline-light" onClick={handleAddImage}>
@@ -331,6 +353,14 @@ function RenderEditFormBody({
               onChange={handleInputChange}
               name="image"
             />
+            {data.image ? (
+              <img src={URL.createObjectURL(data.image)} alt="edit img" />
+            ) : (
+              <img
+                src={`data:image/png;base64,${data.Image.imageData}`}
+                alt="edit img"
+              />
+            )}
           </Form.Group>
         </>
       );
@@ -481,6 +511,14 @@ function RenderEditFormBody({
               onChange={handleInputChange}
               name="image"
             />
+            {data.image ? (
+              <img src={URL.createObjectURL(data.image)} alt="edit img" />
+            ) : (
+              <img
+                src={`data:image/png;base64,${data.Image.imageData}`}
+                alt="edit img"
+              />
+            )}
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Check // prettier-ignore
@@ -490,6 +528,137 @@ function RenderEditFormBody({
               onChange={handleInputChange}
               checked={data.carrousel}
             />
+          </Form.Group>
+        </>
+      );
+    case 'order':
+      return (
+        <>
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Name"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="text"
+                onChange={handleInputChange}
+                value={data.name}
+                name="name"
+                autoComplete="off"
+                placeholder="product name"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Phone number"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="text"
+                onChange={handleInputChange}
+                value={data.phoneNamber}
+                name="phoneNamber"
+                autoComplete="off"
+                placeholder="phoneNamber"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Address"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="text"
+                onChange={handleInputChange}
+                value={data.adress}
+                name="adress"
+                autoComplete="off"
+                placeholder="adress"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Comment"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="text"
+                onChange={handleInputChange}
+                value={data.comment}
+                name="comment"
+                autoComplete="off"
+                placeholder="comment"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <Form.Select
+              required
+              onChange={handleInputChange}
+              value={data.paymentType}
+              name="paymentType"
+            >
+              <option>Сhoose a payment type from the select menu</option>
+              <option>card</option>
+              <option>cash</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <Form.Select
+              required
+              onChange={handleInputChange}
+              value={data.deliveryType}
+              name="deliveryType"
+            >
+              <option>Сhoose a delivery type from the select menu</option>
+              <option>self</option>
+              <option>courier</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Total amount"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="text"
+                onChange={handleInputChange}
+                value={data.totalAmount}
+                name="totalAmount"
+                autoComplete="off"
+                placeholder="totalAmount"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Status"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="text"
+                onChange={handleInputChange}
+                value={data.status}
+                name="totalAmount"
+                autoComplete="off"
+                placeholder="status"
+              />
+            </FloatingLabel>
           </Form.Group>
         </>
       );
