@@ -68,7 +68,7 @@ function Order({
             .required('Postcode is required')
             .matches(regexes.regexPostcode, 'Postcode number is not valid'),
           addressLine1: Yup.string().required(),
-          addressLine2: Yup.string().required(),
+          addressLine2: Yup.string(),
           addressLine3: Yup.string(),
           town: Yup.string().required(),
           comment: Yup.string(),
@@ -90,13 +90,6 @@ function Order({
           phone: Yup.string()
             .required('Phone is required')
             .matches(regexes.regexPhone, 'Phone number is not valid'),
-          // postcode: Yup.string()
-          //   .required('Postcode is required')
-          //   .matches(regexes.regexPostcode, 'Postcode number is not valid'),
-          // addressLine1: Yup.string(),
-          // addressLine2: Yup.string(),
-          // addressLine3: Yup.string(),
-          // town: Yup.string().required(),
           comment: Yup.string(),
           delivery: Yup.string()
             .required()
@@ -146,7 +139,7 @@ function Order({
     const total = getTotalAmount();
     const request = {
       name: values.name,
-      phoneNamber: values.phone,
+      phoneNumber: values.phone,
       adress: addressLine,
       comment: values.comment,
       paymentType: values.payment,
