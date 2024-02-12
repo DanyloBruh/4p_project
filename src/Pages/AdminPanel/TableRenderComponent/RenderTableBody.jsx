@@ -23,12 +23,18 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
 
   const getOrderColor = (status) => {
     switch (status) {
-      case 'ordered, not processed': return 'newOrder';
-      case 'ordered, processed': return 'processed';
-      case 'courier on the way': return 'onWay';
-      case 'delivered': return 'delivered';
-      case 'requires processing': return 'requiresProcessing';
-      default: return '';
+      case 'ordered, not processed':
+        return 'newOrder';
+      case 'ordered, processed':
+        return 'processed';
+      case 'courier on the way':
+        return 'onWay';
+      case 'delivered':
+        return 'delivered';
+      case 'requires processing':
+        return 'requiresProcessing';
+      default:
+        return '';
     }
   };
 
@@ -38,11 +44,21 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
         <tbody>
           {data.map((product) => (
             <tr key={product.id}>
-              <td>{product.name}</td>
-              <td>{product.description}</td>
-              <td>{product.weight}</td>
-              <td>{product.price}</td>
-              <td>{product.ingredients}</td>
+              <td>
+                <span>{product.name}</span>
+              </td>
+              <td>
+                <span>{product.description}</span>
+              </td>
+              <td>
+                <span>{product.weight}</span>
+              </td>
+              <td>
+                <span>{product.price}</span>
+              </td>
+              <td>
+                <span>{product.ingredients}</span>
+              </td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link
@@ -66,14 +82,30 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
         <tbody>
           {data.map((recipe) => (
             <tr key={recipe.id}>
-              <td>{recipe.name}</td>
-              <td>{recipe.difficulty}</td>
-              <td>{recipe.time}</td>
-              <td>{recipe.makes}</td>
-              <td>{recipe.description}</td>
-              <td>{recipe.ingredients}</td>
-              <td>{recipe.text}</td>
-              <td>{recipe.carrousel ? 'yes' : 'no'}</td>
+              <td>
+                <span>{recipe.name}</span>
+              </td>
+              <td>
+                <span>{recipe.difficulty}</span>
+              </td>
+              <td>
+                <span>{recipe.time}</span>
+              </td>
+              <td>
+                <span>{recipe.makes}</span>
+              </td>
+              <td>
+                <span>{recipe.description}</span>
+              </td>
+              <td>
+                <span>{recipe.ingredients}</span>
+              </td>
+              <td>
+                <span>{recipe.text}</span>
+              </td>
+              <td>
+                <span>{recipe.carrousel ? 'yes' : 'no'}</span>
+              </td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link
@@ -97,9 +129,15 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
         <tbody>
           {data.map((blog) => (
             <tr key={blog.id}>
-              <td>{blog.name}</td>
-              <td className="blog-text">{Parser.parse(blog?.text)}</td>
-              <td>{blog.displayType}</td>
+              <td>
+                <span>{blog.name}</span>
+              </td>
+              <td className="blog-text">
+                <span>{Parser.parse(blog?.text)}</span>
+              </td>
+              <td>
+                <span>{blog.displayType}</span>
+              </td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link to={`/edit/blog/${blog.id}`} className="button-edit" />
@@ -120,8 +158,14 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
         <tbody>
           {data.map((user) => (
             <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
+              <td>
+                <span>{user.name}</span>
+              </td>
+              <td>
+                <span>
+                  {user.email}
+                </span>
+              </td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link to={`/edit/user/${user.id}`} className="button-edit" />
@@ -142,19 +186,35 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
         <tbody>
           {data.map((order) => (
             <tr key={order.id} className={getOrderColor(order.status)}>
-              <td>{order.name}</td>
-              <td>{order.phoneNumber}</td>
-              <td>{order.adress}</td>
-              <td>{order.comment}</td>
-              <td>{order.paymentType}</td>
-              <td>{order.deliveryType}</td>
-              <td>{order.totalAmount}</td>
-              <td>{order.status}</td>
               <td>
-                {formatDate(order.createdAt)}
+                <span>{order.name}</span>
               </td>
               <td>
-                {formatDate(order.updatedAt)}
+                <span>{order.phoneNumber}</span>
+              </td>
+              <td>
+                <span>{order.adress}</span>
+              </td>
+              <td>
+                <span>{order.comment}</span>
+              </td>
+              <td>
+                <span>{order.paymentType}</span>
+              </td>
+              <td>
+                <span>{order.deliveryType}</span>
+              </td>
+              <td>
+                <span>{order.totalAmount}</span>
+              </td>
+              <td>
+                <span>{order.status}</span>
+              </td>
+              <td>
+                <span>{formatDate(order.createdAt)}</span>
+              </td>
+              <td>
+                <span>{formatDate(order.updatedAt)}</span>
               </td>
               <td>
                 {/* eslint-disable-next-line */}
