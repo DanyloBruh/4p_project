@@ -15,10 +15,12 @@ import Article from '../../Components/Article/Article';
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
   const { id } = useParams();
+  console.log(id);
   useEffect(() => {
-    getAllBlogs().then(setAllBlogs);
-  }, []);
-  console.log(allBlogs);
+    if (!id && !allBlogs) {
+      getAllBlogs().then(setAllBlogs);
+    }
+  }, [id]);
   return !id ? (
     <div className="blog__content">
       <Container>

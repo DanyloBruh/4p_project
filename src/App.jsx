@@ -11,7 +11,6 @@ import Recipes from './Pages/Recipes/Recipes';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import Login from './Pages/Login/Login';
-
 import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 import RequireAuth from './Components/Login/RequireAuth';
 import PersistLogin from './Components/Login/PersistLogin';
