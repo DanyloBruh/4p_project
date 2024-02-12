@@ -15,7 +15,6 @@ import Article from '../../Components/Article/Article';
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
   const { id } = useParams();
-  console.log(id);
   useEffect(() => {
     if (!id && !allBlogs) {
       getAllBlogs().then(setAllBlogs);

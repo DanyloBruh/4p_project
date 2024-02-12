@@ -7,10 +7,18 @@ import React, {
 } from 'react';
 import { Container } from 'react-bootstrap';
 import './Recipe.scss';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { getRecipeById } from '../../Helper/requests';
 
 function Recipe({ recipe }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '*/*';
+
   const ref = useRef(null);
   const [height, setHeight] = useState(0);
+  const [recipeInfo, setRecipeInfo] = useState();
 
   useLayoutEffect(() => {
     setHeight(ref.current.clientHeight);
@@ -27,43 +35,58 @@ function Recipe({ recipe }) {
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (id) {
+      if (recipe) {
+        setRecipeInfo(recipe);
+      } else {
+        getRecipeById(id)
+          .then(setRecipeInfo)
+          .catch(() => navigate(from, { replace: true }));
+      }
+    } else {
+      navigate(from, { replace: true });
+    }
+  }, []);
+
   return (
     <div className="recipe">
       <div className="recipe__header">
         <img
-          src={`data:image/png;base64,${recipe?.Image.imageData}`}
-          alt={recipe?.Image.imageName}
+          src={`data:image/png;base64,${recipeInfo?.Image.imageData}`}
+          alt={recipeInfo?.Image.imageName}
         />
-        <h2>{recipe?.name}</h2>
+        <h2>{recipeInfo?.name}</h2>
       </div>
       <Container className="recipe__container">
         <div className="dop-info">
           <div className="dop-info-item">
             <p>Difficulty</p>
-            <h3>{recipe?.difficulty}</h3>
+            <h3>{recipeInfo?.difficulty}</h3>
           </div>
           <div className="dop-info-item">
             <p>Cooking time</p>
-            <h3>{recipe?.time}</h3>
+            <h3>{recipeInfo?.time}</h3>
           </div>
           <div className="dop-info-item">
             <p>Makes</p>
-            <h3>{`${recipe?.makes} servings`}</h3>
+            <h3>{`${recipeInfo?.makes} servings`}</h3>
           </div>
         </div>
         <div className="descriptions">
           <div className="description" ref={ref}>
             <h2>Description</h2>
-            <p>{`${recipe?.description}`}</p>
+            <p>{`${recipeInfo?.description}`}</p>
             <img
-              src={`data:image/png;base64,${recipe?.Image.imageData}`}
-              alt={recipe?.Image.imageName}
+              src={`data:image/png;base64,${recipeInfo?.Image.imageData}`}
+              alt={recipeInfo?.Image.imageName}
             />
           </div>
           <div className="ingredients" style={{ height }}>
             <h3>Ingredients</h3>
             <ul>
-              {recipe?.ingredients.split(' | ').map((item, index) => (
+              {recipeInfo?.ingredients.split(' | ').map((item, index) => (
                 <li key={index}>
                   <div>
                     <div className="checkbox-wrapper-32">
@@ -102,7 +125,7 @@ function Recipe({ recipe }) {
         <div className="instructions">
           <h3>Instructions</h3>
           <ul>
-            {recipe?.text.split(' | ').map((item, index) => (
+            {recipeInfo?.text.split(' | ').map((item, index) => (
               <li key={index}>
                 <div className="list-text">
                   <p className="number">{index + 1}</p>

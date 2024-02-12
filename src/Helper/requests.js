@@ -26,6 +26,11 @@ export const getBlogById = async (id) => {
   return data;
 };
 
+export const getRecipeById = async (id) => {
+  const { data } = await client.get(`/instruction/${id}`);
+  return data;
+};
+
 export const login = async (postData) => {
   const { data } = await client.post('/login', postData);
   return data;

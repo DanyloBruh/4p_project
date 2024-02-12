@@ -10,7 +10,6 @@ import { getBlogById } from '../../Helper/requests';
 function Article({ blog }) {
   const [blogInfo, setBlogInfo] = useState();
   const Parser = new HtmlToReactParser.Parser();
-  const settings = useLocation().pathname.split('/')[1];
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -18,11 +17,7 @@ function Article({ blog }) {
   const from = location.state?.from?.pathname || '*/*';
   useEffect(() => {
     if (id) {
-      if (settings === 'featured-blog') {
-        getBlogById(id)
-          .then(setBlogInfo)
-          .catch(() => navigate(from, { replace: true }));
-      } else if (blog) {
+      if (blog) {
         setBlogInfo(blog);
       } else {
         getBlogById(id)
@@ -90,9 +85,7 @@ function Article({ blog }) {
           ) : (
             <p>
               {' '}
-              <Placeholder
-                animation="glow"
-              >
+              <Placeholder animation="glow">
                 <Placeholder xs={2} />
                 <Placeholder xs={3} />
                 <Placeholder xs={3} />
