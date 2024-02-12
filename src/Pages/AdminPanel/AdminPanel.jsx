@@ -11,7 +11,11 @@ import { useSelector } from 'react-redux';
 /* eslint-disable object-curly-newline */
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { getDataByCategory, deleteData, getDataByCategoryId } from '../../Helper/requests';
+import {
+  getDataByCategory,
+  deleteData,
+  getDataByCategoryId,
+} from '../../Helper/requests';
 
 import './AdminPanel.scss';
 import RenderTableBody from './TableRenderComponent/RenderTableBody';
@@ -42,6 +46,8 @@ function AdminPanel() {
   const navigate = useNavigate();
   const logout = useLogout();
 
+  console.log('admin-panel data', data);
+
   useEffect(() => {
     if (category === 'order') {
       // eslint-disable-next-line no-undef
@@ -52,11 +58,10 @@ function AdminPanel() {
 
       socket.onmessage = (event) => {
         const id = JSON.parse(event.data);
-        getDataByCategoryId('order', id, axiosPrivate)
-          .then((order) => {
-            ToastNotification('info', 'A new order has been created');
-            setData((d) => [order, ...d]);
-          });
+        getDataByCategoryId('order', id, axiosPrivate).then((order) => {
+          ToastNotification('info', 'A new order has been created');
+          setData((d) => [order, ...d]);
+        });
       };
     }
   }, [category]);

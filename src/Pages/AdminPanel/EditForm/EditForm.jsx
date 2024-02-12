@@ -74,8 +74,6 @@ function EditForm({ data, setData }) {
 
   const [editedData, setEditedData] = useState(data.find((el) => el.id === id));
 
-  console.log(editedData);
-
   let inputIngredientsArray = [];
   let inputStepsArray = [];
   let inputImagesArray = [];
@@ -96,7 +94,10 @@ function EditForm({ data, setData }) {
         .map((item) => ({ text: item, timestamp: useId() }));
       break;
     case 'blog':
-      inputImagesArray = editedData.Images;
+      inputImagesArray = editedData.Images.map((item) => ({
+        images: item,
+        timestamp: useId(),
+      }));
       break;
     default:
       inputIngredientsArray = [];
@@ -178,7 +179,7 @@ function EditForm({ data, setData }) {
       .map((ingredient) => ingredient.ingredient)
       .join(' | ');
     const text = stepsArray.map((step) => step.text).join(' | ');
-
+    const Images = imagesArray.map((image) => image.images);
     let newState;
 
     switch (category) {
@@ -189,7 +190,7 @@ function EditForm({ data, setData }) {
         newState = { ...editedData, ingredients, text };
         break;
       case 'blog':
-        newState = { ...editedData, ...imagesArray };
+        newState = { ...editedData, Images };
         break;
       default:
         newState = { ...editedData };
@@ -200,6 +201,10 @@ function EditForm({ data, setData }) {
         .filter(([key]) => Object.keys(initialState).includes(key))
         .map(([key, value]) => [key, value]),
     );
+
+    console.log('new State', newState);
+
+    console.log('response', response);
 
     if (category !== 'user') {
       editDataConfig(category, id, axiosPrivateConfig, response).then(

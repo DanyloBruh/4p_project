@@ -3,9 +3,12 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HtmlToReactParser from 'html-to-react';
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
 function RenderTableBody({ category, data, openConfirmDeleteModal }) {
+  const Parser = new HtmlToReactParser.Parser();
+
   switch (category) {
     case 'product':
       return (
@@ -72,7 +75,7 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
           {data.map((blog) => (
             <tr key={blog.id}>
               <td>{blog.name}</td>
-              <td>{blog.text}</td>
+              <td className="blog-text">{Parser.parse(blog?.text)}</td>
               <td>{blog.displayType}</td>
               <td>
                 {/* eslint-disable-next-line */}
