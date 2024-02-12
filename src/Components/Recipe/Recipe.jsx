@@ -37,6 +37,10 @@ function Recipe({ recipe }) {
   }, []);
 
   useEffect(() => {
+    setHeight(ref.current.clientHeight);
+  }, [ref]);
+
+  useEffect(() => {
     if (id) {
       if (recipe) {
         setRecipeInfo(recipe);
