@@ -208,32 +208,19 @@ function RenderAddFormBody({
               click to add new Image
             </Button>
           </Form.Group>
-          <Form.Group className="form-element radiobtn">
-            <Form.Check
-              inline
-              label="firstPage"
-              name="displayType"
-              type="radio"
+          <Form.Group className="form-element">
+            <Form.Select
+              required
+              aria-label="Default select example"
               onChange={handleInputChange}
-              value="firstPage"
-            />
-            <Form.Check
-              className="centered"
-              inline
-              label="featured"
+              value={formData.displayType}
               name="displayType"
-              type="radio"
-              onChange={handleInputChange}
-              value="featured"
-            />
-            <Form.Check
-              inline
-              label="default"
-              name="displayType"
-              type="radio"
-              onChange={handleInputChange}
-              value="default"
-            />
+            >
+              <option>choose where you want to display the blog</option>
+              <option>firstPage</option>
+              <option>featured</option>
+              <option>default</option>
+            </Form.Select>
           </Form.Group>
         </>
       );

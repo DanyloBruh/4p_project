@@ -16,7 +16,7 @@ import {
 import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 
 /* eslint-disable react/prop-types */
-function AddForm({ setData, data }) {
+function AddForm({ setData }) {
   const category = useLocation().pathname.split('/')[2];
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
@@ -38,8 +38,8 @@ function AddForm({ setData, data }) {
       initialState = {
         name: '',
         text: '',
-        images: '',
-        displayType: 'default',
+        Images: [],
+        displayType: '',
       };
       break;
     case 'product':
@@ -157,7 +157,7 @@ function AddForm({ setData, data }) {
 
     const text = stepsArray.map((step) => step.text).join(' | ');
 
-    const images = imagesArray.map((image) => image.images);
+    const Images = imagesArray.map((image) => image.images);
 
     let newState;
 
@@ -170,9 +170,9 @@ function AddForm({ setData, data }) {
       case 'instruction':
         newState = { ...formData, ingredients, text };
         break;
-      // case 'blog':
-      //   newState = { ...formData, ...images };
-      //   break;
+      case 'blog':
+        newState = { ...formData, Images };
+        break;
       default:
         newState = { ...formData };
     }
@@ -205,7 +205,7 @@ function AddForm({ setData, data }) {
             : 'add-edit-form__body blog'
         }
       >
-        <Form noValidate className="form">
+        <Form noValidate className="form" encType="multipart/form-data">
           <Form.Label>
             Add
             {` ${category}`}
