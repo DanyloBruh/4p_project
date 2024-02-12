@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import './SearchBar.scss';
 import React from 'react';
 
-function SearchBar() {
+function SearchBar({ handleChange }) {
   return (
     <div className="container">
       <div className="row height d-flex justify-content-center align-items-center">
@@ -12,6 +13,7 @@ function SearchBar() {
               type="text"
               className="form-control form-input"
               placeholder="Search..."
+              onChange={handleChange}
             />
           </div>
         </div>

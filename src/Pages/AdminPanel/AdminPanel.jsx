@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
 import React, { useState, useEffect, useMemo } from 'react';
@@ -99,67 +100,71 @@ function AdminPanel() {
   };
 
   const visibleData = useMemo(() => {
-    let dataBuffer = [...data];
+    if (data) {
+      let dataBuffer = [...data];
 
-    const isData = (value) => (new Date(value)).getTime() > 0;
+      const isData = (value) => (new Date(value)).getTime() > 0;
 
-    const isNumeric = (value) => /^-?\d+$/.test(value);
+      const isNumeric = (value) => /^-?\d+$/.test(value);
 
-    if (query) {
-      dataBuffer = dataBuffer.filter((obj) =>
-        Object.keys(obj).some((key) => {
-          if (typeof obj[key] === 'string') {
-            const aValue = obj[key].toLowerCase();
-            const bValue = query.toLowerCase();
-            return aValue.includes(bValue);
-          }
-
-          return false;
-        }),
-      );
-    }
-
-    if (sort) {
-      if (sort !== 'none') {
-        dataBuffer = dataBuffer.sort((a, b) => {
-          if (isNumeric(a[sort]) && isNumeric(b[sort])) {
-            return (+a[sort]) - (+b[sort]);
-          }
-          if (isData(a[sort]) && isData(b[sort])) {
-            const aValue = new Date(a[sort]).valueOf();
-            const bValue = new Date(b[sort]).valueOf();
-            return aValue > bValue;
-          }
-
-          if (sort === 'carrousel') {
-            if (a[sort] === true) {
-              return -1;
+      if (query) {
+        dataBuffer = dataBuffer.filter((obj) =>
+          Object.keys(obj).some((key) => {
+            if (typeof obj[key] === 'string') {
+              const aValue = obj[key].toLowerCase();
+              const bValue = query.toLowerCase();
+              return aValue.includes(bValue);
             }
 
-            return 1;
-          }
-          if (sort === 'show place') {
-            if (a.displayType === 'firstPage') {
-              return -1;
-            }
-
-            if (a.displayType === 'featured') {
-              return -1;
-            }
-
-            return 1;
-          }
-          if (!a[sort] || !b[sort]) {
-            return 0;
-          }
-          const aValue = a[sort].toLowerCase();
-          const bValue = b[sort].toLowerCase();
-          return aValue.localeCompare(bValue);
-        });
+            return false;
+          }),
+        );
       }
+
+      if (sort) {
+        if (sort !== 'none') {
+          dataBuffer = dataBuffer.sort((a, b) => {
+            if (isNumeric(a[sort]) && isNumeric(b[sort])) {
+              return (+a[sort]) - (+b[sort]);
+            }
+            if (isData(a[sort]) && isData(b[sort])) {
+              const aValue = new Date(a[sort]).valueOf();
+              const bValue = new Date(b[sort]).valueOf();
+              return aValue > bValue;
+            }
+
+            if (sort === 'carrousel') {
+              if (a[sort] === true) {
+                return -1;
+              }
+
+              return 1;
+            }
+            if (sort === 'show place') {
+              if (a.displayType === 'firstPage') {
+                return -1;
+              }
+
+              if (a.displayType === 'featured') {
+                return -1;
+              }
+
+              return 1;
+            }
+            if (!a[sort] || !b[sort]) {
+              return 0;
+            }
+            const aValue = a[sort].toLowerCase();
+            const bValue = b[sort].toLowerCase();
+            return aValue.localeCompare(bValue);
+          });
+        }
+      }
+
+      return dataBuffer;
     }
 
-    return dataBuffer;
+    return [];
   }, [query, sort, data]);
 
   const openConfirmDeleteModal = (deleteItemId) => {
