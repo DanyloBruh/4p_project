@@ -17,16 +17,19 @@
   }
   &__text {
     display: block !important;
-    > p {
-      display: none;
-    }
-    > p:first-child {
+    > *:first-child {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      color: #fff;
+      text-align: left;
       display: -webkit-box;
       text-align: left !important;
-
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+    }
+    > * {
+      display: none;
     }
   }
   &__image-placeholder {
