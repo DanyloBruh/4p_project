@@ -155,7 +155,7 @@
             font-style: normal;
             font-weight: 300;
             line-height: normal;
-            background-color: #272727;
+            background-color: #111111;
             border: none;
             padding-top: 54px;
             padding-bottom: 54px;
@@ -178,6 +178,12 @@
             font-weight: 300;
             line-height: normal;
             text-align: left;
+            > span{
+              display: -webkit-box;
+              -webkit-line-clamp: 6;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+            }
             > a.button-edit {
               margin: auto;
               display: block;
