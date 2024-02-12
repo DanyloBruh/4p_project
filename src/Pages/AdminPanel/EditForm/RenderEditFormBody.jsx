@@ -644,21 +644,20 @@ function RenderEditFormBody({
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Status"
-              className="mb-3"
+            <Form.Select
+              required
+              onChange={handleInputChange}
+              value={data.status}
+              name="deliveryType"
             >
-              <Form.Control
-                required
-                type="text"
-                onChange={handleInputChange}
-                value={data.status}
-                name="totalAmount"
-                autoComplete="off"
-                placeholder="status"
-              />
-            </FloatingLabel>
+              <option>Сhoose a order status from the select menu</option>
+              <option>ordered, not processed</option>
+              <option>ordered, processed</option>
+              <option>courier on the way</option>
+              <option>delivered</option>
+              <option>requires processing</option>
+
+            </Form.Select>
           </Form.Group>
         </>
       );
