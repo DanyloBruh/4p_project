@@ -81,6 +81,9 @@ const orderDataSlice = createSlice({
     setVisible: (state, action) => {
       state.visible = action.payload;
     },
+    deleteOrderData: (state) => {
+      state.data = [];
+    },
   },
 });
 
