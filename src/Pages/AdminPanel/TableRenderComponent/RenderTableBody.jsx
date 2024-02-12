@@ -18,6 +18,17 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
+  const getOrderColor = (status) => {
+    switch (status) {
+      case 'ordered, not processed': return 'newOrder';
+      case 'ordered, processed': return 'processed';
+      case 'courier on the way': return 'onWay';
+      case 'delivered': return 'delivered';
+      case 'requires processing': return 'requiresProcessing';
+      default: return '';
+    }
+  };
+
   switch (category) {
     case 'product':
       return (
@@ -127,9 +138,9 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
       return (
         <tbody>
           {data.map((order) => (
-            <tr key={order.id}>
+            <tr key={order.id} className={getOrderColor(order.status)}>
               <td>{order.name}</td>
-              <td>{order.phoneNamber}</td>
+              <td>{order.phoneNumber}</td>
               <td>{order.adress}</td>
               <td>{order.comment}</td>
               <td>{order.paymentType}</td>
