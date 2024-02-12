@@ -6,6 +6,18 @@ import { Link } from 'react-router-dom';
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
 function RenderTableBody({ category, data, openConfirmDeleteModal }) {
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      hour12: true,
+      minute: 'numeric',
+    };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
   switch (category) {
     case 'product':
       return (
@@ -124,6 +136,12 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
               <td>{order.deliveryType}</td>
               <td>{order.totalAmount}</td>
               <td>{order.status}</td>
+              <td>
+                {formatDate(order.createdAt)}
+              </td>
+              <td>
+                {formatDate(order.updatedAt)}
+              </td>
               <td>
                 {/* eslint-disable-next-line */}
                 <Link to={`/edit/order/${order.id}`} className="button-edit" />

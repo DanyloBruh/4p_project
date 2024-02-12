@@ -110,6 +110,8 @@
     }
   }
   &__body {
+    overflow: auto;
+    height: 50vh;
     > .spinner {
       position: fixed;
       top: 65%;
@@ -122,17 +124,17 @@
     > .table {
       > thead {
         > tr {
-          border-top: 1px solid #fff;
-          border-bottom: 1px solid #fff;
           align-items: center;
           > th {
+            position: sticky;
+            top: 0;
             color: #fff;
             font-family: 'Outfit', sans-serif;
             font-size: 1.75rem;
             font-style: normal;
             font-weight: 300;
             line-height: normal;
-            background: none;
+            background-color: #1f1f1f;
             border: none;
             padding-top: 54px;
             padding-bottom: 54px;

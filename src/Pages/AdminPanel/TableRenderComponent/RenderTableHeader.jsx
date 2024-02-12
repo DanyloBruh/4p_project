@@ -66,6 +66,8 @@ function RenderTableHeader({ category }) {
           <th>deliveryType</th>
           <th>totalAmount</th>
           <th>status</th>
+          <th>createdAt</th>
+          <th>updatedAt</th>
           <th>
             <img src={editIcon} alt="edit icon" />
           </th>
