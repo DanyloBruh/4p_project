@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import '../AddForm/AddForm.scss';
 /* eslint-disable object-curly-newline */
@@ -41,7 +41,7 @@ function EditForm({ data, setData }) {
       initialState = {
         name: '',
         text: '',
-        images: '',
+        Images: [],
         displayType: '',
       };
       break;
@@ -74,21 +74,64 @@ function EditForm({ data, setData }) {
 
   const [editedData, setEditedData] = useState(data.find((el) => el.id === id));
 
-  console.log('data', data);
-  console.log('edited', editedData);
+  console.log(editedData);
+
+  let inputIngredientsArray = [];
+  let inputStepsArray = [];
+  let inputImagesArray = [];
+
+  switch (category) {
+    case 'product':
+      inputIngredientsArray = editedData.ingredients
+        .split(' | ')
+        .map((item) => ({ ingredient: item, timestamp: useId() }));
+      break;
+    case 'instruction':
+      inputIngredientsArray = editedData.ingredients
+        .split(' | ')
+        .map((item) => ({ ingredient: item, timestamp: useId() }));
+
+      inputStepsArray = editedData.text
+        .split(' | ')
+        .map((item) => ({ text: item, timestamp: useId() }));
+      break;
+    case 'blog':
+      inputImagesArray = editedData.Images;
+      break;
+    default:
+      inputIngredientsArray = [];
+      inputStepsArray = [];
+      inputImagesArray = [];
+  }
+
+  const [ingredientsArray, setIngredients] = useState(inputIngredientsArray);
+  const [stepsArray, setSteps] = useState(inputStepsArray);
+  const [imagesArray, setImages] = useState(inputImagesArray);
+
   const handleInputChange = (e) => {
-    if (e.target.files) {
+    if (e.target && e.target.files) {
       const uploadFile = e.target.files[0];
-      console.log({ ...uploadFile });
       setEditedData((prevFormData) => ({
         ...prevFormData,
         [e.target.name]: uploadFile,
       }));
-    } else {
+    } else if (e.target) {
       const { name, value } = e.target;
+      if (name === 'carrousel') {
+        setEditedData((prevFormData) => ({
+          ...prevFormData,
+          [name]: e.target.checked,
+        }));
+      } else {
+        setEditedData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+      }
+    } else {
       setEditedData((prevFormData) => ({
         ...prevFormData,
-        [name]: value,
+        text: e,
       }));
     }
   };
@@ -107,12 +150,6 @@ function EditForm({ data, setData }) {
 
   const handleUpdate = (event) => {
     event.preventDefault();
-
-    const response = Object.fromEntries(
-      Object.entries(editedData)
-        .filter(([key]) => Object.keys(initialState).includes(key))
-        .map(([key, value]) => [key, value]),
-    );
 
     switch (category) {
       case 'user':
@@ -137,8 +174,34 @@ function EditForm({ data, setData }) {
 
     if (!isValidated) return;
 
+    const ingredients = ingredientsArray
+      .map((ingredient) => ingredient.ingredient)
+      .join(' | ');
+    const text = stepsArray.map((step) => step.text).join(' | ');
+
+    let newState;
+
+    switch (category) {
+      case 'product':
+        newState = { ...editedData, ingredients };
+        break;
+      case 'instruction':
+        newState = { ...editedData, ingredients, text };
+        break;
+      case 'blog':
+        newState = { ...editedData, ...imagesArray };
+        break;
+      default:
+        newState = { ...editedData };
+    }
+
+    const response = Object.fromEntries(
+      Object.entries(newState)
+        .filter(([key]) => Object.keys(initialState).includes(key))
+        .map(([key, value]) => [key, value]),
+    );
+
     if (category !== 'user') {
-      console.log(response);
       editDataConfig(category, id, axiosPrivateConfig, response).then(
         replaceItem(id, { ...response, id }),
       );
@@ -184,6 +247,13 @@ function EditForm({ data, setData }) {
             handleInputChange={handleInputChange}
             category={category}
             data={editedData}
+            setData={setEditedData}
+            ingredients={ingredientsArray}
+            setIngredients={setIngredients}
+            steps={stepsArray}
+            setSteps={setSteps}
+            images={imagesArray}
+            setImages={setImages}
           />
           <br />
           {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}

@@ -1,9 +1,93 @@
 import React from 'react';
-import { FloatingLabel, Form } from 'react-bootstrap';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
 
 /* eslint-disable react/prop-types */
-function RenderEditFormBody({ handleInputChange, category, data }) {
+function RenderEditFormBody({
+  handleInputChange,
+  category,
+  data,
+  setData,
+  ingredients,
+  setIngredients,
+  steps,
+  setSteps,
+  images,
+  setImages,
+}) {
+  const handleIngredient = (e, i) => {
+    const { name, value } = e.target;
+    /* eslint-disable prefer-const */
+    let newIngredients = [...ingredients];
+    newIngredients[i][name] = value;
+    setIngredients(newIngredients);
+  };
+
+  const handleAddIngredient = () => {
+    setIngredients([
+      ...ingredients,
+      {
+        ingredient: '',
+        timestamp: new Date().getTime(),
+      },
+    ]);
+  };
+
+  const handleDelete = (i) => {
+    let deleteIngredient = [...ingredients];
+    deleteIngredient.splice(i, 1);
+    setIngredients(deleteIngredient);
+  };
+
+  const handleStep = (e, i) => {
+    const { name, value } = e.target;
+    /* eslint-disable prefer-const */
+    let newSteps = [...steps];
+    newSteps[i][name] = value;
+    setSteps(newSteps);
+  };
+
+  const handleAddStep = () => {
+    setSteps([
+      ...steps,
+      {
+        text: '',
+        timestamp: new Date().getTime(),
+      },
+    ]);
+  };
+
+  const handleDeleteStep = (i) => {
+    let deleteStep = [...steps];
+    deleteStep.splice(i, 1);
+    setSteps(deleteStep);
+  };
+
+  const handleImage = (e, i) => {
+    const { name } = e.target;
+    const value = e.target.files[0];
+    /* eslint-disable prefer-const */
+    let newImages = [...images];
+    newImages[i][name] = value;
+    setImages(newImages);
+  };
+
+  const handleAddImage = () => {
+    setImages([
+      ...images,
+      {
+        images: '',
+        timestamp: new Date().getTime(),
+      },
+    ]);
+  };
+
+  const handleDeleteImages = (i) => {
+    let deleteImages = [...images];
+    deleteImages.splice(i, 1);
+    setImages(deleteImages);
+  };
+
   switch (category) {
     case 'user':
       return (
@@ -98,19 +182,48 @@ function RenderEditFormBody({ handleInputChange, category, data }) {
             <p>text</p>
 
             <BlogTextEditor
-              text={data.text}
-              handleInputChange={handleInputChange}
+              setFormData={setData}
+              formData={data}
+              content={data.text}
             />
-            {/* <input
-            type="text"
-            onChange={handleInputChange}
-            value={data.text}
-            name="text"
-          /> */}
+          </Form.Group>
+          <Form.Group className="form-element images">
+            <Form.Label>Images</Form.Label>
+            <Form.Group className="control-element">
+              {images.map((image, i) => (
+                <Form.Group className="rendered-content" key={image.id}>
+                  <Form.Control
+                    required
+                    type="file"
+                    name="images"
+                    onChange={(e) => handleImage(e, i)}
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDeleteImages(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddImage}>
+              click to add new Image
+            </Button>
           </Form.Group>
           <Form.Group className="form-element">
-            <p>images</p>
-            <input type="file" onChange={handleInputChange} name="images" />
+            <Form.Select
+              required
+              aria-label="Default select example"
+              onChange={handleInputChange}
+              value={data.displayType}
+              name="displayType"
+            >
+              <option>choose where you want to display the blog</option>
+              <option>firstPage</option>
+              <option>featured</option>
+              <option>default</option>
+            </Form.Select>
           </Form.Group>
         </>
       );
@@ -183,15 +296,32 @@ function RenderEditFormBody({ handleInputChange, category, data }) {
 
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              rows={5}
-              type="text"
-              onChange={handleInputChange}
-              value={data.ingredients}
-              name="ingredients"
-            />
+            <Form.Group className="control-element">
+              {ingredients.map((ingredient, i) => (
+                <Form.Group
+                  className="rendered-content"
+                  key={ingredient.timestamp}
+                >
+                  <Form.Control
+                    required
+                    type="text"
+                    onChange={(e) => handleIngredient(e, i)}
+                    name="ingredient"
+                    autoComplete="off"
+                    value={ingredient.ingredient}
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDelete(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddIngredient}>
+              click to add new Ingredient
+            </Button>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
@@ -233,9 +363,11 @@ function RenderEditFormBody({ handleInputChange, category, data }) {
               name="difficulty"
             >
               <option>Сhoose a difficulty from the select menu</option>
-              <option>easy</option>
-              <option>medium</option>
-              <option>hard</option>
+              <option>Very easy</option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+              <option>Very hard</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="form-element">
@@ -286,27 +418,60 @@ function RenderEditFormBody({ handleInputChange, category, data }) {
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              rows={3}
-              type="text"
-              onChange={handleInputChange}
-              value={data.ingredients}
-              name="ingredients"
-            />
+            <Form.Group className="control-element">
+              {ingredients.map((ingredient, i) => (
+                <Form.Group
+                  className="rendered-content"
+                  key={ingredient.timestamp}
+                >
+                  <Form.Control
+                    required
+                    type="text"
+                    onChange={(e) => handleIngredient(e, i)}
+                    name="ingredient"
+                    autoComplete="off"
+                    value={ingredient.ingredient}
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDelete(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddIngredient}>
+              click to add new Ingredient
+            </Button>
           </Form.Group>
           <Form.Group className="form-element">
-            <Form.Label>Instruction text</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              rows={3}
-              type="text"
-              onChange={handleInputChange}
-              value={data.text}
-              name="text"
-            />
+            <Form.Label>Steps</Form.Label>
+            <Form.Group className="control-element">
+              {steps.map((step, i) => (
+                <Form.Group className="rendered-content" key={step.timestamp}>
+                  <Form.Control
+                    required
+                    rows={3}
+                    as="textarea"
+                    type="text"
+                    onChange={(e) => handleStep(e, i)}
+                    name="text"
+                    autoComplete="off"
+                    value={step.text}
+                  />
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleDeleteStep(i)}
+                  >
+                    remove
+                  </Button>
+                </Form.Group>
+              ))}
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddStep}>
+              click to add new Step
+            </Button>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
@@ -315,6 +480,15 @@ function RenderEditFormBody({ handleInputChange, category, data }) {
               type="file"
               onChange={handleInputChange}
               name="image"
+            />
+          </Form.Group>
+          <Form.Group className="form-element">
+            <Form.Check // prettier-ignore
+              type="switch"
+              label="Add this recipe to the carousel"
+              name="carrousel"
+              onChange={handleInputChange}
+              checked={data.carrousel}
             />
           </Form.Group>
         </>
