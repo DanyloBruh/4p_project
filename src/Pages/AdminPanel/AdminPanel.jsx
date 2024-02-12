@@ -1,6 +1,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 /* eslint-disable object-curly-newline */
 import { Button, Container, Nav, Spinner } from 'react-bootstrap';
@@ -9,7 +9,13 @@ import Table from 'react-bootstrap/Table';
 
 import { useSelector } from 'react-redux';
 /* eslint-disable object-curly-newline */
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { getDataByCategory, deleteData, getDataByCategoryId } from '../../Helper/requests';
 
@@ -23,10 +29,12 @@ import AddForm from './AddForm/AddForm';
 import EditForm from './EditForm/EditForm';
 import DeleteConfirmModel from '../../Components/DeleteConfirmModel/DeleteConfirmModel';
 import ToastNotification from '../../Components/Toast/Toast';
+import getSearchWith from '../../Helper/searchHelper';
 
 function AdminPanel() {
-  const [sortBy, setSortBy] = useState('');
-  const [search, setSearch] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') || '';
+  const sort = searchParams.get('sort') || '';
   const [show, setShow] = useState(false);
   const [deleteId, setDeleteId] = useState('');
 
@@ -83,6 +91,75 @@ function AdminPanel() {
       )
       .then(setShow(false));
   };
+
+  const visibleData = useMemo(() => {
+    let dataBuffer = [...data];
+
+    const isData = (value) => (new Date(value)).getTime() > 0;
+
+    const isNumeric = (value) => /^-?\d+$/.test(value);
+
+    if (query) {
+      dataBuffer = dataBuffer.filter((obj) =>
+        Object.keys(obj).some((key) => {
+          if (typeof obj[key] === 'string') {
+            const aValue = obj[key].toLowerCase();
+            const bValue = query.toLowerCase();
+            return aValue.includes(bValue);
+          }
+
+          return false;
+        }),
+      );
+    }
+
+    if (sort) {
+      if (sort !== 'none') {
+        dataBuffer = dataBuffer.sort((a, b) => {
+          if (isNumeric(a[sort]) && isNumeric(b[sort])) {
+            console.log('here 2');
+            return (+a[sort]) - (+b[sort]);
+          }
+          if (isData(a[sort]) && isData(b[sort])) {
+            const aValue = new Date(a[sort]).valueOf();
+            const bValue = new Date(b[sort]).valueOf();
+            console.log('here 1');
+            return aValue > bValue;
+          }
+
+          if (sort === 'carrousel') {
+            console.log('here 3');
+            if (a[sort] === true) {
+              return -1;
+            }
+
+            return 1;
+          }
+          if (sort === 'show place') {
+            console.log('here 32');
+            if (a.displayType === 'firstPage') {
+              return -1;
+            }
+
+            if (a.displayType === 'featured') {
+              return -1;
+            }
+
+            return 1;
+          }
+          if (!a[sort] || !b[sort]) {
+            console.log('here 0');
+            return 0;
+          }
+          const aValue = a[sort].toLowerCase();
+          const bValue = b[sort].toLowerCase();
+          return aValue.localeCompare(bValue);
+        });
+      }
+    }
+
+    return dataBuffer;
+  }, [query, sort, data]);
 
   const openConfirmDeleteModal = (deleteItemId) => {
     setShow(true);
@@ -164,8 +241,14 @@ function AdminPanel() {
                       <input
                         type="text"
                         placeholder="Search anything..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        value={query}
+                        onChange={(e) => {
+                          setSearchParams(
+                            getSearchWith(searchParams, {
+                              query: e.target.value || null,
+                            }),
+                          );
+                        }}
                       />
                     </div>
                     <Link to={`/addform/${category}`} className="table-button">
@@ -175,9 +258,13 @@ function AdminPanel() {
                     {/* eslint-disable-next-line */}
                     <select
                       className="dropdown"
-                      value={sortBy}
+                      value={sort}
                       onChange={(e) => {
-                        setSortBy(e.target.value);
+                        setSearchParams(
+                          getSearchWith(searchParams, {
+                            sort: e.target.value || null,
+                          }),
+                        );
                       }}
                     >
                       <RenderTableSortBy category={category} />
@@ -187,16 +274,19 @@ function AdminPanel() {
               )}
             </Container>
             <Container className="admin-panel__body">
-              {data && data.length !== 0 ? (
+              {visibleData && visibleData.length !== 0 ? (
                 <Table>
                   <thead>
                     <tr>
-                      <RenderTableHeader category={category} data={data} />
+                      <RenderTableHeader
+                        category={category}
+                        data={visibleData}
+                      />
                     </tr>
                   </thead>
                   <RenderTableBody
                     category={category}
-                    data={data}
+                    data={visibleData}
                     openConfirmDeleteModal={openConfirmDeleteModal}
                   />
                 </Table>
@@ -212,7 +302,7 @@ function AdminPanel() {
         </>
       );
     case 'addform':
-      return <AddForm data={data} setData={setData} />;
+      return <AddForm setData={setData} />;
     case 'edit':
       return <EditForm data={data} setData={setData} />;
     default:
