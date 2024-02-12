@@ -10,12 +10,6 @@
           font-size: 1.2rem;
           margin-bottom: 10px;
         }
-        > .quill.editor {
-          height: 400px;
-        }
-        > p {
-          margin-top: 50px;
-        }
       }
     }
   }
@@ -89,7 +83,16 @@
 
         > .control-element {
           display: block;
+
+          > img {
+            height: 220px;
+            width: 220px;
+            margin-bottom: 20px;
+            object-fit: cover;
+          }
+
           > .rendered-content {
+            margin-bottom: 20px;
             display: flex;
             > input {
               background: none;
@@ -108,8 +111,13 @@
               margin-right: 15px;
               background-color: #1f1f1f;
             }
-            margin-bottom: 20px;
           }
+        }
+        > img {
+          height: 220px;
+          width: 220px;
+          margin-bottom: 20px;
+          object-fit: cover;
         }
 
         > textarea {
@@ -192,6 +200,13 @@
           .form-floating > .form-select ~ label::after {
             display: none;
           }
+          .form-control:-webkit-autofill,
+          .form-control:-webkit-autofill:hover,
+          .form-control:-webkit-autofill:focus,
+          .form-control:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+            -webkit-text-fill-color: #ffffff;
+          }
         }
         > p {
           color: #b4b4b4;
@@ -207,6 +222,7 @@
           background: none;
           border: 1px solid #fff;
           color: #fff;
+          margin-bottom: 20px;
         }
         > select {
           color: #fff;

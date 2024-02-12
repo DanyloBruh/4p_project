@@ -42,6 +42,12 @@
         > a:hover:after {
           transform: scaleX(1);
         }
+        > .active {
+          border-bottom: solid 3px #ffffff;
+        }
+        > .active:after {
+          display: none;
+        }
       }
     }
     > h2 {
@@ -56,9 +62,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin: 40px 0;
 
       > .search-bar {
-        margin: 58px 0 43px 0;
         > input[type='text'] {
           border: none;
           border-radius: 5px;
@@ -101,6 +107,11 @@
         width: 30%;
         display: block;
         font-weight: 600;
+        font-size: 1rem;
+
+        @media (max-width: 990px) {
+          margin: 0 10px;
+        }
       }
       > .table-button:hover {
         border: 1px solid #1f1f1f;

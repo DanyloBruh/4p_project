@@ -89,6 +89,8 @@ function RenderAddFormBody({
     setImages(deleteImages);
   };
 
+  if (images[0].images) console.log(images[0].images);
+
   switch (category) {
     case 'user':
       return (
@@ -188,20 +190,34 @@ function RenderAddFormBody({
             <Form.Label>Images</Form.Label>
             <Form.Group className="control-element">
               {images.map((image, i) => (
-                <Form.Group className="rendered-content" key={image.timestamp}>
-                  <Form.Control
-                    required
-                    type="file"
-                    name="images"
-                    onChange={(e) => handleImage(e, i)}
-                  />
-                  <Button
-                    variant="outline-light"
-                    onClick={() => handleDeleteImages(i)}
+                <>
+                  <Form.Group
+                    className="rendered-content images"
+                    key={image.id}
                   >
-                    remove
-                  </Button>
-                </Form.Group>
+                    <Form.Control
+                      required
+                      type="file"
+                      name="images"
+                      onChange={(e) => handleImage(e, i)}
+                    />
+                    <Button
+                      variant="outline-light"
+                      onClick={() => handleDeleteImages(i)}
+                    >
+                      remove
+                    </Button>
+                  </Form.Group>
+                  {image.images ? (
+                    <img
+                      key={image.timestamp}
+                      src={URL.createObjectURL(image.images)}
+                      alt="add img"
+                    />
+                  ) : (
+                    <img alt="" />
+                  )}
+                </>
               ))}
             </Form.Group>
             <Button variant="outline-light" onClick={handleAddImage}>
@@ -327,6 +343,11 @@ function RenderAddFormBody({
               onChange={handleInputChange}
               name="image"
             />
+            {formData.image ? (
+              <img src={URL.createObjectURL(formData.image)} alt="add img" />
+            ) : (
+              <img alt="" />
+            )}
           </Form.Group>
         </>
       );
@@ -475,6 +496,11 @@ function RenderAddFormBody({
               onChange={handleInputChange}
               name="image"
             />
+            {formData.image ? (
+              <img src={URL.createObjectURL(formData.image)} alt="add img" />
+            ) : (
+              <img alt="" />
+            )}
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Check // prettier-ignore
