@@ -85,7 +85,7 @@ function AddForm({ setData }) {
   ]);
   const [imagesArray, setImages] = useState([
     {
-      images: {},
+      images: null,
       timestamp: new Date().getTime(),
     },
   ]);
@@ -120,8 +120,6 @@ function AddForm({ setData }) {
       }));
     }
   };
-
-  console.log(formData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -161,8 +159,6 @@ function AddForm({ setData }) {
 
     let newState;
 
-    console.log(formData);
-
     switch (category) {
       case 'product':
         newState = { ...formData, ingredients };
@@ -182,9 +178,9 @@ function AddForm({ setData }) {
       ...newState,
     };
 
-    console.log(response);
     if (category !== 'user') {
       postDataConfig(category, axiosPrivateConfig, response).then((result) => {
+        console.log(result);
         setData((prevState) => [...prevState, result]);
       });
       navigate(`/admin/${category}`);
