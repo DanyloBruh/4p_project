@@ -120,9 +120,18 @@
       }
     }
   }
-  &__body {
+  .orderTable {
     overflow: auto;
     height: 50vh;
+    > .table {
+      > thead {
+        > tr {
+          border: none;
+        }
+      }
+    }
+  }
+  &__body {
     > .spinner {
       position: fixed;
       top: 65%;
@@ -136,8 +145,7 @@
       > thead {
         > tr {
           align-items: center;
-          // border-left: 2px solid #808080;
-          // border-right: 2px solid #808080;
+          border: 2px solid #808080;
           > th {
             position: sticky;
             top: 0;
@@ -147,7 +155,7 @@
             font-style: normal;
             font-weight: 300;
             line-height: normal;
-            background-color: #1f1f1f;
+            background-color: #272727;
             border: none;
             padding-top: 54px;
             padding-bottom: 54px;
@@ -162,7 +170,7 @@
         > tr {
           > td {
             border: 2px solid #808080; //#4d4d4d;
-            background-color: transparent;
+            background-color: #272727;
             color: #fff;
             font-family: 'Outfit', sans-serif;
             font-size: 1.25rem;
