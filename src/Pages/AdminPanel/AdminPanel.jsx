@@ -17,6 +17,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import classNames from 'classnames';
 import { getDataByCategory, deleteData, getDataByCategoryId } from '../../Helper/requests';
 
 import './AdminPanel.scss';
@@ -117,18 +118,15 @@ function AdminPanel() {
       if (sort !== 'none') {
         dataBuffer = dataBuffer.sort((a, b) => {
           if (isNumeric(a[sort]) && isNumeric(b[sort])) {
-            console.log('here 2');
             return (+a[sort]) - (+b[sort]);
           }
           if (isData(a[sort]) && isData(b[sort])) {
             const aValue = new Date(a[sort]).valueOf();
             const bValue = new Date(b[sort]).valueOf();
-            console.log('here 1');
             return aValue > bValue;
           }
 
           if (sort === 'carrousel') {
-            console.log('here 3');
             if (a[sort] === true) {
               return -1;
             }
@@ -136,7 +134,6 @@ function AdminPanel() {
             return 1;
           }
           if (sort === 'show place') {
-            console.log('here 32');
             if (a.displayType === 'firstPage') {
               return -1;
             }
@@ -148,7 +145,6 @@ function AdminPanel() {
             return 1;
           }
           if (!a[sort] || !b[sort]) {
-            console.log('here 0');
             return 0;
           }
           const aValue = a[sort].toLowerCase();
@@ -273,7 +269,11 @@ function AdminPanel() {
                 </>
               )}
             </Container>
-            <Container className="admin-panel__body">
+            <Container
+              className={classNames('admin-panel__body', {
+                orderTable: category === 'order',
+              })}
+            >
               {visibleData && visibleData.length !== 0 ? (
                 <Table>
                   <thead>
