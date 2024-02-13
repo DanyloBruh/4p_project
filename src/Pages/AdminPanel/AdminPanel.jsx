@@ -47,6 +47,8 @@ function AdminPanel() {
   const [archived, setArchived] = useState(false);
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  console.log(data);
   const user = useSelector((state) => state.auth.auth.user);
 
   // const accepted = false;
@@ -83,7 +85,10 @@ function AdminPanel() {
 
   useEffect(() => {
     if (category) {
-      getDataByCategory(category, axiosPrivate, archived).then(setData);
+      setLoading(true);
+      getDataByCategory(category, axiosPrivate, archived)
+        .then(setData)
+        .finally(() => setLoading(false));
     } else {
       navigate('product');
     }
@@ -91,12 +96,9 @@ function AdminPanel() {
 
   const handleDelete = async (id) => {
     if (await confirm('Are your sure?')) {
-      deleteData(category, id, axiosPrivate)
-        .then(
-          setData((prevState) =>
-            prevState.filter((item) => item.id !== id),
-          ),
-        );
+      deleteData(category, id, axiosPrivate).then(
+        setData((prevState) => prevState.filter((item) => item.id !== id)),
+      );
     }
   };
 
@@ -106,21 +108,18 @@ function AdminPanel() {
       message: 'Set archived',
       variant1: 'Zip',
       variant2: 'Unzip',
-
-    }).then(
-      ({ button }) => {
-        const archiv = button === 'Zip';
-        archivedData(category, archivedId, axiosPrivate, { archived: archiv })
-          .then(() => {
-            if ((archived && !archiv) || (!archived && archiv)) {
-              setData((prevState) =>
-                prevState.filter((item) => item.id !== archivedId),
-              );
-            }
-          },
+    }).then(({ button }) => {
+      const archiv = button === 'Zip';
+      archivedData(category, archivedId, axiosPrivate, {
+        archived: archiv,
+      }).then(() => {
+        if ((archived && !archiv) || (!archived && archiv)) {
+          setData((prevState) =>
+            prevState.filter((item) => item.id !== archivedId),
           );
-      },
-    );
+        }
+      });
+    });
   };
 
   const visibleData = useMemo(() => {
@@ -307,7 +306,7 @@ function AdminPanel() {
                 orderTable: category === 'order',
               })}
             >
-              {visibleData && visibleData.length !== 0 ? (
+              {visibleData && visibleData.length !== 0 && (
                 <Table>
                   <thead>
                     <tr>
@@ -324,12 +323,16 @@ function AdminPanel() {
                     handleArchived={handleArchived}
                   />
                 </Table>
-              ) : (
+              )}
+              {loading && (
                 <Spinner
                   animation="border"
                   variant="light"
                   className="spinner"
                 />
+              )}
+              {!loading && visibleData.length === 0 && (
+                <h2 className="text-white">Nothing found</h2>
               )}
             </Container>
           </div>
