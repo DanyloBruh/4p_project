@@ -52,7 +52,7 @@ function EditForm({ data, setData }) {
         description: '',
         price: '',
         ingredients: '',
-        image: '',
+        Image: '',
       };
       break;
     case 'instruction':
@@ -64,7 +64,7 @@ function EditForm({ data, setData }) {
         description: '',
         ingredients: '',
         text: '',
-        image: '',
+        Image: '',
         carrousel: '',
       };
       break;
@@ -73,17 +73,18 @@ function EditForm({ data, setData }) {
   }
 
   const [editedData, setEditedData] = useState(data.find((el) => el.id === id));
+  let startData = data.find((el) => el.id === id);
+  startData = Object.fromEntries(
+    Object.entries(startData)
+      .filter(([key]) => Object.keys(initialState).includes(key))
+      .map(([key, value]) => [key, value]),
+  );
 
   let inputIngredientsArray = [];
   let inputStepsArray = [];
   let inputImagesArray = [];
 
   switch (category) {
-    case 'product':
-      inputIngredientsArray = editedData.ingredients
-        .split(' | ')
-        .map((item) => ({ ingredient: item, timestamp: useId() }));
-      break;
     case 'instruction':
       inputIngredientsArray = editedData.ingredients
         .split(' | ')
@@ -149,6 +150,49 @@ function EditForm({ data, setData }) {
     });
   };
 
+  const imageToFile = (imageObj, sliceSize = 512) => {
+    console.log('Obj', imageObj);
+    if (!imageObj.id) return imageObj;
+    const byteCharacters = atob(imageObj.imageData);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i += 1) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, { type: imageObj.imageType });
+    const file = new File([blob], imageObj.imageName, {
+      type: imageObj.imageType,
+    });
+
+    return file;
+  };
+
+  function removeUnchangedFields(originalData, modifiedData) {
+    const newData = { ...modifiedData };
+
+    Object.keys(originalData).forEach((key) => {
+      if (
+        Object.prototype.hasOwnProperty.call(originalData, key)
+        && Object.prototype.hasOwnProperty.call(newData, key)
+      ) {
+        if (originalData[key] === newData[key]) {
+          delete newData[key];
+        }
+      }
+    });
+
+    return newData;
+  }
+
   const handleUpdate = (event) => {
     event.preventDefault();
 
@@ -179,13 +223,10 @@ function EditForm({ data, setData }) {
       .map((ingredient) => ingredient.ingredient)
       .join(' | ');
     const text = stepsArray.map((step) => step.text).join(' | ');
-    const Images = imagesArray.map((image) => image.images);
+    const Images = imagesArray.map((image) => imageToFile(image.images));
     let newState;
 
     switch (category) {
-      case 'product':
-        newState = { ...editedData, ingredients };
-        break;
       case 'instruction':
         newState = { ...editedData, ingredients, text };
         break;
@@ -195,25 +236,27 @@ function EditForm({ data, setData }) {
       default:
         newState = { ...editedData };
     }
+    console.log('newState', newState);
+    console.log('startData', startData);
 
-    const response = Object.fromEntries(
+    const dataForState = Object.fromEntries(
       Object.entries(newState)
         .filter(([key]) => Object.keys(initialState).includes(key))
         .map(([key, value]) => [key, value]),
     );
 
-    console.log('new State', newState);
+    const dataForDB = removeUnchangedFields(startData, dataForState);
 
-    console.log('response', response);
+    dataForState.Image = newState.Image;
 
     if (category !== 'user') {
-      editDataConfig(category, id, axiosPrivateConfig, response).then(
-        replaceItem(id, { ...response, id }),
+      editDataConfig(category, id, axiosPrivateConfig, dataForDB).then(
+        replaceItem(id, { ...dataForState, id }),
       );
       navigate(`/admin/${category}`);
     } else {
-      editData(category, id, axiosPrivate, response).then(
-        replaceItem(id, { ...response, id }),
+      editData(category, id, axiosPrivate, dataForDB).then(
+        replaceItem(id, { ...dataForState, id }),
       );
       navigate(`/admin/${category}`);
     }
@@ -228,7 +271,7 @@ function EditForm({ data, setData }) {
             : 'add-edit-form__body blog'
         }
       >
-        <Form noValidate className="form">
+        <Form noValidate className="form" encType="multipart/form-data">
           <Form.Label>
             Edit
             {` ${category}`}

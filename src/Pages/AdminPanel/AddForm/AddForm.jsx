@@ -160,9 +160,6 @@ function AddForm({ setData }) {
     let newState;
 
     switch (category) {
-      case 'product':
-        newState = { ...formData, ingredients };
-        break;
       case 'instruction':
         newState = { ...formData, ingredients, text };
         break;
@@ -177,6 +174,8 @@ function AddForm({ setData }) {
       userId,
       ...newState,
     };
+
+    console.log('response add', response);
 
     if (category !== 'user') {
       postDataConfig(category, axiosPrivateConfig, response).then((result) => {

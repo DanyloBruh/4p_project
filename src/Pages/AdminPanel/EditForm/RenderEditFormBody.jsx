@@ -16,7 +16,6 @@ function RenderEditFormBody({
   setImages,
 }) {
   console.log(data);
-
   const handleIngredient = (e, i) => {
     const { name, value } = e.target;
     /* eslint-disable prefer-const */
@@ -90,7 +89,19 @@ function RenderEditFormBody({
   };
 
   // console.log(URL.createObjectURL(images[2].images));
-  console.log(images);
+
+  // {data.image && data.image.id ? (
+  //   <img
+  //     src={`data:image/png;base64,${data.image.imageData}`}
+  //     alt="edit img"
+  //   />
+  // ) : (
+  //   // <img src={URL.createObjectURL(data.image)} alt="edit img" />
+  //   <img
+  //     src={`data:image/png;base64,${data.Image.imageData}`}
+  //     alt="edit img"
+  //   />
+  // )}
 
   switch (category) {
     case 'user':
@@ -319,32 +330,15 @@ function RenderEditFormBody({
 
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Group className="control-element">
-              {ingredients.map((ingredient, i) => (
-                <Form.Group
-                  className="rendered-content"
-                  key={ingredient.timestamp}
-                >
-                  <Form.Control
-                    required
-                    type="text"
-                    onChange={(e) => handleIngredient(e, i)}
-                    name="ingredient"
-                    autoComplete="off"
-                    value={ingredient.ingredient}
-                  />
-                  <Button
-                    variant="outline-light"
-                    onClick={() => handleDelete(i)}
-                  >
-                    remove
-                  </Button>
-                </Form.Group>
-              ))}
-            </Form.Group>
-            <Button variant="outline-light" onClick={handleAddIngredient}>
-              click to add new Ingredient
-            </Button>
+            <Form.Control
+              required
+              as="textarea"
+              rows={5}
+              type="text"
+              onChange={handleInputChange}
+              value={data.ingredients}
+              name="ingredients"
+            />
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
@@ -352,10 +346,10 @@ function RenderEditFormBody({
               required
               type="file"
               onChange={handleInputChange}
-              name="image"
+              name="Image"
             />
-            {data.image ? (
-              <img src={URL.createObjectURL(data.image)} alt="edit img" />
+            {data.Image && !data.Image.id ? (
+              <img src={URL.createObjectURL(data.Image)} alt="edit img" />
             ) : (
               <img
                 src={`data:image/png;base64,${data.Image.imageData}`}
@@ -511,10 +505,10 @@ function RenderEditFormBody({
               required
               type="file"
               onChange={handleInputChange}
-              name="image"
+              name="Image"
             />
-            {data.image ? (
-              <img src={URL.createObjectURL(data.image)} alt="edit img" />
+            {data.Image && !data.Image.id ? (
+              <img src={URL.createObjectURL(data.Image)} alt="edit img" />
             ) : (
               <img
                 src={`data:image/png;base64,${data.Image.imageData}`}
@@ -658,7 +652,6 @@ function RenderEditFormBody({
               <option>courier on the way</option>
               <option>delivered</option>
               <option>requires processing</option>
-
             </Form.Select>
           </Form.Group>
         </>
