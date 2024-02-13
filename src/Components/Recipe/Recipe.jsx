@@ -3,7 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React, {
-  useEffect, useLayoutEffect, useRef, useState,
+  useEffect, useRef, useState,
 } from 'react';
 import { Container, Placeholder } from 'react-bootstrap';
 import './Recipe.scss';
@@ -20,9 +20,10 @@ function Recipe({ recipe }) {
   const [height, setHeight] = useState(0);
   const [recipeInfo, setRecipeInfo] = useState();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setHeight(ref.current.clientHeight);
-  }, [ref?.current?.clientHeight]);
+    console.log(ref.current.clientHeight);
+  }, [ref.current, recipeInfo]);
 
   useEffect(() => {
     function handleWindowResize() {
@@ -39,7 +40,7 @@ function Recipe({ recipe }) {
   useEffect(() => {
     setHeight(ref.current.clientHeight);
   }, [ref]);
-
+  console.log(height);
   useEffect(() => {
     if (id) {
       if (recipe) {
