@@ -64,7 +64,6 @@ function RenderAddFormBody({
   };
 
   const handleImage = (e, i) => {
-    console.log(e.target.files[0]);
     const { name } = e.target;
     const value = e.target.files[0];
     /* eslint-disable prefer-const */
@@ -88,8 +87,6 @@ function RenderAddFormBody({
     deleteImages.splice(i, 1);
     setImages(deleteImages);
   };
-
-  if (images[0].images) console.log(images[0].images);
 
   switch (category) {
     case 'user':
@@ -308,32 +305,15 @@ function RenderAddFormBody({
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Group className="control-element">
-              {ingredients.map((ingredient, i) => (
-                <Form.Group
-                  className="rendered-content"
-                  key={ingredient.timestamp}
-                >
-                  <Form.Control
-                    required
-                    rows={5}
-                    type="text"
-                    onChange={(e) => handleIngredient(e, i)}
-                    name="ingredient"
-                    autoComplete="off"
-                  />
-                  <Button
-                    variant="outline-light"
-                    onClick={() => handleDelete(i)}
-                  >
-                    remove
-                  </Button>
-                </Form.Group>
-              ))}
-            </Form.Group>
-            <Button variant="outline-light" onClick={handleAddIngredient}>
-              click to add new Ingredient
-            </Button>
+            <Form.Control
+              required
+              as="textarea"
+              rows={5}
+              type="text"
+              onChange={handleInputChange}
+              value={formData.ingredients}
+              name="ingredients"
+            />
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>

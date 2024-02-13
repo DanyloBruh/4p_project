@@ -56,8 +56,6 @@ function AdminPanel() {
   const navigate = useNavigate();
   const logout = useLogout();
 
-  console.log('admin-panel data', data);
-
   useEffect(() => {
     if (category === 'order') {
       // eslint-disable-next-line no-undef
@@ -103,7 +101,7 @@ function AdminPanel() {
     if (data) {
       let dataBuffer = [...data];
 
-      const isData = (value) => (new Date(value)).getTime() > 0;
+      const isData = (value) => new Date(value).getTime() > 0;
 
       const isNumeric = (value) => /^-?\d+$/.test(value);
 
@@ -125,7 +123,7 @@ function AdminPanel() {
         if (sort !== 'none') {
           dataBuffer = dataBuffer.sort((a, b) => {
             if (isNumeric(a[sort]) && isNumeric(b[sort])) {
-              return (+a[sort]) - (+b[sort]);
+              return +a[sort] - +b[sort];
             }
             if (isData(a[sort]) && isData(b[sort])) {
               const aValue = new Date(a[sort]).valueOf();
@@ -171,6 +169,8 @@ function AdminPanel() {
     setShow(true);
     setDeleteId(deleteItemId);
   };
+
+  console.log(data);
 
   switch (page) {
     case 'admin':
