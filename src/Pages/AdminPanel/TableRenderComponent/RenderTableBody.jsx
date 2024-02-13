@@ -1,13 +1,23 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import HtmlToReactParser from 'html-to-react';
+import { Button } from 'react-bootstrap';
+import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
+import { MdDeleteForever } from 'react-icons/md';
+import { IconContext } from 'react-icons';
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
-function RenderTableBody({ category, data, openConfirmDeleteModal }) {
+function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchived }) {
   const Parser = new HtmlToReactParser.Parser();
+  const iconProviderValue = useMemo(() => {
+    const res = { color: 'white', size: '2em' };
+    return res;
+  }, []);
 
   const formatDate = (dateString) => {
     const options = {
@@ -63,15 +73,31 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
                 {/* eslint-disable-next-line */}
                 <Link
                   to={`/edit/product/${product.id}`}
-                  className="button-edit"
-                />
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiEdit2Line />
+                  </IconContext.Provider>
+                </Link>
               </td>
               <td>
-                {/* eslint-disable-next-line */}
-                <Link
-                  className="button-delete"
+                <Button
+                  className="button-icon"
                   onClick={() => openConfirmDeleteModal(product.id)}
-                />
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <MdDeleteForever />
+                  </IconContext.Provider>
+                </Button>
+              </td>
+              <td>
+                <Button
+                  className="button-icon"
+                  onClick={() => handleArchived(product.id)}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiFolderZipFill />
+                  </IconContext.Provider>
+                </Button>
               </td>
             </tr>
           ))}
@@ -109,16 +135,32 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
               <td>
                 {/* eslint-disable-next-line */}
                 <Link
-                  to={`/edit/instruction/${recipe.id}`}
-                  className="button-edit"
-                />
+                  to={`/edit/product/${recipe.id}`}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiEdit2Line />
+                  </IconContext.Provider>
+                </Link>
               </td>
               <td>
-                {/* eslint-disable-next-line */}
-                <Link
-                  className="button-delete"
+                <Button
+                  className="button-icon"
                   onClick={() => openConfirmDeleteModal(recipe.id)}
-                />
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <MdDeleteForever />
+                  </IconContext.Provider>
+                </Button>
+              </td>
+              <td>
+                <Button
+                  className="button-icon"
+                  onClick={() => handleArchived(recipe.id)}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiFolderZipFill />
+                  </IconContext.Provider>
+                </Button>
               </td>
             </tr>
           ))}
@@ -140,14 +182,33 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/blog/${blog.id}`} className="button-edit" />
+                <Link
+                  to={`/edit/product/${blog.id}`}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiEdit2Line />
+                  </IconContext.Provider>
+                </Link>
               </td>
               <td>
-                {/* eslint-disable-next-line */}
-                <Link
-                  className="button-delete"
+                <Button
+                  className="button-icon"
                   onClick={() => openConfirmDeleteModal(blog.id)}
-                />
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <MdDeleteForever />
+                  </IconContext.Provider>
+                </Button>
+              </td>
+              <td>
+                <Button
+                  className="button-icon"
+                  onClick={() => handleArchived(blog.id)}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiFolderZipFill />
+                  </IconContext.Provider>
+                </Button>
               </td>
             </tr>
           ))}
@@ -168,14 +229,33 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/user/${user.id}`} className="button-edit" />
+                <Link
+                  to={`/edit/product/${user.id}`}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiEdit2Line />
+                  </IconContext.Provider>
+                </Link>
               </td>
               <td>
-                {/* eslint-disable-next-line */}
-                <Link
-                  className="button-delete"
+                <Button
+                  className="button-icon"
                   onClick={() => openConfirmDeleteModal(user.id)}
-                />
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <MdDeleteForever />
+                  </IconContext.Provider>
+                </Button>
+              </td>
+              <td>
+                <Button
+                  className="button-icon"
+                  onClick={() => handleArchived(user.id)}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiFolderZipFill />
+                  </IconContext.Provider>
+                </Button>
               </td>
             </tr>
           ))}
@@ -218,14 +298,33 @@ function RenderTableBody({ category, data, openConfirmDeleteModal }) {
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link to={`/edit/order/${order.id}`} className="button-edit" />
+                <Link
+                  to={`/edit/product/${order.id}`}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiEdit2Line />
+                  </IconContext.Provider>
+                </Link>
               </td>
               <td>
-                {/* eslint-disable-next-line */}
-                <Link
-                  className="button-delete"
+                <Button
+                  className="button-icon"
                   onClick={() => openConfirmDeleteModal(order.id)}
-                />
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <MdDeleteForever />
+                  </IconContext.Provider>
+                </Button>
+              </td>
+              <td>
+                <Button
+                  className="button-icon"
+                  onClick={() => handleArchived(order.id)}
+                >
+                  <IconContext.Provider value={iconProviderValue}>
+                    <RiFolderZipFill />
+                  </IconContext.Provider>
+                </Button>
               </td>
             </tr>
           ))}

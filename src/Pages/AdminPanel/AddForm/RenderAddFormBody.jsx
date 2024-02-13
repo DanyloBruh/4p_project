@@ -1,4 +1,5 @@
 import React from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
 
@@ -293,10 +294,11 @@ function RenderAddFormBody({
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Description</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
+            <TextareaAutosize
               rows={5}
+              minRows={5}
+              className="form-control"
+              required
               type="text"
               onChange={handleInputChange}
               value={formData.description}
@@ -403,10 +405,11 @@ function RenderAddFormBody({
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Description</Form.Label>
-            <Form.Control
+            <TextareaAutosize
+              rows={5}
+              minRows={5}
+              className="form-control"
               required
-              as="textarea"
-              rows={2}
               type="text"
               onChange={handleInputChange}
               value={formData.description}
@@ -446,14 +449,14 @@ function RenderAddFormBody({
             <Form.Group className="control-element">
               {steps.map((step, i) => (
                 <Form.Group className="rendered-content" key={step.timestamp}>
-                  <Form.Control
+                  <TextareaAutosize
+                    rows={5}
+                    minRows={2}
+                    className="form-control"
                     required
-                    rows={3}
-                    as="textarea"
                     type="text"
                     onChange={(e) => handleStep(e, i)}
                     name="text"
-                    autoComplete="off"
                   />
                   <Button
                     variant="outline-light"
