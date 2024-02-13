@@ -1,34 +1,58 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { confirmable, createConfirmation } from 'react-confirm';
 import { Button, Modal } from 'react-bootstrap';
 import './DeleteConfirmModel.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
-function DeleteConfirmModel({ show, setShow, handleDelete, category }) {
-  const handleClose = () => {
-    setShow(false);
-  };
-
+function Confirmation({
+  okLabel = 'OK',
+  cancelLabel = 'Cancel',
+  title = 'Confirmation',
+  confirmation,
+  show,
+  proceed,
+  enableEscape = true,
+}) {
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+    <Modal
+      animation={false}
+      show={show}
+      onHide={() => proceed(false)}
+      backdrop={enableEscape ? true : 'static'}
+      keyboard={enableEscape}
+    >
       <Modal.Header closeButton>
-        <Modal.Title>Confirm the Deletion</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Are you sure you want to delete
-        {` ${category} `}
-        from the table?
+        {confirmation}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="outline-danger" onClick={handleDelete}>
-          Delete
+        <Button onClick={() => proceed(false)}>{cancelLabel}</Button>
+        <Button
+          className="button-l"
+          bsStyle="primary"
+          onClick={() => proceed(true)}
+        >
+          {okLabel}
         </Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export default DeleteConfirmModel;
+export default function confirm(
+  confirmation,
+  proceedLabel = 'OK',
+  cancelLabel = 'cancel',
+  options = {},
+) {
+  return createConfirmation(confirmable(Confirmation))({
+    confirmation,
+    proceedLabel,
+    cancelLabel,
+    ...options,
+  });
+}

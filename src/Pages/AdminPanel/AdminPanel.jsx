@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
@@ -23,6 +24,7 @@ import {
   getDataByCategory,
   deleteData,
   getDataByCategoryId,
+  archivedData,
 } from '../../Helper/requests';
 
 import './AdminPanel.scss';
@@ -33,16 +35,16 @@ import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 import useLogout from '../../Hooks/useLogout';
 import AddForm from './AddForm/AddForm';
 import EditForm from './EditForm/EditForm';
-import DeleteConfirmModel from '../../Components/DeleteConfirmModel/DeleteConfirmModel';
 import ToastNotification from '../../Components/Toast/Toast';
 import getSearchWith from '../../Helper/searchHelper';
+import confirm from '../../Components/DeleteConfirmModel/DeleteConfirmModel';
+import { confirm as confirmComplex } from '../../Components/setConfirmModel/setConfirmModel';
 
 function AdminPanel() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
   const sort = searchParams.get('sort') || '';
-  const [show, setShow] = useState(false);
-  const [deleteId, setDeleteId] = useState('');
+  const [archived, setArchived] = useState(false);
 
   const [data, setData] = useState([]);
   const user = useSelector((state) => state.auth.auth.user);
@@ -83,20 +85,44 @@ function AdminPanel() {
 
   useEffect(() => {
     if (category) {
-      getDataByCategory(category, axiosPrivate).then(setData);
+      getDataByCategory(category, axiosPrivate, archived).then(setData);
     } else {
       navigate('product');
     }
-  }, [category]);
+  }, [category, archived]);
 
-  const handleDelete = () => {
-    deleteData(category, deleteId, axiosPrivate)
-      .then(
-        setData((prevState) =>
-          prevState.filter((item) => item.id !== deleteId),
-        ),
-      )
-      .then(setShow(false));
+  const handleDelete = async (id) => {
+    if (await confirm('Are your sure?')) {
+      deleteData(category, id, axiosPrivate)
+        .then(
+          setData((prevState) =>
+            prevState.filter((item) => item.id !== id),
+          ),
+        );
+    }
+  };
+
+  const handleArchived = (archivedId) => {
+    confirmComplex({
+      title: 'Confirmation',
+      message: 'Set archived',
+      variant1: 'Zip',
+      variant2: 'Unzip',
+
+    }).then(
+      ({ button }) => {
+        const archiv = button === 'Zip';
+        archivedData(category, archivedId, axiosPrivate, { archived: archiv })
+          .then(() => {
+            if ((archived && !archiv) || (!archived && archiv)) {
+              setData((prevState) =>
+                prevState.filter((item) => item.id !== archivedId),
+              );
+            }
+          },
+          );
+      },
+    );
   };
 
   const visibleData = useMemo(() => {
@@ -167,22 +193,11 @@ function AdminPanel() {
     return [];
   }, [query, sort, data]);
 
-  const openConfirmDeleteModal = (deleteItemId) => {
-    setShow(true);
-    setDeleteId(deleteItemId);
-  };
-
   switch (page) {
     case 'admin':
       return (
         <>
           <ToastContainer />
-          <DeleteConfirmModel
-            show={show}
-            setShow={setShow}
-            handleDelete={handleDelete}
-            category={category}
-          />
           <div className="admin-panel">
             <Container className="admin-panel__header">
               <h2 className="user-name">
@@ -260,7 +275,17 @@ function AdminPanel() {
                     <Link to={`/addform/${category}`} className="table-button">
                       {`ADD NEW ${category.toUpperCase()}`}
                     </Link>
-
+                    <div className="checkbox-wrapper-22">
+                      <label className="switch" htmlFor="checkbox">
+                        <input
+                          type="checkbox"
+                          id="checkbox"
+                          onChange={() => setArchived(!archived)}
+                        />
+                        <div className="slider round" />
+                      </label>
+                      <span className="switchText">Archived</span>
+                    </div>
                     {/* eslint-disable-next-line */}
                     <select
                       className="dropdown"
@@ -297,7 +322,8 @@ function AdminPanel() {
                   <RenderTableBody
                     category={category}
                     data={visibleData}
-                    openConfirmDeleteModal={openConfirmDeleteModal}
+                    openConfirmDeleteModal={handleDelete}
+                    handleArchived={handleArchived}
                   />
                 </Table>
               ) : (
