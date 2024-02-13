@@ -74,7 +74,6 @@
           background-image: url('../../Assets/searchicon.png');
           background-position: 10px 15px;
           background-repeat: no-repeat;
-          padding-left: 60px;
           color: #fff;
           font-family: 'Outfit', sans-serif;
           font-size: 1rem;
@@ -85,6 +84,68 @@
             width: 300px;
           }
         }
+      }
+
+      .checkbox-wrapper-22 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .switchText {
+          color: #fff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 300;
+          line-height: normal;
+        }
+      }
+      .checkbox-wrapper-22 .switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+      }
+    
+      .checkbox-wrapper-22 .switch input {
+        display:none;
+      }
+    
+      .checkbox-wrapper-22 .slider {
+        background-color: #bbbbbb;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .4s;
+      }
+    
+      .checkbox-wrapper-22 .slider:before {
+        background-color: #fff;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: .4s;
+        width: 26px;
+      }
+    
+      .checkbox-wrapper-22 input:checked + .slider {
+        background-color: #3e3e3e;
+      }
+    
+      .checkbox-wrapper-22 input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+    
+      .checkbox-wrapper-22 .slider.round {
+        border-radius: 34px;
+      }
+    
+      .checkbox-wrapper-22 .slider.round:before {
+        border-radius: 50%;
       }
       > .dropdown {
         color: #fff;
@@ -193,14 +254,9 @@
               background-position: center;
               background-size: cover;
             }
-            > a.button-delete {
-              margin: auto;
-              display: block;
-              width: 40px;
-              height: 40px;
-              background: url('../../Assets/deleteicon.png');
-              background-position: center;
-              background-size: cover;
+            > button.button-icon {
+              background-color: transparent;
+              border: none;
             }
           }
         }

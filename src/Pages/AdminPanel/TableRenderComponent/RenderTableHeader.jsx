@@ -1,10 +1,16 @@
-import React from 'react';
-
-import editIcon from '../../../Assets/editicon.png';
-import deleteIcon from '../../../Assets/deleteicon.png';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable import/no-extraneous-dependencies */
+import React, { useMemo } from 'react';
+import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
+import { MdDeleteForever } from 'react-icons/md';
+import { IconContext } from 'react-icons';
 
 /* eslint-disable react/prop-types */
 function RenderTableHeader({ category }) {
+  const iconProviderValue = useMemo(() => {
+    const res = { color: 'white', size: '2em' };
+    return res;
+  }, []);
   switch (category) {
     case 'product':
       return (
@@ -15,10 +21,19 @@ function RenderTableHeader({ category }) {
           <th>price</th>
           <th>ingridients</th>
           <th>
-            <img src={editIcon} alt="edit icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <RiEdit2Line />
+            </IconContext.Provider>
           </th>
           <th>
-            <img src={deleteIcon} alt="delete icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <MdDeleteForever />
+            </IconContext.Provider>
+          </th>
+          <th>
+            <IconContext.Provider value={iconProviderValue}>
+              <RiFolderZipFill />
+            </IconContext.Provider>
           </th>
         </>
       );
@@ -34,10 +49,19 @@ function RenderTableHeader({ category }) {
           <th>text</th>
           <th>show in carousels</th>
           <th>
-            <img src={editIcon} alt="edit icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <RiEdit2Line />
+            </IconContext.Provider>
           </th>
           <th>
-            <img src={deleteIcon} alt="delete icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <MdDeleteForever />
+            </IconContext.Provider>
+          </th>
+          <th>
+            <IconContext.Provider value={iconProviderValue}>
+              <RiFolderZipFill />
+            </IconContext.Provider>
           </th>
         </>
       );
@@ -48,10 +72,19 @@ function RenderTableHeader({ category }) {
           <th>text</th>
           <th>show place</th>
           <th>
-            <img src={editIcon} alt="edit icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <RiEdit2Line />
+            </IconContext.Provider>
           </th>
           <th>
-            <img src={deleteIcon} alt="delete icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <MdDeleteForever />
+            </IconContext.Provider>
+          </th>
+          <th>
+            <IconContext.Provider value={iconProviderValue}>
+              <RiFolderZipFill />
+            </IconContext.Provider>
           </th>
         </>
       );
@@ -69,10 +102,19 @@ function RenderTableHeader({ category }) {
           <th>createdAt</th>
           <th>updatedAt</th>
           <th>
-            <img src={editIcon} alt="edit icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <RiEdit2Line />
+            </IconContext.Provider>
           </th>
           <th>
-            <img src={deleteIcon} alt="delete icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <MdDeleteForever />
+            </IconContext.Provider>
+          </th>
+          <th>
+            <IconContext.Provider value={iconProviderValue}>
+              <RiFolderZipFill />
+            </IconContext.Provider>
           </th>
         </>
       );
@@ -82,10 +124,19 @@ function RenderTableHeader({ category }) {
           <th>name</th>
           <th>email</th>
           <th>
-            <img src={editIcon} alt="edit icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <RiEdit2Line />
+            </IconContext.Provider>
           </th>
           <th>
-            <img src={deleteIcon} alt="delete icon" />
+            <IconContext.Provider value={iconProviderValue}>
+              <MdDeleteForever />
+            </IconContext.Provider>
+          </th>
+          <th>
+            <IconContext.Provider value={iconProviderValue}>
+              <RiFolderZipFill />
+            </IconContext.Provider>
           </th>
         </>
       );
