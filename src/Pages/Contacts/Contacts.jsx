@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './Contacts.scss';
@@ -107,10 +108,20 @@ function Contacts() {
             </Row>
           </Col>
           <Col md={6} sm={12} className="col-contacts-address">
-            <div className="contact-map" />
-            <p className="address-map">
-              you can find us at | 39 Finsbury Square
-            </p>
+            <div className="google-map">
+              <iframe
+                width="350"
+                height="350"
+                frameBorder="0"
+                scrolling="no"
+                marginHeight="0"
+                marginWidth="0"
+                src="https://maps.google.com/maps?width=350&amp;height=350&amp;hl=en&amp;q=5%20Wellesley%20Ct,%20London%20W9%201RG,%20United%20Kingdom+(4P)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              >
+                <a href="https://www.gps.ie/">gps trackers</a>
+              </iframe>
+            </div>
+            <p className="address-map">you can find us at | 5 Wellesley Ct</p>
           </Col>
         </Row>
       </Container>
