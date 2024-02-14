@@ -235,14 +235,16 @@ function AdminPanel() {
                   >
                     orders
                   </NavLink>
-                  <NavLink
-                    to="user"
-                    onClick={() => {
-                      if (category !== 'user') setData([]);
-                    }}
-                  >
-                    users
-                  </NavLink>
+                  {user.role === 'admin' && (
+                    <NavLink
+                      to="user"
+                      onClick={() => {
+                        if (category !== 'user') setData([]);
+                      }}
+                    >
+                      users
+                    </NavLink>
+                  )}
                   <Button variant="outline-light" onClick={signOut}>
                     LOGOUT
                   </Button>

@@ -1,9 +1,24 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/iframe-has-title */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './Contacts.scss';
 
 function Contacts() {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
   return (
     <div className="contacts-content">
       <Container className="contact-card">
@@ -110,8 +125,14 @@ function Contacts() {
           <Col md={6} sm={12} className="col-contacts-address">
             <div className="google-map">
               <iframe
-                width="350"
-                height="350"
+                width={
+                  windowSize <= 575
+                    ? windowSize <= 370
+                      ? '100%'
+                      : '320'
+                    : '350'
+                }
+                height={windowSize <= 575 ? '300' : '350'}
                 frameBorder="0"
                 scrolling="no"
                 marginHeight="0"
