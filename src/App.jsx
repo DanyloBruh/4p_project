@@ -35,28 +35,54 @@ function App() {
           </Route>
 
           <Route element={<PersistLogin />}>
-            <Route element={<RequireAuth />}>
+            <Route
+              element={<RequireAuth allowedRoles={['admin', 'employee']} />}
+            >
               <Route path="admin" element={<AdminPanel />}>
                 <Route path="product" element={<AdminPanel />} />
                 <Route path="instruction" element={<AdminPanel />} />
                 <Route path="blog" element={<AdminPanel />} />
                 <Route path="order" element={<AdminPanel />} />
+              </Route>
+            </Route>
+
+            <Route element={<RequireAuth allowedRoles={['admin']} />}>
+              <Route path="admin" element={<AdminPanel />}>
                 <Route path="user" element={<AdminPanel />} />
               </Route>
+            </Route>
 
+            <Route
+              element={<RequireAuth allowedRoles={['admin', 'employee']} />}
+            >
               <Route path="addform" element={<AdminPanel />}>
                 <Route path="product" element={<AdminPanel />} />
                 <Route path="instruction" element={<AdminPanel />} />
                 <Route path="blog" element={<AdminPanel />} />
                 <Route path="order" element={<AdminPanel />} />
+              </Route>
+            </Route>
+
+            <Route element={<RequireAuth allowedRoles={['admin']} />}>
+              <Route path="addform" element={<AdminPanel />}>
                 <Route path="user" element={<AdminPanel />} />
               </Route>
-
+            </Route>
+            <Route
+              element={<RequireAuth allowedRoles={['admin', 'employee']} />}
+            >
               <Route path="edit" element={<AdminPanel />}>
                 <Route path="product/:id" element={<AdminPanel />} />
                 <Route path="instruction/:id" element={<AdminPanel />} />
                 <Route path="blog/:id" element={<AdminPanel />} />
                 <Route path="order/:id" element={<AdminPanel />} />
+              </Route>
+            </Route>
+
+            <Route
+              element={<RequireAuth allowedRoles={['admin']} />}
+            >
+              <Route path="edit" element={<AdminPanel />}>
                 <Route path="user/:id" element={<AdminPanel />} />
               </Route>
             </Route>
