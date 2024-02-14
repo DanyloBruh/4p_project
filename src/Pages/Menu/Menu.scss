@@ -23,6 +23,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      pointer-events: auto;
 
       color: #fff;
       font-family: 'Outfit', sans-serif;
@@ -74,6 +75,8 @@
     }
     .container {
       position: relative;
+      pointer-events: none;
+
       > h2 {
         width: 85%;
         //   margin-top:  calc(95px + 10%);
@@ -84,6 +87,7 @@
         font-weight: 300;
         line-height: normal;
         text-align: left;
+        pointer-events: none;
       }
     }
   }
