@@ -96,9 +96,17 @@ function AdminPanel() {
 
   const handleDelete = async (id) => {
     if (await confirm('Are your sure?')) {
-      deleteData(category, id, axiosPrivate).then(
-        setData((prevState) => prevState.filter((item) => item.id !== id)),
-      );
+      deleteData(category, id, axiosPrivate)
+        .then(() => {
+          ToastNotification('success', 'Successfully deleted!');
+          setData((prevState) => prevState.filter((item) => item.id !== id));
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
+          );
+        });
     }
   };
 
@@ -112,13 +120,21 @@ function AdminPanel() {
       const archiv = button === 'Zip';
       archivedData(category, archivedId, axiosPrivate, {
         archived: archiv,
-      }).then(() => {
-        if ((archived && !archiv) || (!archived && archiv)) {
-          setData((prevState) =>
-            prevState.filter((item) => item.id !== archivedId),
+      })
+        .then(() => {
+          if ((archived && !archiv) || (!archived && archiv)) {
+            ToastNotification('success', 'Successfully archived!');
+            setData((prevState) =>
+              prevState.filter((item) => item.id !== archivedId),
+            );
+          }
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
           );
-        }
-      });
+        });
     });
   };
 
@@ -312,9 +328,7 @@ function AdminPanel() {
                 <Table>
                   <thead>
                     <tr>
-                      <RenderTableHeader
-                        category={category}
-                      />
+                      <RenderTableHeader category={category} />
                     </tr>
                   </thead>
                   <RenderTableBody
