@@ -14,6 +14,7 @@ import {
   validateProduct,
 } from '../ValidationFunctions';
 import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
+import ToastNotification from '../../../Components/Toast/Toast';
 
 /* eslint-disable react/prop-types */
 function EditForm({ data, setData }) {
@@ -266,14 +267,30 @@ function EditForm({ data, setData }) {
     console.log(dataForState);
 
     if (category !== 'user') {
-      editDataConfig(category, id, axiosPrivateConfig, dataForDB).then(
-        replaceItem(id, { ...dataForState, id }),
-      );
+      editDataConfig(category, id, axiosPrivateConfig, dataForDB)
+        .then(() => {
+          ToastNotification('success', 'Successfully updated!');
+          replaceItem(id, { ...dataForState, id });
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
+          );
+        });
       navigate(`/admin/${category}`);
     } else {
-      editData(category, id, axiosPrivate, dataForDB).then(
-        replaceItem(id, { ...dataForState, id }),
-      );
+      editData(category, id, axiosPrivate, dataForDB)
+        .then(() => {
+          ToastNotification('success', 'Successfully updated!');
+          replaceItem(id, { ...dataForState, id });
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
+          );
+        });
       navigate(`/admin/${category}`);
     }
   };

@@ -48,7 +48,6 @@ function AdminPanel() {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(data);
   const user = useSelector((state) => state.auth.auth.user);
 
   // const accepted = false;
@@ -88,6 +87,7 @@ function AdminPanel() {
       setLoading(true);
       getDataByCategory(category, axiosPrivate, archived)
         .then(setData)
+        // .then((d) => setData(d.reverse()))
         .finally(() => setLoading(false));
     } else {
       navigate('product');
@@ -98,9 +98,17 @@ function AdminPanel() {
 
   const handleDelete = async (id) => {
     if (await confirm('Are your sure?')) {
-      deleteData(category, id, axiosPrivate).then(
-        setData((prevState) => prevState.filter((item) => item.id !== id)),
-      );
+      deleteData(category, id, axiosPrivate)
+        .then(() => {
+          ToastNotification('success', 'Successfully deleted!');
+          setData((prevState) => prevState.filter((item) => item.id !== id));
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
+          );
+        });
     }
   };
 
@@ -114,13 +122,21 @@ function AdminPanel() {
       const archiv = button === 'Zip';
       archivedData(category, archivedId, axiosPrivate, {
         archived: archiv,
-      }).then(() => {
-        if ((archived && !archiv) || (!archived && archiv)) {
-          setData((prevState) =>
-            prevState.filter((item) => item.id !== archivedId),
+      })
+        .then(() => {
+          if ((archived && !archiv) || (!archived && archiv)) {
+            ToastNotification('success', 'Successfully archived!');
+            setData((prevState) =>
+              prevState.filter((item) => item.id !== archivedId),
+            );
+          }
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
           );
-        }
-      });
+        });
     });
   };
 
@@ -319,15 +335,12 @@ function AdminPanel() {
                 <Table>
                   <thead>
                     <tr>
-                      <RenderTableHeader
-                        category={category}
-                        data={visibleData}
-                      />
+                      <RenderTableHeader category={category} />
                     </tr>
                   </thead>
                   <RenderTableBody
                     category={category}
-                    data={visibleData}
+                    data={visibleData.reverse()}
                     openConfirmDeleteModal={handleDelete}
                     handleArchived={handleArchived}
                   />

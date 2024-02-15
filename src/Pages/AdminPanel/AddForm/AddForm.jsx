@@ -14,6 +14,7 @@ import {
   validateProduct,
 } from '../ValidationFunctions';
 import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
+import ToastNotification from '../../../Components/Toast/Toast';
 
 /* eslint-disable react/prop-types */
 function AddForm({ setData }) {
@@ -178,15 +179,30 @@ function AddForm({ setData }) {
     console.log('response add', response);
 
     if (category !== 'user') {
-      postDataConfig(category, axiosPrivateConfig, response).then((result) => {
-        console.log(result);
-        setData((prevState) => [...prevState, result]);
-      });
+      postDataConfig(category, axiosPrivateConfig, response)
+        .then((result) => {
+          ToastNotification('success', 'Successfully created!');
+          setData((prevState) => [...prevState, result]);
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
+          );
+        });
       navigate(`/admin/${category}`);
     } else {
-      postData(category, axiosPrivate, response).then((result) => {
-        setData((prevState) => [...prevState, result]);
-      });
+      postData(category, axiosPrivate, response)
+        .then((result) => {
+          ToastNotification('success', 'Successfully created!');
+          setData((prevState) => [...prevState, result]);
+        })
+        .catch((err) => {
+          ToastNotification(
+            'error',
+            `Something went wrong! (${err.response.data.message})`,
+          );
+        });
       navigate(`/admin/${category}`);
     }
   };
