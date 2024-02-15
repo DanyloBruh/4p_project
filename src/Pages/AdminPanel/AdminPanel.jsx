@@ -94,6 +94,8 @@ function AdminPanel() {
     }
   }, [category, archived]);
 
+  // console.log(data);
+
   const handleDelete = async (id) => {
     if (await confirm('Are your sure?')) {
       deleteData(category, id, axiosPrivate).then(
@@ -271,9 +273,14 @@ function AdminPanel() {
                         }}
                       />
                     </div>
-                    <Link to={`/addform/${category}`} className="table-button">
-                      {`ADD NEW ${category.toUpperCase()}`}
-                    </Link>
+                    {category !== 'order' && (
+                      <Link
+                        to={`/addform/${category}`}
+                        className="table-button"
+                      >
+                        {`ADD NEW ${category.toUpperCase()}`}
+                      </Link>
+                    )}
                     <div className="checkbox-wrapper-22">
                       <label className="switch" htmlFor="checkbox">
                         <input

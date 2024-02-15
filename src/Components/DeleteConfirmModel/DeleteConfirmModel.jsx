@@ -26,14 +26,14 @@ function Confirmation({
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {confirmation}
-      </Modal.Body>
+      <Modal.Body>{confirmation}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => proceed(false)}>{cancelLabel}</Button>
+        <Button variant="outline-secondary" onClick={() => proceed(false)}>
+          {cancelLabel}
+        </Button>
         <Button
           className="button-l"
-          bsStyle="primary"
+          variant="outline-danger"
           onClick={() => proceed(true)}
         >
           {okLabel}
