@@ -13,10 +13,11 @@
       height: 60vh;
     }
     > h2 {
+      width: 100%;
       color: #fff;
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 4rem;
+      font-size: 3rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -25,7 +26,8 @@
       left: 50%;
       top: 70%;
       transform: translate(-50%, -50%);
-      width: 100%;
+      background-color: rgba(0, 0, 0, 0.65); 
+      padding: 20px 0 20px 0;
     }
     > img {
       position: absolute;
