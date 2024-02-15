@@ -317,12 +317,20 @@
         }
       }
     }
+    .not-found{
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
   }
   > .ornament-left {
     height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
-    background-size: contain;
+    background-size: 100%;
     position: absolute;
     z-index: -2;
     top: 505px;
@@ -335,7 +343,7 @@
     height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
-    background-size: contain;
+    background-size: 100%;
     position: absolute;
     z-index: -2;
     top: 505px;

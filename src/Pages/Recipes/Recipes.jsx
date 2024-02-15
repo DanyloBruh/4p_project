@@ -16,6 +16,7 @@ function Recipes() {
   const [allRecipes, setAllRecipes] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
+  console.log(query);
   const { id } = useParams();
   useEffect(() => {
     if (!id && !allRecipes) {
@@ -44,7 +45,7 @@ function Recipes() {
 
     return [];
   }, [query, allRecipes]);
-
+  console.log(visibleRecipes);
   return !id ? (
     <div className="recipes">
       <div className="recipes__header">
@@ -52,6 +53,7 @@ function Recipes() {
           <h2>Search the recipe you need</h2>
           <div className="search-bar">
             <SearchBar
+              value={query}
               handleChange={(e) => {
                 setSearchParams(
                   getSearchWith(searchParams, {
@@ -67,7 +69,7 @@ function Recipes() {
       <Container>
         {query === '' && (
           <Carousel>
-            {visibleRecipes
+            {visibleRecipes.length > 0
               && visibleRecipes
                 ?.filter((recipe) => recipe.carrousel === true)
                 ?.map((recipe) => (
@@ -91,8 +93,8 @@ function Recipes() {
                     </div>
                   </Carousel.Item>
                 ))}
-            {!visibleRecipes && (
-              <Carousel.Item interval={10000}>
+            {!visibleRecipes.length > 0 && (
+              <Carousel.Item>
                 <div className="item-cover">
                   <div className="placeholder-img" />
 
@@ -128,7 +130,7 @@ function Recipes() {
       </Container>
       <Container className="item-section">
         <Row>
-          {visibleRecipes
+          {visibleRecipes.length > 0
             && visibleRecipes?.map((item) => (
               <Col key={item.id} xxl={4} xl={4} lg={4} md={6} sm={6}>
                 <RecipeItem
@@ -140,7 +142,10 @@ function Recipes() {
                 />
               </Col>
             ))}
-          {!visibleRecipes && (
+          {!visibleRecipes.length > 0 && query !== '' && (
+            <h2 className="not-found">Nothing found</h2>
+          )}
+          {!visibleRecipes.length > 0 && query === '' && (
             <>
               <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
                 <RecipeItemPlaceholder />
