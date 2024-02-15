@@ -89,14 +89,13 @@ function AdminPanel() {
     }
   }, [category, archived]);
 
+  // console.log(data);
+
   const handleDelete = async (id) => {
     if (await confirm('Are your sure?')) {
-      deleteData(category, id, axiosPrivate)
-        .then(
-          setData((prevState) =>
-            prevState.filter((item) => item.id !== id),
-          ),
-        );
+      deleteData(category, id, axiosPrivate).then(
+        setData((prevState) => prevState.filter((item) => item.id !== id)),
+      );
     }
   };
 
@@ -106,21 +105,18 @@ function AdminPanel() {
       message: 'Set archived',
       variant1: 'Zip',
       variant2: 'Unzip',
-
-    }).then(
-      ({ button }) => {
-        const archiv = button === 'Zip';
-        archivedData(category, archivedId, axiosPrivate, { archived: archiv })
-          .then(() => {
-            if ((archived && !archiv) || (!archived && archiv)) {
-              setData((prevState) =>
-                prevState.filter((item) => item.id !== archivedId),
-              );
-            }
-          },
+    }).then(({ button }) => {
+      const archiv = button === 'Zip';
+      archivedData(category, archivedId, axiosPrivate, {
+        archived: archiv,
+      }).then(() => {
+        if ((archived && !archiv) || (!archived && archiv)) {
+          setData((prevState) =>
+            prevState.filter((item) => item.id !== archivedId),
           );
-      },
-    );
+        }
+      });
+    });
   };
 
   const visibleData = useMemo(() => {
@@ -270,9 +266,14 @@ function AdminPanel() {
                         }}
                       />
                     </div>
-                    <Link to={`/addform/${category}`} className="table-button">
-                      {`ADD NEW ${category.toUpperCase()}`}
-                    </Link>
+                    {category !== 'order' && (
+                      <Link
+                        to={`/addform/${category}`}
+                        className="table-button"
+                      >
+                        {`ADD NEW ${category.toUpperCase()}`}
+                      </Link>
+                    )}
                     <div className="checkbox-wrapper-22">
                       <label className="switch" htmlFor="checkbox">
                         <input

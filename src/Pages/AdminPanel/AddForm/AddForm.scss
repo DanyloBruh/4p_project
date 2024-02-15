@@ -48,6 +48,54 @@
 
       > .form-element {
         margin-bottom: 20px;
+
+        // > .order-product {
+        //   display: flex;
+        //   align-items: center;
+        //   margin-bottom: 15px;
+        //   justify-content: space-between;
+        //   > .mb-2 {
+        //     width: 80%;
+        //     > button {
+        //       background-color: #272727;
+        //       border: 1px solid #888888;
+        //       color: #fff;
+        //       width: 80%;
+        //       margin-bottom: 1rem;
+        //     }
+        //     > .form-floating {
+        //       > .form-control {
+        //         border: 1px solid #fff;
+        //         background: rgba(51, 45, 45, 0);
+        //         color: white;
+        //       }
+        //       > label {
+        //         color: white !important;
+        //       }
+        //       > .form-control:focus ~ label {
+        //         color: white;
+        //       }
+        //       > .form-control:focus ~ label::after {
+        //         display: none;
+        //       }
+        //       > .form-control:not(:placeholder-shown) ~ label::after,
+        //       .form-floating > .form-select ~ label::after {
+        //         display: none;
+        //       }
+        //       .form-control:-webkit-autofill,
+        //       .form-control:-webkit-autofill:hover,
+        //       .form-control:-webkit-autofill:focus,
+        //       .form-control:-webkit-autofill:active {
+        //         -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+        //         -webkit-text-fill-color: #ffffff;
+        //       }
+        //     }
+        //   }
+        //   > button {
+        //     margin-bottom: 23px;
+        //   }
+        // }
+
         > .form-check {
           margin: 0;
           > input[type='radio'] {

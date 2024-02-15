@@ -1,7 +1,15 @@
 import React from 'react';
+/* eslint-disable object-curly-newline */
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
+// import { useDispatch } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
+// import {
+//   addCountData,
+//   decCountData,
+//   deleteItem,
+// } from '../../../redux/orderDataSlice';
 import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
+// import Product from '../../../Components/Order/product';
 /* eslint-disable react/prop-types */
 function RenderEditFormBody({
   handleInputChange,
@@ -16,6 +24,23 @@ function RenderEditFormBody({
   setImages,
 }) {
   console.log(data);
+  // const order = useSelector((state) => state.orderData);
+  // console.log(order);
+  // console.log(data);
+  // const dispatch = useDispatch();
+
+  // const deleteProduct = (ProdId) => {
+  //   dispatch(deleteItem(ProdId));
+  // };
+
+  // const incCount = (ProdId) => {
+  //   dispatch(addCountData(ProdId));
+  // };
+
+  // const decCount = (ProdId) => {
+  //   dispatch(decCountData(ProdId));
+  // };
+
   const handleIngredient = (e, i) => {
     const { name, value } = e.target;
     /* eslint-disable prefer-const */
@@ -557,10 +582,10 @@ function RenderEditFormBody({
                 required
                 type="text"
                 onChange={handleInputChange}
-                value={data.phoneNamber}
-                name="phoneNamber"
+                value={data.phoneNumber}
+                name="phoneNumber"
                 autoComplete="off"
-                placeholder="phoneNamber"
+                placeholder="phoneNumber"
               />
             </FloatingLabel>
           </Form.Group>
@@ -654,6 +679,19 @@ function RenderEditFormBody({
               <option>requires processing</option>
             </Form.Select>
           </Form.Group>
+          {/* <Form.Group className="form-element">
+            <Form.Label>Dishes</Form.Label>
+            {data.Products.map((product) => (
+              <Product
+                product={product}
+                count={product.Dishes.count}
+                incCount={incCount}
+                decCount={decCount}
+                deleteProduct={deleteProduct}
+                key={product.id}
+              />
+            ))}
+          </Form.Group> */}
         </>
       );
     default:

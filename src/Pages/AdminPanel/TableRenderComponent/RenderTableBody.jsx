@@ -3,7 +3,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import HtmlToReactParser from 'html-to-react';
 import { Button } from 'react-bootstrap';
@@ -12,7 +12,12 @@ import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */
-function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchived }) {
+function RenderTableBody({
+  category,
+  data,
+  openConfirmDeleteModal,
+  handleArchived,
+}) {
   const Parser = new HtmlToReactParser.Parser();
   const iconProviderValue = useMemo(() => {
     const res = { color: 'white', size: '2em' };
@@ -48,6 +53,15 @@ function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchive
     }
   };
 
+  const [selectedBlog, setSelectedBlog] = useState();
+
+  const handleDisplay = (id) => {
+    console.log(selectedBlog);
+    console.log(id);
+    if (selectedBlog === id) return setSelectedBlog(0);
+    return setSelectedBlog(id);
+  };
+
   switch (category) {
     case 'product':
       return (
@@ -71,9 +85,7 @@ function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchive
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link
-                  to={`/edit/product/${product.id}`}
-                >
+                <Link to={`/edit/product/${product.id}`}>
                   <IconContext.Provider value={iconProviderValue}>
                     <RiEdit2Line />
                   </IconContext.Provider>
@@ -134,9 +146,7 @@ function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchive
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link
-                  to={`/edit/product/${recipe.id}`}
-                >
+                <Link to={`/edit/instruction/${recipe.id}`}>
                   <IconContext.Provider value={iconProviderValue}>
                     <RiEdit2Line />
                   </IconContext.Provider>
@@ -175,16 +185,26 @@ function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchive
                 <span>{blog.name}</span>
               </td>
               <td className="blog-text">
-                <span>{Parser.parse(blog?.text)}</span>
+                <span
+                  style={
+                    blog.id === selectedBlog
+                      ? { display: 'block' }
+                      : { display: '-webkit-box' }
+                  }
+                >
+                  {Parser.parse(blog?.text)}
+                </span>
+                <Button onClick={() => handleDisplay(blog.id)}>
+                  {blog.id === selectedBlog ? 'hide ' : 'show '}
+                  text...
+                </Button>
               </td>
               <td>
                 <span>{blog.displayType}</span>
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link
-                  to={`/edit/product/${blog.id}`}
-                >
+                <Link to={`/edit/blog/${blog.id}`}>
                   <IconContext.Provider value={iconProviderValue}>
                     <RiEdit2Line />
                   </IconContext.Provider>
@@ -223,15 +243,11 @@ function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchive
                 <span>{user.name}</span>
               </td>
               <td>
-                <span>
-                  {user.email}
-                </span>
+                <span>{user.email}</span>
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link
-                  to={`/edit/product/${user.id}`}
-                >
+                <Link to={`/edit/user/${user.id}`}>
                   <IconContext.Provider value={iconProviderValue}>
                     <RiEdit2Line />
                   </IconContext.Provider>
@@ -298,9 +314,7 @@ function RenderTableBody({ category, data, openConfirmDeleteModal, handleArchive
               </td>
               <td>
                 {/* eslint-disable-next-line */}
-                <Link
-                  to={`/edit/product/${order.id}`}
-                >
+                <Link to={`/edit/order/${order.id}`}>
                   <IconContext.Provider value={iconProviderValue}>
                     <RiEdit2Line />
                   </IconContext.Provider>

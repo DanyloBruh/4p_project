@@ -323,10 +323,10 @@ function RenderAddFormBody({
               required
               type="file"
               onChange={handleInputChange}
-              name="image"
+              name="Image"
             />
-            {formData.image ? (
-              <img src={URL.createObjectURL(formData.image)} alt="add img" />
+            {formData.Image ? (
+              <img src={URL.createObjectURL(formData.Image)} alt="add img" />
             ) : (
               <img alt="" />
             )}
@@ -477,10 +477,10 @@ function RenderAddFormBody({
               required
               type="file"
               onChange={handleInputChange}
-              name="image"
+              name="Image"
             />
-            {formData.image ? (
-              <img src={URL.createObjectURL(formData.image)} alt="add img" />
+            {formData.Image ? (
+              <img src={URL.createObjectURL(formData.Image)} alt="add img" />
             ) : (
               <img alt="" />
             )}

@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React, { useId, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import '../AddForm/AddForm.scss';
@@ -66,6 +67,19 @@ function EditForm({ data, setData }) {
         text: '',
         Image: '',
         carrousel: '',
+      };
+      break;
+    case 'order':
+      initialState = {
+        name: '',
+        phoneNumber: '',
+        adress: '',
+        comment: '',
+        paymentType: '',
+        deliveryType: '',
+        totalAmount: '',
+        Image: '',
+        status: '',
       };
       break;
     default:
@@ -181,8 +195,8 @@ function EditForm({ data, setData }) {
 
     Object.keys(originalData).forEach((key) => {
       if (
-        Object.prototype.hasOwnProperty.call(originalData, key)
-        && Object.prototype.hasOwnProperty.call(newData, key)
+        Object.prototype.hasOwnProperty.call(originalData, key) &&
+        Object.prototype.hasOwnProperty.call(newData, key)
       ) {
         if (originalData[key] === newData[key]) {
           delete newData[key];
@@ -249,6 +263,8 @@ function EditForm({ data, setData }) {
 
     dataForState.Image = newState.Image;
 
+    console.log(dataForState);
+
     if (category !== 'user') {
       editDataConfig(category, id, axiosPrivateConfig, dataForDB).then(
         replaceItem(id, { ...dataForState, id }),
@@ -302,6 +318,7 @@ function EditForm({ data, setData }) {
             setSteps={setSteps}
             images={imagesArray}
             setImages={setImages}
+            mainData={data}
           />
           <br />
           {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}

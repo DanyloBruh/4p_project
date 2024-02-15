@@ -48,7 +48,7 @@ function AddForm({ setData }) {
         weight: '',
         description: '',
         price: '',
-        image: '',
+        Image: '',
         ingredients: '',
       };
       break;
@@ -61,7 +61,7 @@ function AddForm({ setData }) {
         description: '',
         ingredients: '',
         text: '',
-        image: '',
+        Image: '',
         carrousel: false,
       };
       break;
