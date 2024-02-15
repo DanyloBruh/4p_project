@@ -48,7 +48,6 @@ function AdminPanel() {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(data);
   const user = useSelector((state) => state.auth.auth.user);
 
   // const accepted = false;
@@ -88,6 +87,7 @@ function AdminPanel() {
       setLoading(true);
       getDataByCategory(category, axiosPrivate, archived)
         .then(setData)
+        // .then((d) => setData(d.reverse()))
         .finally(() => setLoading(false));
     } else {
       navigate('product');
@@ -314,13 +314,12 @@ function AdminPanel() {
                     <tr>
                       <RenderTableHeader
                         category={category}
-                        data={visibleData}
                       />
                     </tr>
                   </thead>
                   <RenderTableBody
                     category={category}
-                    data={visibleData}
+                    data={visibleData.reverse()}
                     openConfirmDeleteModal={handleDelete}
                     handleArchived={handleArchived}
                   />
