@@ -3,19 +3,16 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useRef, useState } from 'react';
 import './ProductCard.scss';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Button, Col, Row } from 'react-bootstrap';
+import {
+  Button, Col, Row,
+} from 'react-bootstrap';
 import Counter from '../Counter/Counter';
 import { addOrderData, setVisible } from '../../redux/orderDataSlice';
 
-function ProductCard({ data }) {
+function ProductCard({ data, setSelectItems }) {
   const ref = useRef();
-  const navigate = useNavigate();
-  const routeChange = () => {
-    const path = '/';
-    navigate(path);
-  };
+
   const [count, setCount] = useState(1);
   const dispath = useDispatch();
 
@@ -58,7 +55,7 @@ function ProductCard({ data }) {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
-      routeChange();
+      setSelectItems();
     };
     document.addEventListener('mousedown', listener);
     document.addEventListener('touchstart', listener);
@@ -73,7 +70,7 @@ function ProductCard({ data }) {
         <button
           type="button"
           className="product-modal__card__close"
-          onClick={() => routeChange()}
+          onClick={() => setSelectItems()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -117,8 +114,12 @@ function ProductCard({ data }) {
               <Counter count={count} decr={decCount} incr={incCount} />
             </div>
             <div className="product-modal__card__one-line">
-              <Button variant="outline-light" onClick={handleSetVisible}>by in one click</Button>
-              <Button variant="outline-light" onClick={handleReduxAdd}>add to cart</Button>
+              <Button variant="outline-light" onClick={handleSetVisible}>
+                by in one click
+              </Button>
+              <Button variant="outline-light" onClick={handleReduxAdd}>
+                add to cart
+              </Button>
             </div>
           </Col>
         </Row>
