@@ -22,6 +22,7 @@ function BuyList() {
   useEffect(() => {
     setOrders(orderRed);
     if (orderRed.length === 0) {
+      dispath(setVisible(false));
       dispath(onScroll());
     }
   }, [orderRed]);
