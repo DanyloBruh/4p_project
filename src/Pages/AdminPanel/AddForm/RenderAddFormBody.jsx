@@ -1,92 +1,70 @@
+/* eslint-disable dot-notation */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable operator-linebreak */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable react/jsx-curly-newline */
+
 import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { FieldArray } from 'formik';
 import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
+// import PreviewFile from '../../../Components/PreviewFile/PreviewFile';
 
 /* eslint-disable react/prop-types */
 function RenderAddFormBody({
-  handleInputChange,
+  // handleInputChange,
   category,
-  formData,
-  setFormData,
-  ingredients,
-  setIngredients,
-  steps,
-  setSteps,
-  images,
-  setImages,
+  // formData,
+  // setFormData,
+  // ingredients,
+  // setIngredients,
+  // steps,
+  // setSteps,
+  // images,
+  // setImages,
+  errors,
+  values,
+  setValues,
+  handleChange,
+  touched,
+  setFieldValue,
 }) {
-  const handleIngredient = (e, i) => {
-    const { name, value } = e.target;
-    /* eslint-disable prefer-const */
-    let newIngredients = [...ingredients];
-    newIngredients[i][name] = value;
-    setIngredients(newIngredients);
-  };
-
   const handleAddIngredient = () => {
-    setIngredients([
-      ...ingredients,
-      {
-        ingredient: '',
-        timestamp: new Date().getTime(),
-      },
-    ]);
+    const newIngredient = [...values.ingredients];
+    newIngredient.push({ ingredient: '' });
+    setValues({ ...values, ingredients: newIngredient });
   };
 
   const handleDelete = (i) => {
-    let deleteIngredient = [...ingredients];
+    const deleteIngredient = [...values.ingredients];
     deleteIngredient.splice(i, 1);
-    setIngredients(deleteIngredient);
-  };
-
-  const handleStep = (e, i) => {
-    const { name, value } = e.target;
-    /* eslint-disable prefer-const */
-    let newSteps = [...steps];
-    newSteps[i][name] = value;
-    setSteps(newSteps);
+    setValues({ ...values, ingredients: deleteIngredient });
   };
 
   const handleAddStep = () => {
-    setSteps([
-      ...steps,
-      {
-        text: '',
-        timestamp: new Date().getTime(),
-      },
-    ]);
+    const newStep = [...values.text];
+    newStep.push({ text: '' });
+    setValues({ ...values, text: newStep });
   };
 
   const handleDeleteStep = (i) => {
-    let deleteStep = [...steps];
+    const deleteStep = [...values.text];
     deleteStep.splice(i, 1);
-    setSteps(deleteStep);
-  };
-
-  const handleImage = (e, i) => {
-    const { name } = e.target;
-    const value = e.target.files[0];
-    /* eslint-disable prefer-const */
-    let newImages = [...images];
-    newImages[i][name] = value;
-    setImages(newImages);
+    setValues({ ...values, text: deleteStep });
   };
 
   const handleAddImage = () => {
-    setImages([
-      ...images,
-      {
-        images: '',
-        timestamp: new Date().getTime(),
-      },
-    ]);
+    const newImage = [...values.Images];
+    newImage.push({ image: '' });
+    setValues({ ...values, Images: newImage });
   };
 
   const handleDeleteImages = (i) => {
-    let deleteImages = [...images];
+    const deleteImages = [...values.Images];
     deleteImages.splice(i, 1);
-    setImages(deleteImages);
+    setValues({ ...values, Images: deleteImages });
   };
 
   switch (category) {
@@ -100,29 +78,36 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="text"
-                onChange={handleInputChange}
-                value={formData.name}
                 name="name"
-                autoComplete="off"
                 placeholder="user name"
+                value={values.name}
+                onChange={handleChange}
+                isValid={touched.name && !errors.name}
+                isInvalid={touched.name && errors.name}
+                autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.name}
+              </Form.Control.Feedback>
             </FloatingLabel>
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Select
-              required
-              aria-label="Default select example"
-              onChange={handleInputChange}
-              value={formData.role}
               name="role"
+              value={values.role}
+              onChange={handleChange}
+              isValid={touched.role && !errors.role}
+              isInvalid={touched.role && errors.role}
+              autoComplete="off"
             >
               <option>Сhoose a role from the select menu</option>
               <option>admin</option>
               <option>employee</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              {errors.role}
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="form-element">
             <FloatingLabel
@@ -131,14 +116,18 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="text"
-                onChange={handleInputChange}
-                value={formData.email}
                 name="email"
-                autoComplete="off"
                 placeholder="email"
+                value={values.email}
+                onChange={handleChange}
+                isValid={touched.email && !errors.email}
+                isInvalid={touched.email && errors.email}
+                autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
@@ -148,13 +137,39 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="password"
-                onChange={handleInputChange}
-                value={formData.password}
                 name="password"
                 placeholder="password"
+                value={values.password}
+                onChange={handleChange}
+                isValid={touched.password && !errors.password}
+                isInvalid={touched.password && errors.password}
+                autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="form-element">
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Confirm password"
+              className="mb-3"
+            >
+              <Form.Control
+                type="password"
+                name="confirmPassword"
+                placeholder="confirmPassword"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                isValid={touched.confirmPassword && !errors.confirmPassword}
+                isInvalid={touched.confirmPassword && errors.confirmPassword}
+                autoComplete="off"
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.confirmPassword}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
         </>
@@ -169,22 +184,75 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="text"
-                onChange={handleInputChange}
-                value={formData.name}
                 name="name"
                 placeholder="Title"
+                value={values.name}
+                onChange={handleChange}
+                isValid={touched.name && !errors.name}
+                isInvalid={touched.name && errors.name}
                 autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.name}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
             <p>text</p>
-
-            <BlogTextEditor setFormData={setFormData} formData={formData} />
+            <BlogTextEditor setFormData={setValues} formData={values} />
           </Form.Group>
-          <Form.Group className="form-element images">
+          <Form.Group className="form-element">
+            <Form.Label>Images</Form.Label>
+            <Form.Group className="control-element">
+              <FieldArray className="rendered-content" name="Images">
+                {() =>
+                  values.Images.map((item, i) => {
+                    console.log(item);
+                    return (
+                      <Form.Group
+                        key={`Images${i}`}
+                        className="rendered-content"
+                      >
+                        <Form.Control
+                          type="file"
+                          name={`Images.${i}.image`}
+                          onChange={(e) =>
+                            setFieldValue(
+                              `Images[${i}]`,
+                              e.currentTarget.files[0],
+                            )
+                          }
+                          isValid={touched.Images && !errors.Images?.[i]}
+                          isInvalid={touched.Images && errors.Images?.[i]}
+                        />
+                        {values.Images.length > 1 && (
+                          <Button
+                            variant="outline-light"
+                            onClick={() => handleDeleteImages(i)}
+                          >
+                            remove
+                          </Button>
+                        )}
+                        {item.name ? (
+                          <img src={URL.createObjectURL(item)} alt="add img" />
+                        ) : (
+                          <img alt="" />
+                        )}
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Images && errors.Images[i]}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    );
+                  })
+                }
+              </FieldArray>
+            </Form.Group>
+            <Button variant="outline-light" onClick={handleAddImage}>
+              click to add new Image
+            </Button>
+          </Form.Group>
+          {/* <Form.Group className="form-element images">
             <Form.Label>Images</Form.Label>
             <Form.Group className="control-element">
               {images.map((image, i) => (
@@ -221,20 +289,24 @@ function RenderAddFormBody({
             <Button variant="outline-light" onClick={handleAddImage}>
               click to add new Image
             </Button>
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="form-element">
             <Form.Select
-              required
-              aria-label="Default select example"
-              onChange={handleInputChange}
-              value={formData.displayType}
               name="displayType"
+              value={values.displayType}
+              onChange={handleChange}
+              isValid={touched.displayType && !errors.displayType}
+              isInvalid={touched.displayType && errors.displayType}
+              autoComplete="off"
             >
               <option>choose where you want to display the blog</option>
               <option>firstPage</option>
               <option>featured</option>
               <option>default</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              {errors.displayType}
+            </Form.Control.Feedback>
           </Form.Group>
         </>
       );
@@ -248,14 +320,18 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="text"
-                onChange={handleInputChange}
-                value={formData.name}
                 name="name"
-                autoComplete="off"
                 placeholder="product name"
+                value={values.name}
+                onChange={handleChange}
+                isValid={touched.name && !errors.name}
+                isInvalid={touched.name && errors.name}
+                autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.name}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
@@ -265,14 +341,18 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="text"
-                onChange={handleInputChange}
-                value={formData.weight}
                 name="weight"
-                autoComplete="off"
                 placeholder="weight"
+                value={values.weight}
+                onChange={handleChange}
+                isValid={touched.weight && !errors.weight}
+                isInvalid={touched.weight && errors.weight}
+                autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.weight}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
@@ -282,51 +362,78 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="number"
-                onChange={handleInputChange}
-                value={formData.price}
                 name="price"
+                placeholder="price"
+                value={values.price}
+                onChange={handleChange}
+                isValid={touched.price && !errors.price}
+                isInvalid={touched.price && errors.price}
                 autoComplete="off"
-                placeholder="product name"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.price}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Description</Form.Label>
             <TextareaAutosize
+              name="description"
+              type="text"
               rows={5}
               minRows={5}
-              className="form-control"
-              required
-              type="text"
-              onChange={handleInputChange}
-              value={formData.description}
-              name="description"
+              className={`form-control ${
+                touched.description && errors.description
+                  ? 'is-invalid'
+                  : touched.description && !errors.description
+                    ? 'is-valid'
+                    : ''
+              }`}
+              onChange={handleChange}
+              value={values.description}
+              autoComplete="off"
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.description}
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              rows={5}
-              type="text"
-              onChange={handleInputChange}
-              value={formData.ingredients}
+            <TextareaAutosize
               name="ingredients"
+              type="text"
+              rows={5}
+              minRows={5}
+              className={`form-control ${
+                touched.description && errors.description
+                  ? 'is-invalid'
+                  : touched.description && !errors.description
+                    ? 'is-valid'
+                    : ''
+              }`}
+              value={values.ingredients}
+              onChange={handleChange}
+              autoComplete="off"
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.ingredients}
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              required
               type="file"
-              onChange={handleInputChange}
               name="Image"
+              onChange={(e) => setFieldValue('Image', e.currentTarget.files[0])}
+              isValid={touched.Image && !errors.Image}
+              isInvalid={touched.Image && errors.Image}
             />
-            {formData.Image ? (
-              <img src={URL.createObjectURL(formData.Image)} alt="add img" />
+            <Form.Control.Feedback type="invalid">
+              {errors.Image}
+            </Form.Control.Feedback>
+            {values.Image ? (
+              <img src={URL.createObjectURL(values.Image)} alt="add img" />
             ) : (
               <img alt="" />
             )}
@@ -344,22 +451,27 @@ function RenderAddFormBody({
             >
               <Form.Control
                 type="text"
-                required
-                onChange={handleInputChange}
-                value={formData.name}
                 name="name"
-                autoComplete="off"
                 placeholder="instruction name"
+                value={values.name}
+                onChange={handleChange}
+                isValid={touched.name && !errors.name}
+                isInvalid={touched.name && errors.name}
+                autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.name}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Select
-              required
-              aria-label="Default select example"
-              onChange={handleInputChange}
-              value={formData.difficulty}
               name="difficulty"
+              value={values.difficulty}
+              onChange={handleChange}
+              isValid={touched.difficulty && !errors.difficulty}
+              isInvalid={touched.difficulty && errors.difficulty}
+              autoComplete="off"
             >
               <option>Сhoose a difficulty from the select menu</option>
               <option>Very easy</option>
@@ -368,6 +480,9 @@ function RenderAddFormBody({
               <option>Hard</option>
               <option>Very hard</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              {errors.difficulty}
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="form-element">
             <FloatingLabel
@@ -377,13 +492,17 @@ function RenderAddFormBody({
             >
               <Form.Control
                 type="text"
-                required
-                onChange={handleInputChange}
-                value={formData.time}
                 name="time"
-                autoComplete="off"
                 placeholder="time"
+                value={values.time}
+                onChange={handleChange}
+                isValid={touched.time && !errors.time}
+                isInvalid={touched.time && errors.time}
+                autoComplete="off"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.time}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
@@ -393,52 +512,89 @@ function RenderAddFormBody({
               className="mb-3"
             >
               <Form.Control
-                required
                 type="number"
-                onChange={handleInputChange}
-                value={formData.makes}
                 name="makes"
+                placeholder="makes"
+                value={values.makes}
+                onChange={handleChange}
+                isValid={touched.makes && !errors.makes}
+                isInvalid={touched.makes && errors.makes}
                 autoComplete="off"
-                placeholder="time"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.makes}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Description</Form.Label>
             <TextareaAutosize
+              name="description"
+              type="text"
               rows={5}
               minRows={5}
-              className="form-control"
-              required
-              type="text"
-              onChange={handleInputChange}
-              value={formData.description}
-              name="description"
+              className={`form-control ${
+                touched.description && errors.description
+                  ? 'is-invalid'
+                  : touched.description && !errors.description
+                    ? 'is-valid'
+                    : ''
+              }`}
+              onChange={handleChange}
+              value={values.description}
+              autoComplete="off"
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.description}
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Ingredients</Form.Label>
             <Form.Group className="control-element">
-              {ingredients.map((ingredient, i) => (
-                <Form.Group
-                  className="rendered-content"
-                  key={ingredient.timestamp}
-                >
-                  <Form.Control
-                    required
-                    type="text"
-                    onChange={(e) => handleIngredient(e, i)}
-                    name="ingredient"
-                    autoComplete="off"
-                  />
-                  <Button
-                    variant="outline-light"
-                    onClick={() => handleDelete(i)}
-                  >
-                    remove
-                  </Button>
-                </Form.Group>
-              ))}
+              <FieldArray className="rendered-content" name="ingredients">
+                {() =>
+                  values.ingredients.map((item, i) => {
+                    console.log(i);
+                    return (
+                      <Form.Group
+                        key={`ingredients${i}`}
+                        className="rendered-content"
+                      >
+                        <TextareaAutosize
+                          name={`ingredients.${i}.ingredient`}
+                          type="text"
+                          rows={5}
+                          minRows={5}
+                          className={`form-control ${
+                            touched.ingredients && errors.ingredients
+                              ? 'is-invalid'
+                              : touched.ingredients && !errors.ingredients
+                                ? 'is-valid'
+                                : ''
+                          }`}
+                          value={item.ingredient}
+                          onChange={handleChange}
+                          autoComplete="off"
+                        />
+
+                        {values.ingredients.length > 1 && (
+                          <Button
+                            variant="outline-light"
+                            onClick={() => handleDelete(i)}
+                          >
+                            remove
+                          </Button>
+                        )}
+                        <Form.Control.Feedback type="invalid">
+                          {errors.ingredients &&
+                            errors.ingredients[i] &&
+                            errors.ingredients[i].ingredient}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    );
+                  })
+                }
+              </FieldArray>
             </Form.Group>
             <Button variant="outline-light" onClick={handleAddIngredient}>
               click to add new Ingredient
@@ -447,25 +603,45 @@ function RenderAddFormBody({
           <Form.Group className="form-element">
             <Form.Label>Steps</Form.Label>
             <Form.Group className="control-element">
-              {steps.map((step, i) => (
-                <Form.Group className="rendered-content" key={step.timestamp}>
-                  <TextareaAutosize
-                    rows={5}
-                    minRows={2}
-                    className="form-control"
-                    required
-                    type="text"
-                    onChange={(e) => handleStep(e, i)}
-                    name="text"
-                  />
-                  <Button
-                    variant="outline-light"
-                    onClick={() => handleDeleteStep(i)}
-                  >
-                    remove
-                  </Button>
-                </Form.Group>
-              ))}
+              <FieldArray className="rendered-content" name="steps">
+                {() =>
+                  values.text.map((item, i) => {
+                    console.log(i);
+                    return (
+                      <Form.Group key={`text${i}`} className="rendered-content">
+                        <TextareaAutosize
+                          name={`text.${i}.text`}
+                          type="text"
+                          rows={5}
+                          minRows={5}
+                          className={`form-control ${
+                            touched.text && errors.text
+                              ? 'is-invalid'
+                              : touched.text && !errors.text
+                                ? 'is-valid'
+                                : ''
+                          }`}
+                          value={item.text}
+                          onChange={handleChange}
+                          autoComplete="off"
+                        />
+
+                        {values.text.length > 1 && (
+                          <Button
+                            variant="outline-light"
+                            onClick={() => handleDeleteStep(i)}
+                          >
+                            remove
+                          </Button>
+                        )}
+                        <Form.Control.Feedback type="invalid">
+                          {errors.text && errors.text[i] && errors.text[i].text}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    );
+                  })
+                }
+              </FieldArray>
             </Form.Group>
             <Button variant="outline-light" onClick={handleAddStep}>
               click to add new Step
@@ -474,13 +650,17 @@ function RenderAddFormBody({
           <Form.Group className="form-element">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              required
               type="file"
-              onChange={handleInputChange}
               name="Image"
+              onChange={(e) => setFieldValue('Image', e.currentTarget.files[0])}
+              isValid={touched.Image && !errors.Image}
+              isInvalid={touched.Image && errors.Image}
             />
-            {formData.Image ? (
-              <img src={URL.createObjectURL(formData.Image)} alt="add img" />
+            <Form.Control.Feedback type="invalid">
+              {errors.Image}
+            </Form.Control.Feedback>
+            {values.Image ? (
+              <img src={URL.createObjectURL(values.Image)} alt="add img" />
             ) : (
               <img alt="" />
             )}
@@ -490,8 +670,8 @@ function RenderAddFormBody({
               type="switch"
               label="Add this recipe to the carousel"
               name="carrousel"
-              onChange={handleInputChange}
-              checked={formData.carrousel}
+              onChange={handleChange}
+              checked={values.carrousel}
             />
           </Form.Group>
         </>

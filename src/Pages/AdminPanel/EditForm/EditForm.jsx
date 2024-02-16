@@ -7,12 +7,6 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import RenderEditFormBody from './RenderEditFormBody';
 import { editData, editDataConfig } from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
-import {
-  validateUser,
-  validateBlog,
-  validateInstruction,
-  validateProduct,
-} from '../ValidationFunctions';
 import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 import ToastNotification from '../../../Components/Toast/Toast';
 
@@ -24,9 +18,6 @@ function EditForm({ data, setData }) {
 
   const axiosPrivate = useAxiosPrivate();
   const axiosPrivateConfig = useAxiosPrivateImages();
-
-  const [errorMsg, setErrorMsg] = useState('');
-  let isValidated = true;
 
   let initialState = {};
 
@@ -211,29 +202,6 @@ function EditForm({ data, setData }) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    switch (category) {
-      case 'user':
-        setErrorMsg(validateUser(editedData).msg);
-        isValidated = validateUser(editedData).isValidated;
-        break;
-      case 'product':
-        setErrorMsg(validateProduct(editedData).msg);
-        isValidated = validateProduct(editedData).isValidated;
-        break;
-      case 'blog':
-        setErrorMsg(validateBlog(editedData).msg);
-        isValidated = validateBlog(editedData).isValidated;
-        break;
-      case 'instruction':
-        setErrorMsg(validateInstruction(editedData).msg);
-        isValidated = validateInstruction(editedData).isValidated;
-        break;
-      default:
-        setErrorMsg('');
-    }
-
-    if (!isValidated) return;
-
     const ingredients = ingredientsArray
       .map((ingredient) => ingredient.ingredient)
       .join(' | ');
@@ -338,7 +306,6 @@ function EditForm({ data, setData }) {
             mainData={data}
           />
           <br />
-          {isValidated && errorMsg !== '' && <p>{`${errorMsg}`}</p>}
           <Button
             variant="outline-light"
             className="button__submit"
