@@ -37,8 +37,7 @@ import AddForm from './AddForm/AddForm';
 import EditForm from './EditForm/EditForm';
 import ToastNotification from '../../Components/Toast/Toast';
 import getSearchWith from '../../Helper/searchHelper';
-import confirm from '../../Components/DeleteConfirmModel/DeleteConfirmModel';
-import { confirm as confirmComplex } from '../../Components/setConfirmModel/setConfirmModel';
+import confirm from '../../Components/ConfirmModel/ConfirmModel';
 
 function AdminPanel() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -71,7 +70,7 @@ function AdminPanel() {
         const id = JSON.parse(event.data);
         getDataByCategoryId('order', id, axiosPrivate).then((order) => {
           ToastNotification('info', 'A new order has been created');
-          setData((d) => [order, ...d]);
+          setData((d) => [...d, order]);
         });
       };
     }
@@ -112,24 +111,18 @@ function AdminPanel() {
     }
   };
 
-  const handleArchived = (archivedId) => {
-    confirmComplex({
-      title: 'Confirmation',
-      message: 'Set archived',
-      variant1: 'Zip',
-      variant2: 'Unzip',
-    }).then(({ button }) => {
-      const archiv = button === 'Zip';
+  const handleArchived = async (archivedId) => {
+    const message = archived ? 'Are you sure you want to unzip?' : 'Are you sure you want to zip?';
+    if (await confirm(message)) {
       archivedData(category, archivedId, axiosPrivate, {
-        archived: archiv,
+        archived: !archived,
       })
         .then(() => {
-          if ((archived && !archiv) || (!archived && archiv)) {
-            ToastNotification('success', 'Successfully archived!');
-            setData((prevState) =>
-              prevState.filter((item) => item.id !== archivedId),
-            );
-          }
+          const mess = archived ? 'unzipped' : 'zipped';
+          ToastNotification('success', `Successfully ${mess}!`);
+          setData((prevState) =>
+            prevState.filter((item) => item.id !== archivedId),
+          );
         })
         .catch((err) => {
           ToastNotification(
@@ -137,7 +130,7 @@ function AdminPanel() {
             `Something went wrong! (${err.response.data.message})`,
           );
         });
-    });
+    }
   };
 
   const visibleData = useMemo(() => {

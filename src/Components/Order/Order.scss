@@ -19,6 +19,12 @@
   z-index: 1;
   overflow: hidden;
 
+  @media (max-width: 575px) {
+    width: 90%;
+    border-radius: 8px;
+    top: 5%;
+  }
+
   &__cross {
     background-image: url('../../Assets/crossorder.svg');
     background-size: contain;
@@ -27,6 +33,11 @@
     position: absolute;
     top: 8px;
     right: 18px;
+
+    @media (max-width: 575px) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &__cross:hover,
@@ -38,6 +49,13 @@
 
   &__content {
     padding: 35px 85px 80px;
+
+    @media (max-width: 575px) {
+      padding: 20px 5px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: space-between;
+    }
   }
 
   .idpc-select-container {
@@ -90,6 +108,7 @@
   &__product {
     margin: 20px 0;
     display: flex;
+    width: 100%;
 
     &__cross {
       background-image: url('../../Assets/cross.svg');
@@ -124,19 +143,36 @@
     &__textGroup {
       display: flex;
       justify-content: space-between;
-      width: 100%;
+      flex-grow: 3;
     }
 
     &__img {
       width: 115px;
       height: 103px;
       border-radius: 8px;
+
+      @media (max-width: 950px) {
+        width: 80px;
+        height: 80px;
+      }
+
+      @media (max-width: 575px) {
+        width: 70px;
+        height: 70px;
+      }
     }
 
     &__nameCount {
       display: flex;
     }
 
+    &__name {
+      width: 300px;
+
+      @media (max-width: 575px) {
+        width: 150px;
+      }
+    }
     &__text {
       color: #fff;
       font-family: Outfit;
@@ -145,6 +181,11 @@
       font-weight: 600;
       line-height: normal;
       text-transform: uppercase;
+      text-align: left;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
   &__total {
@@ -169,6 +210,10 @@
     font-weight: 300;
     line-height: normal;
     text-transform: capitalize;
+
+    @media (max-width: 575px) {
+      margin: 10px 0;
+    }
 
     .form-control:-webkit-autofill,
     .form-control:-webkit-autofill:hover,
@@ -212,11 +257,8 @@
   &__checkBoxes {
     margin: 0;
     display: flex;
-    gap: 130px;
-  }
-
-  &__inputs {
-    padding: 0 45px;
+    justify-content: space-between;
+    padding: 0 15px;
   }
 
   &__postcode {
@@ -244,6 +286,7 @@
     display: block;
     margin: 0;
     height: 1px;
+    width: 100%;
     border-top: 1px solid #fff;
     opacity: 1;
   }
@@ -276,6 +319,10 @@
   &--right {
     top: 65px;
     right: 18px;
+  }
+
+  @media (max-width: 575px) {
+    width: 0;
   }
 }
 
@@ -318,6 +365,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 575px) {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .checkmark::after {

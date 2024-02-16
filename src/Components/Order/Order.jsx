@@ -73,11 +73,11 @@ function Order({
           town: Yup.string().required(),
           comment: Yup.string(),
           delivery: Yup.string()
-            .required()
-            .oneOf(['self', 'courier'], 'Delivery type is required'),
+            .required('required')
+            .oneOf(['self', 'courier'], 'required'),
           payment: Yup.string()
-            .required()
-            .oneOf(['card', 'cash'], 'Payment type is required'),
+            .required('required')
+            .oneOf(['card', 'cash'], 'required'),
         }),
       );
     } else {
@@ -85,18 +85,18 @@ function Order({
         Yup.object().shape({
           name: Yup.string()
             .min(2, 'Name must be minimum 2')
-            .max(100, 'Name must not be more than 100 characters')
+            .max(50, 'Name must not be more than 50 characters')
             .required('Name is required'),
           phone: Yup.string()
             .required('Phone is required')
             .matches(regexes.regexPhone, 'Phone number is not valid'),
           comment: Yup.string(),
           delivery: Yup.string()
-            .required()
-            .oneOf(['self', 'courier'], 'Delivery type is required'),
+            .required('required')
+            .oneOf(['self', 'courier'], 'required'),
           payment: Yup.string()
-            .required()
-            .oneOf(['card', 'cash'], 'Payment type is required'),
+            .required('required')
+            .oneOf(['card', 'cash'], 'required'),
         }),
       );
     }
