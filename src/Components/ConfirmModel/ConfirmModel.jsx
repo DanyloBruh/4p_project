@@ -2,7 +2,7 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { confirmable, createConfirmation } from 'react-confirm';
 import { Button, Modal } from 'react-bootstrap';
-import './DeleteConfirmModel.scss';
+import './ConfirmModel.scss';
 
 /* eslint-disable react/prop-types */
 /* eslint-disable object-curly-newline */

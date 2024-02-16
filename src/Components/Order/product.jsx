@@ -19,7 +19,7 @@ function Product({
       <div className="order__product__group">
         <div className="order__product__nameCount">
           <div className="order__product__textGroup">
-            <span className="order__product__text">{`| ${product.name} |`}</span>
+            <span className="order__product__text order__product__name">{`| ${product.name} |`}</span>
             <span className="order__product__text">
               {`${product.price * count}£`}
             </span>
