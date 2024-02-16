@@ -8,10 +8,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import './Order.scss';
 import { PostcodeLookup } from '@ideal-postcodes/postcode-lookup';
 import {
-  Button,
-  FloatingLabel,
-  Form,
-  InputGroup,
+  Button, FloatingLabel, Form, InputGroup,
 } from 'react-bootstrap';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
@@ -124,10 +121,14 @@ function Order({
   }, [products]);
 
   const handleSubmit = async (values) => {
-    const addressLine = values.town + ', '
-      + values.addressLine1 + ', '
-      + values.addressLine2 + ', '
-      + values.addressLine3 + ', ';
+    const addressLine = values.town
+      + ', '
+      + values.addressLine1
+      + ', '
+      + values.addressLine2
+      + ', '
+      + values.addressLine3
+      + ', ';
 
     const productIds = products.map((product) => {
       const ret = {
@@ -179,147 +180,146 @@ function Order({
 
   return (
     <div className="orderBackground" onClick={handleHideOrder}>
-      <div className="order">
-        <div className="container">
-          <div className="ornament ornament--left" />
-          <div className="ornament ornament--right" />
-          <div className="order__cross" onClick={setOrderVisibleFalse} />
-          <div className="order__content">
-            <h1 className="order__title">Your order:</h1>
-            <hr className="order__line" />
-            {products.map(({ product, count }) => (
-              <Product
-                product={product}
-                count={count}
-                incCount={incCount}
-                decCount={decCount}
-                deleteProduct={deleteProduct}
-                key={product.id}
-              />
-            ))}
-            <hr className="order__line" />
-            <span className="order__total">{`Total: ${getTotalAmount()}£`}</span>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={schema}
-              onSubmit={handleSubmit}
-            >
-              {({
-                errors,
-                handleSubmit,
-                values,
-                handleChange,
-                touched,
-              }) => (
-                <form onSubmit={handleSubmit}>
-                  <div className="order__inputs">
-                    <Form.Group controlId="floatingInput">
-                      <FloatingLabel
-                        controlId="floatingInput"
-                        label="Your Name"
-                        className="order__input"
-                      >
-                        <Form.Control
-                          type="text"
-                          name="name"
-                          placeholder="name"
-                          value={values.name}
-                          onChange={handleChange}
-                          isValid={touched.name && !errors.name}
-                          isInvalid={touched.name && errors.name}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                          {errors.name}
-                        </Form.Control.Feedback>
-                      </FloatingLabel>
-                    </Form.Group>
-                    <Form.Group controlId="floatingInput">
-                      <InputGroup hasValidation>
+      <div className="order-position">
+        <div className="order">
+          <div className="container">
+            <div className="ornament ornament--left" />
+            <div className="ornament ornament--right" />
+            <div className="order__cross" onClick={setOrderVisibleFalse} />
+            <div className="order__content">
+              <h1 className="order__title">Your order:</h1>
+              <hr className="order__line" />
+              {products.map(({ product, count }) => (
+                <Product
+                  product={product}
+                  count={count}
+                  incCount={incCount}
+                  decCount={decCount}
+                  deleteProduct={deleteProduct}
+                  key={product.id}
+                />
+              ))}
+              <hr className="order__line" />
+              <span className="order__total">{`Total: ${getTotalAmount()}£`}</span>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={schema}
+                onSubmit={handleSubmit}
+              >
+                {({
+                  errors, handleSubmit, values, handleChange, touched,
+                }) => (
+                  <form onSubmit={handleSubmit}>
+                    <div className="order__inputs">
+                      <Form.Group controlId="floatingInput">
                         <FloatingLabel
                           controlId="floatingInput"
-                          label="Phone Number"
+                          label="Your Name"
                           className="order__input"
                         >
                           <Form.Control
                             type="text"
-                            name="phone"
-                            placeholder="Phone Number"
-                            value={values.phone}
+                            name="name"
+                            placeholder="name"
+                            value={values.name}
                             onChange={handleChange}
-                            isValid={touched.phone && !errors.phone}
-                            isInvalid={touched.phone && errors.phone}
+                            isValid={touched.name && !errors.name}
+                            isInvalid={touched.name && errors.name}
                           />
                           <Form.Control.Feedback type="invalid">
-                            {errors.phone}
+                            {errors.name}
                           </Form.Control.Feedback>
                         </FloatingLabel>
-                      </InputGroup>
-                    </Form.Group>
-                    <div className="order__checkBoxes">
-                      <div className="order__checkBoxes__group">
-                        <Form.Group controlId="floatingInput">
-                          <h2 className="order__radioTitle">Payment</h2>
-                          <label className="sq-radio">
-                            Cash
-                            <input
-                              type="radio"
-                              name="payment"
-                              value="cash"
+                      </Form.Group>
+                      <Form.Group controlId="floatingInput">
+                        <InputGroup hasValidation>
+                          <FloatingLabel
+                            controlId="floatingInput"
+                            label="Phone Number"
+                            className="order__input"
+                          >
+                            <Form.Control
+                              type="text"
+                              name="phone"
+                              placeholder="Phone Number"
+                              value={values.phone}
                               onChange={handleChange}
+                              isValid={touched.phone && !errors.phone}
+                              isInvalid={touched.phone && errors.phone}
                             />
-                            <span className="checkmark" />
-                          </label>
-                          <label className="sq-radio">
-                            Card
-                            <input
-                              type="radio"
-                              name="payment"
-                              value="card"
-                              onChange={handleChange}
-                            />
-                            <span className="checkmark" />
-                          </label>
-                          {errors.payment && touched.payment && (
+                            <Form.Control.Feedback type="invalid">
+                              {errors.phone}
+                            </Form.Control.Feedback>
+                          </FloatingLabel>
+                        </InputGroup>
+                      </Form.Group>
+                      <div className="order__checkBoxes">
+                        <div className="order__checkBoxes__group">
+                          <Form.Group controlId="floatingInput">
+                            <h2 className="order__radioTitle">Payment</h2>
+                            <label className="sq-radio">
+                              Cash
+                              <input
+                                type="radio"
+                                name="payment"
+                                value="cash"
+                                onChange={handleChange}
+                              />
+                              <span className="checkmark" />
+                            </label>
+                            <label className="sq-radio">
+                              Card
+                              <input
+                                type="radio"
+                                name="payment"
+                                value="card"
+                                onChange={handleChange}
+                              />
+                              <span className="checkmark" />
+                            </label>
+                            {errors.payment && touched.payment && (
                             <div className="errorRadio">{errors.payment}</div>
-                          )}
-                        </Form.Group>
+                            )}
+                          </Form.Group>
+                        </div>
+                        <div className="order__checkBoxes__group">
+                          <Form.Group controlId="floatingInput">
+                            <h2 className="order__radioTitle">Delivery</h2>
+                            <label className="sq-radio">
+                              Self pickup
+                              <input
+                                type="radio"
+                                name="delivery"
+                                value="self"
+                                onChange={(e) => {
+                                  setAddressFinder(false);
+                                  handleChange(e);
+                                }}
+                              />
+                              <span className="checkmark" />
+                            </label>
+                            <label className="sq-radio">
+                              Courier delivery
+                              <input
+                                type="radio"
+                                name="delivery"
+                                value="courier"
+                                onChange={(e) => {
+                                  setAddressFinder(true);
+                                  handleChange(e);
+                                }}
+                              />
+                              <span className="checkmark" />
+                            </label>
+                            {errors.delivery && touched.delivery && (
+                            <div className="errorRadio">
+                              {errors.delivery}
+                            </div>
+                            )}
+                          </Form.Group>
+                        </div>
                       </div>
-                      <div className="order__checkBoxes__group">
-                        <Form.Group controlId="floatingInput">
-                          <h2 className="order__radioTitle">Delivery</h2>
-                          <label className="sq-radio">
-                            Self pickup
-                            <input
-                              type="radio"
-                              name="delivery"
-                              value="self"
-                              onChange={(e) => {
-                                setAddressFinder(false);
-                                handleChange(e);
-                              }}
-                            />
-                            <span className="checkmark" />
-                          </label>
-                          <label className="sq-radio">
-                            Courier delivery
-                            <input
-                              type="radio"
-                              name="delivery"
-                              value="courier"
-                              onChange={(e) => {
-                                setAddressFinder(true);
-                                handleChange(e);
-                              }}
-                            />
-                            <span className="checkmark" />
-                          </label>
-                          {errors.delivery && touched.delivery && (
-                            <div className="errorRadio">{errors.delivery}</div>
-                          )}
-                        </Form.Group>
-                      </div>
-                    </div>
-                    {addressFinder && (
+                      {addressFinder && (
                       <>
                         <div className="order__postcode">
                           <Form.Group controlId="floatingInput">
@@ -336,10 +336,12 @@ function Order({
                                   id="postcode_input"
                                   value={values.postcode}
                                   onChange={handleChange}
-                                  isValid={touched.postcode && !errors.postcode}
+                                  isValid={
+                                      touched.postcode && !errors.postcode
+                                    }
                                   isInvalid={
-                                    touched.postcode && errors.postcode
-                                  }
+                                      touched.postcode && errors.postcode
+                                    }
                                 />
                                 <Form.Control.Feedback type="invalid">
                                   {errors.postcode}
@@ -372,11 +374,11 @@ function Order({
                                 value={values.addressLine1}
                                 onChange={handleChange}
                                 isValid={
-                                  touched.addressLine1 && !errors.addressLine1
-                                }
+                                    touched.addressLine1 && !errors.addressLine1
+                                  }
                                 isInvalid={
-                                  touched.addressLine1 && errors.addressLine1
-                                }
+                                    touched.addressLine1 && errors.addressLine1
+                                  }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.addressLine1}
@@ -399,11 +401,11 @@ function Order({
                                 value={values.addressLine2}
                                 onChange={handleChange}
                                 isValid={
-                                  touched.addressLine2 && !errors.addressLine2
-                                }
+                                    touched.addressLine2 && !errors.addressLine2
+                                  }
                                 isInvalid={
-                                  touched.addressLine2 && errors.addressLine2
-                                }
+                                    touched.addressLine2 && errors.addressLine2
+                                  }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.addressLine2}
@@ -426,11 +428,11 @@ function Order({
                                 value={values.addressLine3}
                                 onChange={handleChange}
                                 isValid={
-                                  touched.addressLine3 && !errors.addressLine3
-                                }
+                                    touched.addressLine3 && !errors.addressLine3
+                                  }
                                 isInvalid={
-                                  touched.addressLine3 && errors.addressLine3
-                                }
+                                    touched.addressLine3 && errors.addressLine3
+                                  }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.addressLine3}
@@ -476,7 +478,9 @@ function Order({
                                 value={values.postcode}
                                 onChange={handleChange}
                                 isValid={touched.postcode && !errors.postcode}
-                                isInvalid={touched.postcode && errors.postcode}
+                                isInvalid={
+                                    touched.postcode && errors.postcode
+                                  }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.postcode}
@@ -485,44 +489,45 @@ function Order({
                           </InputGroup>
                         </Form.Group>
                       </>
-                    )}
-                    <Form.Group controlId="floatingInput">
-                      <InputGroup hasValidation>
-                        <FloatingLabel
-                          controlId="floatingInput"
-                          label="Comment"
-                          className="order__input"
-                        >
-                          <Form.Control
-                            type="text"
-                            name="comment"
-                            placeholder="Comment"
-                            value={values.comment}
-                            onChange={handleChange}
-                            isValid={touched.comment && !errors.comment}
-                            isInvalid={touched.comment && errors.comment}
-                          />
-                          <Form.Control.Feedback type="invalid">
-                            {errors.comment}
-                          </Form.Control.Feedback>
-                        </FloatingLabel>
-                      </InputGroup>
-                    </Form.Group>
+                      )}
+                      <Form.Group controlId="floatingInput">
+                        <InputGroup hasValidation>
+                          <FloatingLabel
+                            controlId="floatingInput"
+                            label="Comment"
+                            className="order__input"
+                          >
+                            <Form.Control
+                              type="text"
+                              name="comment"
+                              placeholder="Comment"
+                              value={values.comment}
+                              onChange={handleChange}
+                              isValid={touched.comment && !errors.comment}
+                              isInvalid={touched.comment && errors.comment}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                              {errors.comment}
+                            </Form.Control.Feedback>
+                          </FloatingLabel>
+                        </InputGroup>
+                      </Form.Group>
 
-                    <hr className="order__line" />
-                    <span className="order__total">{`Total: ${getTotalAmount()}£`}</span>
+                      <hr className="order__line" />
+                      <span className="order__total">{`Total: ${getTotalAmount()}£`}</span>
 
-                    <Button
-                      type="submit"
-                      className="order__button"
-                      variant="outline-light"
-                    >
-                      ORDER NOW
-                    </Button>
-                  </div>
-                </form>
-              )}
-            </Formik>
+                      <Button
+                        type="submit"
+                        className="order__button"
+                        variant="outline-light"
+                      >
+                        ORDER NOW
+                      </Button>
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </div>
           </div>
         </div>
       </div>
