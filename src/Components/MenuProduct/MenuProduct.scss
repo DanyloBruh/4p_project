@@ -5,10 +5,13 @@
   border: none;
   background: #232323;
   overflow: hidden;
-  > a {
+  > button {
     display: flex;
     justify-content: center;
     height: 270px;
+    width: 100%;
+    border: 0px;
+    padding: 0;
     @media (max-width: 1399px) {
       height: 250px;
     }
@@ -63,6 +66,10 @@
       text-transform: uppercase;
       text-decoration: underline;
       text-align: left;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       margin-bottom: 30px;
       @media (max-width: 1199px) {
         margin-bottom: 10px;

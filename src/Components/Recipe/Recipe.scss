@@ -8,15 +8,16 @@
     width: 100%;
     height: 80vh;
     position: relative;
-    z-index: -1;
+    z-index: 0;
     @media (max-width: 575px) {
       height: 60vh;
     }
     > h2 {
+      width: 100%;
       color: #fff;
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 4rem;
+      font-size: 3rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -25,7 +26,8 @@
       left: 50%;
       top: 70%;
       transform: translate(-50%, -50%);
-      width: 100%;
+      background-color: rgba(0, 0, 0, 0.65); 
+      padding: 20px 0 20px 0;
     }
     > img {
       position: absolute;
@@ -369,7 +371,7 @@
     height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
-    background-size: contain;
+    background-size: 100%;
     position: absolute;
     z-index: -2;
     top: 40vh;
@@ -382,7 +384,7 @@
     height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
-    background-size: contain;
+    background-size: 100%;
     position: absolute;
     z-index: -2;
     top: 40vh;

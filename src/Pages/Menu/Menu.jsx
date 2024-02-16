@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import {
-  NavLink, useLocation, useNavigate, useParams,
-} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Menu.scss';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import Varenyk from '../../Assets/varenyk.png';
 import Dumplings from '../../Assets/dumplings.png';
 import Borsch from '../../Assets/borsch.png';
@@ -17,21 +16,22 @@ import { getAllProducts, getMainBlogs } from '../../Helper/requests';
 
 import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/MenuProductPlaceholder';
 import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
+import { offScroll, onScroll } from '../../redux/scrollSlice';
 
 function Menu() {
   const [menuItems, setMenuItems] = useState();
   const [blogItems, setBlogItems] = useState();
+  const [selectItems, setSelectItems] = useState();
 
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '*';
+  const dispath = useDispatch();
 
   useEffect(() => {
-    if (id && !menuItems?.find((item) => item.id === id)) {
-      navigate(from, { replace: true });
+    if (selectItems) {
+      dispath(offScroll());
+    } else {
+      dispath(onScroll());
     }
-  }, [id]);
+  }, [selectItems]);
 
   useEffect(() => {
     getAllProducts().then(setMenuItems);
@@ -84,7 +84,7 @@ function Menu() {
           <Row className="menu-main__product">
             {menuItems?.map((item) => (
               <Col key={item.id} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                <MenuProduct product={item} />
+                <MenuProduct product={item} setSelectItems={setSelectItems} />
               </Col>
             ))}
             {(!menuItems || menuItems.length === 0) && (
@@ -189,8 +189,11 @@ function Menu() {
       </Container>
       <div className="ornament-left" />
       <div className="ornament-rigth" />
-      {id && menuItems?.find((item) => item.id === id) && (
-        <ProductCard data={menuItems?.find((item) => item.id === id)} />
+      {selectItems && menuItems?.find((item) => item.id === selectItems) && (
+        <ProductCard
+          data={menuItems?.find((item) => item.id === selectItems)}
+          setSelectItems={setSelectItems}
+        />
       )}
     </div>
   );

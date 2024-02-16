@@ -10,19 +10,23 @@
   backdrop-filter: blur(10px);
 }
 
-.order {
-  background-color: #1f1f1f;
+.order-position {
   position: absolute;
-  top: 10%;
+  padding-bottom: 40px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+}
+
+.order {
+  background-color: #1f1f1f;
+
   overflow: hidden;
 
   @media (max-width: 575px), (max-height: 575px) {
     width: 90%;
     border-radius: 8px;
-    top: 5%;
   }
 
   &__cross {
@@ -44,8 +48,6 @@
   &__cross:active,
   &__cross:focus-visible {
   }
-
-  
 
   &__content {
     padding: 35px 85px 80px;
@@ -156,7 +158,8 @@
       width: 115px;
       height: 103px;
       border-radius: 8px;
-
+      object-fit: cover;
+      
       @media (max-width: 950px), (max-height: 950px) {
         width: 80px;
         height: 80px;
