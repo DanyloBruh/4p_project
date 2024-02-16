@@ -5,10 +5,13 @@
   border: none;
   background: #232323;
   overflow: hidden;
-  > a {
+  > button {
     display: flex;
     justify-content: center;
     height: 270px;
+    width: 100%;
+    border: 0px;
+    padding: 0;
     @media (max-width: 1399px) {
       height: 250px;
     }

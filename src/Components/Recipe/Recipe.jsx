@@ -2,9 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React, {
-  useEffect, useRef, useState,
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container, Placeholder } from 'react-bootstrap';
 import './Recipe.scss';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -22,7 +20,6 @@ function Recipe({ recipe }) {
 
   useEffect(() => {
     setHeight(ref.current.clientHeight);
-    console.log(ref.current.clientHeight);
   }, [ref.current, recipeInfo]);
 
   useEffect(() => {

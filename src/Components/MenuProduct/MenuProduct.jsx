@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import './MenuProduct.scss';
 import Counter from '../Counter/Counter';
 import { addOrderData } from '../../redux/orderDataSlice';
 
-function MenuProduct({ product }) {
+function MenuProduct({ product, setSelectItems }) {
   const [count, setCount] = useState(1);
   const dispath = useDispatch();
 
@@ -35,12 +34,13 @@ function MenuProduct({ product }) {
 
   return (
     <div key={product.id} className="product">
-      <Link to={`/${product.id}`}>
+      <button type="button" onClick={() => setSelectItems(product.id)}>
         <img
           src={`data:image/png;base64,${product.Image.imageData}`}
           alt={product.Image.imageName}
         />
-      </Link>
+      </button>
+
       <div className="product__text">
         <h2>{product.name}</h2>
         <p id="price">{`PRICE | ${product.price}$`}</p>

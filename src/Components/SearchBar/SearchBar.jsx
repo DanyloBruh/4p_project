@@ -2,7 +2,7 @@
 import './SearchBar.scss';
 import React from 'react';
 
-function SearchBar({ handleChange }) {
+function SearchBar({ handleChange, value }) {
   return (
     <div className="container">
       <div className="row height d-flex justify-content-center align-items-center">
@@ -13,6 +13,7 @@ function SearchBar({ handleChange }) {
               type="text"
               className="form-control form-input"
               placeholder="Search..."
+              value={value}
               onChange={handleChange}
             />
           </div>

@@ -38,7 +38,7 @@
     }
     &__img {
       width: 100%;
-      height: 100%;
+      height: 360px;
       object-fit: cover;
       // @media (max-width: 992px) {
       //   object-fit: contain;
@@ -138,6 +138,15 @@
         > svg {
           height: 35px;
           width: 35px;
+        }
+      }
+    }
+    &__close:hover,
+    &__close:focus,
+    &__close:active {
+      > svg {
+        > path {
+          fill: rgb(255, 255, 255);
         }
       }
     }
