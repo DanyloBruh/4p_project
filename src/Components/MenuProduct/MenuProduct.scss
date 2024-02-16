@@ -66,6 +66,10 @@
       text-transform: uppercase;
       text-decoration: underline;
       text-align: left;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       margin-bottom: 30px;
       @media (max-width: 1199px) {
         margin-bottom: 10px;
