@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@emotion/react": "^11.11.3",
     "@ideal-postcodes/postcode-lookup": "^1.11.2",
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.0.1",
+    "@table-library/react-table-library": "^4.1.7",
     "@tiptap/extension-color": "^2.2.2",
     "@tiptap/extension-list-item": "^2.2.2",
     "@tiptap/extension-text-style": "^2.2.2",
