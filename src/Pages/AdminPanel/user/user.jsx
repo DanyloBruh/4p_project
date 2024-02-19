@@ -14,8 +14,8 @@ import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { Button } from 'react-bootstrap';
 import { TableGenerator, handleArchived, handleDelete } from '../adminUtils';
-import AddUser from './addUser';
 import EditUser from './edituser';
+import AddUser from './addUser';
 
 function User({
   nodes,

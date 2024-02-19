@@ -1,66 +1,68 @@
 /* eslint-disable no-unused-vars */
 
+/* eslint-disable object-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable operator-linebreak */
+
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import { Formik } from 'formik';
 import React, { useMemo } from 'react';
-import {
-  Button, Container, FloatingLabel, Form,
-} from 'react-bootstrap';
+import { Button, Container, FloatingLabel, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import TextareaAutosize from 'react-textarea-autosize';
 import { IoMdClose } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import ToastNotification from '../../../Components/Toast/Toast';
-import { postDataConfig } from '../../../Helper/requests';
+import { editDataConfig } from '../../../Helper/requests';
 import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
+import { removeUnchangedFields } from '../adminUtils';
 
-function EditProduct({
-  item, setData, fileOptions, close,
-}) {
-  const userId = useSelector((state) => state.auth.auth.user.id);
+function EditProduct({ item, setData, fileOptions, close }) {
+  const UserId = useSelector((state) => state.auth.auth.user.id);
   const axiosPrivateConfig = useAxiosPrivateImages();
 
-  const initialState = useMemo(() => ({
-    name: item.name,
-    weight: item.weight,
-    description: item.description,
-    price: item.price,
-    Image: '',
-    ingredients: item.ingredients,
-  }), []);
-  const schema = useMemo(
-    () => Yup.object().shape({
-      name: Yup.string()
-        .min(2, 'Name must be minimum 2')
-        .max(100, 'Name must not be more than 100 characters')
-        .matches(
-          '^[A-Za-z]{1,20}',
-          'Product name must not contain numbers',
-        )
-        .required('Name is required'),
-      weight: Yup.number('Weight must be a number').required(
-        'Weight is required',
-      ),
-      description: Yup.string().required('Description is required'),
-      price: Yup.number('Price must be a number').required(
-        'Price is required',
-      ),
-      Image: Yup.mixed()
-        .required('A Image is required')
-        .test(
-          'fileSize',
-          'Image too large',
-          (value) => value && value.size <= fileOptions.fileSize,
-        )
-        .test(
-          'fileFormat',
-          'Unsupported Format',
-          (value) => value && fileOptions.supportedFormats.includes(value.type),
-        ),
-      ingredients: Yup.string().required('Ingredients is required'),
+  console.log(item);
+
+  const initialState = useMemo(
+    () => ({
+      name: item.name,
+      weight: item.weight,
+      description: item.description,
+      price: item.price,
+      Image: item.Image,
+      ingredients: item.ingredients,
     }),
+    [],
+  );
+  const schema = useMemo(
+    () =>
+      Yup.object().shape({
+        name: Yup.string()
+          .min(2, 'Name must be minimum 2')
+          .max(100, 'Name must not be more than 100 characters')
+          .matches('^[A-Za-z]{1,20}', 'Product name must not contain numbers')
+          .required('Name is required'),
+        weight: Yup.number('Weight must be a number').required(
+          'Weight is required',
+        ),
+        description: Yup.string().required('Description is required'),
+        price: Yup.number('Price must be a number').required(
+          'Price is required',
+        ).positive('Price must be positive'),
+        Image: Yup.mixed()
+          .test('fileSize', 'Image too large', (value) => {
+            if (!value.size) return true;
+            return value.size <= fileOptions.fileSize;
+          })
+          .test('fileFormat', 'Unsupported format', (value) => {
+            if (!value.type) return true;
+            return fileOptions.supportedFormats.includes(value.type);
+          }),
+        ingredients: Yup.string().required('Ingredients is required'),
+      }),
     [],
   );
 
@@ -70,6 +72,31 @@ function EditProduct({
   }, []);
 
   const handleSubmitForm = (values) => {
+    const request = removeUnchangedFields(item, values);
+    editDataConfig('product', item.id, axiosPrivateConfig, {
+      ...request,
+      UserId,
+    })
+      .then(() => {
+        ToastNotification('success', 'Successfully updated!');
+        setData((state) => ({
+          nodes: state.nodes.map((node) => {
+            if (node.id === item.id) {
+              return { ...values, id: item.id };
+            }
+            return node;
+          }),
+        }));
+      })
+      .catch((err) => {
+        ToastNotification(
+          'error',
+          `Something went wrong! (${err.response.data.message})`,
+        );
+      })
+      .finally(() => {
+        close();
+      });
   };
   return (
     <div className="add-edit-form">
@@ -94,9 +121,7 @@ function EditProduct({
             >
               <Form.Label>
                 Edit product
-                <Button
-                  onClick={() => close()}
-                >
+                <Button onClick={() => close()}>
                   <IconContext.Provider value={iconProviderValue}>
                     <IoMdClose />
                   </IconContext.Provider>
@@ -196,9 +221,9 @@ function EditProduct({
                   rows={5}
                   minRows={5}
                   className={`form-control ${
-                    touched.description && errors.description
+                    touched.ingredients && errors.ingredients
                       ? 'is-invalid'
-                      : touched.description && !errors.description
+                      : touched.ingredients && !errors.ingredients
                         ? 'is-valid'
                         : ''
                   }`}
@@ -215,18 +240,20 @@ function EditProduct({
                 <Form.Control
                   type="file"
                   name="Image"
-                  onChange={(e) => setFieldValue('Image', e.currentTarget.files[0])}
+                  onChange={(e) =>
+                    setFieldValue('Image', e.currentTarget.files[0])
+                  }
                   isValid={touched.Image && !errors.Image}
                   isInvalid={touched.Image && errors.Image}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.Image}
                 </Form.Control.Feedback>
-                {values.Image ? (
-                  <img src={URL.createObjectURL(values.Image)} alt="add img" />
+                {values.Image && !values.Image.id ? (
+                  <img src={URL.createObjectURL(values.Image)} alt="edit img" />
                 ) : (
                   <img
-                    src={`data:image/png;base64,${item.Image.imageData}`}
+                    src={`data:image/png;base64,${values.Image.imageData}`}
                     alt="edit img"
                   />
                 )}

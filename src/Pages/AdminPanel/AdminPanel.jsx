@@ -123,8 +123,6 @@ function AdminPanel() {
     return dataBuffer;
   }, [query, data]);
 
-  console.log(category);
-
   return (
     <>
       <ToastContainer />
