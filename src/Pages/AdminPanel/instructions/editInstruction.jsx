@@ -165,7 +165,7 @@ function EditInstruction({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter instruction name"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="text"
@@ -206,7 +206,7 @@ function EditInstruction({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter time"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="text"
@@ -227,7 +227,7 @@ function EditInstruction({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter makes"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="number"

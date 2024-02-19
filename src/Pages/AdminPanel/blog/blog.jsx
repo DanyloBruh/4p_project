@@ -24,7 +24,6 @@ function Blog({
   axiosPrivate,
   theme,
   fileOptions,
-  setManipulation,
 }) {
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
@@ -58,7 +57,6 @@ function Blog({
   });
 
   const handeEdit = useCallback((item) => {
-    setManipulation(false);
     setVisibleType('edit');
     setEditItem(item);
   }, []);
@@ -129,31 +127,34 @@ function Blog({
   );
 
   const close = useCallback(() => {
-    setManipulation(true);
     setVisibleType('');
   }, []);
 
-  return visibleType === 'add' ? (
-    <AddBlog setData={setData} fileOptions={fileOptions} close={close} />
-  ) : visibleType === 'edit' ? (
-    <EditBlog
-      item={editItem}
-      setData={setData}
-      fileOptions={fileOptions}
-      close={close}
-    />
-  ) : (
-    <TableGenerator
-      columns={COLUMNS}
-      data={data}
-      theme={theme}
-      sort={sort}
-      pagination={pagination}
-      addClick={() => {
-        setVisibleType('add');
-        setManipulation(false);
-      }}
-    />
+  return (
+    <>
+      {visibleType === 'add' && (
+        <AddBlog setData={setData} fileOptions={fileOptions} close={close} />
+      )}
+      {visibleType === 'edit' && (
+        <EditBlog
+          item={editItem}
+          setData={setData}
+          fileOptions={fileOptions}
+          close={close}
+        />
+      )}
+
+      <TableGenerator
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        sort={sort}
+        pagination={pagination}
+        addClick={() => {
+          setVisibleType('add');
+        }}
+      />
+    </>
   );
 }
 

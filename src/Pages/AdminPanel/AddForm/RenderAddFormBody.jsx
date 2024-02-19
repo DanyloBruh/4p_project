@@ -75,7 +75,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter user name"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -113,7 +113,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter email"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -134,7 +134,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter password"
-              className="mb-3"
+
             >
               <Form.Control
                 type="password"
@@ -155,7 +155,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Confirm password"
-              className="mb-3"
+
             >
               <Form.Control
                 type="password"
@@ -181,7 +181,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter title"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -283,7 +283,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter product name"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -304,7 +304,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter weight"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -325,7 +325,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter price"
-              className="mb-3"
+
             >
               <Form.Control
                 type="number"
@@ -413,7 +413,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter instruction name"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -454,7 +454,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter time"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -475,7 +475,7 @@ function RenderAddFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter makes"
-              className="mb-3"
+
             >
               <Form.Control
                 type="number"

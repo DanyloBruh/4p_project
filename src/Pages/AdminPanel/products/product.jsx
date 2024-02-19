@@ -23,7 +23,6 @@ function Product({
   axiosPrivate,
   theme,
   fileOptions,
-  setManipulation,
 }) {
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
@@ -58,7 +57,6 @@ function Product({
   });
 
   const handeEdit = useCallback((item) => {
-    setManipulation(false);
     setVisibleType('edit');
     setEditItem(item);
   }, []);
@@ -144,31 +142,33 @@ function Product({
   );
 
   const close = useCallback(() => {
-    setManipulation(true);
     setVisibleType('');
   }, []);
 
-  return visibleType === 'add' ? (
-    <AddProduct setData={setData} fileOptions={fileOptions} close={close} />
-  ) : visibleType === 'edit' ? (
-    <EditProduct
-      item={editItem}
-      setData={setData}
-      fileOptions={fileOptions}
-      close={close}
-    />
-  ) : (
-    <TableGenerator
-      columns={COLUMNS}
-      data={data}
-      theme={theme}
-      sort={sort}
-      pagination={pagination}
-      addClick={() => {
-        setVisibleType('add');
-        setManipulation(false);
-      }}
-    />
+  return (
+    <>
+      {visibleType === 'add' && (
+        <AddProduct setData={setData} fileOptions={fileOptions} close={close} />
+      )}
+      {visibleType === 'edit' && (
+        <EditProduct
+          item={editItem}
+          setData={setData}
+          fileOptions={fileOptions}
+          close={close}
+        />
+      )}
+      <TableGenerator
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        sort={sort}
+        pagination={pagination}
+        addClick={() => {
+          setVisibleType('add');
+        }}
+      />
+    </>
   );
 }
 

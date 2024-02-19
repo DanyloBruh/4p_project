@@ -22,7 +22,6 @@ function Order({
   axiosPrivate,
   theme,
   fileOptions,
-  setManipulation,
 }) {
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
@@ -61,7 +60,6 @@ function Order({
   });
 
   const handeEdit = useCallback((item) => {
-    setManipulation(false);
     setVisibleType('edit');
     setEditItem(item);
   }, []);
@@ -172,7 +170,6 @@ function Order({
   );
 
   const close = useCallback(() => {
-    setManipulation(true);
     setVisibleType('');
   }, []);
 
@@ -192,7 +189,6 @@ function Order({
       pagination={pagination}
       addClick={() => {
         setVisibleType('add');
-        setManipulation(false);
       }}
       addDisable
     />

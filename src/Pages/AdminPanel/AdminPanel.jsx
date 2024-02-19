@@ -35,7 +35,6 @@ import './AdminPanel.scss';
 function AdminPanel() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
-  const [manipulation, setManipulation] = useState(true);
   const query = searchParams.get('query') || '';
   const [loading, setLoading] = useState(false);
   const [archived, setArchived] = useState(false);
@@ -190,35 +189,35 @@ function AdminPanel() {
               {` ${category}`}
             </h2>
           )}
-          {manipulation && (
-            <div className="manipulation">
-              <div className="search-bar">
-                <input
-                  type="text"
-                  placeholder="Search anything..."
-                  value={query}
-                  onChange={(e) => {
+
+          <div className="manipulation">
+            <div className="search-bar">
+              <input
+                type="text"
+                placeholder="Search anything..."
+                value={query}
+                onChange={(e) => {
                     setSearchParams(
                       getSearchWith(searchParams, {
                         query: e.target.value || null,
                       }),
                     );
                   }}
-                />
-              </div>
-              <div className="checkbox-wrapper-22">
-                <label className="switch" htmlFor="checkbox">
-                  <input
-                    type="checkbox"
-                    id="checkbox"
-                    onChange={() => setArchived(!archived)}
-                  />
-                  <div className="slider round" />
-                </label>
-                <span className="switchText">Archived</span>
-              </div>
+              />
             </div>
-          )}
+            <div className="checkbox-wrapper-22">
+              <label className="switch" htmlFor="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  onChange={() => setArchived(!archived)}
+                />
+                <div className="slider round" />
+              </label>
+              <span className="switchText">Archived</span>
+            </div>
+          </div>
+
         </Container>
         {category === 'product' && (
           <Product
@@ -227,7 +226,7 @@ function AdminPanel() {
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-            setManipulation={setManipulation}
+
           />
         )}
         {category === 'user' && (
@@ -237,7 +236,7 @@ function AdminPanel() {
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-            setManipulation={setManipulation}
+
           />
         )}
         {category === 'instruction' && (
@@ -247,7 +246,7 @@ function AdminPanel() {
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-            setManipulation={setManipulation}
+
           />
         )}
         {category === 'blog' && (
@@ -257,7 +256,7 @@ function AdminPanel() {
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-            setManipulation={setManipulation}
+
           />
         )}
         {category === 'order' && (
@@ -267,7 +266,7 @@ function AdminPanel() {
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-            setManipulation={setManipulation}
+
           />
         )}
         {loading && (
@@ -276,9 +275,6 @@ function AdminPanel() {
         {!loading && data.length === 0 && (
           <h2 className="text-white">Nothing found</h2>
         )}
-        {/* <Container> */}
-
-        {/* </Container> */}
       </div>
     </>
   );

@@ -107,7 +107,7 @@ function EditProduct({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter product name"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="text"
@@ -128,7 +128,7 @@ function EditProduct({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter weight"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="text"
@@ -149,7 +149,7 @@ function EditProduct({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter price"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="number"

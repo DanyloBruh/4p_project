@@ -1,1 +1,26 @@
-
+.text-editor-header {
+  display: flex;
+  > button {
+    height: 58px;
+    width: 58px;
+    background-color: #212529;
+    > svg {
+      height: 50px;
+      width: 50px;
+    }
+  }
+  > button:hover,
+  button:active,
+  button:focus,
+  button:focus-visible {
+    background-color: #424649;
+  }
+}
+.add-edit-form-blog-position {
+  height: 100%;
+  width: auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 25px 0;
+}

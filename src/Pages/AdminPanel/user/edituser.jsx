@@ -95,7 +95,7 @@ function EditUser({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter user name"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="text"
@@ -133,7 +133,7 @@ function EditUser({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter email"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="text"
@@ -154,7 +154,7 @@ function EditUser({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter password"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="password"
@@ -175,7 +175,7 @@ function EditUser({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Confirm password"
-                  className="mb-3"
+
                 >
                   <Form.Control
                     type="password"

@@ -165,7 +165,6 @@ function EditBlog({
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Enter title"
-                  className="mb-3"
                 >
                   <Form.Control
                     required
