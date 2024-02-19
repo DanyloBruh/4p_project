@@ -303,7 +303,9 @@ const extensions = [
   }),
 ];
 
-export default function BlogTextEditor({ setFormData, content }) {
+export default function BlogTextEditor({
+  setFormData, content,
+}) {
   return (
     <EditorProvider
       slotBefore={<MenuBar setFormData={setFormData} />}

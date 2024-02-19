@@ -200,51 +200,54 @@ function RenderAddFormBody({
           </Form.Group>
           <Form.Group className="form-element">
             <p>text</p>
-            <BlogTextEditor setFormData={setValues} formData={values} />
+            <BlogTextEditor
+              setFormData={setValues}
+              formData={values}
+            />
+            {errors.text && touched.text ? (
+              <div className="validtaionText">{errors.text}</div>
+            ) : null}
           </Form.Group>
           <Form.Group className="form-element">
             <Form.Label>Images</Form.Label>
             <Form.Group className="control-element">
               <FieldArray className="rendered-content" name="Images">
                 {() =>
-                  values.Images.map((item, i) => {
-                    console.log(item);
-                    return (
-                      <Form.Group
-                        key={`Images${i}`}
-                        className="rendered-content"
-                      >
-                        <Form.Control
-                          type="file"
-                          name={`Images.${i}.image`}
-                          onChange={(e) =>
-                            setFieldValue(
-                              `Images[${i}]`,
-                              e.currentTarget.files[0],
-                            )
+                  values.Images.map((item, i) => (
+                    <Form.Group
+                      key={`Images${i}`}
+                      className="rendered-content"
+                    >
+                      <Form.Control
+                        type="file"
+                        name={`Images.${i}.image`}
+                        onChange={(e) =>
+                          setFieldValue(
+                            `Images[${i}]`,
+                            e.currentTarget.files[0],
+                          )
                           }
-                          isValid={touched.Images && !errors.Images?.[i]}
-                          isInvalid={touched.Images && errors.Images?.[i]}
-                        />
-                        {values.Images.length > 1 && (
-                          <Button
-                            variant="outline-light"
-                            onClick={() => handleDeleteImages(i)}
-                          >
-                            remove
-                          </Button>
-                        )}
-                        {item.name ? (
-                          <img src={URL.createObjectURL(item)} alt="add img" />
-                        ) : (
-                          <img alt="" />
-                        )}
-                        <Form.Control.Feedback type="invalid">
-                          {errors.Images && errors.Images[i]}
-                        </Form.Control.Feedback>
-                      </Form.Group>
-                    );
-                  })
+                        isValid={touched.Images && !errors.Images?.[i]}
+                        isInvalid={touched.Images && errors.Images?.[i]}
+                      />
+                      {values.Images.length > 1 && (
+                      <Button
+                        variant="outline-light"
+                        onClick={() => handleDeleteImages(i)}
+                      >
+                        remove
+                      </Button>
+                      )}
+                      {item.name ? (
+                        <img src={URL.createObjectURL(item)} alt="add img" />
+                      ) : (
+                        <img alt="" />
+                      )}
+                      <Form.Control.Feedback type="invalid">
+                        {errors.Images && errors.Images[i]}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  ))
                 }
               </FieldArray>
             </Form.Group>
@@ -252,44 +255,7 @@ function RenderAddFormBody({
               click to add new Image
             </Button>
           </Form.Group>
-          {/* <Form.Group className="form-element images">
-            <Form.Label>Images</Form.Label>
-            <Form.Group className="control-element">
-              {images.map((image, i) => (
-                <>
-                  <Form.Group
-                    className="rendered-content images"
-                    key={image.id}
-                  >
-                    <Form.Control
-                      required
-                      type="file"
-                      name="images"
-                      onChange={(e) => handleImage(e, i)}
-                    />
-                    <Button
-                      variant="outline-light"
-                      onClick={() => handleDeleteImages(i)}
-                    >
-                      remove
-                    </Button>
-                  </Form.Group>
-                  {image.images ? (
-                    <img
-                      key={image.timestamp}
-                      src={URL.createObjectURL(image.images)}
-                      alt="add img"
-                    />
-                  ) : (
-                    <img alt="" />
-                  )}
-                </>
-              ))}
-            </Form.Group>
-            <Button variant="outline-light" onClick={handleAddImage}>
-              click to add new Image
-            </Button>
-          </Form.Group> */}
+
           <Form.Group className="form-element">
             <Form.Select
               name="displayType"
@@ -553,46 +519,43 @@ function RenderAddFormBody({
             <Form.Group className="control-element">
               <FieldArray className="rendered-content" name="ingredients">
                 {() =>
-                  values.ingredients.map((item, i) => {
-                    console.log(i);
-                    return (
-                      <Form.Group
-                        key={`ingredients${i}`}
-                        className="rendered-content"
-                      >
-                        <TextareaAutosize
-                          name={`ingredients.${i}.ingredient`}
-                          type="text"
-                          rows={5}
-                          minRows={5}
-                          className={`form-control ${
-                            touched.ingredients && errors.ingredients
-                              ? 'is-invalid'
-                              : touched.ingredients && !errors.ingredients
-                                ? 'is-valid'
-                                : ''
-                          }`}
-                          value={item.ingredient}
-                          onChange={handleChange}
-                          autoComplete="off"
-                        />
+                  values.ingredients.map((item, i) => (
+                    <Form.Group
+                      key={`ingredients${i}`}
+                      className="rendered-content"
+                    >
+                      <TextareaAutosize
+                        name={`ingredients.${i}.ingredient`}
+                        type="text"
+                        rows={5}
+                        minRows={5}
+                        className={`form-control ${
+                          touched.ingredients && errors.ingredients
+                            ? 'is-invalid'
+                            : touched.ingredients && !errors.ingredients
+                              ? 'is-valid'
+                              : ''
+                        }`}
+                        value={item.ingredient}
+                        onChange={handleChange}
+                        autoComplete="off"
+                      />
 
-                        {values.ingredients.length > 1 && (
-                          <Button
-                            variant="outline-light"
-                            onClick={() => handleDelete(i)}
-                          >
-                            remove
-                          </Button>
-                        )}
-                        <Form.Control.Feedback type="invalid">
-                          {errors.ingredients &&
+                      {values.ingredients.length > 1 && (
+                      <Button
+                        variant="outline-light"
+                        onClick={() => handleDelete(i)}
+                      >
+                        remove
+                      </Button>
+                      )}
+                      <Form.Control.Feedback type="invalid">
+                        {errors.ingredients &&
                             errors.ingredients[i] &&
                             errors.ingredients[i].ingredient}
-                        </Form.Control.Feedback>
-                      </Form.Group>
-                    );
-                  })
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  ))
                 }
               </FieldArray>
             </Form.Group>
