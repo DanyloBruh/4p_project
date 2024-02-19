@@ -10,6 +10,7 @@ import React, {
 
 import { useSort } from '@table-library/react-table-library/sort';
 import { usePagination } from '@table-library/react-table-library/pagination';
+import HtmlToReactParser from 'html-to-react';
 import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
@@ -29,6 +30,8 @@ function Blog({
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
   const [editItem, setEditItem] = useState();
+
+  const Parser = new HtmlToReactParser.Parser();
 
   useEffect(() => {
     setData((state) => ({ nodes }));
@@ -72,7 +75,7 @@ function Blog({
     },
     {
       label: 'text',
-      renderCell: (item) => item.text,
+      renderCell: (item) => Parser.parse(item?.text),
     },
     {
       label: 'Display type',

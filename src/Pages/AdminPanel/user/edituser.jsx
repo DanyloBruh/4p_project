@@ -7,14 +7,19 @@ import React, { useMemo } from 'react';
 import {
   Button, Container, FloatingLabel, Form,
 } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { IoMdClose } from 'react-icons/io';
 import { IconContext } from 'react-icons';
+import ToastNotification from '../../../Components/Toast/Toast';
+import { editData } from '../../../Helper/requests';
 import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
+import { removeUnchangedFields } from '../adminUtils';
 
 function EditUser({
   item, setData, fileOptions, close,
 }) {
+  const UserId = useSelector((state) => state.auth.auth.user.id);
   const axiosPrivate = useAxiosPrivate();
 
   const initialState = useMemo(() => ({
@@ -41,15 +46,13 @@ function EditUser({
         .matches(/^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/, 'Invalid email')
         .required('Email is required'),
       password: Yup.string()
-        .required('Password is required')
         .min(6, 'Password must be 6 characters long')
         .matches(/[0-9]/, 'Password requires a number')
         .matches(/[a-z]/, 'Password requires a lowercase letter')
         .matches(/[A-Z]/, 'Password requires an uppercase letter')
         .matches(/[^\w]/, 'Password requires a symbol'),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'Mismatched passwords')
-        .required('Please confirm your password'),
+        .oneOf([Yup.ref('password')], 'Mismatched passwords'),
     }),
     [],
   );
@@ -59,6 +62,31 @@ function EditUser({
   }, []);
 
   const handleSubmitForm = (values) => {
+    const request = removeUnchangedFields(item, values);
+    editData('user', item.id, axiosPrivate, {
+      ...request,
+      UserId,
+    })
+      .then(() => {
+        ToastNotification('success', 'Successfully updated!');
+        setData((state) => ({
+          nodes: state.nodes.map((node) => {
+            if (node.id === item.id) {
+              return { ...values, id: item.id };
+            }
+            return node;
+          }),
+        }));
+      })
+      .catch((err) => {
+        ToastNotification(
+          'error',
+          `Something went wrong! (${err.response.data.message})`,
+        );
+      })
+      .finally(() => {
+        close();
+      });
   };
   return (
     <div className="add-edit-form">

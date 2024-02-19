@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 export const handleDeleteIngredient = (i, values, setValues) => {
   const deleteIngredient = [...values.ingredients];
   deleteIngredient.splice(i, 1);
@@ -21,5 +23,3 @@ export const handleDeleteStep = (i, values, setValues) => {
   deleteStep.splice(i, 1);
   setValues({ ...values, text: deleteStep });
 };
-
-console.log('dfdsf instructions');
