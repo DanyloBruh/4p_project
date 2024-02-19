@@ -51,7 +51,7 @@ function EditProduct({ item, setData, fileOptions, close }) {
         description: Yup.string().required('Description is required'),
         price: Yup.number('Price must be a number').required(
           'Price is required',
-        ),
+        ).positive('Price must be positive'),
         Image: Yup.mixed()
           .test('fileSize', 'Image too large', (value) => {
             if (!value.size) return true;
@@ -221,9 +221,9 @@ function EditProduct({ item, setData, fileOptions, close }) {
                   rows={5}
                   minRows={5}
                   className={`form-control ${
-                    touched.description && errors.description
+                    touched.ingredients && errors.ingredients
                       ? 'is-invalid'
-                      : touched.description && !errors.description
+                      : touched.ingredients && !errors.ingredients
                         ? 'is-valid'
                         : ''
                   }`}

@@ -16,6 +16,7 @@ function MenuBar({ setFormData }) {
   /* eslint-disable no-shadow */
   editor.on('update', ({ editor }) => {
     const html = editor.getHTML();
+    console.log(html);
     setFormData((prevFormData) => ({
       ...prevFormData,
       text: html,

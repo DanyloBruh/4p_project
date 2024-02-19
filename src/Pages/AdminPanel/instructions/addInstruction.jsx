@@ -51,7 +51,7 @@ function AddInstruction({ setData, fileOptions, close }) {
       time: Yup.string().required('Time is required'),
       makes: Yup.number('Makes must be a number').required(
         'Makes is required',
-      ),
+      ).positive('Makes must be positive'),
       description: Yup.string().required('Description is required'),
       ingredients: Yup.array().of(
         Yup.object().shape({
