@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import { IconContext } from 'react-icons';
-import { Button } from 'react-bootstrap';
+import { Button, Pagination } from 'react-bootstrap';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { archivedData, deleteData } from '../../Helper/requests';
 import ToastNotification from '../../Components/Toast/Toast';
@@ -17,7 +17,8 @@ export const handleArchived = async (
   setData,
 ) => {
   const message = archived
-    ? 'Are you sure you want to unzip?' : 'Are you sure you want to zip?';
+    ? 'Are you sure you want to unzip?'
+    : 'Are you sure you want to zip?';
   if (await confirm(message)) {
     archivedData(category, archivedId, axiosPrivate, {
       archived: !archived,
@@ -38,12 +39,7 @@ export const handleArchived = async (
   }
 };
 
-export const handleDelete = async (
-  id,
-  axiosPrivate,
-  category,
-  setData,
-) => {
+export const handleDelete = async (id, axiosPrivate, category, setData) => {
   if (await confirm('Are your sure?')) {
     deleteData(category, id, axiosPrivate)
       .then(() => {
@@ -75,52 +71,73 @@ export function TableGenerator({
     return res;
   }, []);
 
+  const sizes = [5, 10, 15];
+  console.log(data);
   return (
-    <>
+    <div className="admin-table">
       <CompactTable
         columns={columns}
         data={data}
         theme={theme}
         sort={sort}
         pagination={pagination}
+        layout={{ custom: true, horizontalScroll: true }}
       />
 
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <span>
-          Total Pages:
-          {pagination.state.getTotalPages(data.nodes)}
+          Page Size:
+          <Pagination>
+            {sizes.map((size, index) => (
+              <Pagination.Item
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                active={pagination.state.size === size}
+                onClick={() => pagination.fns.onSetSize(size)}
+              >
+                {size}
+              </Pagination.Item>
+            ))}
+            <Pagination.Item
+              // eslint-disable-next-line react/no-array-index-key
+              key={data.nodes.length}
+              active={pagination.state.size === data.nodes.length}
+              onClick={() => pagination.fns.onSetSize(data.nodes.length)}
+            >
+              All
+            </Pagination.Item>
+          </Pagination>
         </span>
 
         {!addDisable && (
-        <Button
-          className="button-icon"
-          onClick={() => addClick()}
-        >
-          <IconContext.Provider value={iconProviderValue}>
-            <IoIosAddCircle />
-          </IconContext.Provider>
-        </Button>
+          <Button
+            variant="dark"
+            className="button-icon"
+            onClick={() => addClick()}
+          >
+            <IconContext.Provider value={iconProviderValue}>
+              <IoIosAddCircle />
+            </IconContext.Provider>
+          </Button>
         )}
 
         <span>
           Page:
-          {' '}
-          {pagination.state.getPages(data.nodes).map((_, index) => (
-            <button
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              type="button"
-              style={{
-                fontWeight: pagination.state.page === index ? 'bold' : 'normal',
-              }}
-              onClick={() => pagination.fns.onSetPage(index)}
-            >
-              {index + 1}
-            </button>
-          ))}
+          <Pagination>
+            {pagination.state.getPages(data.nodes).map((_, index) => (
+              <Pagination.Item
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                active={pagination.state.page === index}
+                onClick={() => pagination.fns.onSetPage(index)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            ))}
+          </Pagination>
         </span>
       </div>
-    </>
+    </div>
   );
 }
 

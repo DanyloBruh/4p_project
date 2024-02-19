@@ -56,7 +56,7 @@ function Instruction({
   const pagination = usePagination(data, {
     state: {
       page: 0,
-      size: 4,
+      size: 5,
     },
   });
 
@@ -107,6 +107,7 @@ function Instruction({
       label: 'Edit',
       renderCell: (item) => (
         <Button
+          variant="dark"
           className="button-icon"
           onClick={() => handeEdit(item)}
         >
@@ -115,11 +116,13 @@ function Instruction({
           </IconContext.Provider>
         </Button>
       ),
+      pinRight: true,
     },
     {
       label: 'Zip/Unzip',
       renderCell: (item) => (
         <Button
+          variant="dark"
           className="button-icon"
           onClick={() => handleArchived(
             item.id,
@@ -134,11 +137,13 @@ function Instruction({
           </IconContext.Provider>
         </Button>
       ),
+      pinRight: true,
     },
     {
       label: 'Delete',
       renderCell: (item) => (
         <Button
+          variant="dark"
           className="button-icon"
           onClick={() => handleDelete(
             item.id,
@@ -152,6 +157,7 @@ function Instruction({
           </IconContext.Provider>
         </Button>
       ),
+      pinRight: true,
     },
   ], [archived]);
 
