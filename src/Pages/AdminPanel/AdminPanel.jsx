@@ -4,12 +4,17 @@ import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
 import {
-  Button, Container, Nav, NavLink, Spinner, ToastContainer,
+  Button, Container, Nav, Spinner, ToastContainer,
 } from 'react-bootstrap';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useSearchParams,
+  NavLink,
+} from 'react-router-dom';
 import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 import { getDataByCategory } from '../../Helper/requests';
 import Product from './products/product';
@@ -77,6 +82,8 @@ function AdminPanel() {
 
     return dataBuffer;
   }, [query, data]);
+
+  console.log(category);
 
   return (
     <>
