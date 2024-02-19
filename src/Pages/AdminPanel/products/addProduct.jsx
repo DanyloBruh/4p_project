@@ -42,7 +42,7 @@ function AddProduct({ setData, fileOptions, close }) {
       description: Yup.string().required('Description is required'),
       price: Yup.number('Price must be a number').required(
         'Price is required',
-      ),
+      ).positive('Price must be positive'),
       Image: Yup.mixed()
         .required('A Image is required')
         .test(
@@ -213,9 +213,9 @@ function AddProduct({ setData, fileOptions, close }) {
                   rows={5}
                   minRows={5}
                   className={`form-control ${
-                    touched.description && errors.description
+                    touched.ingredients && errors.ingredients
                       ? 'is-invalid'
-                      : touched.description && !errors.description
+                      : touched.ingredients && !errors.ingredients
                         ? 'is-valid'
                         : ''
                   }`}

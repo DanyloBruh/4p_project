@@ -68,9 +68,9 @@ function EditInstruction({ item, setData, fileOptions, close }) {
             'Select the correct difficulty',
           ),
         time: Yup.string().required('Time is required'),
-        makes: Yup.number('Makes must be a number').required(
-          'Makes is required',
-        ),
+        makes: Yup.number('Makes must be a number')
+          .required('Makes is required')
+          .positive('Makes must be positive'),
         description: Yup.string().required('Description is required'),
         ingredients: Yup.array().of(
           Yup.object().shape({
@@ -137,7 +137,6 @@ function EditInstruction({ item, setData, fileOptions, close }) {
         close();
       });
   };
-  console.log(initialState);
   return (
     <div className="add-edit-form">
       <Container>
@@ -279,7 +278,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                 <Form.Group className="control-element">
                   <FieldArray className="rendered-content" name="ingredients">
                     {() => {
-                      console.log(values);
+                      console.log(typeof values.ingredients);
                       return values.ingredients.map((itemIng, i) => (
                         <Form.Group
                           key={`ingredients${i}`}
