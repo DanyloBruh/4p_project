@@ -72,7 +72,6 @@ export function TableGenerator({
     return res;
   }, []);
 
-
   const sizes = [5, 10, 15];
 
   useEffect(() => {
