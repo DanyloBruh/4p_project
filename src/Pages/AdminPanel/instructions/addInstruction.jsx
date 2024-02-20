@@ -4,6 +4,12 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
+/* eslint-disable object-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable consistent-return */
+/* eslint-disable operator-linebreak */
+/* eslint-disable react/jsx-curly-newline */
+
 import { FieldArray, Formik } from 'formik';
 import React, { useMemo } from 'react';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
@@ -39,47 +45,59 @@ function AddInstruction({ setData, fileOptions, close }) {
     [],
   );
   const schema = useMemo(
-    () => Yup.object().shape({
-      name: Yup.string()
-        .min(2, 'Name must be minimum 2')
-        .max(100, 'Name must not be more than 100 characters')
-        .required('Name is required'),
+    () =>
+      Yup.object().shape({
+        name: Yup.string()
+          .min(2, 'Name must be minimum 2')
+          .max(100, 'Name must not be more than 100 characters')
+          .matches(/^[^"]*$/, 'Name cannot contain double quotes')
+          .required('Name is required'),
 
-      difficulty: Yup.string()
-        .required('Difficulty is required')
-        .oneOf(
-          ['Very easy', 'Easy', 'Medium', 'Hard', 'Very hard'],
-          'Select the correct difficulty',
+        difficulty: Yup.string()
+          .required('Difficulty is required')
+          .oneOf(
+            ['Very easy', 'Easy', 'Medium', 'Hard', 'Very hard'],
+            'Select the correct difficulty',
+          ),
+        time: Yup.string()
+          .required('Time is required')
+          .matches(/^[^"]*$/, 'Time cannot contain double quotes'),
+        makes: Yup.number()
+          .typeError('Makes must be a number')
+          .required('Makes is required')
+          .positive('Makes must be positive'),
+        description: Yup.string()
+          .required('Description is required')
+          .matches(/^[^"]*$/, 'Description cannot contain double quotes'),
+        ingredients: Yup.array().of(
+          Yup.object().shape({
+            ingredient: Yup.string()
+              .required('Ingredient required')
+              .matches(/^[^"]*$/, 'Ingredient cannot contain double quotes'),
+          }),
         ),
-      time: Yup.string().required('Time is required'),
-      makes: Yup.number('Makes must be a number').required(
-        'Makes is required',
-      ).positive('Makes must be positive'),
-      description: Yup.string().required('Description is required'),
-      ingredients: Yup.array().of(
-        Yup.object().shape({
-          ingredient: Yup.string().required('Ingredient required'),
-        }),
-      ),
-      // ingredients: Yup.string().required(),
-      text: Yup.array().of(
-        Yup.object().shape({
-          text: Yup.string().required('Step required'),
-        }),
-      ),
-      Image: Yup.mixed()
-        .required('A Image is required')
-        .test(
-          'fileSize',
-          'Image too large',
-          (value) => value && value.size <= fileOptions.fileSize,
-        )
-        .test(
-          'fileFormat',
-          'Unsupported Format',
-          (value) => value && fileOptions.supportedFormats.includes(value.type),
+        // ingredients: Yup.string().required(),
+        text: Yup.array().of(
+          Yup.object().shape({
+            text: Yup.string()
+              .required('Step required')
+              .matches(/^[^"]*$/, 'Step cannot contain double quotes'),
+          }),
         ),
-    }),
+        Image: Yup.mixed()
+          .required('A Image is required')
+          .test(
+            'fileSize',
+            'Image too large',
+            (value) => value && value.size <= fileOptions.fileSize,
+          )
+          .test(
+            'fileFormat',
+            'Unsupported Format',
+            (value) =>
+              value && fileOptions.supportedFormats.includes(value.type),
+          ),
+      }),
     [],
   );
 
@@ -160,7 +178,6 @@ function AddInstruction({ setData, fileOptions, close }) {
                 onSubmit={handleSubmit}
               >
                 <Form.Label>Add instruction</Form.Label>
-
                 <Form.Group className="form-element">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -230,7 +247,7 @@ function AddInstruction({ setData, fileOptions, close }) {
 
                   >
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="makes"
                       placeholder="makes"
                       value={values.makes}
@@ -396,7 +413,6 @@ function AddInstruction({ setData, fileOptions, close }) {
                     checked={values.carrousel}
                   />
                 </Form.Group>
-
                 <hr />
                 <div className="btn-group">
                   <Button

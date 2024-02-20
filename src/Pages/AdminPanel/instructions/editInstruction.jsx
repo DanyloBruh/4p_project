@@ -6,6 +6,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable operator-linebreak */
+/* eslint-disable consistent-return */
 
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
@@ -60,6 +61,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
         name: Yup.string()
           .min(2, 'Name must be minimum 2')
           .max(100, 'Name must not be more than 100 characters')
+          .matches(/^[^"]*$/, 'Name cannot contain double quotes')
           .required('Name is required'),
 
         difficulty: Yup.string()
@@ -68,20 +70,29 @@ function EditInstruction({ item, setData, fileOptions, close }) {
             ['Very easy', 'Easy', 'Medium', 'Hard', 'Very hard'],
             'Select the correct difficulty',
           ),
-        time: Yup.string().required('Time is required'),
-        makes: Yup.number('Makes must be a number')
+        time: Yup.string()
+          .required('Time is required')
+          .matches(/^[^"]*$/, 'Time cannot contain double quotes'),
+        makes: Yup.number()
+          .typeError('Makes must be a number')
           .required('Makes is required')
           .positive('Makes must be positive'),
-        description: Yup.string().required('Description is required'),
+        description: Yup.string()
+          .required('Description is required')
+          .matches(/^[^"]*$/, 'Description cannot contain double quotes'),
         ingredients: Yup.array().of(
           Yup.object().shape({
-            ingredient: Yup.string().required('Ingredient required'),
+            ingredient: Yup.string()
+              .required('Ingredient required')
+              .matches(/^[^"]*$/, 'Ingredient cannot contain double quotes'),
           }),
         ),
         // ingredients: Yup.string().required(),
         text: Yup.array().of(
           Yup.object().shape({
-            text: Yup.string().required('Step required'),
+            text: Yup.string()
+              .required('Step required')
+              .matches(/^[^"]*$/, 'Step cannot contain double quotes'),
           }),
         ),
         Image: Yup.mixed()
@@ -103,7 +114,6 @@ function EditInstruction({ item, setData, fileOptions, close }) {
   }, []);
 
   const handleSubmitForm = (values) => {
-    console.log(values);
     // eslint-disable-next-line no-param-reassign
     values.ingredients = values.ingredients
       .map((ingredient) => ingredient.ingredient)
@@ -241,7 +251,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                 <Form.Group className="form-element">
                   <FloatingLabel controlId="floatingInput" label="Enter makes">
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="makes"
                       placeholder="makes"
                       value={values.makes}

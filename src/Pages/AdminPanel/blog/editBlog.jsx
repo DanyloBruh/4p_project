@@ -39,7 +39,9 @@ function EditBlog({
     () => Yup.object().shape({
       name: Yup.string()
         .min(2, 'Title must be minimum 2')
-        .max(100, 'Title must not be more than 100 characters'),
+        .max(100, 'Title must not be more than 100 characters')
+        .required('Title is required')
+        .matches(/^[^"]*$/, 'Title cannot contain double quotes'),
       text: Yup.string(),
       Images: Yup.array().of(
         Yup.mixed()
@@ -92,13 +94,14 @@ function EditBlog({
   }, []);
 
   const handleSubmitForm = (values) => {
+    console.log(item);
     if (values.Images) {
       // eslint-disable-next-line no-param-reassign
       values.Images = values.Images.map((image) => imageToFile(image));
     }
-
     const req = removeUnchangedFields(item, values);
 
+    if (req.text) req.text = req.text.replace(/"/g, "'");
     editData('blog', item.id, axiosPrivateConfig, req)
       .then(() => {
         ToastNotification('success', 'Successfully updated!');
@@ -191,7 +194,7 @@ function EditBlog({
                     content={values.text}
                   />
                   {errors.text && touched.text ? (
-                    <div className="validtaionText">{errors.text}</div>
+                    <div style={{ color: '#DC3545' }}>{errors.text}</div>
                   ) : null}
                 </Form.Group>
                 <Form.Group className="form-element images">
