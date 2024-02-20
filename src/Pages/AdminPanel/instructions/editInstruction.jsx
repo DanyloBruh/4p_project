@@ -369,54 +369,55 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                               key={`text${i}`}
                               className="rendered-content"
                             >
-                            <div className="d-flex">
-                              <TextareaAutosize
-                                name={`text.${i}.text`}
-                                type="text"
-                                rows={5}
-                                minRows={5}
-                                className={`form-control ${
-                                  touched.text && errors.text
-                                    ? 'is-invalid'
-                                    : touched.text && !errors.text
-                                      ? 'is-valid'
-                                      : ''
-                                }`}
-                                value={itemIng.text}
-                                onChange={handleChange}
-                                autoComplete="off"
-                              />
-                              {values.text.length > 1 && (
-                                <Button
-                                  variant="outline-light"
-                                  className="mb-3 ml-3"
-                                  onClick={() =>
-                                    handleDeleteStep(i, values, setValues)
-                                  }
-                                >
-                                  remove
-                                </Button>
-                              )}
-                            </div>
+                              <div className="d-flex">
+                                <TextareaAutosize
+                                  name={`text.${i}.text`}
+                                  type="text"
+                                  rows={5}
+                                  minRows={5}
+                                  className={`form-control ${
+                                    touched.text && errors.text
+                                      ? 'is-invalid'
+                                      : touched.text && !errors.text
+                                        ? 'is-valid'
+                                        : ''
+                                  }`}
+                                  value={itemIng.text}
+                                  onChange={handleChange}
+                                  autoComplete="off"
+                                />
+                                {values.text.length > 1 && (
+                                  <Button
+                                    variant="outline-light"
+                                    className="mb-3 ml-3"
+                                    onClick={() =>
+                                      handleDeleteStep(i, values, setValues)
+                                    }
+                                  >
+                                    remove
+                                  </Button>
+                                )}
+                              </div>
 
-                            <Form.Control.Feedback
-                              type="invalid"
-                              className={
-                                touched.text &&
-                                errors.text &&
-                                errors.text[i] &&
-                                errors.text[i].text
-                                  ? 'd-block'
-                                  : ''
-                              }
-                            >
-                              {errors.text &&
-                                errors.text[i] &&
-                                errors.text[i].text}
-                            </Form.Control.Feedback>
-                          </Form.Group>
-                        ))
-                      }
+                              <Form.Control.Feedback
+                                type="invalid"
+                                className={
+                                  touched.text &&
+                                  errors.text &&
+                                  errors.text[i] &&
+                                  errors.text[i].text
+                                    ? 'd-block'
+                                    : ''
+                                }
+                              >
+                                {errors.text &&
+                                  errors.text[i] &&
+                                  errors.text[i].text}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          );
+                        });
+                      }}
                     </FieldArray>
                   </Form.Group>
                   <Button

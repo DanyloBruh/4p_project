@@ -281,57 +281,59 @@ function AddInstruction({ setData, fileOptions, close }) {
                     <FieldArray className="rendered-content" name="ingredients">
                       {() => {
                         if (typeof values.ingredients === 'string') return;
-                        values.ingredients.map((item, i) => (
-                        <Form.Group
-                          key={`ingredients${i}`}
-                          className="rendered-content"
-                        >
-                          <div className="d-flex">
-                            <TextareaAutosize
-                              name={`ingredients.${i}.ingredient`}
-                              type="text"
-                              rows={5}
-                              minRows={5}
-                              className={`form-control ${
-                                touched.ingredients && errors.ingredients
-                                  ? 'is-invalid'
-                                  : touched.ingredients && !errors.ingredients
-                                    ? 'is-valid'
-                                    : ''
-                              }`}
-                              value={item.ingredient}
-                              onChange={handleChange}
-                              autoComplete="off"
-                            />
+                        return values.ingredients.map((item, i) => (
+                          <Form.Group
+                            key={`ingredients${i}`}
+                            className="rendered-content"
+                          >
+                            <div className="d-flex">
+                              <TextareaAutosize
+                                name={`ingredients.${i}.ingredient`}
+                                type="text"
+                                rows={5}
+                                minRows={5}
+                                className={`form-control ${
+                                  touched.ingredients && errors.ingredients
+                                    ? 'is-invalid'
+                                    : touched.ingredients && !errors.ingredients
+                                      ? 'is-valid'
+                                      : ''
+                                }`}
+                                value={item.ingredient}
+                                onChange={handleChange}
+                                autoComplete="off"
+                              />
 
-                            {values.ingredients.length > 1 && (
-                            <Button
-                              variant="outline-light"
-                              className="ml-3 mb-3"
-                              onClick={() => handleDeleteIngredient(i, values, setValues)}
-                            >
-                              remove
-                            </Button>
-                            )}
-                          </div>
-                          <Form.Control.Feedback
-                            type="invalid"
-                            className={
-                                touched.ingredients
-                                && errors.ingredients
-                                && errors.ingredients[i]
-                                && errors.ingredients[i].ingredient
+                              {values.ingredients.length > 1 && (
+                                <Button
+                                  variant="outline-light"
+                                  className="ml-3 mb-3"
+                                  onClick={() =>
+                                    handleDeleteIngredient(i, values, setValues)
+                                  }
+                                >
+                                  remove
+                                </Button>
+                              )}
+                            </div>
+                            <Form.Control.Feedback
+                              type="invalid"
+                              className={
+                                touched.ingredients &&
+                                errors.ingredients &&
+                                errors.ingredients[i] &&
+                                errors.ingredients[i].ingredient
                                   ? 'd-block'
                                   : ''
                               }
-                          >
-                            {errors.ingredients
-                                && errors.ingredients[i]
-                                && errors.ingredients[i].ingredient}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      ))}}
-                      
+                            >
+                              {errors.ingredients &&
+                                errors.ingredients[i] &&
+                                errors.ingredients[i].ingredient}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        ));
+                      }}
                     </FieldArray>
                   </Form.Group>
                   <Button
@@ -347,56 +349,60 @@ function AddInstruction({ setData, fileOptions, close }) {
                     <FieldArray className="rendered-content" name="steps">
                       {() => {
                         if (typeof values.text === 'string') return;
-                        values.text.map((item, i) => (
-                        <Form.Group
-                          key={`text${i}`}
-                          className="rendered-content"
-                        >
-                          <div className="d-flex">
-                            <TextareaAutosize
-                              name={`text.${i}.text`}
-                              type="text"
-                              rows={5}
-                              minRows={5}
-                              className={`form-control ${
-                                touched.text && errors.text
-                                  ? 'is-invalid'
-                                  : touched.text && !errors.text
-                                    ? 'is-valid'
-                                    : ''
-                              }`}
-                              value={item.text}
-                              onChange={handleChange}
-                              autoComplete="off"
-                            />
-
-                            {values.text.length > 1 && (
-                            <Button
-                              variant="outline-light"
-                              onClick={() => handleDeleteStep(i, values, setValues)}
-                              className="mb-3 ml-3"
-                            >
-                              remove
-                            </Button>
-                            )}
-                          </div>
-
-                          <Form.Control.Feedback
-                            type="invalid"
-                            className={touched.text
-                                && errors.text
-                                && errors.text[i]
-                                && errors.text[i].text
-                              ? 'd-block'
-                              : ''}
+                        return values.text.map((item, i) => (
+                          <Form.Group
+                            key={`text${i}`}
+                            className="rendered-content"
                           >
-                            {errors.text
-                                && errors.text[i]
-                                && errors.text[i].text}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      ))}}
-                     
+                            <div className="d-flex">
+                              <TextareaAutosize
+                                name={`text.${i}.text`}
+                                type="text"
+                                rows={5}
+                                minRows={5}
+                                className={`form-control ${
+                                  touched.text && errors.text
+                                    ? 'is-invalid'
+                                    : touched.text && !errors.text
+                                      ? 'is-valid'
+                                      : ''
+                                }`}
+                                value={item.text}
+                                onChange={handleChange}
+                                autoComplete="off"
+                              />
+
+                              {values.text.length > 1 && (
+                                <Button
+                                  variant="outline-light"
+                                  onClick={() =>
+                                    handleDeleteStep(i, values, setValues)
+                                  }
+                                  className="mb-3 ml-3"
+                                >
+                                  remove
+                                </Button>
+                              )}
+                            </div>
+
+                            <Form.Control.Feedback
+                              type="invalid"
+                              className={
+                                touched.text &&
+                                errors.text &&
+                                errors.text[i] &&
+                                errors.text[i].text
+                                  ? 'd-block'
+                                  : ''
+                              }
+                            >
+                              {errors.text &&
+                                errors.text[i] &&
+                                errors.text[i].text}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        ));
+                      }}
                     </FieldArray>
                   </Form.Group>
                   <Button
@@ -411,7 +417,9 @@ function AddInstruction({ setData, fileOptions, close }) {
                   <Form.Control
                     type="file"
                     name="Image"
-                    onChange={(e) => setFieldValue('Image', e.currentTarget.files[0])}
+                    onChange={(e) =>
+                      setFieldValue('Image', e.currentTarget.files[0])
+                    }
                     isValid={touched.Image && !errors.Image}
                     isInvalid={touched.Image && errors.Image}
                   />
