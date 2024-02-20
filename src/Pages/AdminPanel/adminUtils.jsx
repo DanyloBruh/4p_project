@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { IoIosAddCircle } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import { Button, Pagination } from 'react-bootstrap';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { archivedData, deleteData } from '../../Helper/requests';
-import ToastNotification from '../../Components/Toast/Toast';
 import confirm from '../../Components/ConfirmModel/ConfirmModel';
+import ToastNotification from '../../Components/Toast/Toast';
 
 export const handleArchived = async (
   archivedId,
@@ -64,6 +64,7 @@ export function TableGenerator({
   sort,
   pagination,
   addClick,
+  archived,
   addDisable = false,
 }) {
   const iconProviderValue = useMemo(() => {
@@ -71,8 +72,13 @@ export function TableGenerator({
     return res;
   }, []);
 
+
   const sizes = [5, 10, 15];
-  console.log(data);
+
+  useEffect(() => {
+    pagination.fns.onSetPage(0);
+  }, [archived]);
+
   return (
     <div className="admin-table">
       <CompactTable

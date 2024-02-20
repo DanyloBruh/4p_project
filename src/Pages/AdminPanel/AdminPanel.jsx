@@ -10,7 +10,6 @@ import {
   Container,
   Nav,
   Spinner,
-  ToastContainer,
 } from 'react-bootstrap';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
@@ -21,6 +20,7 @@ import {
   useSearchParams,
   NavLink,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 import { getDataByCategory } from '../../Helper/requests';
 import Product from './products/product';
@@ -123,7 +123,7 @@ function AdminPanel() {
     return dataBuffer;
   }, [query, data]);
 
-  return (
+return (
     <>
       <ToastContainer />
       <div className="admin-panel">
@@ -276,6 +276,7 @@ function AdminPanel() {
       </div>
     </>
   );
+}
 }
 
 export default AdminPanel;

@@ -1,5 +1,7 @@
 /* eslint-disable newline-per-chained-call */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable arrow-body-style */
+/* eslint-disable consistent-return */
 
 import './BlogTextEditor.scss';
 
@@ -8,24 +10,34 @@ import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import { EditorProvider, useCurrentEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import React from 'react';
 import { Button } from 'react-bootstrap';
+import React, { useEffect, useMemo } from 'react';
+
 
 /* eslint-disable react/prop-types */
 function MenuBar({ setFormData }) {
   const { editor } = useCurrentEditor();
   /* eslint-disable no-shadow */
-  editor.on('update', ({ editor }) => {
-    const html = editor.getHTML();
-    console.log(html);
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      text: html,
-    }));
-  });
-  if (!editor) {
-    return null;
-  }
+  const handleUpdate = useMemo(() => {
+    return ({ editor }) => {
+      const html = editor.getHTML();
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        text: html,
+      }));
+    };
+  }, [setFormData]);
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const updateHandler = ({ editor }) => handleUpdate({ editor });
+    editor.on('update', updateHandler);
+
+    return () => {
+      editor.off('update', updateHandler);
+    };
+  }, [editor, handleUpdate]);
 
   return (
     <div className="text-editor-header">

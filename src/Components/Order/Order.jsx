@@ -122,13 +122,14 @@ function Order({
 
   const handleSubmit = async (values) => {
     const addressLine = values.town
-      + ', '
+      + '|'
       + values.addressLine1
-      + ', '
+      + '|'
       + values.addressLine2
-      + ', '
+      + '|'
       + values.addressLine3
-      + ', ';
+      + '|'
+      + values.postcode;
 
     const productIds = products.map((product) => {
       const ret = {
