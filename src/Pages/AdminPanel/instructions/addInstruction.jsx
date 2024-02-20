@@ -121,7 +121,7 @@ function AddInstruction({ setData, fileOptions, close }) {
   return (
     <div className="add-edit-form-bg">
       <div className="add-edit-form-position">
-        <div className="add-edit-form instruction-form">
+        <div className="add-edit-form">
           <button
             type="button"
             className="product-modal__card__close"
@@ -397,7 +397,7 @@ function AddInstruction({ setData, fileOptions, close }) {
                   />
                 </Form.Group>
 
-                <br />
+                <hr />
                 <div className="btn-group">
                   <Button
                     type="button"

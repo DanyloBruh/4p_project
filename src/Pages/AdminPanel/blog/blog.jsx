@@ -72,7 +72,7 @@ function Blog({
     },
     {
       label: 'text',
-      renderCell: (item) => Parser.parse(item?.text),
+      renderCell: (item) => Parser.parse(item?.text)[0],
     },
     {
       label: 'Display type',

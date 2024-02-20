@@ -86,7 +86,7 @@ function AddBlog({ setData, fileOptions, close }) {
   return (
     <div className="add-edit-form-bg">
       <div className="add-edit-form-blog-position">
-        <Container className="add-edit-form instruction-form">
+        <Container className="add-edit-form">
           <button
             type="button"
             className="product-modal__card__close"
@@ -127,10 +127,7 @@ function AddBlog({ setData, fileOptions, close }) {
                 <Form.Label>Add product</Form.Label>
 
                 <Form.Group className="form-element">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Enter title"
-                  >
+                  <FloatingLabel controlId="floatingInput" label="Enter title">
                     <Form.Control
                       type="text"
                       name="name"
@@ -146,8 +143,8 @@ function AddBlog({ setData, fileOptions, close }) {
                     </Form.Control.Feedback>
                   </FloatingLabel>
                 </Form.Group>
-                <Form.Group className="form-element">
-                  <p>text</p>
+                <h4 style={{ color: '#fff' }}>Text</h4>
+                <Form.Group className="form-element text-element">
                   <BlogTextEditor setFormData={setValues} formData={values} />
                   {errors.text && touched.text ? (
                     <div className="validtaionText">{errors.text}</div>
@@ -158,41 +155,41 @@ function AddBlog({ setData, fileOptions, close }) {
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="Images">
                       {() => values.Images.map((item, i) => (
-                        <Form.Group
-                            // eslint-disable-next-line react/no-array-index-key
-                          key={`Images${i}`}
-                          className="rendered-content"
-                        >
-                          <Form.Control
-                            type="file"
-                            name={`Images.${i}.image`}
-                            onChange={(e) => setFieldValue(
-                              `Images[${i}]`,
-                              e.currentTarget.files[0],
-                            )}
-                            isValid={touched.Images && !errors.Images?.[i]}
-                            isInvalid={touched.Images && errors.Images?.[i]}
-                          />
-                          {values.Images.length > 1 && (
-                          <Button
-                            variant="outline-light"
-                            onClick={() => handleDeleteImages(i, values, setValues)}
+                        <>
+                          <Form.Group
+                              // eslint-disable-next-line react/no-array-index-key
+                            key={`Images${i}`}
+                            className="rendered-content "
                           >
-                            remove
-                          </Button>
-                          )}
+                            <Form.Control
+                              type="file"
+                              name={`Images.${i}.image`}
+                              onChange={(e) => setFieldValue(
+                                `Images[${i}]`,
+                                e.currentTarget.files[0],
+                              )}
+                              isValid={touched.Images && !errors.Images?.[i]}
+                              isInvalid={touched.Images && errors.Images?.[i]}
+                            />
+                            {values.Images.length > 1 && (
+                            <Button
+                              variant="outline-light"
+                              onClick={() => handleDeleteImages(i, values, setValues)}
+                            >
+                              remove
+                            </Button>
+                            )}
+                          </Form.Group>
                           {item.name ? (
                             <img
                               src={URL.createObjectURL(item)}
                               alt="add img"
                             />
-                          ) : (
-                            <img alt="" />
-                          )}
+                          ) : null}
                           <Form.Control.Feedback type="invalid">
                             {errors.Images && errors.Images[i]}
                           </Form.Control.Feedback>
-                        </Form.Group>
+                        </>
                       ))}
                     </FieldArray>
                   </Form.Group>
@@ -222,7 +219,6 @@ function AddBlog({ setData, fileOptions, close }) {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <br />
                 <div className="btn-group">
                   <Button
                     type="button"
