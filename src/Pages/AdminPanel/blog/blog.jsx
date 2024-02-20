@@ -144,17 +144,18 @@ function Blog({
           close={close}
         />
       )}
-
-      <TableGenerator
-        columns={COLUMNS}
-        data={data}
-        theme={theme}
-        sort={sort}
-        pagination={pagination}
-        addClick={() => {
-          setVisibleType('add');
-        }}
-      />
+      {data.nodes.length > 0 && (
+        <TableGenerator
+          columns={COLUMNS}
+          data={data}
+          theme={theme}
+          sort={sort}
+          pagination={pagination}
+          addClick={() => {
+            setVisibleType('add');
+          }}
+        />
+      )}
     </>
   );
 }
