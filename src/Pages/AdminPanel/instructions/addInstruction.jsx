@@ -25,6 +25,7 @@ import {
   handleDeleteIngredient,
   handleDeleteStep,
 } from './instructionsUtils';
+import './instruction.scss';
 
 function AddInstruction({ setData, fileOptions, close }) {
   const userId = useSelector((state) => state.auth.auth.user.id);
@@ -182,7 +183,6 @@ function AddInstruction({ setData, fileOptions, close }) {
                   <FloatingLabel
                     controlId="floatingInput"
                     label="Enter instruction name"
-
                   >
                     <Form.Control
                       type="text"
@@ -220,11 +220,7 @@ function AddInstruction({ setData, fileOptions, close }) {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="form-element">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Enter time"
-
-                  >
+                  <FloatingLabel controlId="floatingInput" label="Enter time">
                     <Form.Control
                       type="text"
                       name="time"
@@ -241,11 +237,7 @@ function AddInstruction({ setData, fileOptions, close }) {
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="form-element">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Enter makes"
-
-                  >
+                  <FloatingLabel controlId="floatingInput" label="Enter makes">
                     <Form.Control
                       type="text"
                       name="makes"
@@ -283,17 +275,18 @@ function AddInstruction({ setData, fileOptions, close }) {
                     {errors.description}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className="form-element mb-3">
+                <Form.Group className="form-element form-element-add mb-3">
                   <Form.Label>Ingredients</Form.Label>
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="ingredients">
                       {() => {
                         if (typeof values.ingredients === 'string') return;
-                        return values.ingredients.map((item, i) => (
-                          <Form.Group
-                            key={`ingredients${i}`}
-                            className="rendered-content"
-                          >
+                        values.ingredients.map((item, i) => (
+                        <Form.Group
+                          key={`ingredients${i}`}
+                          className="rendered-content"
+                        >
+                          <div className="d-flex">
                             <TextareaAutosize
                               name={`ingredients.${i}.ingredient`}
                               type="text"
@@ -310,43 +303,56 @@ function AddInstruction({ setData, fileOptions, close }) {
                               onChange={handleChange}
                               autoComplete="off"
                             />
+
                             {values.ingredients.length > 1 && (
                             <Button
                               variant="outline-light"
+                              className="ml-3 mb-3"
                               onClick={() => handleDeleteIngredient(i, values, setValues)}
                             >
                               remove
                             </Button>
                             )}
-                            <Form.Control.Feedback type="invalid">
-                              {errors.ingredients
-                                  && errors.ingredients[i]
-                                  && errors.ingredients[i].ingredient}
-                            </Form.Control.Feedback>
-                          </Form.Group>
-                        ));
-                      }
-                      }
+                          </div>
+                          <Form.Control.Feedback
+                            type="invalid"
+                            className={
+                                touched.ingredients
+                                && errors.ingredients
+                                && errors.ingredients[i]
+                                && errors.ingredients[i].ingredient
+                                  ? 'd-block'
+                                  : ''
+                              }
+                          >
+                            {errors.ingredients
+                                && errors.ingredients[i]
+                                && errors.ingredients[i].ingredient}
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                      ))}}
+                      
                     </FieldArray>
                   </Form.Group>
                   <Button
                     variant="outline-light"
                     onClick={() => handleAddIngredient(values, setValues)}
                   >
-                    click to add new Ingredient
+                    Click to add new ingredient
                   </Button>
                 </Form.Group>
-                <Form.Group className="form-element mb-3">
+                <Form.Group className="form-element form-element-add mb-3">
                   <Form.Label>Steps</Form.Label>
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="steps">
                       {() => {
                         if (typeof values.text === 'string') return;
-                        return values.text.map((item, i) => (
-                          <Form.Group
-                            key={`text${i}`}
-                            className="rendered-content"
-                          >
+                        values.text.map((item, i) => (
+                        <Form.Group
+                          key={`text${i}`}
+                          className="rendered-content"
+                        >
+                          <div className="d-flex">
                             <TextareaAutosize
                               name={`text.${i}.text`}
                               type="text"
@@ -363,30 +369,41 @@ function AddInstruction({ setData, fileOptions, close }) {
                               onChange={handleChange}
                               autoComplete="off"
                             />
+
                             {values.text.length > 1 && (
                             <Button
                               variant="outline-light"
                               onClick={() => handleDeleteStep(i, values, setValues)}
+                              className="mb-3 ml-3"
                             >
                               remove
                             </Button>
                             )}
-                            <Form.Control.Feedback type="invalid">
-                              {errors.text
-                                  && errors.text[i]
-                                  && errors.text[i].text}
-                            </Form.Control.Feedback>
-                          </Form.Group>
-                        ));
-                      }
-                      }
+                          </div>
+
+                          <Form.Control.Feedback
+                            type="invalid"
+                            className={touched.text
+                                && errors.text
+                                && errors.text[i]
+                                && errors.text[i].text
+                              ? 'd-block'
+                              : ''}
+                          >
+                            {errors.text
+                                && errors.text[i]
+                                && errors.text[i].text}
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                      ))}}
+                     
                     </FieldArray>
                   </Form.Group>
                   <Button
                     variant="outline-light"
                     onClick={() => handleAddStep(values, setValues)}
                   >
-                    click to add new Step
+                    Click to add new step
                   </Button>
                 </Form.Group>
                 <Form.Group className="form-element">

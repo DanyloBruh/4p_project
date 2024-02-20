@@ -200,7 +200,7 @@ function EditBlog({
                     <div style={{ color: '#DC3545' }}>{errors.text}</div>
                   ) : null}
                 </Form.Group>
-                <Form.Group className="form-element images">
+                <Form.Group className="form-element form-element-add images">
                   <Form.Label>Images</Form.Label>
                   <Form.Group className="control-element">
                     {values.Images.map((image, i) => (
@@ -209,24 +209,27 @@ function EditBlog({
                           className="rendered-content images"
                           key={image.id}
                         >
-                          <Form.Control
-                            type="file"
-                            name="Images"
-                            onChange={(e) => setFieldValue(
-                              `Images.[${i}]`,
-                              e.currentTarget.files[0],
+                          <div className="d-flex">
+                            <Form.Control
+                              type="file"
+                              name="Images"
+                              onChange={(e) => setFieldValue(
+                                `Images.[${i}]`,
+                                e.currentTarget.files[0],
+                              )}
+                              isValid={touched.Images && !errors.Images?.[i]}
+                              isInvalid={touched.Images && errors.Images?.[i]}
+                            />
+                            {values.Images.length > 1 && (
+                              <Button
+                                variant="outline-light"
+                                className="ml-3 rounded-0"
+                                onClick={() => handleDeleteImages(i, values, setValues)}
+                              >
+                                remove
+                              </Button>
                             )}
-                            isValid={touched.Images && !errors.Images?.[i]}
-                            isInvalid={touched.Images && errors.Images?.[i]}
-                          />
-                          {values.Images.length > 1 && (
-                            <Button
-                              variant="outline-light"
-                              onClick={() => handleDeleteImages(i, values, setValues)}
-                            >
-                              remove
-                            </Button>
-                          )}
+                          </div>
                         </Form.Group>
                         {image.imageData ? (
                           <img
@@ -250,7 +253,7 @@ function EditBlog({
                     variant="outline-light"
                     onClick={() => handleAddImage(values, setValues)}
                   >
-                    click to add new Image
+                    Click to add new image
                   </Button>
                 </Form.Group>
                 <Form.Group className="form-element">

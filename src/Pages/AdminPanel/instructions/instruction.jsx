@@ -18,11 +18,7 @@ import AddInstruction from './addInstruction';
 import EditInstruction from './editInstruction';
 
 function Instruction({
-  nodes,
-  archived,
-  axiosPrivate,
-  theme,
-  fileOptions,
+  nodes, archived, axiosPrivate, theme, fileOptions,
 }) {
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
@@ -178,17 +174,18 @@ function Instruction({
           close={close}
         />
       )}
-
-      <TableGenerator
-        columns={COLUMNS}
-        data={data}
-        theme={theme}
-        sort={sort}
-        pagination={pagination}
-        addClick={() => {
-          setVisibleType('add');
-        }}
-      />
+      {data.nodes.length > 0 && (
+        <TableGenerator
+          columns={COLUMNS}
+          data={data}
+          theme={theme}
+          sort={sort}
+          pagination={pagination}
+          addClick={() => {
+            setVisibleType('add');
+          }}
+        />
+      )}
     </>
   );
 }
