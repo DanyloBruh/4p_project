@@ -132,7 +132,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
         setData((state) => ({
           nodes: state.nodes.map((node) => {
             if (node.id === item.id) {
-              return { ...values, id: item.id };
+              return { ...item, ...values };
             }
             return node;
           }),
@@ -292,7 +292,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="ingredients">
                       {() => {
-                        console.log(typeof values.ingredients);
+                        if (typeof values.ingredients === 'string') return;
                         return values.ingredients.map((itemIng, i) => (
                           <Form.Group
                             key={`ingredients${i}`}
@@ -346,8 +346,9 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   <Form.Label>Steps</Form.Label>
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="steps">
-                      {() =>
-                        values.text.map((itemIng, i) => {
+                      {() => {
+                        if (typeof values.text === 'string') return;
+                        return values.text.map((itemIng, i) => {
                           console.log(itemIng);
                           return (
                             <Form.Group
@@ -370,7 +371,6 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                                 onChange={handleChange}
                                 autoComplete="off"
                               />
-
                               {values.text.length > 1 && (
                                 <Button
                                   variant="outline-light"
@@ -388,7 +388,8 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                               </Form.Control.Feedback>
                             </Form.Group>
                           );
-                        })
+                        });
+                      }
                       }
                     </FieldArray>
                   </Form.Group>
