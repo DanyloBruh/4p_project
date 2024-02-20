@@ -1,0 +1,138 @@
+.add-edit-form {
+  width: 700px;
+  top: 0px;
+  left: 0;
+  transform: translate(0);
+  position: static;
+  z-index: 10;
+  background: #1f1f1f;
+  padding: 30px 25px;
+  border-radius: 8px;
+  form {
+    > label {
+      color: #fff;
+      text-align: left;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.75rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+    > .form-element {
+      margin-bottom: 1rem;
+      > label {
+        color: #fff;
+        text-align: left;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+      }
+
+      > .form-select {
+        height: 58px;
+        border-radius: 5px;
+        border: 1px solid #fff;
+        background-color: rgba(51, 45, 45, 0) !important;
+        color: white !important;
+        caret-color: #fff;
+        transition: all 150ms ease;
+        > option {
+          background-color: #1f1f1f !important;
+        }
+      }
+      > img {
+        width: 100%;
+        object-fit: cover;
+        margin: 1rem 0;
+      }
+    }
+    > hr {
+      border-top-color: #fff;
+      opacity: 1;
+      margin-bottom: 2rem;
+    }
+    > .btn-group {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      > button {
+        max-width: 48%;
+        border-radius: 0;
+        font-size: 1.5rem;
+        font-style: normal;
+      }
+    }
+  }
+  > button {
+    z-index: 2;
+    top: 20px;
+  }
+  .form-control {
+    border-radius: 5px;
+    border: 1px solid #fff;
+    background-color: rgba(51, 45, 45, 0) !important;
+    color: white !important;
+    caret-color: #fff;
+    font-family: 'Outfit', sans-serif;
+  }
+  .form-floating {
+    > label {
+      color: white !important;
+    }
+    > .form-control:focus ~ label {
+      color: white;
+    }
+    > .form-control:focus ~ label::after {
+      display: none;
+    }
+    > .form-control:not(:placeholder-shown) ~ label::after,
+    .form-floating > .form-select ~ label::after {
+      display: none;
+    }
+  }
+  .form-check {
+    display: flex;
+  }
+
+  .form-check-label {
+    color: #fff;
+    text-align: left;
+    margin-left: 15px;
+  }
+
+  textarea {
+    margin-bottom: 1rem;
+  }
+
+  .form-control:-webkit-autofill,
+  .form-control:-webkit-autofill:hover,
+  .form-control:-webkit-autofill:focus,
+  .form-control:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #ffffff;
+  }
+}
+
+.add-edit-form-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  overflow: auto;
+}
+
+.add-edit-form-position {
+  width: 700px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 25px 0;
+}

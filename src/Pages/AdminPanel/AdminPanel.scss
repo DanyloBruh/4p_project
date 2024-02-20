@@ -1,7 +1,6 @@
 .admin-panel {
   &__header {
-    width: 100%;
-    margin: 20px 0 0 0;
+    margin-top: 30px;
     > .user-name {
       text-align: left;
       font-size: 1.8rem;
@@ -307,5 +306,49 @@
   }
   .requiresProcessing {
     background-color: #833434;
+  }
+}
+
+.admin-table {
+  margin: 60px 50px 0 50px;
+  th {
+    background-color: #111111 !important;
+    color: #fff !important;
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    line-height: normal;
+  }
+  td {
+    background-color: #111111 !important;
+    color: #fff !important;
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    line-height: normal;
+    text-align: left;
+  }
+  span {
+    color: #fff !important;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+  }
+  .pagination {
+    margin: 0 0 0 15px;
+    > .page-item {
+      > .page-link {
+        color: #fff;
+        background-color: #212529;
+        border-color: #212529;
+      }
+    }
+    > .active {
+      > .page-link {
+        background-color: #424649;
+        border-color: #424649;
+      }
+    }
   }
 }

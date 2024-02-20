@@ -58,5 +58,26 @@
   color: #fff;
   font-size: 1.1rem;
   padding: 0.75rem;
+  border-top: 1px solid #fff;
+}
+
+.text-editor-header {
+  > button {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    width: 100% !important;
+    border-left: 0.5px solid #8f8f8f !important;
+    border-right: 0.5px solid #8f8f8f !important;
+    > p {
+      margin: 0;
+      font-size: 1.75rem;
+    }
+  }
+}
+
+.text-element{
   border: 1px solid #fff;
 }

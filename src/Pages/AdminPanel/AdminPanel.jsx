@@ -1,10 +1,15 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable indent */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, {
-  useState, useEffect, useCallback, useMemo,
+ useState, useEffect, useCallback, useMemo,
 } from 'react';
 import {
-  Button, Container, Nav, Spinner,
+  Button,
+  Container,
+  Nav,
+  Spinner,
 } from 'react-bootstrap';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
@@ -25,20 +30,57 @@ import User from './user/user';
 import Instruction from './instructions/instruction';
 import Blog from './blog/blog';
 import Order from './order/order';
+import './AdminPanel.scss';
 
 function AdminPanel() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
-  const [manipulation, setManipulation] = useState(true);
   const query = searchParams.get('query') || '';
   const [loading, setLoading] = useState(false);
   const [archived, setArchived] = useState(false);
-  const theme = useTheme(getTheme());
+  const location = useLocation();
+  const category = location.pathname.split('/')[2];
 
-  const fileOptions = useMemo(() => ({
-    fileSize: 5242880,
-    supportedFormats: ['image/jpg', 'image/jpeg', 'image/png'],
-  }), []);
+  const theme = useTheme([
+    getTheme(),
+    {
+      Table: `
+        --data-table-library_grid-template-columns:  ${
+          category === 'product'
+            ? '20%  100px 100px repeat(2, 30%) repeat(3, 70px)'
+            : category === 'user'
+              ? 'repeat(3, 30%) repeat(3, 70px)'
+              : category === 'blog'
+                ? '30% 50% auto repeat(3, 70px)'
+                : category === 'instruction'
+                  ? '25% repeat(4, auto) repeat(3, 25%) repeat(3, 70px)'
+                  : category === 'order'
+                    ? 'auto auto 25% 25% repeat(5, auto) repeat(3, 70px)'
+                    : ''
+        } 
+         
+      `,
+      BaseCell: `
+      &:nth-last-child(1) {
+        right: 0px;
+      }
+      &:nth-last-child(2) {
+        right: 70px;
+      }
+      &:nth-last-child(3) {
+        right: 140px;
+      }
+    `,
+    },
+  ]);
+
+  const fileOptions = useMemo(
+    () => ({
+      fileSize: 5242880,
+      supportedFormats: ['image/jpg', 'image/jpeg', 'image/png'],
+    }),
+    [],
+  );
 
   const user = useSelector((state) => state.auth.auth.user);
 
@@ -47,9 +89,6 @@ function AdminPanel() {
   const navigate = useNavigate();
 
   const logout = useLogout();
-
-  const location = useLocation();
-  const category = location.pathname.split('/')[2];
 
   const signOut = useCallback(async () => {
     await logout();
@@ -71,181 +110,173 @@ function AdminPanel() {
     let dataBuffer = [...data];
     if (data && query) {
       dataBuffer = dataBuffer.filter((obj) => Object.keys(obj).some((key) => {
-        if (typeof obj[key] === 'string') {
-          const aValue = obj[key].toLowerCase();
-          const bValue = query.toLowerCase();
-          return aValue.includes(bValue);
-        }
+          if (typeof obj[key] === 'string') {
+            const aValue = obj[key].toLowerCase();
+            const bValue = query.toLowerCase();
+            return aValue.includes(bValue);
+          }
 
-        return false;
-      }));
+          return false;
+        }));
     }
 
     return dataBuffer;
   }, [query, data]);
 
-  return (
-    <div className="admin-panel">
+return (
+    <>
       <ToastContainer />
-      <Container className="admin-panel__header">
-        <h2 className="user-name">
-          Welcome
-          {` ${user.name}`}
-        </h2>
-        <div className="selecte-table">
-          <Nav className="me-auto">
-            <NavLink
-              to="product"
-              onClick={() => {
-                if (category !== 'product') setData([]);
-              }}
-            >
-              product
-            </NavLink>
-            <NavLink
-              to="instruction"
-              onClick={() => {
-                if (category !== 'instruction') setData([]);
-              }}
-            >
-              recipes
-            </NavLink>
-            <NavLink
-              to="blog"
-              onClick={() => {
-                if (category !== 'blog') setData([]);
-              }}
-            >
-              blog
-            </NavLink>
-            <NavLink
-              to="order"
-              onClick={() => {
-                if (category !== 'order') setData([]);
-              }}
-            >
-              orders
-            </NavLink>
-            {user.role === 'admin' && (
+      <div className="admin-panel">
+        <Container className="admin-panel__header">
+          <h2 className="user-name">
+            Welcome
+            {` ${user.name}`}
+          </h2>
+          <div className="selecte-table">
+            <Nav className="me-auto">
               <NavLink
-                to="user"
+                to="product"
                 onClick={() => {
-                  if (category !== 'user') setData([]);
+                  if (category !== 'product') setData([]);
                 }}
               >
-                users
+                product
               </NavLink>
-            )}
-            <Button variant="outline-light" onClick={signOut}>
-              LOGOUT
-            </Button>
-          </Nav>
-        </div>
-        {category && (
-          <h2>
-            List of
+              <NavLink
+                to="instruction"
+                onClick={() => {
+                  if (category !== 'instruction') setData([]);
+                }}
+              >
+                recipes
+              </NavLink>
+              <NavLink
+                to="blog"
+                onClick={() => {
+                  if (category !== 'blog') setData([]);
+                }}
+              >
+                blog
+              </NavLink>
+              <NavLink
+                to="order"
+                onClick={() => {
+                  if (category !== 'order') setData([]);
+                }}
+              >
+                orders
+              </NavLink>
+              {user.role === 'admin' && (
+                <NavLink
+                  to="user"
+                  onClick={() => {
+                    if (category !== 'user') setData([]);
+                  }}
+                >
+                  users
+                </NavLink>
+              )}
+              <Button variant="outline-light" onClick={signOut}>
+                LOGOUT
+              </Button>
+            </Nav>
+          </div>
+          {category && (
+            <h2>
+              List of
               {` ${category}`}
-          </h2>
-        )}
-        {manipulation && (
-        <div className="manipulation">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search anything..."
-              value={query}
-              onChange={(e) => {
-                setSearchParams(
-                  getSearchWith(searchParams, {
-                    query: e.target.value || null,
-                  }),
-                );
-              }}
-            />
-          </div>
-          <div className="checkbox-wrapper-22">
-            <label className="switch" htmlFor="checkbox">
+            </h2>
+          )}
+
+          <div className="manipulation">
+            <div className="search-bar">
               <input
-                type="checkbox"
-                id="checkbox"
-                onChange={() => setArchived(!archived)}
+                type="text"
+                placeholder="Search anything..."
+                value={query}
+                onChange={(e) => {
+                    setSearchParams(
+                      getSearchWith(searchParams, {
+                        query: e.target.value || null,
+                      }),
+                    );
+                  }}
               />
-              <div className="slider round" />
-            </label>
-            <span className="switchText">Archived</span>
+            </div>
+            <div className="checkbox-wrapper-22">
+              <label className="switch" htmlFor="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  onChange={() => setArchived(!archived)}
+                />
+                <div className="slider round" />
+              </label>
+              <span className="switchText">Archived</span>
+            </div>
           </div>
-        </div>
-        )}
-      </Container>
-      <Container>
-        {category === 'product'
-            && (
-            <Product
-              nodes={visibleData}
-              archived={archived}
-              axiosPrivate={axiosPrivate}
-              theme={theme}
-              fileOptions={fileOptions}
-              setManipulation={setManipulation}
-            />
-            )}
-        {category === 'user'
-            && (
-            <User
-              nodes={visibleData}
-              archived={archived}
-              axiosPrivate={axiosPrivate}
-              theme={theme}
-              fileOptions={fileOptions}
-              setManipulation={setManipulation}
-            />
-            )}
-        {category === 'instruction'
-              && (
-              <Instruction
-                nodes={visibleData}
-                archived={archived}
-                axiosPrivate={axiosPrivate}
-                theme={theme}
-                fileOptions={fileOptions}
-                setManipulation={setManipulation}
-              />
-              )}
-        {category === 'blog'
-              && (
-              <Blog
-                nodes={visibleData}
-                archived={archived}
-                axiosPrivate={axiosPrivate}
-                theme={theme}
-                fileOptions={fileOptions}
-                setManipulation={setManipulation}
-              />
-              )}
-        {category === 'order'
-              && (
-              <Order
-                nodes={visibleData}
-                archived={archived}
-                axiosPrivate={axiosPrivate}
-                theme={theme}
-                fileOptions={fileOptions}
-                setManipulation={setManipulation}
-              />
-              )}
-        {loading && (
-          <Spinner
-            animation="border"
-            variant="light"
-            className="spinner"
+
+        </Container>
+        {category === 'product' && (
+          <Product
+            nodes={visibleData}
+            archived={archived}
+            axiosPrivate={axiosPrivate}
+            theme={theme}
+            fileOptions={fileOptions}
+
           />
+        )}
+        {category === 'user' && (
+          <User
+            nodes={visibleData}
+            archived={archived}
+            axiosPrivate={axiosPrivate}
+            theme={theme}
+            fileOptions={fileOptions}
+
+          />
+        )}
+        {category === 'instruction' && (
+          <Instruction
+            nodes={visibleData}
+            archived={archived}
+            axiosPrivate={axiosPrivate}
+            theme={theme}
+            fileOptions={fileOptions}
+
+          />
+        )}
+        {category === 'blog' && (
+          <Blog
+            nodes={visibleData}
+            archived={archived}
+            axiosPrivate={axiosPrivate}
+            theme={theme}
+            fileOptions={fileOptions}
+
+          />
+        )}
+        {category === 'order' && (
+          <Order
+            nodes={visibleData}
+            archived={archived}
+            axiosPrivate={axiosPrivate}
+            theme={theme}
+            fileOptions={fileOptions}
+
+          />
+        )}
+        {loading && (
+          <Spinner animation="border" variant="light" className="spinner" />
         )}
         {!loading && data.length === 0 && (
           <h2 className="text-white">Nothing found</h2>
         )}
-      </Container>
-    </div>
+      </div>
+    </>
   );
+}
 }
 
 export default AdminPanel;

@@ -136,7 +136,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter user name"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -167,7 +167,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter email"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -184,7 +184,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter password"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -205,7 +205,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter title"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -292,7 +292,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter product name"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -309,7 +309,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter weight"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -326,7 +326,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter price"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -391,7 +391,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter instruction name"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -424,7 +424,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter time"
-              className="mb-3"
+
             >
               <Form.Control
                 type="text"
@@ -441,7 +441,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Enter makes"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -559,7 +559,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Name"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -576,7 +576,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Phone number"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -593,7 +593,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Address"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -610,7 +610,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Comment"
-              className="mb-3"
+
             >
               <Form.Control
                 required
@@ -651,7 +651,7 @@ function RenderEditFormBody({
             <FloatingLabel
               controlId="floatingInput"
               label="Total amount"
-              className="mb-3"
+
             >
               <Form.Control
                 required
