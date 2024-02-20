@@ -90,7 +90,7 @@ function EditProduct({ item, setData, fileOptions, close }) {
         setData((state) => ({
           nodes: state.nodes.map((node) => {
             if (node.id === item.id) {
-              return { ...values, id: item.id };
+              return { ...item, ...values };
             }
             return node;
           }),
