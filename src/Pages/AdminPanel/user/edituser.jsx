@@ -63,6 +63,11 @@ function EditUser({
 
   const handleSubmitForm = (values) => {
     const request = removeUnchangedFields(item, values);
+    if (request.password === '') {
+      delete request.password;
+      delete request.confirmPassword;
+    }
+    delete request.confirmPassword;
     editData('user', item.id, axiosPrivate, {
       ...request,
       UserId,

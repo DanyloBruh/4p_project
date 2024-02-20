@@ -30,21 +30,22 @@ function AddBlog({ setData, fileOptions, close }) {
       name: Yup.string()
         .min(2, 'Title must be minimum 2')
         .max(100, 'Title must not be more than 100 characters')
-        .required('Title is required'),
+        .required('Title is required')
+        .matches(/^[^"]*$/, 'Name cannot contain double quotes'),
       text: Yup.string().required('Text is required'),
       Images: Yup.array()
-        .required('At least one image is required')
         .of(
           Yup.mixed()
+            .required('A Image is required')
             .test(
               'fileSize',
               'Image too large',
-              (value) => !value || value.size <= fileOptions.fileSize,
+              (value) => value && value.size <= fileOptions.fileSize,
             )
             .test(
               'fileFormat',
-              'Unsupported format',
-              (value) => !value || fileOptions.supportedFormats.includes(value.type),
+              'Unsupported Format',
+              (value) => value && fileOptions.supportedFormats.includes(value.type),
             ),
         ),
       displayType: Yup.string()
@@ -67,6 +68,8 @@ function AddBlog({ setData, fileOptions, close }) {
       userId,
       ...values,
     };
+
+    if (req.text) req.text = req.text.replace(/"/g, "'");
 
     postDataConfig('blog', axiosPrivateConfig, req)
       .then((result) => {
@@ -146,7 +149,7 @@ function AddBlog({ setData, fileOptions, close }) {
                   formData={values}
                 />
                 {errors.text && touched.text ? (
-                  <div className="validtaionText">{errors.text}</div>
+                  <div style={{ color: '#DC3545' }}>{errors.text}</div>
                 ) : null}
               </Form.Group>
               <Form.Group className="form-element">
@@ -177,14 +180,14 @@ function AddBlog({ setData, fileOptions, close }) {
                           remove
                         </Button>
                         )}
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Images && errors.Images[i]}
+                        </Form.Control.Feedback>
                         {item.name ? (
                           <img src={URL.createObjectURL(item)} alt="add img" />
                         ) : (
                           <img alt="" />
                         )}
-                        <Form.Control.Feedback type="invalid">
-                          {errors.Images && errors.Images[i]}
-                        </Form.Control.Feedback>
                       </Form.Group>
                     ))}
                   </FieldArray>

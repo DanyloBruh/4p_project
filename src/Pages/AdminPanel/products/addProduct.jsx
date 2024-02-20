@@ -1,10 +1,12 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
+/* eslint-disable object-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable react/jsx-curly-newline */
+
 import { Formik } from 'formik';
 import React, { useMemo } from 'react';
-import {
-  Button, Container, FloatingLabel, Form,
-} from 'react-bootstrap';
+import { Button, Container, FloatingLabel, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -18,45 +20,54 @@ function AddProduct({ setData, fileOptions, close }) {
   const userId = useSelector((state) => state.auth.auth.user.id);
   const axiosPrivateConfig = useAxiosPrivateImages();
 
-  const initialState = useMemo(() => ({
-    name: '',
-    weight: '',
-    description: '',
-    price: '',
-    Image: '',
-    ingredients: '',
-  }), []);
-  const schema = useMemo(
-    () => Yup.object().shape({
-      name: Yup.string()
-        .min(2, 'Name must be minimum 2')
-        .max(100, 'Name must not be more than 100 characters')
-        .matches(
-          '^[A-Za-z]{1,20}',
-          'Product name must not contain numbers',
-        )
-        .required('Name is required'),
-      weight: Yup.number('Weight must be a number').required(
-        'Weight is required',
-      ),
-      description: Yup.string().required('Description is required'),
-      price: Yup.number('Price must be a number').required(
-        'Price is required',
-      ).positive('Price must be positive'),
-      Image: Yup.mixed()
-        .required('A Image is required')
-        .test(
-          'fileSize',
-          'Image too large',
-          (value) => value && value.size <= fileOptions.fileSize,
-        )
-        .test(
-          'fileFormat',
-          'Unsupported Format',
-          (value) => value && fileOptions.supportedFormats.includes(value.type),
-        ),
-      ingredients: Yup.string().required('Ingredients is required'),
+  const initialState = useMemo(
+    () => ({
+      name: '',
+      weight: '',
+      description: '',
+      price: '',
+      Image: '',
+      ingredients: '',
     }),
+    [],
+  );
+  const schema = useMemo(
+    () =>
+      Yup.object().shape({
+        name: Yup.string()
+          .min(2, 'Name must be minimum 2')
+          .max(100, 'Name must not be more than 100 characters')
+          .matches('^[A-Za-z]{1,20}', 'Product name must not contain numbers')
+          .matches(/^[^"]*$/, 'Name cannot contain double quotes')
+          .required('Name is required'),
+        weight: Yup.number()
+          .typeError('Weight must be a number')
+          .required('Weight is required')
+          .positive('Weight must be positive'),
+        description: Yup.string()
+          .required('Description is required')
+          .matches(/^[^"]*$/, 'Description cannot contain double quotes'),
+        price: Yup.number()
+          .typeError('Price must be a number')
+          .required('Price is required')
+          .positive('Price must be positive'),
+        Image: Yup.mixed()
+          .required('A Image is required')
+          .test(
+            'fileSize',
+            'Image too large',
+            (value) => value && value.size <= fileOptions.fileSize,
+          )
+          .test(
+            'fileFormat',
+            'Unsupported Format',
+            (value) =>
+              value && fileOptions.supportedFormats.includes(value.type),
+          ),
+        ingredients: Yup.string()
+          .required('Ingredients is required')
+          .matches(/^[^"]*$/, 'Ingredients cannot contain double quotes'),
+      }),
     [],
   );
 
@@ -111,9 +122,7 @@ function AddProduct({ setData, fileOptions, close }) {
             >
               <Form.Label>
                 Add product
-                <Button
-                  onClick={() => close()}
-                >
+                <Button onClick={() => close()}>
                   <IconContext.Provider value={iconProviderValue}>
                     <IoMdClose />
                   </IconContext.Provider>
@@ -169,7 +178,7 @@ function AddProduct({ setData, fileOptions, close }) {
                   className="mb-3"
                 >
                   <Form.Control
-                    type="number"
+                    type="text"
                     name="price"
                     placeholder="price"
                     value={values.price}
@@ -232,7 +241,9 @@ function AddProduct({ setData, fileOptions, close }) {
                 <Form.Control
                   type="file"
                   name="Image"
-                  onChange={(e) => setFieldValue('Image', e.currentTarget.files[0])}
+                  onChange={(e) =>
+                    setFieldValue('Image', e.currentTarget.files[0])
+                  }
                   isValid={touched.Image && !errors.Image}
                   isInvalid={touched.Image && errors.Image}
                 />
