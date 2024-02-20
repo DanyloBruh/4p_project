@@ -25,6 +25,7 @@ function EditBlog({
 }) {
   const userId = useSelector((state) => state.auth.auth.user.id);
   const axiosPrivateConfig = useAxiosPrivateImages();
+  console.log(item);
 
   const initialState = useMemo(
     () => ({
@@ -39,7 +40,9 @@ function EditBlog({
     () => Yup.object().shape({
       name: Yup.string()
         .min(2, 'Title must be minimum 2')
-        .max(100, 'Title must not be more than 100 characters'),
+        .max(100, 'Title must not be more than 100 characters')
+        .required('Title is required')
+        .matches(/^[^"]*$/, 'Title cannot contain double quotes'),
       text: Yup.string(),
       Images: Yup.array().of(
         Yup.mixed()
@@ -92,22 +95,25 @@ function EditBlog({
   }, []);
 
   const handleSubmitForm = (values) => {
+    console.log('item', item);
+    console.log('value', values);
     if (values.Images) {
       // eslint-disable-next-line no-param-reassign
       values.Images = values.Images.map((image) => imageToFile(image));
     }
-
     const req = removeUnchangedFields(item, values);
 
-    editData('blog', item.id, axiosPrivateConfig, req)
+    // req.Images = req.Images.filter((img, i) => img.name !== item.Images[i].imageName);
+
+    if (req.text) req.text = req.text.replace(/"/g, "'");
+    editData('blog', item.id, axiosPrivateConfig, { ...req, userId })
       .then(() => {
         ToastNotification('success', 'Successfully updated!');
         setData((state) => ({
           nodes: state.nodes.map((node) => {
             if (node.id === item.id) {
-              return values;
+              return { ...item, ...values };
             }
-
             return node;
           }),
         }));
@@ -191,7 +197,7 @@ function EditBlog({
                     content={values.text}
                   />
                   {errors.text && touched.text ? (
-                    <div className="validtaionText">{errors.text}</div>
+                    <div style={{ color: '#DC3545' }}>{errors.text}</div>
                   ) : null}
                 </Form.Group>
                 <Form.Group className="form-element form-element-add images">
