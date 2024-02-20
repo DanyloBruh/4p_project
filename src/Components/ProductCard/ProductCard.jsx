@@ -4,9 +4,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './ProductCard.scss';
 import { useDispatch } from 'react-redux';
-import {
-  Button, Col, Row,
-} from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import Counter from '../Counter/Counter';
 import { addOrderData, setVisible } from '../../redux/orderDataSlice';
 
@@ -35,6 +33,7 @@ function ProductCard({ data, setSelectItems }) {
       }),
     );
     setCount(1);
+    setSelectItems();
   };
 
   const handleSetVisible = () => {
@@ -46,7 +45,7 @@ function ProductCard({ data, setSelectItems }) {
     );
     setCount(1);
     dispath(setVisible(true));
-    routeChange();
+    setSelectItems();
   };
 
   useEffect(() => {
