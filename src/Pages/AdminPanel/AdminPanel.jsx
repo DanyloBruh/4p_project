@@ -6,10 +6,7 @@ import React, {
  useState, useEffect, useCallback, useMemo,
 } from 'react';
 import {
-  Button,
-  Container,
-  Nav,
-  Spinner,
+ Button, Container, Nav, Spinner,
 } from 'react-bootstrap';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
@@ -123,7 +120,7 @@ function AdminPanel() {
     return dataBuffer;
   }, [query, data]);
 
-return (
+  return (
     <>
       <ToastContainer />
       <div className="admin-panel">
@@ -195,12 +192,12 @@ return (
                 placeholder="Search anything..."
                 value={query}
                 onChange={(e) => {
-                    setSearchParams(
-                      getSearchWith(searchParams, {
-                        query: e.target.value || null,
-                      }),
-                    );
-                  }}
+                  setSearchParams(
+                    getSearchWith(searchParams, {
+                      query: e.target.value || null,
+                    }),
+                  );
+                }}
               />
             </div>
             <div className="checkbox-wrapper-22">
@@ -215,7 +212,6 @@ return (
               <span className="switchText">Archived</span>
             </div>
           </div>
-
         </Container>
         {category === 'product' && (
           <Product
@@ -224,7 +220,6 @@ return (
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-
           />
         )}
         {category === 'user' && (
@@ -234,7 +229,6 @@ return (
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-
           />
         )}
         {category === 'instruction' && (
@@ -244,7 +238,6 @@ return (
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-
           />
         )}
         {category === 'blog' && (
@@ -254,7 +247,6 @@ return (
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-
           />
         )}
         {category === 'order' && (
@@ -264,7 +256,6 @@ return (
             axiosPrivate={axiosPrivate}
             theme={theme}
             fileOptions={fileOptions}
-
           />
         )}
         {loading && (
@@ -276,7 +267,6 @@ return (
       </div>
     </>
   );
-}
 }
 
 export default AdminPanel;

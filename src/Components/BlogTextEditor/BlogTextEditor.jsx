@@ -13,7 +13,6 @@ import StarterKit from '@tiptap/starter-kit';
 import { Button } from 'react-bootstrap';
 import React, { useEffect, useMemo } from 'react';
 
-
 /* eslint-disable react/prop-types */
 function MenuBar({ setFormData }) {
   const { editor } = useCurrentEditor();
