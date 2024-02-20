@@ -20,11 +20,7 @@ import EditBlog from './editBlog';
 import './blog.scss';
 
 function Blog({
-  nodes,
-  archived,
-  axiosPrivate,
-  theme,
-  fileOptions,
+  nodes, archived, axiosPrivate, theme, fileOptions,
 }) {
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
@@ -64,67 +60,72 @@ function Blog({
     setEditItem(item);
   }, []);
 
-  const COLUMNS = useMemo(() => [
-    {
-      label: 'Name',
-      renderCell: (item) => item.name,
-      sort: { sortKey: 'NAME' },
-    },
-    {
-      label: 'text',
-      renderCell: (item) => Parser.parse(item?.text)[0],
-    },
-    {
-      label: 'Display type',
-      renderCell: (item) => item.displayType,
-      sort: { sortKey: 'DISPLAYTYPE' },
-    },
-    {
-      label: 'Edit',
-      renderCell: (item) => (
-        <Button
-          variant="dark"
-          className="button-icon"
-          onClick={() => handeEdit(item)}
-        >
-          <IconContext.Provider value={iconProviderValue}>
-            <RiEdit2Line />
-          </IconContext.Provider>
-        </Button>
-      ),
-      pinRight: true,
-    },
-    {
-      label: 'Zip/Unzip',
-      renderCell: (item) => (
-        <Button
-          variant="dark"
-          className="button-icon"
-          onClick={() => handleArchived(item.id, archived, axiosPrivate, 'blog', setData)}
-        >
-          <IconContext.Provider value={iconProviderValue}>
-            <RiFolderZipFill />
-          </IconContext.Provider>
-        </Button>
-      ),
-      pinRight: true,
-    },
-    {
-      label: 'Delete',
-      renderCell: (item) => (
-        <Button
-          variant="dark"
-          className="button-icon"
-          onClick={() => handleDelete(item.id, axiosPrivate, 'blog', setData)}
-        >
-          <IconContext.Provider value={iconProviderValue}>
-            <MdDeleteForever />
-          </IconContext.Provider>
-        </Button>
-      ),
-      pinRight: true,
-    },
-  ], [archived]);
+  const COLUMNS = useMemo(
+    () => [
+      {
+        label: 'Name',
+        renderCell: (item) => item.name,
+        sort: { sortKey: 'NAME' },
+      },
+      {
+        label: 'text',
+        renderCell: (item) => (Parser.parse(item?.text).length > 0
+          ? Parser.parse(item?.text)[0]
+          : Parser.parse(item?.text)),
+      },
+      {
+        label: 'Display type',
+        renderCell: (item) => item.displayType,
+        sort: { sortKey: 'DISPLAYTYPE' },
+      },
+      {
+        label: 'Edit',
+        renderCell: (item) => (
+          <Button
+            variant="dark"
+            className="button-icon"
+            onClick={() => handeEdit(item)}
+          >
+            <IconContext.Provider value={iconProviderValue}>
+              <RiEdit2Line />
+            </IconContext.Provider>
+          </Button>
+        ),
+        pinRight: true,
+      },
+      {
+        label: 'Zip/Unzip',
+        renderCell: (item) => (
+          <Button
+            variant="dark"
+            className="button-icon"
+            onClick={() => handleArchived(item.id, archived, axiosPrivate, 'blog', setData)}
+          >
+            <IconContext.Provider value={iconProviderValue}>
+              <RiFolderZipFill />
+            </IconContext.Provider>
+          </Button>
+        ),
+        pinRight: true,
+      },
+      {
+        label: 'Delete',
+        renderCell: (item) => (
+          <Button
+            variant="dark"
+            className="button-icon"
+            onClick={() => handleDelete(item.id, axiosPrivate, 'blog', setData)}
+          >
+            <IconContext.Provider value={iconProviderValue}>
+              <MdDeleteForever />
+            </IconContext.Provider>
+          </Button>
+        ),
+        pinRight: true,
+      },
+    ],
+    [archived],
+  );
 
   const close = useCallback(() => {
     setVisibleType('');

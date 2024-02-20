@@ -288,34 +288,48 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                             key={`ingredients${i}`}
                             className="rendered-content"
                           >
-                            <TextareaAutosize
-                              name={`ingredients.${i}.ingredient`}
-                              type="text"
-                              rows={5}
-                              minRows={5}
-                              className={`form-control ${
-                                touched.ingredients && errors.ingredients
-                                  ? 'is-invalid'
-                                  : touched.ingredients && !errors.ingredients
-                                    ? 'is-valid'
-                                    : ''
-                              }`}
-                              value={itemIng.ingredient}
-                              onChange={handleChange}
-                              autoComplete="off"
-                            />
+                            <div className="d-flex">
+                              <TextareaAutosize
+                                name={`ingredients.${i}.ingredient`}
+                                type="text"
+                                rows={5}
+                                minRows={5}
+                                className={`form-control ${
+                                  touched.ingredients && errors.ingredients
+                                    ? 'is-invalid'
+                                    : touched.ingredients && !errors.ingredients
+                                      ? 'is-valid'
+                                      : ''
+                                }`}
+                                value={itemIng.ingredient}
+                                onChange={handleChange}
+                                autoComplete="off"
+                              />
 
-                            {values.ingredients.length > 1 && (
-                              <Button
-                                variant="outline-light"
-                                onClick={() =>
-                                  handleDeleteIngredient(i, values, setValues)
-                                }
-                              >
-                                remove
-                              </Button>
-                            )}
-                            <Form.Control.Feedback type="invalid">
+                              {values.ingredients.length > 1 && (
+                                <Button
+                                  variant="outline-light"
+                                  className="mb-3 ml-3"
+                                  onClick={() =>
+                                    handleDeleteIngredient(i, values, setValues)
+                                  }
+                                >
+                                  remove
+                                </Button>
+                              )}
+                            </div>
+
+                            <Form.Control.Feedback
+                              type="invalid"
+                              className={
+                                touched.ingredients &&
+                                errors.ingredients &&
+                                errors.ingredients[i] &&
+                                errors.ingredients[i].ingredient
+                                  ? 'd-block'
+                                  : ''
+                              }
+                            >
                               {errors.ingredients &&
                                 errors.ingredients[i] &&
                                 errors.ingredients[i].ingredient}
@@ -337,13 +351,12 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="steps">
                       {() =>
-                        values.text.map((itemIng, i) => {
-                          console.log(itemIng);
-                          return (
-                            <Form.Group
-                              key={`text${i}`}
-                              className="rendered-content"
-                            >
+                        values.text.map((itemIng, i) => (
+                          <Form.Group
+                            key={`text${i}`}
+                            className="rendered-content"
+                          >
+                            <div className="d-flex">
                               <TextareaAutosize
                                 name={`text.${i}.text`}
                                 type="text"
@@ -364,6 +377,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                               {values.text.length > 1 && (
                                 <Button
                                   variant="outline-light"
+                                  className="mb-3 ml-3"
                                   onClick={() =>
                                     handleDeleteStep(i, values, setValues)
                                   }
@@ -371,14 +385,25 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                                   remove
                                 </Button>
                               )}
-                              <Form.Control.Feedback type="invalid">
-                                {errors.text &&
-                                  errors.text[i] &&
-                                  errors.text[i].text}
-                              </Form.Control.Feedback>
-                            </Form.Group>
-                          );
-                        })
+                            </div>
+
+                            <Form.Control.Feedback
+                              type="invalid"
+                              className={
+                                touched.text &&
+                                errors.text &&
+                                errors.text[i] &&
+                                errors.text[i].text
+                                  ? 'd-block'
+                                  : ''
+                              }
+                            >
+                              {errors.text &&
+                                errors.text[i] &&
+                                errors.text[i].text}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        ))
                       }
                     </FieldArray>
                   </Form.Group>

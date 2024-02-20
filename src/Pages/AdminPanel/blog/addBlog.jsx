@@ -124,7 +124,7 @@ function AddBlog({ setData, fileOptions, close }) {
                 encType="multipart/form-data"
                 onSubmit={handleSubmit}
               >
-                <Form.Label>Add product</Form.Label>
+                <Form.Label>Add blog</Form.Label>
 
                 <Form.Group className="form-element">
                   <FloatingLabel controlId="floatingInput" label="Enter title">
@@ -150,7 +150,7 @@ function AddBlog({ setData, fileOptions, close }) {
                     <div className="validtaionText">{errors.text}</div>
                   ) : null}
                 </Form.Group>
-                <Form.Group className="form-element">
+                <Form.Group className="form-element form-element-add mb-5">
                   <Form.Label>Images</Form.Label>
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="Images">
@@ -159,26 +159,33 @@ function AddBlog({ setData, fileOptions, close }) {
                           <Form.Group
                               // eslint-disable-next-line react/no-array-index-key
                             key={`Images${i}`}
-                            className="rendered-content "
+                            className="rendered-content"
                           >
-                            <Form.Control
-                              type="file"
-                              name={`Images.${i}.image`}
-                              onChange={(e) => setFieldValue(
-                                `Images[${i}]`,
-                                e.currentTarget.files[0],
+                            <div className="d-flex">
+                              <Form.Control
+                                type="file"
+                                name={`Images.${i}.image`}
+                                onChange={(e) => setFieldValue(
+                                  `Images[${i}]`,
+                                  e.currentTarget.files[0],
+                                )}
+                                isValid={
+                                    touched.Images && !errors.Images?.[i]
+                                  }
+                                isInvalid={
+                                    touched.Images && errors.Images?.[i]
+                                  }
+                              />
+                              {values.Images.length > 1 && (
+                              <Button
+                                variant="outline-light"
+                                className="ml-3 rounded-0"
+                                onClick={() => handleDeleteImages(i, values, setValues)}
+                              >
+                                remove
+                              </Button>
                               )}
-                              isValid={touched.Images && !errors.Images?.[i]}
-                              isInvalid={touched.Images && errors.Images?.[i]}
-                            />
-                            {values.Images.length > 1 && (
-                            <Button
-                              variant="outline-light"
-                              onClick={() => handleDeleteImages(i, values, setValues)}
-                            >
-                              remove
-                            </Button>
-                            )}
+                            </div>
                           </Form.Group>
                           {item.name ? (
                             <img
@@ -186,7 +193,16 @@ function AddBlog({ setData, fileOptions, close }) {
                               alt="add img"
                             />
                           ) : null}
-                          <Form.Control.Feedback type="invalid">
+                          <Form.Control.Feedback
+                            type="invalid"
+                            className={
+                                touched.Images
+                                && errors.Images
+                                && errors.Images[i]
+                                  ? 'd-block'
+                                  : ''
+                              }
+                          >
                             {errors.Images && errors.Images[i]}
                           </Form.Control.Feedback>
                         </>
@@ -197,7 +213,7 @@ function AddBlog({ setData, fileOptions, close }) {
                     variant="outline-light"
                     onClick={() => handleAddImage(values, setValues)}
                   >
-                    click to add new Image
+                    Click to add new image
                   </Button>
                 </Form.Group>
                 <Form.Group className="form-element">
