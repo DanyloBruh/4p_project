@@ -48,7 +48,9 @@ function Instruction({
         NAME: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
         DIFFICULTY: (array) => array.sort((a, b) => a.difficulty.localeCompare(b.difficulty)),
         MAKES: (array) => array.sort((a, b) => a.makes - b.makes),
-        CARROUSEL: (array) => array.sort((a, b) => a.carrousel.localeCompare(b.carrousel)),
+        CARROUSEL: (array) => array.sort(
+          (a, b) => ((a.carrousel === b.carrousel) ? 0 : a.carrousel ? -1 : 1),
+        ),
       },
     },
   );

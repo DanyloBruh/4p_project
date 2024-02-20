@@ -13,6 +13,7 @@ import {
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 import Product from './product';
 import { orderComplite } from '../../Helper/requests';
 import { deleteOrderData } from '../../redux/orderDataSlice';
@@ -68,7 +69,7 @@ function Order({
           addressLine2: Yup.string(),
           addressLine3: Yup.string(),
           town: Yup.string().required(),
-          comment: Yup.string(),
+          terms: Yup.bool().required().oneOf([true], 'Terms must be accepted'),
           delivery: Yup.string()
             .required('required')
             .oneOf(['self', 'courier'], 'required'),
@@ -88,6 +89,7 @@ function Order({
             .required('Phone is required')
             .matches(regexes.regexPhone, 'Phone number is not valid'),
           comment: Yup.string(),
+          terms: Yup.bool().required().oneOf([true], 'Terms must be accepted'),
           delivery: Yup.string()
             .required('required')
             .oneOf(['self', 'courier'], 'required'),
@@ -177,6 +179,7 @@ function Order({
     comment: '',
     delivery: '',
     payment: '',
+    terms: '',
   };
 
   return (
@@ -512,6 +515,36 @@ function Order({
                             </Form.Control.Feedback>
                           </FloatingLabel>
                         </InputGroup>
+                      </Form.Group>
+
+                      <Form.Group className="terms">
+                        <div className="termsGroup">
+                          <div className="checkbox-wrapper-23">
+                            <input
+                              type="checkbox"
+                              id="check-23"
+                              value={values.terms}
+                              onClick={handleChange}
+                              name="terms"
+                            />
+                            <label htmlFor="check-23">
+                              <svg viewBox="0,0,50,50">
+                                <path d="M5 30 L 20 45 L 45 5" />
+                              </svg>
+                            </label>
+                          </div>
+                          <p className="termsGroup__text">
+                            By clicking the button, you agree to the
+                            <Link to="privacy-policy" onClick={setOrderVisibleFalse} className="termsGroup__link"> public offer agreement </Link>
+                            and
+                            <Link to="privacy-policy" onClick={setOrderVisibleFalse} className="termsGroup__link"> privacy policy</Link>
+                          </p>
+                        </div>
+                        {errors.terms && touched.terms && (
+                        <div className="errorRadio">
+                          {errors.terms}
+                        </div>
+                        )}
                       </Form.Group>
 
                       <hr className="order__line" />
