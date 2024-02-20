@@ -4,7 +4,7 @@ import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
 import {
-  Button, Container, Nav, Spinner, ToastContainer,
+  Button, Container, Nav, Spinner,
 } from 'react-bootstrap';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
@@ -15,6 +15,7 @@ import {
   useSearchParams,
   NavLink,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 import { getDataByCategory } from '../../Helper/requests';
 import Product from './products/product';
@@ -84,49 +85,48 @@ function AdminPanel() {
   }, [query, data]);
 
   return (
-    <>
+    <div className="admin-panel">
       <ToastContainer />
-      <div className="admin-panel">
-        <Container className="admin-panel__header">
-          <h2 className="user-name">
-            Welcome
-            {` ${user.name}`}
-          </h2>
-          <div className="selecte-table">
-            <Nav className="me-auto">
-              <NavLink
-                to="product"
-                onClick={() => {
-                  if (category !== 'product') setData([]);
-                }}
-              >
-                product
-              </NavLink>
-              <NavLink
-                to="instruction"
-                onClick={() => {
-                  if (category !== 'instruction') setData([]);
-                }}
-              >
-                recipes
-              </NavLink>
-              <NavLink
-                to="blog"
-                onClick={() => {
-                  if (category !== 'blog') setData([]);
-                }}
-              >
-                blog
-              </NavLink>
-              <NavLink
-                to="order"
-                onClick={() => {
-                  if (category !== 'order') setData([]);
-                }}
-              >
-                orders
-              </NavLink>
-              {user.role === 'admin' && (
+      <Container className="admin-panel__header">
+        <h2 className="user-name">
+          Welcome
+          {` ${user.name}`}
+        </h2>
+        <div className="selecte-table">
+          <Nav className="me-auto">
+            <NavLink
+              to="product"
+              onClick={() => {
+                if (category !== 'product') setData([]);
+              }}
+            >
+              product
+            </NavLink>
+            <NavLink
+              to="instruction"
+              onClick={() => {
+                if (category !== 'instruction') setData([]);
+              }}
+            >
+              recipes
+            </NavLink>
+            <NavLink
+              to="blog"
+              onClick={() => {
+                if (category !== 'blog') setData([]);
+              }}
+            >
+              blog
+            </NavLink>
+            <NavLink
+              to="order"
+              onClick={() => {
+                if (category !== 'order') setData([]);
+              }}
+            >
+              orders
+            </NavLink>
+            {user.role === 'admin' && (
               <NavLink
                 to="user"
                 onClick={() => {
@@ -135,50 +135,50 @@ function AdminPanel() {
               >
                 users
               </NavLink>
-              )}
-              <Button variant="outline-light" onClick={signOut}>
-                LOGOUT
-              </Button>
-            </Nav>
-          </div>
-          {category && (
+            )}
+            <Button variant="outline-light" onClick={signOut}>
+              LOGOUT
+            </Button>
+          </Nav>
+        </div>
+        {category && (
           <h2>
             List of
               {` ${category}`}
           </h2>
-          )}
-          {manipulation && (
-            <div className="manipulation">
-              <div className="search-bar">
-                <input
-                  type="text"
-                  placeholder="Search anything..."
-                  value={query}
-                  onChange={(e) => {
-                    setSearchParams(
-                      getSearchWith(searchParams, {
-                        query: e.target.value || null,
-                      }),
-                    );
-                  }}
-                />
-              </div>
-              <div className="checkbox-wrapper-22">
-                <label className="switch" htmlFor="checkbox">
-                  <input
-                    type="checkbox"
-                    id="checkbox"
-                    onChange={() => setArchived(!archived)}
-                  />
-                  <div className="slider round" />
-                </label>
-                <span className="switchText">Archived</span>
-              </div>
-            </div>
-          )}
-        </Container>
-        <Container>
-          {category === 'product'
+        )}
+        {manipulation && (
+        <div className="manipulation">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search anything..."
+              value={query}
+              onChange={(e) => {
+                setSearchParams(
+                  getSearchWith(searchParams, {
+                    query: e.target.value || null,
+                  }),
+                );
+              }}
+            />
+          </div>
+          <div className="checkbox-wrapper-22">
+            <label className="switch" htmlFor="checkbox">
+              <input
+                type="checkbox"
+                id="checkbox"
+                onChange={() => setArchived(!archived)}
+              />
+              <div className="slider round" />
+            </label>
+            <span className="switchText">Archived</span>
+          </div>
+        </div>
+        )}
+      </Container>
+      <Container>
+        {category === 'product'
             && (
             <Product
               nodes={visibleData}
@@ -189,7 +189,7 @@ function AdminPanel() {
               setManipulation={setManipulation}
             />
             )}
-          {category === 'user'
+        {category === 'user'
             && (
             <User
               nodes={visibleData}
@@ -200,7 +200,7 @@ function AdminPanel() {
               setManipulation={setManipulation}
             />
             )}
-          {category === 'instruction'
+        {category === 'instruction'
               && (
               <Instruction
                 nodes={visibleData}
@@ -211,7 +211,7 @@ function AdminPanel() {
                 setManipulation={setManipulation}
               />
               )}
-          {category === 'blog'
+        {category === 'blog'
               && (
               <Blog
                 nodes={visibleData}
@@ -222,7 +222,7 @@ function AdminPanel() {
                 setManipulation={setManipulation}
               />
               )}
-          {category === 'order'
+        {category === 'order'
               && (
               <Order
                 nodes={visibleData}
@@ -233,19 +233,18 @@ function AdminPanel() {
                 setManipulation={setManipulation}
               />
               )}
-          {loading && (
+        {loading && (
           <Spinner
             animation="border"
             variant="light"
             className="spinner"
           />
-          )}
-          {!loading && data.length === 0 && (
+        )}
+        {!loading && data.length === 0 && (
           <h2 className="text-white">Nothing found</h2>
-          )}
-        </Container>
-      </div>
-    </>
+        )}
+      </Container>
+    </div>
   );
 }
 

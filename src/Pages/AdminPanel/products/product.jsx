@@ -164,6 +164,7 @@ function Product({
             data={data}
             theme={theme}
             sort={sort}
+            archived={archived}
             pagination={pagination}
             addClick={() => {
               setVisibleType('add');

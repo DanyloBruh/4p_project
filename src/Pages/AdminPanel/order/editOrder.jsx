@@ -29,9 +29,10 @@ import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 import Product from '../../../Components/Order/product';
 import { editData, getAllProducts } from '../../../Helper/requests';
 import { axiosPrivate } from '../../../Helper/axios';
+import { removeUnchangedFields } from '../adminUtils';
 
 function EditOrder({ item, setData, fileOptions, close }) {
-  const [addressFinder, setAddressFinder] = useState(false);
+  const [addressFinder, setAddressFinder] = useState(item.deliveryType === 'courier');
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [schema, setSchema] = useState({});
@@ -47,16 +48,23 @@ function EditOrder({ item, setData, fileOptions, close }) {
   );
 
   const initialState = useMemo(
-    () => ({
-      name: item.name,
-      phoneNumber: item.phoneNumber,
-      adress: item.adress,
-      comment: item.comment,
-      paymentType: item.paymentType,
-      deliveryType: item.deliveryType,
-      totalAmount: item.totalAmount,
-      status: item.status,
-    }),
+    () => {
+      const masAddress = item.adress.split('|');
+      return ({
+        name: item.name,
+        phoneNumber: item.phoneNumber,
+        postcode: masAddress[4],
+        addressLine1: masAddress[1],
+        addressLine2: masAddress[2],
+        addressLine3: masAddress[3],
+        town: masAddress[0],
+        comment: item.comment,
+        paymentType: item.paymentType,
+        deliveryType: item.deliveryType,
+        totalAmount: item.totalAmount,
+        status: item.status,
+      });
+    },
     [],
   );
 
@@ -165,7 +173,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
     }
 
     return '0';
-  }, [item]);
+  }, [order]);
 
   const incCount = useCallback((id) => {
     setOrder((ord) => {
@@ -215,20 +223,38 @@ function EditOrder({ item, setData, fileOptions, close }) {
       };
     });
   }, []);
-
   const addProduct = useCallback(() => {
+    if (order.Products.find(
+      (product) => product.name === selectedProduct.value,
+    )) {
+      setOrder((prev) => ({
+        ...prev,
+        Products: prev.Products.map((product) => {
+          if (product.name === selectedProduct.value) {
+            product.Dishes.count += 1;
+            setSelectedProduct('');
+          }
+
+          return product;
+        }) }));
+      return;
+    }
+
     const selectedProductObj = allProducts.find(
       (product) => product.name === selectedProduct.value,
     );
+
+    if (!selectedProductObj) {
+      return;
+    }
     selectedProductObj.Dishes = { count: 1 };
-    console.log(selectedProductObj);
     setOrder((prevOrder) => {
       return {
         ...prevOrder,
         Products: [...prevOrder.Products, selectedProductObj],
       };
     });
-  }, [selectedProduct]);
+  }, [selectedProduct, order.Products]);
 
   const optionsArr = allProducts.map((product) => {
     return {
@@ -238,40 +264,80 @@ function EditOrder({ item, setData, fileOptions, close }) {
   });
 
   const handleSubmitForm = (values) => {
-    console.log(order);
-    const productIds = order.Products.map((product) => {
-      console.log(product);
-      const ret = {
-        productId: product.id,
-        count: product.Dishes.count,
-      };
-      return ret;
-    });
-    const total = getTotalAmount();
-    const request = {
+    let productMarker = false;
+    const res = {
+      name: item.name,
+      phoneNumber: item.phoneNumber,
+      comment: item.comment,
+      paymentType: item.paymentType,
+      deliveryType: item.deliveryType,
+      status: item.status,
+    };
+    const reqPres = {
       name: values.name,
       phoneNumber: values.phoneNumber,
       comment: values.comment,
       paymentType: values.paymentType,
       deliveryType: values.deliveryType,
-      totalAmount: total,
-      productIds,
+      status: values.status,
     };
-    console.log(request);
-    editData('order', order.id, axiosPrivate, request)
+    const req = {
+      ...removeUnchangedFields(res, reqPres),
+    };
+    if (item.Products.length === order.Products.length) {
+      for (let i = 0; i < item.Products.length; i += 1) {
+        if (item.Products[i].id !== order.Products[i].id
+          || item.Products[i].Dishes.count !== order.Products[i].Dishes.count) {
+          productMarker = true;
+          break;
+        }
+      }
+    } else {
+      productMarker = true;
+    }
+
+    if (productMarker) {
+      const productIds = order.Products.map((product) => {
+        const ret = {
+          ProductId: product.id,
+          count: product.Dishes.count,
+        };
+        return ret;
+      });
+      const total = getTotalAmount();
+      req.totalAmount = total;
+      req.productIds = productIds;
+    }
+
+    const addressLine = `${values.town
+    }|${
+      values.addressLine1
+    }|${
+      values.addressLine2
+    }|${
+      values.addressLine3
+    }|${
+      values.postcode}`;
+
+    if (item.adress !== addressLine) {
+      req.adress = addressLine;
+    }
+    editData('order', order.id, axiosPrivate, req)
       .then(() => {
         ToastNotification('success', 'Successfully updated!');
         setData((state) => ({
           nodes: state.nodes.map((node) => {
-            if (node.id === item.id) {
-              return { ...values, id: item.id };
+            if (node.id === order.id) {
+              return {
+                ...order,
+                ...req,
+              };
             }
             return node;
           }),
         }));
       })
       .catch((err) => {
-        console.log(err);
         ToastNotification(
           'error',
           `Something went wrong! (${err.response.data.message})`,
@@ -281,6 +347,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
         close();
       });
   };
+
   return (
     <div className="">
       <div className="order">
@@ -328,9 +395,8 @@ function EditOrder({ item, setData, fileOptions, close }) {
                     encType="multipart/form-data"
                   >
                     <div className="order__inputs">
-                      <Form.Group controlId="floatingInput">
+                      <Form.Group>
                         <FloatingLabel
-                          controlId="floatingInput"
                           label="Your Name"
                           className="order__input"
                         >
@@ -348,10 +414,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                           </Form.Control.Feedback>
                         </FloatingLabel>
                       </Form.Group>
-                      <Form.Group controlId="floatingInput">
+                      <Form.Group>
                         <InputGroup hasValidation>
                           <FloatingLabel
-                            controlId="floatingInput"
                             label="Phone Number"
                             className="order__input"
                           >
@@ -394,7 +459,15 @@ function EditOrder({ item, setData, fileOptions, close }) {
                         <Form.Select
                           name="deliveryType"
                           value={values.deliveryType}
-                          onChange={handleChange}
+                          onChange={(e) => {
+                            if (e.target.value === 'self') {
+                              setAddressFinder(false);
+                              handleChange(e);
+                            } else {
+                              setAddressFinder(true);
+                              handleChange(e);
+                            }
+                          }}
                           isValid={touched.deliveryType && !errors.deliveryType}
                           isInvalid={
                             touched.deliveryType && errors.deliveryType
@@ -411,10 +484,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                       {addressFinder && (
                         <>
                           <div className="order__postcode">
-                            <Form.Group controlId="floatingInput">
+                            <Form.Group>
                               <InputGroup hasValidation>
                                 <FloatingLabel
-                                  controlId="floatingInput"
                                   label="Postcode"
                                   className="order__input"
                                 >
@@ -448,10 +520,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                             </Button>
                           </div>
                           <div id="lookup_field" />
-                          <Form.Group controlId="floatingInput">
+                          <Form.Group>
                             <InputGroup hasValidation>
                               <FloatingLabel
-                                controlId="floatingInput"
                                 label="Address Line 1"
                                 className="order__input"
                               >
@@ -475,10 +546,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                               </FloatingLabel>
                             </InputGroup>
                           </Form.Group>
-                          <Form.Group controlId="floatingInput">
+                          <Form.Group>
                             <InputGroup hasValidation>
                               <FloatingLabel
-                                controlId="floatingInput"
                                 label="Address Line 2"
                                 className="order__input"
                               >
@@ -502,10 +572,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                               </FloatingLabel>
                             </InputGroup>
                           </Form.Group>
-                          <Form.Group controlId="floatingInput">
+                          <Form.Group>
                             <InputGroup hasValidation>
                               <FloatingLabel
-                                controlId="floatingInput"
                                 label="Address Line 3"
                                 className="order__input"
                               >
@@ -529,10 +598,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                               </FloatingLabel>
                             </InputGroup>
                           </Form.Group>
-                          <Form.Group controlId="floatingInput">
+                          <Form.Group>
                             <InputGroup hasValidation>
                               <FloatingLabel
-                                controlId="floatingInput"
                                 label="Town"
                                 className="order__input"
                               >
@@ -552,10 +620,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                               </FloatingLabel>
                             </InputGroup>
                           </Form.Group>
-                          <Form.Group controlId="floatingInput">
+                          <Form.Group>
                             <InputGroup hasValidation>
                               <FloatingLabel
-                                controlId="floatingInput"
                                 label="Postcode"
                                 className="order__input"
                               >
@@ -579,10 +646,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
                           </Form.Group>
                         </>
                       )}
-                      <Form.Group controlId="floatingInput">
+                      <Form.Group>
                         <InputGroup hasValidation>
                           <FloatingLabel
-                            controlId="floatingInput"
                             label="Comment"
                             className="order__input"
                           >
