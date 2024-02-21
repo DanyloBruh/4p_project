@@ -81,8 +81,8 @@ function EditProduct({ item, setData, fileOptions, close }) {
   const handleSubmitForm = (values) => {
     let ax = axiosPrivateConfig;
     if (values.Image.type === item.Image.type
-      || values.Image.name === item.Image.name
-      || values.Image.size === item.Image.size) {
+      && values.Image.name === item.Image.name
+      && values.Image.size === item.Image.size) {
       ax = axiosPrivate;
       // eslint-disable-next-line no-param-reassign
       delete values.Image;

@@ -99,14 +99,33 @@ function Order({
         renderCell: (item) => item.comment,
       },
       {
+        label: 'Status',
+        renderCell: (item) => (
+          <select
+            style={{
+              width: '100%',
+              fontSize: '1rem',
+              margin: 0,
+            }}
+            value={item.status}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'status', setData, 'order', axiosPrivate)}
+          >
+            <option value="ordered, not processed">Ordered, not processed</option>
+            <option value="ordered, processed">Ordered, processed</option>
+            <option value="courier on the way">Courier on the way</option>
+            <option value="delivered">Delivered</option>
+            <option value="requires processing">Requires processing</option>
+          </select>
+        ),
+        sort: { sortKey: 'STATUS' },
+      },
+      {
         label: 'Delivery type',
         renderCell: (item) => (
           <select
             style={{
               width: '100%',
-              border: 'none',
               fontSize: '1rem',
-              padding: 0,
               margin: 0,
             }}
             value={item.deliveryType}
@@ -124,9 +143,7 @@ function Order({
           <select
             style={{
               width: '100%',
-              border: 'none',
               fontSize: '1rem',
-              padding: 0,
               margin: 0,
             }}
             value={item.paymentType}
@@ -137,30 +154,6 @@ function Order({
           </select>
         ),
         sort: { sortKey: 'PAYMENTTYPE' },
-      },
-      {
-        label: 'Status',
-        renderCell: (item) => (
-          <select
-            style={{
-              width: '100%',
-              border: 'none',
-              fontSize: '1rem',
-              padding: 0,
-              margin: 0,
-            }}
-            value={item.status}
-            onChange={(event) => handleUpdate(event.target.value, item.id, 'status', setData, 'order', axiosPrivate)}
-          >
-            <option value="ordered, not processed">Ordered, not processed</option>
-            <option value="ordered, processed">Ordered, processed</option>
-            <option value="courier on the way">Courier on the way</option>
-            <option value="delivered">Delivered</option>
-            <option value="requires processing">Requires processing</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-        ),
-        sort: { sortKey: 'STATUS' },
       },
       {
         label: 'Create at',
@@ -177,7 +170,7 @@ function Order({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handeEdit(item)}
           >
             <IconContext.Provider value={iconProviderValue}>
@@ -192,7 +185,7 @@ function Order({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleArchived(item.id, archived, axiosPrivate, 'order', setData)}
           >
             <IconContext.Provider value={iconProviderValue}>
@@ -207,7 +200,7 @@ function Order({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleDelete(item.id, axiosPrivate, 'order', setData)}
           >
             <IconContext.Provider value={iconProviderValue}>

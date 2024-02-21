@@ -81,9 +81,7 @@ function Instruction({
           <select
             style={{
               width: '100%',
-              border: 'none',
               fontSize: '1rem',
-              padding: 0,
               margin: 0,
             }}
             value={item.difficulty}
@@ -113,9 +111,7 @@ function Instruction({
           <select
             style={{
               width: '100%',
-              border: 'none',
               fontSize: '1rem',
-              padding: 0,
               margin: 0,
             }}
             value={item.carrousel}
@@ -144,7 +140,7 @@ function Instruction({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handeEdit(item)}
           >
             <IconContext.Provider value={iconProviderValue}>
@@ -159,7 +155,7 @@ function Instruction({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleArchived(
               item.id,
               archived,
@@ -180,7 +176,7 @@ function Instruction({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleDelete(item.id, axiosPrivate, 'instruction', setData, axiosPrivate)}
           >
             <IconContext.Provider value={iconProviderValue}>

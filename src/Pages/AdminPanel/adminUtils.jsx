@@ -5,7 +5,11 @@ import { IoIosAddCircle } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import { Button, Pagination } from 'react-bootstrap';
 import { CompactTable } from '@table-library/react-table-library/compact';
-import { archivedData, deleteData, editDataConfig } from '../../Helper/requests';
+import {
+  archivedData,
+  deleteData,
+  editDataConfig,
+} from '../../Helper/requests';
 import confirm from '../../Components/ConfirmModel/ConfirmModel';
 import ToastNotification from '../../Components/Toast/Toast';
 

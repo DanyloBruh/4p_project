@@ -240,6 +240,18 @@ function EditBlog({
                           alt={image.name}
                         />
                         )}
+                        <Form.Control.Feedback
+                          type="invalid"
+                          className={
+                              touched.Images
+                              && errors.Images
+                              && errors.Images[i]
+                                ? 'd-block'
+                                : ''
+                            }
+                        >
+                          {errors.Images && errors.Images[i]}
+                        </Form.Control.Feedback>
                       </>
                     ))}
                   </Form.Group>

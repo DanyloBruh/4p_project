@@ -83,7 +83,7 @@ function User({
               margin: 0,
             }}
             value={item.role}
-            onChange={(event) => handleUpdate(event.target.value, item.id, 'role', setData, 'order', axiosPrivate)}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'role', setData, 'user', axiosPrivate)}
           >
             <option value="admin">Admin</option>
             <option value="employee">Employee</option>
@@ -101,7 +101,7 @@ function User({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handeEdit(item)}
           >
             <IconContext.Provider value={iconProviderValue}>
@@ -116,7 +116,7 @@ function User({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleArchived(item.id, archived, axiosPrivate, 'user', setData)}
           >
             <IconContext.Provider value={iconProviderValue}>
@@ -131,7 +131,7 @@ function User({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleDelete(item.id, axiosPrivate, 'user', setData)}
           >
             <IconContext.Provider value={iconProviderValue}>
