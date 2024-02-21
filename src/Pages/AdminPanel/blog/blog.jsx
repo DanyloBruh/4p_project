@@ -68,17 +68,37 @@ function Blog({
     setEditItem(item);
   }, []);
 
+  const imageToFile = useCallback((imageObj) => {
+    const sliceSize = 512;
+    if (!imageObj.id) return imageObj;
+    const byteCharacters = atob(imageObj.imageData);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i += 1) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, { type: imageObj.imageType });
+    const file = new File([blob], imageObj.imageName, {
+      type: imageObj.imageType,
+    });
+
+    return file;
+  }, []);
+
   const COLUMNS = useMemo(() => [
     {
       label: 'Name',
       renderCell: (item) => item.name,
       sort: { sortKey: 'NAME' },
-    },
-    {
-      label: 'text',
-      renderCell: (item) => (Parser.parse(item?.text).length > 0
-        ? Parser.parse(item?.text)[0]
-        : Parser.parse(item?.text)),
     },
     {
       label: 'Display type',
@@ -103,7 +123,9 @@ function Blog({
     },
     {
       label: 'text',
-      renderCell: (item) => Parser.parse(item?.text)[0],
+      renderCell: (item) => (Parser.parse(item?.text).length > 0
+        ? Parser.parse(item?.text)[0]
+        : Parser.parse(item?.text)),
     },
     {
       label: 'Edit',
@@ -111,7 +133,9 @@ function Blog({
         <Button
           variant="dark"
           className="button-icon"
-          onClick={() => handeEdit(item)}
+          onClick={() => {
+            handeEdit(item);
+          }}
         >
           <IconContext.Provider value={iconProviderValue}>
             <RiEdit2Line />
@@ -163,7 +187,7 @@ function Blog({
       )}
       {visibleType === 'edit' && (
         <EditBlog
-          item={editItem}
+          item={{ ...editItem, Images: editItem.Images.map(imageToFile) }}
           setData={setData}
           fileOptions={fileOptions}
           close={close}
