@@ -11,6 +11,7 @@ import { getAllInstractions } from '../../Helper/requests';
 import Recipe from '../../Components/Recipe/Recipe';
 import RecipeItemPlaceholder from '../../Components/RecipeItemPlaceholder/RecipeItemPlaceholder';
 import getSearchWith from '../../Helper/searchHelper';
+import ToastNotification from '../../Components/Toast/Toast';
 
 function Recipes() {
   const [allRecipes, setAllRecipes] = useState();
@@ -20,7 +21,7 @@ function Recipes() {
   const { id } = useParams();
   useEffect(() => {
     if (!id && !allRecipes) {
-      getAllInstractions().then(setAllRecipes);
+      getAllInstractions().then(setAllRecipes).catch(() => ToastNotification('error', 'Something went wrong!'));
     }
   }, [id]);
 

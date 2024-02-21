@@ -17,6 +17,7 @@ import { getAllProducts, getMainBlogs } from '../../Helper/requests';
 import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/MenuProductPlaceholder';
 import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
 import { offScroll, onScroll } from '../../redux/scrollSlice';
+import ToastNotification from '../../Components/Toast/Toast';
 
 function Menu() {
   const [menuItems, setMenuItems] = useState();
@@ -34,10 +35,12 @@ function Menu() {
   }, [selectItems]);
 
   useEffect(() => {
-    getAllProducts().then(setMenuItems);
+    getAllProducts()
+      .then(setMenuItems)
+      .catch(() => ToastNotification('error', 'Something went wrong!'));
     getMainBlogs()
       .then(setBlogItems)
-      .catch((e) => console.log(e));
+      .catch(() => ToastNotification('error', 'Something went wrong!'));
   }, []);
 
   return (

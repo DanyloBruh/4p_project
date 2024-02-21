@@ -278,7 +278,7 @@ function AdminPanel() {
         )}
           {category === 'order' && (
           <Order
-            nodes={visibleData.reverse()}
+            nodes={visibleData}
             archived={archived}
             theme={theme}
             fileOptions={fileOptions}
