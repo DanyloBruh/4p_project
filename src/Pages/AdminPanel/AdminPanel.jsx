@@ -246,6 +246,7 @@ function AdminPanel() {
             archived={archived}
             theme={theme}
             fileOptions={fileOptions}
+            firstPage={query !== ''}
           />
         )}
           {category === 'user' && (
@@ -254,6 +255,7 @@ function AdminPanel() {
             archived={archived}
             theme={theme}
             fileOptions={fileOptions}
+            firstPage={query !== ''}
           />
         )}
           {category === 'instruction' && (
@@ -262,6 +264,7 @@ function AdminPanel() {
             archived={archived}
             theme={theme}
             fileOptions={fileOptions}
+            firstPage={query !== ''}
           />
         )}
           {category === 'blog' && (
@@ -270,6 +273,7 @@ function AdminPanel() {
             archived={archived}
             theme={theme}
             fileOptions={fileOptions}
+            firstPage={query !== ''}
           />
         )}
           {category === 'order' && (
@@ -278,6 +282,7 @@ function AdminPanel() {
             archived={archived}
             theme={theme}
             fileOptions={fileOptions}
+            firstPage={query !== ''}
           />
         )}
         </>

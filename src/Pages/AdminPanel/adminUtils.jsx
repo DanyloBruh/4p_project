@@ -95,7 +95,9 @@ export function TableGenerator({
         layout={{ custom: true, horizontalScroll: true }}
       />
       )}
-
+      {data.nodes.length === 0 && (
+      <h2 className="text-white" style={{ marginBottom: '40px' }}>Nothing found</h2>
+      )}
       <div style={{ display: 'flex', justifyContent: !tableSize ? 'center' : 'space-between' }}>
         {data.nodes.length > 0 && (
           <span>
@@ -133,9 +135,6 @@ export function TableGenerator({
               <IoIosAddCircle />
             </IconContext.Provider>
           </Button>
-        )}
-        {data.nodes.length === 0 && (
-          <h2 className="text-white">Nothing found</h2>
         )}
         {tableSize > 0 && (
           <span>
