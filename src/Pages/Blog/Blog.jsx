@@ -11,6 +11,7 @@ import TextArticle from '../../Components/TextArticle/TextArticle';
 import { getAllBlogs } from '../../Helper/requests';
 import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
 import Article from '../../Components/Article/Article';
+import ToastNotification from '../../Components/Toast/Toast';
 
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
@@ -18,7 +19,7 @@ function Blog() {
   const { id } = useParams();
   useEffect(() => {
     if (!id && !allBlogs) {
-      getAllBlogs().then(setAllBlogs);
+      getAllBlogs().then(setAllBlogs).catch(() => ToastNotification('error', 'Something went wrong!'));
     }
   }, [id]);
   return !id ? (
