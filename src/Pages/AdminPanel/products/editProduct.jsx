@@ -20,12 +20,11 @@ import ToastNotification from '../../../Components/Toast/Toast';
 import { editDataConfig } from '../../../Helper/requests';
 import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 import { removeUnchangedFields } from '../adminUtils';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function EditProduct({ item, setData, fileOptions, close }) {
-  const UserId = useSelector((state) => state.auth.auth.user.id);
   const axiosPrivateConfig = useAxiosPrivateImages();
-
-  console.log(item);
+  const axiosPrivate = useAxiosPrivate();
 
   const initialState = useMemo(
     () => ({
@@ -73,10 +72,27 @@ function EditProduct({ item, setData, fileOptions, close }) {
   }, []);
 
   const handleSubmitForm = (values) => {
+    let ax = axiosPrivateConfig;
+    if (values.Image.type === item.Image.type
+      || values.Image.name === item.Image.name
+      || values.Image.size === item.Image.size) {
+      ax = axiosPrivate;
+      // eslint-disable-next-line no-param-reassign
+      delete values.Image;
+    }
     const request = removeUnchangedFields(item, values);
-    editDataConfig('product', item.id, axiosPrivateConfig, {
+
+    if (Object.keys(request).length === 0) {
+      ToastNotification(
+        'error',
+        'You haven\'t changed anything',
+      );
+      close();
+      return;
+    }
+
+    editDataConfig('product', item.id, ax, {
       ...request,
-      UserId,
     })
       .then(() => {
         ToastNotification('success', 'Successfully updated!');

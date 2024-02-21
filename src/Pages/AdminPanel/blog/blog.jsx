@@ -14,19 +14,23 @@ import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { Button } from 'react-bootstrap';
-import { TableGenerator, handleArchived, handleDelete } from '../adminUtils';
+import { useSelector } from 'react-redux';
+import {
+  TableGenerator, handleArchived, handleDelete, handleUpdate,
+} from '../adminUtils';
 import AddBlog from './addBlog';
 import EditBlog from './editBlog';
 import './blog.scss';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function Blog({
   nodes,
   archived,
-  axiosPrivate,
   theme,
   fileOptions,
 }) {
   const [data, setData] = useState({ nodes });
+  const axiosPrivate = useAxiosPrivate();
   const [visibleType, setVisibleType] = useState('');
   const [editItem, setEditItem] = useState();
 
@@ -71,13 +75,29 @@ function Blog({
       sort: { sortKey: 'NAME' },
     },
     {
-      label: 'text',
-      renderCell: (item) => Parser.parse(item?.text)[0],
+      label: 'Display type',
+      renderCell: (item) => (
+        <select
+          style={{
+            width: '100%',
+            border: 'none',
+            fontSize: '1rem',
+            padding: 0,
+            margin: 0,
+          }}
+          value={item.displayType}
+          onChange={(event) => handleUpdate(event.target.value, item.id, 'displayType', setData, 'blog', axiosPrivate)}
+        >
+          <option value="firstPage">firstPage</option>
+          <option value="featured">featured</option>
+          <option value="default">default</option>
+        </select>
+      ),
+      sort: { sortKey: 'DISPLAYTYPE' },
     },
     {
-      label: 'Display type',
-      renderCell: (item) => item.displayType,
-      sort: { sortKey: 'DISPLAYTYPE' },
+      label: 'text',
+      renderCell: (item) => Parser.parse(item?.text)[0],
     },
     {
       label: 'Edit',
