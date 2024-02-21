@@ -316,6 +316,10 @@
           width: 50%;
           flex: 0 0 auto;
         }
+        @media (max-width: 300px) {
+          width: 100%;
+          flex: 0 0 auto;
+        }
       }
     }
     .not-found {

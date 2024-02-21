@@ -129,6 +129,14 @@
         width: 100%;
       }
     }
+    @media (max-width: 300px) {
+      flex-direction: row;
+    }
+    > .counter {
+      @media (max-width: 300px) {
+        width: 47%;
+      }
+    }
   }
   .btn-outline-light {
     max-width: 120px;
@@ -147,6 +155,10 @@
     @media (max-width: 575px) {
       margin-top: 10px;
       max-width: 100%;
+    }
+    @media (max-width: 300px) {
+      margin-top: 0px;
+      max-width: 47%;
     }
   }
 }
