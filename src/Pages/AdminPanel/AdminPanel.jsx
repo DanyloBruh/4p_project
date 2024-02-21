@@ -50,9 +50,9 @@ function AdminPanel() {
               : category === 'blog'
                 ? '30% auto 50% repeat(3, 70px)'
                 : category === 'instruction'
-                  ? '25% repeat(4, auto) repeat(3, 25%) repeat(3, 70px)'
+                  ? '25% 130px repeat(3, auto) repeat(3, 25%) repeat(3, 70px)'
                   : category === 'order'
-                    ? 'auto auto 25% 25% repeat(5, auto) repeat(3, 70px)'
+                    ? 'auto auto 25% 25% 230px repeat(4, auto) repeat(3, 70px)'
                     : ''
         } 
          

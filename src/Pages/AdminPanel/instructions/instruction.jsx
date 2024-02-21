@@ -81,9 +81,7 @@ function Instruction({
           <select
             style={{
               width: '100%',
-              border: 'none',
               fontSize: '1rem',
-              padding: 0,
               margin: 0,
             }}
             value={item.difficulty}
@@ -113,9 +111,7 @@ function Instruction({
           <select
             style={{
               width: '100%',
-              border: 'none',
               fontSize: '1rem',
-              padding: 0,
               margin: 0,
             }}
             value={item.carrousel}

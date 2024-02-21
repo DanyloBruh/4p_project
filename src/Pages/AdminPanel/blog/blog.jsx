@@ -75,20 +75,12 @@ function Blog({
       sort: { sortKey: 'NAME' },
     },
     {
-      label: 'text',
-      renderCell: (item) => (Parser.parse(item?.text).length > 0
-        ? Parser.parse(item?.text)[0]
-        : Parser.parse(item?.text)),
-    },
-    {
       label: 'Display type',
       renderCell: (item) => (
         <select
           style={{
             width: '100%',
-            border: 'none',
             fontSize: '1rem',
-            padding: 0,
             margin: 0,
           }}
           value={item.displayType}
@@ -103,7 +95,9 @@ function Blog({
     },
     {
       label: 'text',
-      renderCell: (item) => Parser.parse(item?.text)[0],
+      renderCell: (item) => (Parser.parse(item?.text).length > 0
+        ? Parser.parse(item?.text)[0]
+        : Parser.parse(item?.text)),
     },
     {
       label: 'Edit',
