@@ -115,6 +115,7 @@ function Order({
             <option value="courier on the way">Courier on the way</option>
             <option value="delivered">Delivered</option>
             <option value="requires processing">Requires processing</option>
+            <option value="cancelled">Cancelled</option>
           </select>
         ),
         sort: { sortKey: 'STATUS' },
