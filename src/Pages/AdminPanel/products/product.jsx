@@ -25,6 +25,7 @@ function Product({
   archived,
   theme,
   fileOptions,
+  firstPage = false,
 }) {
   const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState({ nodes });
@@ -59,6 +60,11 @@ function Product({
       size: 5,
     },
   });
+  useEffect(() => {
+    if (firstPage) {
+      pagination.fns.onSetPage(0);
+    }
+  }, [firstPage]);
 
   const handeEdit = useCallback((item) => {
     setVisibleType('edit');

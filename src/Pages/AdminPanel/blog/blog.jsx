@@ -28,6 +28,7 @@ function Blog({
   archived,
   theme,
   fileOptions,
+  firstPage = false,
 }) {
   const [data, setData] = useState({ nodes });
   const axiosPrivate = useAxiosPrivate();
@@ -62,6 +63,12 @@ function Blog({
       size: 5,
     },
   });
+
+  useEffect(() => {
+    if (firstPage) {
+      pagination.fns.onSetPage(0);
+    }
+  }, [firstPage]);
 
   const handeEdit = useCallback((item) => {
     setVisibleType('edit');

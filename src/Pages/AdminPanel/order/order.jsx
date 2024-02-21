@@ -24,6 +24,7 @@ function Order({
   archived,
   theme,
   fileOptions,
+  firstPage = false,
 }) {
   const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState({ nodes });
@@ -62,6 +63,12 @@ function Order({
     },
   });
 
+  useEffect(() => {
+    if (firstPage) {
+      pagination.fns.onSetPage(0);
+    }
+  }, [firstPage]);
+
   const handeEdit = useCallback((item) => {
     setVisibleType('edit');
     setEditItem(item);
@@ -92,7 +99,12 @@ function Order({
       },
       {
         label: 'Address',
-        renderCell: (item) => item.adress,
+        renderCell: (item) => {
+          if (item.adress === '||||') {
+            return 'Delivery type - self';
+          }
+          return item.adress;
+        },
       },
       {
         label: 'Comment',
