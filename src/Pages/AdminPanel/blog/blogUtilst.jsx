@@ -5,7 +5,5 @@ export const handleAddImage = (values, setValues) => {
 };
 
 export const handleDeleteImages = (i, values, setValues) => {
-  const deleteImages = [...values.Images];
-  deleteImages.splice(i, 1);
-  setValues({ ...values, Images: deleteImages });
+  setValues({ ...values, Images: values.Images.filter((img, index) => index !== i) });
 };
