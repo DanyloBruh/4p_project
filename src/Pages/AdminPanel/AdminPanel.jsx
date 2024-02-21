@@ -44,28 +44,28 @@ function AdminPanel() {
       Table: `
         --data-table-library_grid-template-columns:  ${
           category === 'product'
-            ? '20%  100px 100px repeat(2, 30%) repeat(3, 70px)'
+            ? '20%  100px 100px repeat(2, 30%) 78px 88px 78px'
             : category === 'user'
-              ? 'repeat(3, 30%) repeat(3, 70px)'
+              ? '40% 150px 40% 78px 88px 78px'
               : category === 'blog'
-                ? '30% auto 50% repeat(3, 70px)'
+                ? '30% auto 50% 78px 88px 78px'
                 : category === 'instruction'
-                  ? '25% 130px repeat(3, auto) repeat(3, 25%) repeat(3, 70px)'
+                  ? '25% 130px repeat(3, auto) repeat(3, 25%) 78px 88px 78px'
                   : category === 'order'
-                    ? 'auto auto 25% 25% 230px repeat(4, auto) repeat(3, 70px)'
+                    ? 'auto auto 25% 25% 230px repeat(4, auto) 78px 88px 78px'
                     : ''
         } 
          
       `,
       BaseCell: `
-      &:nth-last-child(1) {
+      &:nth-last-of-type(1) {
         right: 0px;
       }
-      &:nth-last-child(2) {
-        right: 70px;
+      &:nth-last-of-type(2) {
+        right: 78px;
       }
-      &:nth-last-child(3) {
-        right: 140px;
+      &:nth-last-of-type(3) {
+        right: 166px;
       }
     `,
     },

@@ -170,7 +170,7 @@ function Order({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handeEdit(item)}
           >
             <IconContext.Provider value={iconProviderValue}>
@@ -185,7 +185,7 @@ function Order({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleArchived(item.id, archived, axiosPrivate, 'order', setData)}
           >
             <IconContext.Provider value={iconProviderValue}>
@@ -200,7 +200,7 @@ function Order({
         renderCell: (item) => (
           <Button
             variant="dark"
-            className="button-icon"
+            className="button-icon w-100"
             onClick={() => handleDelete(item.id, axiosPrivate, 'order', setData)}
           >
             <IconContext.Provider value={iconProviderValue}>

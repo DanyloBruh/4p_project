@@ -104,7 +104,7 @@ function Blog({
       renderCell: (item) => (
         <Button
           variant="dark"
-          className="button-icon"
+          className="button-icon w-100"
           onClick={() => handeEdit(item)}
         >
           <IconContext.Provider value={iconProviderValue}>
@@ -119,7 +119,7 @@ function Blog({
       renderCell: (item) => (
         <Button
           variant="dark"
-          className="button-icon"
+          className="button-icon w-100"
           onClick={() => handleArchived(item.id, archived, axiosPrivate, 'blog', setData)}
         >
           <IconContext.Provider value={iconProviderValue}>
@@ -134,7 +134,7 @@ function Blog({
       renderCell: (item) => (
         <Button
           variant="dark"
-          className="button-icon"
+          className="button-icon w-100"
           onClick={() => handleDelete(item.id, axiosPrivate, 'blog', setData)}
         >
           <IconContext.Provider value={iconProviderValue}>
