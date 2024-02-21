@@ -157,6 +157,7 @@ function Order({
             <option value="courier on the way">Courier on the way</option>
             <option value="delivered">Delivered</option>
             <option value="requires processing">Requires processing</option>
+            <option value="cancelled">Cancelled</option>
           </select>
         ),
         sort: { sortKey: 'STATUS' },
@@ -234,19 +235,17 @@ function Order({
           close={close}
         />
       )}
-      {data.nodes.length > 0 && (
-        <TableGenerator
-          columns={COLUMNS}
-          data={data}
-          theme={theme}
-          sort={sort}
-          pagination={pagination}
-          addClick={() => {
-            setVisibleType('add');
-          }}
-          addDisable
-        />
-      )}
+      <TableGenerator
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        sort={sort}
+        pagination={pagination}
+        addClick={() => {
+          setVisibleType('add');
+        }}
+        addDisable
+      />
     </>
   );
 }

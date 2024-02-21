@@ -19,7 +19,7 @@ import {
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
-import { getDataByCategory } from '../../Helper/requests';
+import { getDataByCategory, getDataByCategoryId } from '../../Helper/requests';
 import Product from './products/product';
 import useLogout from '../../Hooks/useLogout';
 import getSearchWith from '../../Helper/searchHelper';
@@ -28,6 +28,7 @@ import Instruction from './instructions/instruction';
 import Blog from './blog/blog';
 import Order from './order/order';
 import './AdminPanel.scss';
+import ToastNotification from '../../Components/Toast/Toast';
 
 function AdminPanel() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -85,6 +86,24 @@ function AdminPanel() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const socket = new WebSocket('ws://localhost:3005');
+    socket.onopen = () => {
+      console.log('Connected to WebSocket server');
+    };
+
+    socket.onmessage = (event) => {
+      const id = JSON.parse(event.data);
+      if (category === 'order') {
+        getDataByCategoryId('order', id, axiosPrivate).then((order) => {
+          ToastNotification('info', 'A new order has been created');
+          setData((d) => [order, ...d]);
+        });
+      }
+    };
+  }, []);
+
   const logout = useLogout();
 
   const signOut = useCallback(async () => {
@@ -96,7 +115,9 @@ function AdminPanel() {
     if (category) {
       setLoading(true);
       getDataByCategory(category, axiosPrivate, archived)
-        .then(setData)
+        .then((d) => {
+          setData(d.reverse());
+        })
         .finally(() => setLoading(false));
     } else {
       navigate('product');
@@ -213,7 +234,13 @@ function AdminPanel() {
             </div>
           </div>
         </Container>
-        {category === 'product' && (
+        {loading
+         ? (
+           <Spinner animation="border" variant="light" className="spinner" />
+        )
+      : (
+        <>
+          {category === 'product' && (
           <Product
             nodes={visibleData}
             archived={archived}
@@ -221,7 +248,7 @@ function AdminPanel() {
             fileOptions={fileOptions}
           />
         )}
-        {category === 'user' && (
+          {category === 'user' && (
           <User
             nodes={visibleData}
             archived={archived}
@@ -229,7 +256,7 @@ function AdminPanel() {
             fileOptions={fileOptions}
           />
         )}
-        {category === 'instruction' && (
+          {category === 'instruction' && (
           <Instruction
             nodes={visibleData}
             archived={archived}
@@ -237,7 +264,7 @@ function AdminPanel() {
             fileOptions={fileOptions}
           />
         )}
-        {category === 'blog' && (
+          {category === 'blog' && (
           <Blog
             nodes={visibleData}
             archived={archived}
@@ -245,20 +272,16 @@ function AdminPanel() {
             fileOptions={fileOptions}
           />
         )}
-        {category === 'order' && (
+          {category === 'order' && (
           <Order
-            nodes={visibleData}
+            nodes={visibleData.reverse()}
             archived={archived}
             theme={theme}
             fileOptions={fileOptions}
           />
         )}
-        {loading && (
-          <Spinner animation="border" variant="light" className="spinner" />
-        )}
-        {!loading && data.length === 0 && (
-          <h2 className="text-white">Nothing found</h2>
-        )}
+        </>
+      )}
       </div>
     </>
   );

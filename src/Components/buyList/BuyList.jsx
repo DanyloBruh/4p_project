@@ -11,7 +11,7 @@ import {
   deleteItem,
   setVisible,
 } from '../../redux/orderDataSlice';
-import { offScroll, onScroll } from '../../redux/scrollSlice';
+import { onScroll } from '../../redux/scrollSlice';
 
 function BuyList() {
   const activeOrder = useSelector((state) => state.orderData.visible);
@@ -40,7 +40,6 @@ function BuyList() {
 
   const handleClickOrder = () => {
     dispath(setVisible(true));
-    dispath(offScroll());
   };
 
   const deleteProduct = (ProdId) => {

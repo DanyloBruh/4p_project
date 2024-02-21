@@ -681,6 +681,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                           <option>courier on the way</option>
                           <option>delivered</option>
                           <option>requires processing</option>
+                          <option>cancelled</option>
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
                           {errors.status}

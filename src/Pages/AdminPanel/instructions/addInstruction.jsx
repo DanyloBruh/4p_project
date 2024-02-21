@@ -123,7 +123,7 @@ function AddInstruction({ setData, fileOptions, close }) {
       .then((result) => {
         ToastNotification('success', 'Successfully created!');
         setData((state) => ({
-          nodes: [...state.nodes, result],
+          nodes: [result, ...state.nodes],
         }));
       })
       .catch((err) => {
