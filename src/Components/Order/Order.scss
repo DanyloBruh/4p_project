@@ -21,7 +21,7 @@
   @media (max-width: 575px), (max-height: 575px) {
     width: 100%;
   }
-  @media (max-width: 290px), (max-height: 290px) {
+  @media (max-width: 340px), (max-height: 340px) {
     padding: 0 5px;
   }
 }
@@ -192,12 +192,17 @@
     &__name {
       width: 300px;
 
+      
+      @media (max-width: 950px), (max-height: 950px) {
+        width: 180px;
+      }
+
       @media (max-width: 575px), (max-height: 575px) {
         width: 150px;
       }
 
-      @media (max-width: 290px), (max-height: 290px) {
-        width: 130px;
+      @media (max-width: 340px), (max-height: 340px) {
+        width: 120px;
       }
     }
     &__text {
