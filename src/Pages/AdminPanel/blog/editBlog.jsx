@@ -4,7 +4,9 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import { Formik } from 'formik';
-import React, { useCallback, useMemo } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import {
   Button, Container, FloatingLabel, Form,
 } from 'react-bootstrap';
@@ -27,15 +29,6 @@ function EditBlog({
   const axiosPrivateConfig = useAxiosPrivateImages();
   const axiosPrivate = useAxiosPrivate();
 
-  const initialState = useMemo(
-    () => ({
-      name: item.name,
-      text: item.text,
-      Images: item.Images,
-      displayType: item.displayType,
-    }),
-    [],
-  );
   const schema = useMemo(
     () => Yup.object().shape({
       name: Yup.string()
@@ -63,36 +56,15 @@ function EditBlog({
     [],
   );
 
-  const iconProviderValue = useMemo(() => {
-    const res = { color: 'white', size: '2em' };
-    return res;
-  }, []);
-
-  const imageToFile = useCallback((imageObj) => {
-    const sliceSize = 512;
-    if (!imageObj.id) return imageObj;
-    const byteCharacters = atob(imageObj.imageData);
-    const byteArrays = [];
-
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i += 1) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-
-    const blob = new Blob(byteArrays, { type: imageObj.imageType });
-    const file = new File([blob], imageObj.imageName, {
-      type: imageObj.imageType,
-    });
-
-    return file;
-  }, []);
+  const initialState = useMemo(
+    () => ({
+      name: item.name,
+      text: item.text,
+      Images: item.Images,
+      displayType: item.displayType,
+    }),
+    [],
+  );
 
   const equlePhotos = useCallback((files1, files2) => {
     if (files1.length !== files2.length) {
@@ -110,11 +82,11 @@ function EditBlog({
   const handleSubmitForm = (values) => {
     if (values.Images) {
       // eslint-disable-next-line no-param-reassign
-      values.Images = values.Images.map(imageToFile).filter((image) => image.name);
+      values.Images = values.Images.filter((image) => image.name);
     }
     const req = removeUnchangedFields(item, values);
     let ax;
-    const files1 = item.Images.map(imageToFile);
+    const files1 = item;
     const files2 = req.Images;
     if (values.Images.length === 0 && equlePhotos(files1, files2)) {
       delete req.Images;
@@ -236,7 +208,8 @@ function EditBlog({
                       <>
                         <Form.Group
                           className="rendered-content images"
-                          key={image.id}
+            // eslint-disable-next-line react/no-array-index-key
+                          key={`image${i}`}
                         >
                           <div className="d-flex">
                             <Form.Control
@@ -250,31 +223,35 @@ function EditBlog({
                               isInvalid={touched.Images && errors.Images?.[i]}
                             />
                             {values.Images.length > 1 && (
-                              <Button
-                                variant="outline-light"
-                                className="ml-3 rounded-0"
-                                onClick={() => handleDeleteImages(i, values, setValues)}
-                              >
-                                remove
-                              </Button>
+                            <Button
+                              variant="outline-light"
+                              className="ml-3 rounded-0"
+                              onClick={() => handleDeleteImages(i, values, setValues)}
+                            >
+                              remove
+                            </Button>
                             )}
                           </div>
                         </Form.Group>
-                        {image.imageData ? (
-                          <img
-                            key={image.imageName}
-                            src={`data:image/png;base64,${image.imageData}`}
-                            alt={image.imageName}
-                          />
-                        ) : (
-                          image.image !== '' && (
-                            <img
-                              key={image.imageName}
-                              src={URL.createObjectURL(image)}
-                              alt={image.imageName}
-                            />
-                          )
+                        {image.image !== '' && (
+                        <img
+                          key={image.name}
+                          src={URL.createObjectURL(image)}
+                          alt={image.name}
+                        />
                         )}
+                        <Form.Control.Feedback
+                          type="invalid"
+                          className={
+                              touched.Images
+                              && errors.Images
+                              && errors.Images[i]
+                                ? 'd-block'
+                                : ''
+                            }
+                        >
+                          {errors.Images && errors.Images[i]}
+                        </Form.Control.Feedback>
                       </>
                     ))}
                   </Form.Group>

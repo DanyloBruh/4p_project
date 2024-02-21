@@ -5,7 +5,11 @@ import { IoIosAddCircle } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import { Button, Pagination } from 'react-bootstrap';
 import { CompactTable } from '@table-library/react-table-library/compact';
-import { archivedData, deleteData, editDataConfig } from '../../Helper/requests';
+import {
+  archivedData,
+  deleteData,
+  editDataConfig,
+} from '../../Helper/requests';
 import confirm from '../../Components/ConfirmModel/ConfirmModel';
 import ToastNotification from '../../Components/Toast/Toast';
 
@@ -80,15 +84,16 @@ export function TableGenerator({
 
   return (
     <div className="admin-table">
-      <CompactTable
-        columns={columns}
-        data={data}
-        theme={theme}
-        sort={sort}
-        pagination={pagination}
-        layout={{ custom: true, horizontalScroll: true }}
-      />
-
+      {data.nodes.length > 0 && (
+        <CompactTable
+          columns={columns}
+          data={data}
+          theme={theme}
+          sort={sort}
+          pagination={pagination}
+          layout={{ custom: true, horizontalScroll: true }}
+        />
+      )}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <span>
           Page Size:
