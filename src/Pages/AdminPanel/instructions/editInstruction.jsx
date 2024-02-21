@@ -6,6 +6,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable operator-linebreak */
+/* eslint-disable consistent-return */
 
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
@@ -61,6 +62,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
         name: Yup.string()
           .min(2, 'Name must be minimum 2')
           .max(100, 'Name must not be more than 100 characters')
+          .matches(/^[^"]*$/, 'Name cannot contain double quotes')
           .required('Name is required'),
 
         difficulty: Yup.string()
@@ -69,20 +71,29 @@ function EditInstruction({ item, setData, fileOptions, close }) {
             ['Very easy', 'Easy', 'Medium', 'Hard', 'Very hard'],
             'Select the correct difficulty',
           ),
-        time: Yup.string().required('Time is required'),
-        makes: Yup.number('Makes must be a number')
+        time: Yup.string()
+          .required('Time is required')
+          .matches(/^[^"]*$/, 'Time cannot contain double quotes'),
+        makes: Yup.number()
+          .typeError('Makes must be a number')
           .required('Makes is required')
           .positive('Makes must be positive'),
-        description: Yup.string().required('Description is required'),
+        description: Yup.string()
+          .required('Description is required')
+          .matches(/^[^"]*$/, 'Description cannot contain double quotes'),
         ingredients: Yup.array().of(
           Yup.object().shape({
-            ingredient: Yup.string().required('Ingredient required'),
+            ingredient: Yup.string()
+              .required('Ingredient required')
+              .matches(/^[^"]*$/, 'Ingredient cannot contain double quotes'),
           }),
         ),
         // ingredients: Yup.string().required(),
         text: Yup.array().of(
           Yup.object().shape({
-            text: Yup.string().required('Step required'),
+            text: Yup.string()
+              .required('Step required')
+              .matches(/^[^"]*$/, 'Step cannot contain double quotes'),
           }),
         ),
         Image: Yup.mixed()
@@ -256,7 +267,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                 <Form.Group className="form-element">
                   <FloatingLabel controlId="floatingInput" label="Enter makes">
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="makes"
                       placeholder="makes"
                       value={values.makes}
@@ -297,40 +308,54 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="ingredients">
                       {() => {
-                        console.log(typeof values.ingredients);
+                        if (typeof values.ingredients === 'string') return;
                         return values.ingredients.map((itemIng, i) => (
                           <Form.Group
                             key={`ingredients${i}`}
                             className="rendered-content"
                           >
-                            <TextareaAutosize
-                              name={`ingredients.${i}.ingredient`}
-                              type="text"
-                              rows={5}
-                              minRows={5}
-                              className={`form-control ${
-                                touched.ingredients && errors.ingredients
-                                  ? 'is-invalid'
-                                  : touched.ingredients && !errors.ingredients
-                                    ? 'is-valid'
-                                    : ''
-                              }`}
-                              value={itemIng.ingredient}
-                              onChange={handleChange}
-                              autoComplete="off"
-                            />
+                            <div className="d-flex">
+                              <TextareaAutosize
+                                name={`ingredients.${i}.ingredient`}
+                                type="text"
+                                rows={5}
+                                minRows={5}
+                                className={`form-control ${
+                                  touched.ingredients && errors.ingredients
+                                    ? 'is-invalid'
+                                    : touched.ingredients && !errors.ingredients
+                                      ? 'is-valid'
+                                      : ''
+                                }`}
+                                value={itemIng.ingredient}
+                                onChange={handleChange}
+                                autoComplete="off"
+                              />
 
-                            {values.ingredients.length > 1 && (
-                              <Button
-                                variant="outline-light"
-                                onClick={() =>
-                                  handleDeleteIngredient(i, values, setValues)
-                                }
-                              >
-                                remove
-                              </Button>
-                            )}
-                            <Form.Control.Feedback type="invalid">
+                              {values.ingredients.length > 1 && (
+                                <Button
+                                  variant="outline-light"
+                                  className="mb-3 ml-3"
+                                  onClick={() =>
+                                    handleDeleteIngredient(i, values, setValues)
+                                  }
+                                >
+                                  remove
+                                </Button>
+                              )}
+                            </div>
+
+                            <Form.Control.Feedback
+                              type="invalid"
+                              className={
+                                touched.ingredients &&
+                                errors.ingredients &&
+                                errors.ingredients[i] &&
+                                errors.ingredients[i].ingredient
+                                  ? 'd-block'
+                                  : ''
+                              }
+                            >
                               {errors.ingredients &&
                                 errors.ingredients[i] &&
                                 errors.ingredients[i].ingredient}
@@ -351,50 +376,64 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   <Form.Label>Steps</Form.Label>
                   <Form.Group className="control-element">
                     <FieldArray className="rendered-content" name="steps">
-                      {() =>
-                        values.text.map((itemIng, i) => {
+                      {() => {
+                        if (typeof values.text === 'string') return;
+                        return values.text.map((itemIng, i) => {
                           console.log(itemIng);
                           return (
                             <Form.Group
                               key={`text${i}`}
                               className="rendered-content"
                             >
-                              <TextareaAutosize
-                                name={`text.${i}.text`}
-                                type="text"
-                                rows={5}
-                                minRows={5}
-                                className={`form-control ${
-                                  touched.text && errors.text
-                                    ? 'is-invalid'
-                                    : touched.text && !errors.text
-                                      ? 'is-valid'
-                                      : ''
-                                }`}
-                                value={itemIng.text}
-                                onChange={handleChange}
-                                autoComplete="off"
-                              />
+                              <div className="d-flex">
+                                <TextareaAutosize
+                                  name={`text.${i}.text`}
+                                  type="text"
+                                  rows={5}
+                                  minRows={5}
+                                  className={`form-control ${
+                                    touched.text && errors.text
+                                      ? 'is-invalid'
+                                      : touched.text && !errors.text
+                                        ? 'is-valid'
+                                        : ''
+                                  }`}
+                                  value={itemIng.text}
+                                  onChange={handleChange}
+                                  autoComplete="off"
+                                />
+                                {values.text.length > 1 && (
+                                  <Button
+                                    variant="outline-light"
+                                    className="mb-3 ml-3"
+                                    onClick={() =>
+                                      handleDeleteStep(i, values, setValues)
+                                    }
+                                  >
+                                    remove
+                                  </Button>
+                                )}
+                              </div>
 
-                              {values.text.length > 1 && (
-                                <Button
-                                  variant="outline-light"
-                                  onClick={() =>
-                                    handleDeleteStep(i, values, setValues)
-                                  }
-                                >
-                                  remove
-                                </Button>
-                              )}
-                              <Form.Control.Feedback type="invalid">
+                              <Form.Control.Feedback
+                                type="invalid"
+                                className={
+                                  touched.text &&
+                                  errors.text &&
+                                  errors.text[i] &&
+                                  errors.text[i].text
+                                    ? 'd-block'
+                                    : ''
+                                }
+                              >
                                 {errors.text &&
                                   errors.text[i] &&
                                   errors.text[i].text}
                               </Form.Control.Feedback>
                             </Form.Group>
                           );
-                        })
-                      }
+                        });
+                      }}
                     </FieldArray>
                   </Form.Group>
                   <Button

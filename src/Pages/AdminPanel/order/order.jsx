@@ -224,25 +224,30 @@ function Order({
     setVisibleType('');
   }, []);
 
-  return visibleType === 'edit' ? (
-    <EditOrder
-      item={editItem}
-      setData={setData}
-      fileOptions={fileOptions}
-      close={close}
-    />
-  ) : (
-    <TableGenerator
-      columns={COLUMNS}
-      data={data}
-      theme={theme}
-      sort={sort}
-      pagination={pagination}
-      addClick={() => {
-        setVisibleType('add');
-      }}
-      addDisable
-    />
+  return (
+    <>
+      {visibleType === 'edit' && (
+        <EditOrder
+          item={editItem}
+          setData={setData}
+          fileOptions={fileOptions}
+          close={close}
+        />
+      )}
+      {data.nodes.length > 0 && (
+        <TableGenerator
+          columns={COLUMNS}
+          data={data}
+          theme={theme}
+          sort={sort}
+          pagination={pagination}
+          addClick={() => {
+            setVisibleType('add');
+          }}
+          addDisable
+        />
+      )}
+    </>
   );
 }
 

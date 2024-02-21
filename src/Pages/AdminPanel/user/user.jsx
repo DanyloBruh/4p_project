@@ -149,6 +149,8 @@ function User({
     setVisibleType('');
   }, []);
 
+  console.log(data);
+
   return (
     <>
       {visibleType === 'add' && (
@@ -162,17 +164,18 @@ function User({
           close={close}
         />
       )}
-
-      <TableGenerator
-        columns={COLUMNS}
-        data={data}
-        theme={theme}
-        sort={sort}
-        pagination={pagination}
-        addClick={() => {
-          setVisibleType('add');
-        }}
-      />
+      {data.nodes.length > 0 && (
+        <TableGenerator
+          columns={COLUMNS}
+          data={data}
+          theme={theme}
+          sort={sort}
+          pagination={pagination}
+          addClick={() => {
+            setVisibleType('add');
+          }}
+        />
+      )}
     </>
   );
 }

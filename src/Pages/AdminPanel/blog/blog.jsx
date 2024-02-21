@@ -75,6 +75,12 @@ function Blog({
       sort: { sortKey: 'NAME' },
     },
     {
+      label: 'text',
+      renderCell: (item) => (Parser.parse(item?.text).length > 0
+        ? Parser.parse(item?.text)[0]
+        : Parser.parse(item?.text)),
+    },
+    {
       label: 'Display type',
       renderCell: (item) => (
         <select
@@ -163,17 +169,18 @@ function Blog({
           close={close}
         />
       )}
-
-      <TableGenerator
-        columns={COLUMNS}
-        data={data}
-        theme={theme}
-        sort={sort}
-        pagination={pagination}
-        addClick={() => {
-          setVisibleType('add');
-        }}
-      />
+      {data.nodes.length > 0 && (
+        <TableGenerator
+          columns={COLUMNS}
+          data={data}
+          theme={theme}
+          sort={sort}
+          pagination={pagination}
+          addClick={() => {
+            setVisibleType('add');
+          }}
+        />
+      )}
     </>
   );
 }

@@ -44,12 +44,17 @@ function EditProduct({ item, setData, fileOptions, close }) {
           .min(2, 'Name must be minimum 2')
           .max(100, 'Name must not be more than 100 characters')
           .matches('^[A-Za-z]{1,20}', 'Product name must not contain numbers')
+          .matches(/^[^"]*$/, 'Name cannot contain double quotes')
           .required('Name is required'),
-        weight: Yup.number('Weight must be a number').required(
-          'Weight is required',
-        ),
-        description: Yup.string().required('Description is required'),
-        price: Yup.number('Price must be a number')
+        weight: Yup.number()
+          .typeError('Weight must be a number')
+          .required('Weight is required')
+          .positive('Weight must be positive'),
+        description: Yup.string()
+          .required('Description is required')
+          .matches(/^[^"]*$/, 'Description cannot contain double quotes'),
+        price: Yup.number()
+          .typeError('Price must be a number')
           .required('Price is required')
           .positive('Price must be positive'),
         Image: Yup.mixed()
@@ -61,7 +66,9 @@ function EditProduct({ item, setData, fileOptions, close }) {
             if (!value.type) return true;
             return fileOptions.supportedFormats.includes(value.type);
           }),
-        ingredients: Yup.string().required('Ingredients is required'),
+        ingredients: Yup.string()
+          .required('Ingredients is required')
+          .matches(/^[^"]*$/, 'Ingredients cannot contain double quotes'),
       }),
     [],
   );
@@ -99,7 +106,7 @@ function EditProduct({ item, setData, fileOptions, close }) {
         setData((state) => ({
           nodes: state.nodes.map((node) => {
             if (node.id === item.id) {
-              return { ...values, id: item.id };
+              return { ...item, ...values };
             }
             return node;
           }),

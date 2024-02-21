@@ -40,7 +40,9 @@ function EditBlog({
     () => Yup.object().shape({
       name: Yup.string()
         .min(2, 'Title must be minimum 2')
-        .max(100, 'Title must not be more than 100 characters'),
+        .max(100, 'Title must not be more than 100 characters')
+        .required('Title is required')
+        .matches(/^[^"]*$/, 'Title cannot contain double quotes'),
       text: Yup.string(),
       Images: Yup.array().of(
         Yup.mixed()
@@ -129,6 +131,7 @@ function EditBlog({
 
       return;
     }
+    if (req.text) req.text = req.text.replace(/"/g, "'");
     editData('blog', item.id, ax, req)
       .then(() => {
         ToastNotification('success', 'Successfully updated!');
@@ -140,7 +143,6 @@ function EditBlog({
                 ...req,
               };
             }
-
             return node;
           }),
         }));
@@ -224,10 +226,10 @@ function EditBlog({
                     content={values.text}
                   />
                   {errors.text && touched.text ? (
-                    <div className="validtaionText">{errors.text}</div>
+                    <div style={{ color: '#DC3545' }}>{errors.text}</div>
                   ) : null}
                 </Form.Group>
-                <Form.Group className="form-element images">
+                <Form.Group className="form-element form-element-add images">
                   <Form.Label>Images</Form.Label>
                   <Form.Group className="control-element">
                     {values.Images.map((image, i) => (
@@ -236,24 +238,27 @@ function EditBlog({
                           className="rendered-content images"
                           key={image.id}
                         >
-                          <Form.Control
-                            type="file"
-                            name="Images"
-                            onChange={(e) => setFieldValue(
-                              `Images.[${i}]`,
-                              e.currentTarget.files[0],
+                          <div className="d-flex">
+                            <Form.Control
+                              type="file"
+                              name="Images"
+                              onChange={(e) => setFieldValue(
+                                `Images.[${i}]`,
+                                e.currentTarget.files[0],
+                              )}
+                              isValid={touched.Images && !errors.Images?.[i]}
+                              isInvalid={touched.Images && errors.Images?.[i]}
+                            />
+                            {values.Images.length > 1 && (
+                              <Button
+                                variant="outline-light"
+                                className="ml-3 rounded-0"
+                                onClick={() => handleDeleteImages(i, values, setValues)}
+                              >
+                                remove
+                              </Button>
                             )}
-                            isValid={touched.Images && !errors.Images?.[i]}
-                            isInvalid={touched.Images && errors.Images?.[i]}
-                          />
-                          {values.Images.length > 1 && (
-                            <Button
-                              variant="outline-light"
-                              onClick={() => handleDeleteImages(i, values, setValues)}
-                            >
-                              remove
-                            </Button>
-                          )}
+                          </div>
                         </Form.Group>
                         {image.imageData ? (
                           <img
@@ -277,7 +282,7 @@ function EditBlog({
                     variant="outline-light"
                     onClick={() => handleAddImage(values, setValues)}
                   >
-                    click to add new Image
+                    Click to add new image
                   </Button>
                 </Form.Group>
                 <Form.Group className="form-element">

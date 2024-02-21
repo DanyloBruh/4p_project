@@ -1,6 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
+/* eslint-disable object-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable react/jsx-curly-newline */
+
 import { Formik } from 'formik';
 import React, { useMemo } from 'react';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
@@ -28,33 +32,42 @@ function AddProduct({ setData, fileOptions, close }) {
     [],
   );
   const schema = useMemo(
-    () => Yup.object().shape({
-      name: Yup.string()
-        .min(2, 'Name must be minimum 2')
-        .max(100, 'Name must not be more than 100 characters')
-        .matches('^[A-Za-z]{1,20}', 'Product name must not contain numbers')
-        .required('Name is required'),
-      weight: Yup.number('Weight must be a number').required(
-        'Weight is required',
-      ),
-      description: Yup.string().required('Description is required'),
-      price: Yup.number('Price must be a number')
-        .required('Price is required')
-        .positive('Price must be positive'),
-      Image: Yup.mixed()
-        .required('A Image is required')
-        .test(
-          'fileSize',
-          'Image too large',
-          (value) => value && value.size <= fileOptions.fileSize,
-        )
-        .test(
-          'fileFormat',
-          'Unsupported Format',
-          (value) => value && fileOptions.supportedFormats.includes(value.type),
-        ),
-      ingredients: Yup.string().required('Ingredients is required'),
-    }),
+    () =>
+      Yup.object().shape({
+        name: Yup.string()
+          .min(2, 'Name must be minimum 2')
+          .max(100, 'Name must not be more than 100 characters')
+          .matches('^[A-Za-z]{1,20}', 'Product name must not contain numbers')
+          .matches(/^[^"]*$/, 'Name cannot contain double quotes')
+          .required('Name is required'),
+        weight: Yup.number()
+          .typeError('Weight must be a number')
+          .required('Weight is required')
+          .positive('Weight must be positive'),
+        description: Yup.string()
+          .required('Description is required')
+          .matches(/^[^"]*$/, 'Description cannot contain double quotes'),
+        price: Yup.number()
+          .typeError('Price must be a number')
+          .required('Price is required')
+          .positive('Price must be positive'),
+        Image: Yup.mixed()
+          .required('A Image is required')
+          .test(
+            'fileSize',
+            'Image too large',
+            (value) => value && value.size <= fileOptions.fileSize,
+          )
+          .test(
+            'fileFormat',
+            'Unsupported Format',
+            (value) =>
+              value && fileOptions.supportedFormats.includes(value.type),
+          ),
+        ingredients: Yup.string()
+          .required('Ingredients is required')
+          .matches(/^[^"]*$/, 'Ingredients cannot contain double quotes'),
+      }),
     [],
   );
 
@@ -163,7 +176,7 @@ function AddProduct({ setData, fileOptions, close }) {
                 <Form.Group className="form-element">
                   <FloatingLabel controlId="floatingInput" label="Enter price">
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="price"
                       placeholder="price"
                       value={values.price}
@@ -242,7 +255,6 @@ function AddProduct({ setData, fileOptions, close }) {
                     <img alt="" />
                   )}
                 </Form.Group>
-
                 <hr />
                 <div className="btn-group">
                   <Button
