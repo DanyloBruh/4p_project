@@ -21,7 +21,9 @@ function Recipes() {
   const { id } = useParams();
   useEffect(() => {
     if (!id && !allRecipes) {
-      getAllInstractions().then(setAllRecipes).catch(() => ToastNotification('error', 'Something went wrong!'));
+      getAllInstractions()
+        .then(setAllRecipes)
+        .catch(() => ToastNotification('error', 'Something went wrong!'));
     }
   }, [id]);
 
@@ -74,7 +76,7 @@ function Recipes() {
               && visibleRecipes
                 ?.filter((recipe) => recipe.carrousel === true)
                 ?.map((recipe) => (
-                  <Carousel.Item interval={10000}>
+                  <Carousel.Item key={recipe.id} interval={10000}>
                     <div className="item-cover">
                       <img
                         className="recipe-card-img"

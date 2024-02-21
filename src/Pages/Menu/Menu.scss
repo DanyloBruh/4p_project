@@ -157,6 +157,10 @@
         flex: 0 0 auto;
         width: 50%;
       }
+      @media (max-width: 300px) {
+        width: 100%;
+        flex: 0 0 auto;
+      }
     }
   }
 }
