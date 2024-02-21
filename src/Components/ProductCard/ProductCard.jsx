@@ -85,7 +85,7 @@ function ProductCard({ data, setSelectItems }) {
           </svg>
         </button>
         <Row>
-          <Col xxl={7} xl={6} sm={5}>
+          <Col xxl={7} xl={6} md={7} sm={7}>
             <img
               className="product-modal__card__img"
               src={`data:image/png;base64,${data?.Image.imageData}`}
@@ -95,7 +95,8 @@ function ProductCard({ data, setSelectItems }) {
           <Col
             xxl={5}
             xl={6}
-            sm={7}
+            md={5}
+            sm={5}
             className="product-modal__card__description"
           >
             <h2 className="product-modal__card__title">{data?.name}</h2>
