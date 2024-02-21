@@ -75,12 +75,6 @@ function Blog({
       sort: { sortKey: 'NAME' },
     },
     {
-      label: 'text',
-      renderCell: (item) => (Parser.parse(item?.text).length > 0
-        ? Parser.parse(item?.text)[0]
-        : Parser.parse(item?.text)),
-    },
-    {
       label: 'Display type',
       renderCell: (item) => (
         <select
@@ -103,7 +97,9 @@ function Blog({
     },
     {
       label: 'text',
-      renderCell: (item) => Parser.parse(item?.text)[0],
+      renderCell: (item) => (Parser.parse(item?.text).length > 0
+        ? Parser.parse(item?.text)[0]
+        : Parser.parse(item?.text)),
     },
     {
       label: 'Edit',
