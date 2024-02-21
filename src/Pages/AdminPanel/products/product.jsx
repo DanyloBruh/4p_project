@@ -162,18 +162,16 @@ function Product({
           close={close}
         />
       )}
-      {data.nodes.length > 0 && (
-        <TableGenerator
-          columns={COLUMNS}
-          data={data}
-          theme={theme}
-          sort={sort}
-          pagination={pagination}
-          addClick={() => {
-            setVisibleType('add');
-          }}
-        />
-      )}
+      <TableGenerator
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        sort={sort}
+        pagination={pagination}
+        addClick={() => {
+          setVisibleType('add');
+        }}
+      />
     </>
   );
 }

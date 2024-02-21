@@ -76,6 +76,7 @@ export function TableGenerator({
     return res;
   }, []);
 
+  const tableSize = data.nodes.length > 0;
   const sizes = [5, 10, 15];
 
   useEffect(() => {
@@ -84,40 +85,43 @@ export function TableGenerator({
 
   return (
     <div className="admin-table">
-      {data.nodes.length > 0 && (
-        <CompactTable
-          columns={columns}
-          data={data}
-          theme={theme}
-          sort={sort}
-          pagination={pagination}
-          layout={{ custom: true, horizontalScroll: true }}
-        />
+      {tableSize && (
+      <CompactTable
+        columns={columns}
+        data={data}
+        theme={theme}
+        sort={sort}
+        pagination={pagination}
+        layout={{ custom: true, horizontalScroll: true }}
+      />
       )}
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <span>
-          Page Size:
-          <Pagination>
-            {sizes.map((size, index) => (
-              <Pagination.Item
+
+      <div style={{ display: 'flex', justifyContent: !tableSize ? 'center' : 'space-between' }}>
+        {data.nodes.length > 0 && (
+          <span>
+            Page Size:
+            <Pagination>
+              {sizes.map((size, index) => (
+                <Pagination.Item
                 // eslint-disable-next-line react/no-array-index-key
-                key={index}
-                active={pagination.state.size === size}
-                onClick={() => pagination.fns.onSetSize(size)}
-              >
-                {size}
-              </Pagination.Item>
-            ))}
-            <Pagination.Item
+                  key={index}
+                  active={pagination.state.size === size}
+                  onClick={() => pagination.fns.onSetSize(size)}
+                >
+                  {size}
+                </Pagination.Item>
+              ))}
+              <Pagination.Item
               // eslint-disable-next-line react/no-array-index-key
-              key={data.nodes.length}
-              active={pagination.state.size === data.nodes.length}
-              onClick={() => pagination.fns.onSetSize(data.nodes.length)}
-            >
-              All
-            </Pagination.Item>
-          </Pagination>
-        </span>
+                key={data.nodes.length}
+                active={pagination.state.size === data.nodes.length}
+                onClick={() => pagination.fns.onSetSize(data.nodes.length)}
+              >
+                All
+              </Pagination.Item>
+            </Pagination>
+          </span>
+        )}
 
         {!addDisable && (
           <Button
@@ -130,22 +134,27 @@ export function TableGenerator({
             </IconContext.Provider>
           </Button>
         )}
-
-        <span>
-          Page:
-          <Pagination>
-            {pagination.state.getPages(data.nodes).map((_, index) => (
-              <Pagination.Item
+        {data.nodes.length === 0 && (
+          <h2 className="text-white">Nothing found</h2>
+        )}
+        {tableSize > 0 && (
+          <span>
+            Page:
+            <Pagination>
+              {pagination.state.getPages(data.nodes).map((_, index) => (
+                <Pagination.Item
                 // eslint-disable-next-line react/no-array-index-key
-                key={index}
-                active={pagination.state.page === index}
-                onClick={() => pagination.fns.onSetPage(index)}
-              >
-                {index + 1}
-              </Pagination.Item>
-            ))}
-          </Pagination>
-        </span>
+                  key={index}
+                  active={pagination.state.page === index}
+                  onClick={() => pagination.fns.onSetPage(index)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+            </Pagination>
+          </span>
+        )}
+
       </div>
     </div>
   );

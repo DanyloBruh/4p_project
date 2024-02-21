@@ -18,6 +18,7 @@ import Product from './product';
 import { orderComplite } from '../../Helper/requests';
 import { deleteOrderData } from '../../redux/orderDataSlice';
 import ToastNotification from '../Toast/Toast';
+import { offScroll } from '../../redux/scrollSlice';
 
 const regexes = {
   regexPostcode: /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i,
@@ -121,6 +122,10 @@ function Order({
 
     return '0';
   }, [products]);
+
+  useEffect(() => {
+    dispath(offScroll());
+  }, []);
 
   const handleSubmit = async (values) => {
     const addressLine = values.town
