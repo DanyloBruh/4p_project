@@ -83,7 +83,7 @@ function User({
               margin: 0,
             }}
             value={item.role}
-            onChange={(event) => handleUpdate(event.target.value, item.id, 'role', setData, 'order', axiosPrivate)}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'role', setData, 'user', axiosPrivate)}
           >
             <option value="admin">Admin</option>
             <option value="employee">Employee</option>

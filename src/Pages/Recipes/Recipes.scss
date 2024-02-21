@@ -33,6 +33,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
+    background-color: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   }
   &__container {
     > h2 {
@@ -317,7 +318,7 @@
         }
       }
     }
-    .not-found{
+    .not-found {
       color: #fff;
       font-family: 'Outfit', sans-serif;
       font-size: 2rem;

@@ -124,13 +124,15 @@ function EditInstruction({ item, setData, fileOptions, close }) {
 
     let ax = axiosPrivateConfig;
     if (values.Image.type === item.Image.type
-      || values.Image.name === item.Image.name
-      || values.Image.size === item.Image.size) {
+      && values.Image.name === item.Image.name
+      && values.Image.size === item.Image.size) {
       ax = axiosPrivate;
       // eslint-disable-next-line no-param-reassign
       delete values.Image;
     }
     const request = removeUnchangedFields(item, values);
+
+    console.log(request, values);
 
     if (Object.keys(request).length === 0) {
       ToastNotification(
@@ -148,7 +150,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
         setData((state) => ({
           nodes: state.nodes.map((node) => {
             if (node.id === item.id) {
-              return { ...item, ...values };
+              return { ...item, ...request };
             }
             return node;
           }),
