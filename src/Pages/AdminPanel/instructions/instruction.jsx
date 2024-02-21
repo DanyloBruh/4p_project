@@ -13,13 +13,21 @@ import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { Button } from 'react-bootstrap';
-import { TableGenerator, handleArchived, handleDelete } from '../adminUtils';
+import { useSelector } from 'react-redux';
+import {
+  TableGenerator, handleArchived, handleDelete, handleUpdate,
+} from '../adminUtils';
 import AddInstruction from './addInstruction';
 import EditInstruction from './editInstruction';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function Instruction({
-  nodes, archived, axiosPrivate, theme, fileOptions,
+  nodes,
+  archived,
+  theme,
+  fileOptions,
 }) {
+  const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
   const [editItem, setEditItem] = useState();
@@ -69,7 +77,25 @@ function Instruction({
       },
       {
         label: 'Difficulty',
-        renderCell: (item) => item.difficulty,
+        renderCell: (item) => (
+          <select
+            style={{
+              width: '100%',
+              border: 'none',
+              fontSize: '1rem',
+              padding: 0,
+              margin: 0,
+            }}
+            value={item.difficulty}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'difficulty', setData, 'instruction', axiosPrivate)}
+          >
+            <option value="Very easy">Very easy</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+            <option value="Very hard">Very hard</option>
+          </select>
+        ),
         sort: { sortKey: 'DIFFICULTY' },
       },
       {
@@ -83,7 +109,22 @@ function Instruction({
       },
       {
         label: 'Carrousel',
-        renderCell: (item) => (item.carrousel ? 'Show' : 'Hide'),
+        renderCell: (item) => (
+          <select
+            style={{
+              width: '100%',
+              border: 'none',
+              fontSize: '1rem',
+              padding: 0,
+              margin: 0,
+            }}
+            value={item.carrousel}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'carrousel', setData, 'instruction', axiosPrivate)}
+          >
+            <option value="true">Show</option>
+            <option value="false">Hide</option>
+          </select>
+        ),
         sort: { sortKey: 'CARROUSEL' },
       },
       {
@@ -140,7 +181,7 @@ function Instruction({
           <Button
             variant="dark"
             className="button-icon"
-            onClick={() => handleDelete(item.id, axiosPrivate, 'instruction', setData)}
+            onClick={() => handleDelete(item.id, axiosPrivate, 'instruction', setData, axiosPrivate)}
           >
             <IconContext.Provider value={iconProviderValue}>
               <MdDeleteForever />

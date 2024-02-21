@@ -13,17 +13,25 @@ import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { Button } from 'react-bootstrap';
-import { TableGenerator, handleArchived, handleDelete } from '../adminUtils';
+import {
+  TableGenerator, handleArchived, handleDelete, handleUpdate,
+} from '../adminUtils';
 import AddProduct from './addProduct';
 import EditProduct from './editProduct';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function Product({
-  nodes, archived, axiosPrivate, theme, fileOptions,
+  nodes,
+  archived,
+  theme,
+  fileOptions,
 }) {
+  const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
   const [editItem, setEditItem] = useState();
 
+  console.log(data);
   useEffect(() => {
     setData((state) => ({ nodes }));
   }, [nodes]);

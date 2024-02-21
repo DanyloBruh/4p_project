@@ -13,13 +13,20 @@ import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { Button } from 'react-bootstrap';
-import { TableGenerator, handleArchived, handleDelete } from '../adminUtils';
+import {
+  TableGenerator, handleArchived, handleDelete, handleUpdate,
+} from '../adminUtils';
 import EditUser from './edituser';
 import AddUser from './addUser';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function User({
-  nodes, archived, axiosPrivate, theme, fileOptions,
+  nodes,
+  archived,
+  theme,
+  fileOptions,
 }) {
+  const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
   const [editItem, setEditItem] = useState();
@@ -66,7 +73,22 @@ function User({
       },
       {
         label: 'Role',
-        renderCell: (item) => item.role,
+        renderCell: (item) => (
+          <select
+            style={{
+              width: '100%',
+              border: 'none',
+              fontSize: '1rem',
+              padding: 0,
+              margin: 0,
+            }}
+            value={item.role}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'role', setData, 'order', axiosPrivate)}
+          >
+            <option value="admin">Admin</option>
+            <option value="employee">Employee</option>
+          </select>
+        ),
         sort: { sortKey: 'ROLE' },
       },
       {

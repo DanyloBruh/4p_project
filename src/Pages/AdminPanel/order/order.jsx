@@ -13,12 +13,19 @@ import { RiFolderZipFill, RiEdit2Line } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { Button } from 'react-bootstrap';
-import { TableGenerator, handleArchived, handleDelete } from '../adminUtils';
+import {
+  TableGenerator, handleArchived, handleDelete, handleUpdate,
+} from '../adminUtils';
 import EditOrder from './editOrder';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function Order({
-  nodes, archived, axiosPrivate, theme, fileOptions,
+  nodes,
+  archived,
+  theme,
+  fileOptions,
 }) {
+  const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState({ nodes });
   const [visibleType, setVisibleType] = useState('');
   const [editItem, setEditItem] = useState();
@@ -93,17 +100,65 @@ function Order({
       },
       {
         label: 'Delivery type',
-        renderCell: (item) => item.deliveryType,
+        renderCell: (item) => (
+          <select
+            style={{
+              width: '100%',
+              border: 'none',
+              fontSize: '1rem',
+              padding: 0,
+              margin: 0,
+            }}
+            value={item.deliveryType}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'deliveryType', setData, 'order', axiosPrivate)}
+          >
+            <option value="self">Self</option>
+            <option value="courier">Courier</option>
+          </select>
+        ),
         sort: { sortKey: 'DELIVERYTYPE' },
       },
       {
         label: 'Payment type',
-        renderCell: (item) => item.paymentType,
+        renderCell: (item) => (
+          <select
+            style={{
+              width: '100%',
+              border: 'none',
+              fontSize: '1rem',
+              padding: 0,
+              margin: 0,
+            }}
+            value={item.paymentType}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'paymentType', setData, 'order', axiosPrivate)}
+          >
+            <option value="card">Card</option>
+            <option value="cash">Cash</option>
+          </select>
+        ),
         sort: { sortKey: 'PAYMENTTYPE' },
       },
       {
         label: 'Status',
-        renderCell: (item) => item.status,
+        renderCell: (item) => (
+          <select
+            style={{
+              width: '100%',
+              border: 'none',
+              fontSize: '1rem',
+              padding: 0,
+              margin: 0,
+            }}
+            value={item.status}
+            onChange={(event) => handleUpdate(event.target.value, item.id, 'status', setData, 'order', axiosPrivate)}
+          >
+            <option value="ordered, not processed">Ordered, not processed</option>
+            <option value="ordered, processed">Ordered, processed</option>
+            <option value="courier on the way">Courier on the way</option>
+            <option value="delivered">Delivered</option>
+            <option value="requires processing">Requires processing</option>
+          </select>
+        ),
         sort: { sortKey: 'STATUS' },
       },
       {

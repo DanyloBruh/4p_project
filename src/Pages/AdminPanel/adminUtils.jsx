@@ -5,7 +5,7 @@ import { IoIosAddCircle } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import { Button, Pagination } from 'react-bootstrap';
 import { CompactTable } from '@table-library/react-table-library/compact';
-import { archivedData, deleteData } from '../../Helper/requests';
+import { archivedData, deleteData, editDataConfig } from '../../Helper/requests';
 import confirm from '../../Components/ConfirmModel/ConfirmModel';
 import ToastNotification from '../../Components/Toast/Toast';
 
@@ -162,3 +162,34 @@ export function removeUnchangedFields(originalData, modifiedData) {
 
   return newData;
 }
+
+export const handleUpdate = (
+  value,
+  id,
+  property,
+  setData,
+  tableName,
+  axiosPrivate,
+) => {
+  editDataConfig(tableName, id, axiosPrivate, {
+    [property]: value,
+  })
+    .then(() => {
+      ToastNotification('success', `${property} successfully updated!`);
+      setData((state) => ({
+        ...state,
+        nodes: state.nodes.map((node) => {
+          if (node.id === id) {
+            return { ...node, [property]: value };
+          }
+          return node;
+        }),
+      }));
+    })
+    .catch((err) => {
+      ToastNotification(
+        'error',
+        `Something went wrong! (${err.response.data.message})`,
+      );
+    });
+};

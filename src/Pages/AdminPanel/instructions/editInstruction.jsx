@@ -28,10 +28,11 @@ import {
   handleDeleteStep,
 } from './instructionsUtils';
 import { removeUnchangedFields } from '../adminUtils';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function EditInstruction({ item, setData, fileOptions, close }) {
-  const UserId = useSelector((state) => state.auth.auth.user.id);
   const axiosPrivateConfig = useAxiosPrivateImages();
+  const axiosPrivate = useAxiosPrivate();
 
   const ingredientsParse = useCallback(
     (str) => str?.split(' | ')?.map((a, i) => ({ ingredient: a, index: i })),
@@ -121,11 +122,26 @@ function EditInstruction({ item, setData, fileOptions, close }) {
     // eslint-disable-next-line no-param-reassign
     values.text = values.text.map((step) => step.text).join(' | ');
 
+    let ax = axiosPrivateConfig;
+    if (values.Image.type === item.Image.type
+      || values.Image.name === item.Image.name
+      || values.Image.size === item.Image.size) {
+      ax = axiosPrivate;
+      // eslint-disable-next-line no-param-reassign
+      delete values.Image;
+    }
     const request = removeUnchangedFields(item, values);
 
-    editDataConfig('instruction', item.id, axiosPrivateConfig, {
+    if (Object.keys(request).length === 0) {
+      ToastNotification(
+        'error',
+        'You haven\'t changed anything',
+      );
+      close();
+      return;
+    }
+    editDataConfig('instruction', item.id, ax, {
       ...request,
-      UserId,
     })
       .then(() => {
         ToastNotification('success', 'Successfully updated!');

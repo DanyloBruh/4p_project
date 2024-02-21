@@ -19,13 +19,13 @@ import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 import BlogTextEditor from '../../../Components/BlogTextEditor/BlogTextEditor';
 import { handleAddImage, handleDeleteImages } from './blogUtilst';
 import { removeUnchangedFields } from '../adminUtils';
+import useAxiosPrivate from '../../../Hooks/useAxiosPrivate';
 
 function EditBlog({
   item, setData, fileOptions, close,
 }) {
-  const userId = useSelector((state) => state.auth.auth.user.id);
   const axiosPrivateConfig = useAxiosPrivateImages();
-  console.log(item);
+  const axiosPrivate = useAxiosPrivate();
 
   const initialState = useMemo(
     () => ({
@@ -94,25 +94,54 @@ function EditBlog({
     return file;
   }, []);
 
+  const equlePhotos = useCallback((files1, files2) => {
+    if (files1.length !== files2.length) {
+      return false;
+    }
+    for (let i = 0; i < files1.length; i += 1) {
+      if (files1[i].type !== files2[i].type
+        || files1[i].name !== files2[i].name
+        || files1[i].size !== files2[i].size) {
+        return false;
+      }
+    }
+    return true;
+  }, []);
   const handleSubmitForm = (values) => {
-    console.log('item', item);
-    console.log('value', values);
     if (values.Images) {
       // eslint-disable-next-line no-param-reassign
-      values.Images = values.Images.map((image) => imageToFile(image));
+      values.Images = values.Images.map(imageToFile).filter((image) => image.name);
     }
     const req = removeUnchangedFields(item, values);
+    let ax;
+    const files1 = item.Images.map(imageToFile);
+    const files2 = req.Images;
+    if (values.Images.length === 0 && equlePhotos(files1, files2)) {
+      delete req.Images;
+      ax = axiosPrivate;
+    } else {
+      ax = axiosPrivateConfig;
+    }
 
-    // req.Images = req.Images.filter((img, i) => img.name !== item.Images[i].imageName);
+    if (Object.keys(req).length === 0) {
+      ToastNotification(
+        'error',
+        'You haven\'t changed anything',
+      );
 
+      return;
+    }
     if (req.text) req.text = req.text.replace(/"/g, "'");
-    editData('blog', item.id, axiosPrivateConfig, { ...req, userId })
+    editData('blog', item.id, ax, req)
       .then(() => {
         ToastNotification('success', 'Successfully updated!');
         setData((state) => ({
           nodes: state.nodes.map((node) => {
             if (node.id === item.id) {
-              return { ...item, ...values };
+              return {
+                ...item,
+                ...req,
+              };
             }
             return node;
           }),
