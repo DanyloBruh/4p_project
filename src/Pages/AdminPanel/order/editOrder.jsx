@@ -12,27 +12,20 @@
 import { Formik } from 'formik';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { PostcodeLookup } from '@ideal-postcodes/postcode-lookup';
-import {
-  Button,
-  Container,
-  FloatingLabel,
-  Form,
-  InputGroup,
-} from 'react-bootstrap';
+import { Button, FloatingLabel, Form, InputGroup } from 'react-bootstrap';
 import * as Yup from 'yup';
-import TextareaAutosize from 'react-textarea-autosize';
-import { IoMdClose } from 'react-icons/io';
-import { IconContext } from 'react-icons';
 import Select from 'react-select';
 import ToastNotification from '../../../Components/Toast/Toast';
-import useAxiosPrivateImages from '../../../Hooks/useAxiosPrivateWithImages';
 import Product from '../../../Components/Order/product';
 import { editData, getAllProducts } from '../../../Helper/requests';
 import { axiosPrivate } from '../../../Helper/axios';
 import { removeUnchangedFields } from '../adminUtils';
+import './order.scss';
 
 function EditOrder({ item, setData, fileOptions, close }) {
-  const [addressFinder, setAddressFinder] = useState(item.deliveryType === 'courier');
+  const [addressFinder, setAddressFinder] = useState(
+    item.deliveryType === 'courier',
+  );
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [schema, setSchema] = useState({});
@@ -47,26 +40,23 @@ function EditOrder({ item, setData, fileOptions, close }) {
     [],
   );
 
-  const initialState = useMemo(
-    () => {
-      const masAddress = item.adress.split('|');
-      return ({
-        name: item.name,
-        phoneNumber: item.phoneNumber,
-        postcode: masAddress[4],
-        addressLine1: masAddress[1],
-        addressLine2: masAddress[2],
-        addressLine3: masAddress[3],
-        town: masAddress[0],
-        comment: item.comment,
-        paymentType: item.paymentType,
-        deliveryType: item.deliveryType,
-        totalAmount: item.totalAmount,
-        status: item.status,
-      });
-    },
-    [],
-  );
+  const initialState = useMemo(() => {
+    const masAddress = item.adress.split('|');
+    return {
+      name: item.name,
+      phoneNumber: item.phoneNumber,
+      postcode: masAddress[4],
+      addressLine1: masAddress[1],
+      addressLine2: masAddress[2],
+      addressLine3: masAddress[3],
+      town: masAddress[0],
+      comment: item.comment,
+      paymentType: item.paymentType,
+      deliveryType: item.deliveryType,
+      totalAmount: item.totalAmount,
+      status: item.status,
+    };
+  }, []);
 
   useEffect(() => {
     getAllProducts().then(setAllProducts);
@@ -224,9 +214,9 @@ function EditOrder({ item, setData, fileOptions, close }) {
     });
   }, []);
   const addProduct = useCallback(() => {
-    if (order.Products.find(
-      (product) => product.name === selectedProduct.value,
-    )) {
+    if (
+      order.Products.find((product) => product.name === selectedProduct.value)
+    ) {
       setOrder((prev) => ({
         ...prev,
         Products: prev.Products.map((product) => {
@@ -236,7 +226,8 @@ function EditOrder({ item, setData, fileOptions, close }) {
           }
 
           return product;
-        }) }));
+        }),
+      }));
       return;
     }
 
@@ -286,8 +277,10 @@ function EditOrder({ item, setData, fileOptions, close }) {
     };
     if (item.Products.length === order.Products.length) {
       for (let i = 0; i < item.Products.length; i += 1) {
-        if (item.Products[i].id !== order.Products[i].id
-          || item.Products[i].Dishes.count !== order.Products[i].Dishes.count) {
+        if (
+          item.Products[i].id !== order.Products[i].id
+          || item.Products[i].Dishes.count !== order.Products[i].Dishes.count
+        ) {
           productMarker = true;
           break;
         }
@@ -309,15 +302,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
       req.productIds = productIds;
     }
 
-    const addressLine = `${values.town
-    }|${
-      values.addressLine1
-    }|${
-      values.addressLine2
-    }|${
-      values.addressLine3
-    }|${
-      values.postcode}`;
+    const addressLine = `${values.town}|${values.addressLine1}|${values.addressLine2}|${values.addressLine3}|${values.postcode}`;
 
     if (item.adress !== addressLine) {
       req.adress = addressLine;
@@ -349,12 +334,27 @@ function EditOrder({ item, setData, fileOptions, close }) {
   };
 
   return (
-    <div className="">
-      <div className="order">
-        <div className="container">
-          <div className="ornament ornament--left" />
-          <div className="ornament ornament--right" />
-          <div className="order__cross" onClick={close} />
+    <div className="add-edit-form-bg">
+      <div className="add-edit-form-position">
+        <div className="add-edit-form">
+          <button
+            type="button"
+            className="product-modal__card__close"
+            onClick={() => close()}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              viewBox="0 0 50 50"
+              fill="none"
+            >
+              <path
+                d="M39.1654 35.9052C39.6408 36.4195 39.8987 37.0978 39.8851 37.7979C39.8715 38.4981 39.5874 39.1659 39.0924 39.6612C38.5973 40.1566 37.9298 40.4411 37.2296 40.4552C36.5294 40.4693 35.851 40.2119 35.3364 39.7368L24.9996 29.4L14.6627 39.7368C14.415 40.0048 14.1157 40.22 13.7827 40.3695C13.4497 40.519 13.09 40.5997 12.7251 40.6068C12.3602 40.6139 11.9976 40.5473 11.6591 40.4108C11.3206 40.2744 11.0131 40.071 10.7552 39.8128C10.4972 39.5546 10.294 39.247 10.1578 38.9084C10.0215 38.5698 9.95512 38.2072 9.96246 37.8423C9.96981 37.4774 10.0508 37.1177 10.2005 36.7849C10.3502 36.452 10.5656 36.1528 10.8338 35.9052L21.1706 25.5684L10.8338 15.2368C10.5656 14.9893 10.3502 14.6901 10.2005 14.3572C10.0508 14.0244 9.96981 13.6647 9.96246 13.2998C9.95512 12.9349 10.0215 12.5723 10.1578 12.2337C10.294 11.8951 10.4972 11.5874 10.7552 11.3293C11.0131 11.0711 11.3206 10.8677 11.6591 10.7313C11.9976 10.5948 12.3602 10.5281 12.7251 10.5352C13.09 10.5423 13.4497 10.6231 13.7827 10.7726C14.1157 10.922 14.415 11.1373 14.6627 11.4052L24.9996 21.7395L35.3364 11.4026C35.851 10.9276 36.5294 10.6701 37.2296 10.6842C37.9298 10.6983 38.5973 10.9828 39.0924 11.4782C39.5874 11.9736 39.8715 12.6413 39.8851 13.3415C39.8987 14.0417 39.6408 14.72 39.1654 15.2342L28.8285 25.5684L39.1654 35.9052Z"
+                fill="#8D8D8D"
+              />
+            </svg>
+          </button>
           <div className="order__content">
             <h1 className="order__title">Order:</h1>
             <hr className="order__line" />
@@ -370,18 +370,24 @@ function EditOrder({ item, setData, fileOptions, close }) {
             ))}
             <hr className="order__line" />
             <span className="order__total">{`Total: ${getTotalAmount()}£`}</span>
-            <Select
-              className="basic-single"
-              classNamePrefix="select"
-              isLoading={!allProducts[0]?.name}
-              name="product"
-              onChange={setSelectedProduct}
-              options={optionsArr}
-              value={selectedProduct}
-            />
-            <Button variant="outline-light" onClick={addProduct}>
-              Add Selected Product
-            </Button>
+            <div className="d-flex w-100 my-3">
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                isLoading={!allProducts[0]?.name}
+                name="product"
+                onChange={setSelectedProduct}
+                options={optionsArr}
+                value={selectedProduct}
+              />
+              <Button
+                variant="outline-light ml-3 rounded-0"
+                onClick={addProduct}
+              >
+                Add Selected Product
+              </Button>
+            </div>
+
             <Formik
               initialValues={initialState}
               validationSchema={schema}
@@ -442,6 +448,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                       <Form.Group className="form-element">
                         <Form.Select
                           name="paymentType"
+                          className="form-element-select"
                           value={values.paymentType}
                           onChange={handleChange}
                           isValid={touched.paymentType && !errors.paymentType}
@@ -458,6 +465,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                       <Form.Group className="form-element">
                         <Form.Select
                           name="deliveryType"
+                          className="form-element-select"
                           value={values.deliveryType}
                           onChange={(e) => {
                             if (e.target.value === 'self') {
@@ -483,8 +491,8 @@ function EditOrder({ item, setData, fileOptions, close }) {
                       </Form.Group>
                       {addressFinder && (
                         <>
-                          <div className="order__postcode">
-                            <Form.Group>
+                          <div className="order__postcode mb-3">
+                            <Form.Group className="order__half">
                               <InputGroup hasValidation>
                                 <FloatingLabel
                                   label="Postcode"
@@ -512,7 +520,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                             </Form.Group>
                             <Button
                               type="button"
-                              className="order__button order__button--findPostcode"
+                              className="order__button order__button--findPostcode order__half"
                               variant="outline-light"
                               id="postcode_button"
                             >
@@ -670,6 +678,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                       <Form.Group className="form-element">
                         <Form.Select
                           name="status"
+                          className="form-element-select"
                           value={values.status}
                           onChange={handleChange}
                           isValid={touched.status && !errors.status}
@@ -689,13 +698,23 @@ function EditOrder({ item, setData, fileOptions, close }) {
                       <hr className="order__line" />
                       <span className="order__total">{`Total: ${getTotalAmount()}£`}</span>
 
-                      <Button
-                        type="submit"
-                        className="order__button"
-                        variant="outline-light"
-                      >
-                        Submit
-                      </Button>
+                      <div className="btn-group">
+                        <Button
+                          type="button"
+                          variant="outline-danger"
+                          className="button__submit"
+                          onClick={() => close()}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          type="submit"
+                          variant="outline-light"
+                          className="button__submit"
+                        >
+                          Submit
+                        </Button>
+                      </div>
                     </div>
                   </form>
                 );
@@ -704,7 +723,6 @@ function EditOrder({ item, setData, fileOptions, close }) {
           </div>
         </div>
       </div>
-      )
     </div>
   );
 }

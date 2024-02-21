@@ -9,6 +9,11 @@
   padding: 30px 25px;
   border-radius: 8px;
   form {
+    >.btn-group{
+      >button{
+        width: 49%;
+      }
+    }
     > label {
       color: #fff;
       text-align: left;

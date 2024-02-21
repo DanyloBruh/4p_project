@@ -1,0 +1,89 @@
+.add-edit-form-position {
+  .order__content {
+    padding: 0;
+  }
+  .product-modal__card__close {
+    top: 10px;
+  }
+  .basic-single {
+    width: calc(100% - 1rem - 182px);
+    @media (max-width: 1199px) {
+      width: calc(100% - 1rem - 159px);
+    }
+    @media (max-width: 991px) {
+      width: calc(100% - 1rem - 137px);
+    }
+  }
+  .d-flex {
+    > .btn {
+      border: 2px solid #fff;
+    }
+  }
+
+  .select__control {
+    background-color: transparent;
+    border-color: #fff !important;
+    height: calc(3.5rem + 2px);
+    // border-color: transparent !important;
+  }
+  .select__single-value {
+    color: #fff;
+    text-align: left;
+  }
+  .select__placeholder {
+    color: #fff;
+    text-align: left;
+  }
+  .select__menu {
+    background: #1f1f1f !important;
+    z-index: 10;
+    border: 1px solid #797979;
+  }
+  .css-t3ipsp-control {
+    border-color: #fff !important;
+    box-shadow: none !important;
+  }
+  .select__option {
+    color: #fff;
+    text-align: left;
+    border-bottom: 1px solid #fff;
+    background-color: #1f1f1f !important;
+  }
+  .select__option:last-child {
+    border-bottom: none;
+  }
+  .select__option:hover,
+  .select__option:active,
+  .select__option:focus,
+  .select__option:focus-visible {
+    background-color: #131212 !important;
+  }
+  .order__input {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+  .form-element-select {
+    height: calc(3.5rem + 2px);
+    margin-bottom: 1rem;
+    color: #fff;
+    background-color: #1f1f1f;
+    background-image: url('../../../Assets/down-chevron.svg');
+  }
+  .order__half {
+    height: calc(3.5rem + 2px);
+    width: 49%;
+  }
+  .btn-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    > .button__submit {
+      border-radius: 0;
+      width: 49%;
+      flex: none;
+      border-width: 2px;
+      height: calc(3.5rem + 2px);
+    }
+  }
+}

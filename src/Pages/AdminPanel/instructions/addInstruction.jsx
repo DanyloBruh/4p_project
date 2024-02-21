@@ -307,7 +307,7 @@ function AddInstruction({ setData, fileOptions, close }) {
                               {values.ingredients.length > 1 && (
                                 <Button
                                   variant="outline-light"
-                                  className="ml-3 mb-3"
+                                  className="ml-3 mb-3 rounded-0"
                                   onClick={() =>
                                     handleDeleteIngredient(i, values, setValues)
                                   }
@@ -374,7 +374,7 @@ function AddInstruction({ setData, fileOptions, close }) {
 
                               {values.text.length > 1 && (
                                 <Button
-                                  variant="outline-light"
+                                  variant="outline-light rounded-0"
                                   onClick={() =>
                                     handleDeleteStep(i, values, setValues)
                                   }
