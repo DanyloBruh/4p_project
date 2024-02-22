@@ -131,6 +131,7 @@ function AddUser({ setData, close }) {
                 </FloatingLabel>
               </Form.Group>
               <Form.Group className="form-element">
+                <Form.Label>Role</Form.Label>
                 <Form.Select
                   name="role"
                   value={values.role}

@@ -40,7 +40,6 @@
       > .form-select {
         height: 58px;
         border-radius: 5px;
-        border: 1px solid #fff;
         background-color: rgba(51, 45, 45, 0) !important;
         color: white !important;
         caret-color: #fff;
@@ -54,6 +53,9 @@
         object-fit: cover;
         margin: 1rem 0;
       }
+    }
+    > .form-element.text-element {
+      margin-bottom: 4px;
     }
     > hr {
       border-top-color: #fff;

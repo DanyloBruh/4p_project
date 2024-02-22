@@ -8,8 +8,8 @@ function Footer() {
   return (
     <div className="footer-body">
       <Container>
-        <Row>
-          <Col md={3} sm={2} className="footer-col">
+        <Row className="footer-row">
+          <Col md={3} sm={2} className="footer-col logo">
             <img src={Logo} alt="logo-footer" className="footer-logo" />
           </Col>
           <Col md={2} sm={2} className="footer-col">

@@ -212,7 +212,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                 <Form.Group className="form-element">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Enter instruction name"
+                    label="Edit instruction name"
                   >
                     <Form.Control
                       type="text"
@@ -230,6 +230,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="form-element">
+                  <Form.Label>Difficulty</Form.Label>
                   <Form.Select
                     name="difficulty"
                     value={values.difficulty}
@@ -238,7 +239,6 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                     isInvalid={touched.difficulty && errors.difficulty}
                     autoComplete="off"
                   >
-                    <option>Сhoose a difficulty from the select menu</option>
                     <option>Very easy</option>
                     <option>Easy</option>
                     <option>Medium</option>
@@ -250,7 +250,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="form-element">
-                  <FloatingLabel controlId="floatingInput" label="Enter time">
+                  <FloatingLabel controlId="floatingInput" label="Edit time">
                     <Form.Control
                       type="text"
                       name="time"
@@ -267,7 +267,7 @@ function EditInstruction({ item, setData, fileOptions, close }) {
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="form-element">
-                  <FloatingLabel controlId="floatingInput" label="Enter makes">
+                  <FloatingLabel controlId="floatingInput" label="Edit makes">
                     <Form.Control
                       type="text"
                       name="makes"

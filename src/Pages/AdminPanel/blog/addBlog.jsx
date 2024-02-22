@@ -149,10 +149,10 @@ function AddBlog({ setData, fileOptions, close }) {
                 <h4 style={{ color: '#fff' }}>Text</h4>
                 <Form.Group className="form-element text-element">
                   <BlogTextEditor setFormData={setValues} formData={values} />
-                  {errors.text && touched.text ? (
-                    <div style={{ color: '#DC3545' }}>{errors.text}</div>
-                  ) : null}
                 </Form.Group>
+                {errors.text && touched.text ? (
+                  <div style={{ color: '#DC3545', marginBottom: '1rem' }}>{errors.text}</div>
+                ) : null}
                 <Form.Group className="form-element form-element-add mb-5">
                   <Form.Label>Images</Form.Label>
                   <Form.Group className="control-element">
@@ -220,6 +220,7 @@ function AddBlog({ setData, fileOptions, close }) {
                   </Button>
                 </Form.Group>
                 <Form.Group className="form-element">
+                  <Form.Label>Display Type</Form.Label>
                   <Form.Select
                     name="displayType"
                     value={values.displayType}
