@@ -10,6 +10,9 @@
     height: 95vh;
     min-height: 750px;
   }
+  @media (max-width: 300px) {
+    height: 900px;
+  }
   .contact-card {
     width: 800px;
     height: auto;
@@ -22,6 +25,9 @@
     left: 50%;
     transform: translate(-50%, -45%);
     padding: 25px;
+    @media (max-width: 300px) {
+      max-height: 800px;
+    }
     @media (max-width: 767px) {
       width: 95%;
       padding: 10px 25px 10px 25px;
@@ -61,10 +67,18 @@
             width: 41.66666667%;
             flex: 0 0 auto;
           }
+          @media (max-width: 300px) {
+            width: 100%;
+            flex: 0 0 auto;
+          }
         }
         > .col-sm-7 {
           @media (max-width: 575px) {
             width: 58.33333333%;
+            flex: 0 0 auto;
+          }
+          @media (max-width: 300px) {
+            width: 100%;
             flex: 0 0 auto;
           }
         }
@@ -110,9 +124,13 @@
         flex-direction: column;
         align-items: start;
         margin-left: 10px;
-        width: 100% !important;
+        width: calc(100% - 35px) !important;
         @media (max-width: 767px) {
           width: 50%;
+        }
+        @media (max-width: 300px) {
+          width: calc(100% - 45px) !important;
+          margin: 0 10px;
         }
         > div {
           display: flex;
@@ -143,7 +161,7 @@
     .contacts-info:first-child {
       margin: 0;
       @media (max-width: 767px) {
-        margin-top: 30px;
+        margin-top: 1.5rem;
       }
     }
   }
@@ -171,7 +189,7 @@
       min-width: 250px;
     }
   }
-  .google-map{
+  .google-map {
     height: 350px;
     width: 350px;
     border-radius: 18px;
