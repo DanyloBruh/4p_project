@@ -17,7 +17,6 @@ function Recipes() {
   const [allRecipes, setAllRecipes] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
-  console.log(query);
   const { id } = useParams();
   useEffect(() => {
     if (!id && !allRecipes) {

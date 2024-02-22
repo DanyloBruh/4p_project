@@ -131,6 +131,9 @@
       width: 2.3rem;
       height: 2rem;
       margin-left: 8px;
+      @media (max-width: 300px) {
+        margin-left: 0;
+      }
     }
 
     &__group {
