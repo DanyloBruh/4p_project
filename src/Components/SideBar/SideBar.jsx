@@ -42,7 +42,7 @@ function SideBar({ openSideBar, setOpenSideBar }) {
               strokeLinejoin="round"
             />
           </svg>
-          <p>+442058971574</p>
+          <a href="tel:+442058971574">+442058971574</a>
         </div>
         <div className="footer-col">
           <div>

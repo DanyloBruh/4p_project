@@ -44,7 +44,7 @@ function Contacts() {
                 </svg>
                 <div className="contacts-info-text">
                   <h2>Phone</h2>
-                  <p>+442058971574</p>
+                  <a href="tel:+442058971574">+442058971574</a>
                 </div>
               </Col>
               <Col md={12} sm={7} className="contacts-info">
@@ -62,7 +62,7 @@ function Contacts() {
                 </svg>
                 <div className="contacts-info-text">
                   <h2>Email</h2>
-                  <p>example@gmail.com</p>
+                  <a href="mailto:example@gmail.com">example@gmail.com</a>
                 </div>
               </Col>
               <Col md={12} sm={5} className="contacts-info">
