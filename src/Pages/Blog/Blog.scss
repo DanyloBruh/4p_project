@@ -12,6 +12,7 @@
     }
     @media (max-width: 575px) {
       margin-top: 75px;
+      padding-top: 1rem;
     }
     > .ornament-left {
       height: calc(100% + 100px);
@@ -41,9 +42,7 @@
     }
   }
   &__main-article {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 18px;
+    margin-bottom: 1rem;
   }
   &__secondary-article {
     .col-sm-6 {
