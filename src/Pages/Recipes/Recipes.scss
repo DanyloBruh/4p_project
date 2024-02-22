@@ -352,7 +352,7 @@
     }
   }
   > .ornament-left {
-    height: 100%;
+    height: calc(100vh - 779px);
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
     background-size: 100%;
@@ -365,7 +365,7 @@
     }
   }
   > .ornament-rigth {
-    height: 100%;
+    height: calc(100vh - 779px);
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
     background-size: 100%;
