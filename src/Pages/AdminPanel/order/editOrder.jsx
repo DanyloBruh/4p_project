@@ -448,6 +448,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                         </InputGroup>
                       </Form.Group>
                       <Form.Group className="form-element">
+                        <Form.Label>Payment Type</Form.Label>
                         <Form.Select
                           name="paymentType"
                           className="form-element-select"
@@ -465,6 +466,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                         </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-element">
+                        <Form.Label>Delivery Type</Form.Label>
                         <Form.Select
                           name="deliveryType"
                           className="form-element-select"
@@ -678,6 +680,7 @@ function EditOrder({ item, setData, fileOptions, close }) {
                         </InputGroup>
                       </Form.Group>
                       <Form.Group className="form-element">
+                        <Form.Label>Order Status</Form.Label>
                         <Form.Select
                           name="status"
                           className="form-element-select"

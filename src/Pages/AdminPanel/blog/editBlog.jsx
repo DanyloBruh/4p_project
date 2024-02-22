@@ -36,7 +36,7 @@ function EditBlog({
         .max(100, 'Title must not be more than 100 characters')
         .required('Title is required')
         .matches(/^[^"]*$/, 'Title cannot contain double quotes'),
-      text: Yup.string(),
+      text: Yup.string().required('Text is required'),
       Images: Yup.array().of(
         Yup.mixed()
           .test('fileSize', 'Image too large', (value) => {
@@ -173,7 +173,7 @@ function EditBlog({
                 <Form.Label>Edit blog</Form.Label>
 
                 <Form.Group className="form-element">
-                  <FloatingLabel controlId="floatingInput" label="Enter title">
+                  <FloatingLabel controlId="floatingInput" label="Edit title">
                     <Form.Control
                       required
                       type="text"
@@ -198,7 +198,7 @@ function EditBlog({
                     content={values.text}
                   />
                   {errors.text && touched.text ? (
-                    <div style={{ color: '#DC3545' }}>{errors.text}</div>
+                    <div style={{ color: '#DC3545', marginBottom: '1rem' }}>{errors.text}</div>
                   ) : null}
                 </Form.Group>
                 <Form.Group className="form-element form-element-add images">
@@ -263,6 +263,7 @@ function EditBlog({
                   </Button>
                 </Form.Group>
                 <Form.Group className="form-element">
+                  <Form.Label>Display Type</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={handleChange}
@@ -272,7 +273,6 @@ function EditBlog({
                     name="displayType"
                     autoComplete="off"
                   >
-                    <option>choose where you want to display the blog</option>
                     <option>firstPage</option>
                     <option>featured</option>
                     <option>default</option>

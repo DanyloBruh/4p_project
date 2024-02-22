@@ -138,7 +138,7 @@ function EditUser({
               <Form.Group className="form-element">
                 <FloatingLabel
                   controlId="floatingInput"
-                  label="Enter user name"
+                  label="Edit user name"
                 >
                   <Form.Control
                     type="text"
@@ -156,6 +156,7 @@ function EditUser({
                 </FloatingLabel>
               </Form.Group>
               <Form.Group className="form-element">
+                <Form.Label>Role</Form.Label>
                 <Form.Select
                   name="role"
                   value={values.role}
@@ -164,7 +165,6 @@ function EditUser({
                   isInvalid={touched.role && errors.role}
                   autoComplete="off"
                 >
-                  <option>Сhoose a role from the select menu</option>
                   <option>admin</option>
                   <option>employee</option>
                 </Form.Select>
@@ -173,7 +173,7 @@ function EditUser({
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="form-element">
-                <FloatingLabel controlId="floatingInput" label="Enter email">
+                <FloatingLabel controlId="floatingInput" label="Edit email">
                   <Form.Control
                     type="text"
                     name="email"
@@ -190,7 +190,7 @@ function EditUser({
                 </FloatingLabel>
               </Form.Group>
               <Form.Group className="form-element">
-                <FloatingLabel controlId="floatingInput" label="Enter password">
+                <FloatingLabel controlId="floatingInput" label="Edit password">
                   <Form.Control
                     type="password"
                     name="password"

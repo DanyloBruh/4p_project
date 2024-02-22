@@ -167,7 +167,7 @@ function EditProduct({ item, setData, fileOptions, close }) {
                 <Form.Group className="form-element">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Enter product name"
+                    label="Edit product name"
                   >
                     <Form.Control
                       type="text"
@@ -185,7 +185,7 @@ function EditProduct({ item, setData, fileOptions, close }) {
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="form-element">
-                  <FloatingLabel controlId="floatingInput" label="Enter weight">
+                  <FloatingLabel controlId="floatingInput" label="Edit weight">
                     <Form.Control
                       type="text"
                       name="weight"
@@ -202,7 +202,7 @@ function EditProduct({ item, setData, fileOptions, close }) {
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="form-element">
-                  <FloatingLabel controlId="floatingInput" label="Enter price">
+                  <FloatingLabel controlId="floatingInput" label="Edit price">
                     <Form.Control
                       type="number"
                       name="price"

@@ -10,11 +10,22 @@
     padding-top: 15px;
   }
 }
+
+.footer-row {
+  justify-content: space-around;
+}
+
 .footer-logo {
   width: 47px;
   height: 47px;
   @media (max-width: 575px) {
     margin-left: 15px;
+  }
+}
+
+.footer-col.logo {
+  @media (max-width: 400px) {
+    display: none;
   }
 }
 .footer-hours {
@@ -30,6 +41,10 @@
     flex: 0 0 auto;
     width: 25% !important;
   }
+  @media (max-width: 400px) {
+    width: 32% !important;
+  }
+
   > h2 {
     color: #fff;
     font-family: 'Outfit', sans-serif;
@@ -86,6 +101,7 @@
     position: absolute;
     bottom: -5px;
   }
+
 }
 .footer-line {
   width: 100%;
@@ -110,3 +126,9 @@
     margin: 0;
   }
 }
+
+// .footer-col:first-child {
+//   @media (max-width: 400px) {
+//     width: 25px !important;
+//   }
+// }

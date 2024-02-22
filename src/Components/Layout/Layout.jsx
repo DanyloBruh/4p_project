@@ -4,13 +4,30 @@ import { ToastContainer } from 'react-toastify';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import SmallFooter from '../SmallFooter/SmallFooter';
 import './Layout.scss';
 import BuyList from '../buyList/BuyList';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Layout() {
   const location = useLocation();
+  console.log(location);
   // eslint-disable-next-line
+  if (location.pathname.match('/contacts')) {
+    return (
+      <>
+        <Header />
+        <BuyList />
+        <ToastContainer />
+
+        <div className="content">
+          <Outlet />
+        </div>
+
+        <SmallFooter />
+      </>
+    );
+  }
   if (
     !location.pathname.match('^/admin/')
     && location.pathname !== '/addform'

@@ -200,6 +200,7 @@ function AddInstruction({ setData, fileOptions, close }) {
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="form-element mb-3">
+                  <Form.Label>Difficulty</Form.Label>
                   <Form.Select
                     name="difficulty"
                     value={values.difficulty}
