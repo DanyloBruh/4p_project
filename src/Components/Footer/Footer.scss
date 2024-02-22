@@ -1,8 +1,9 @@
 .footer-body {
   width: 100%;
+  border-top: 1px solid #bebebe;
   min-height: 270px;
   height: auto;
-  background: #232323;
+  background: #111111;
   padding-top: 30px;
   margin-top: auto;
   @media (max-width: 575px) {
@@ -16,6 +17,7 @@
 }
 
 .footer-logo {
+  opacity: 90%;
   width: 47px;
   height: 47px;
   @media (max-width: 575px) {
@@ -47,10 +49,11 @@
 
   > h2 {
     color: #fff;
+    opacity: 93%;
     font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 100;
     line-height: normal;
     text-align: left;
     margin-top: 15px;
@@ -58,25 +61,33 @@
   }
   > a {
     > p {
-      color: #fff;
+      color: #bebebe;
+      opacity: 75%;
       font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-style: normal;
       font-weight: 300;
       line-height: normal;
       text-align: left;
       margin-bottom: 15px;
     }
+    > p:hover {
+      opacity: 100%;
+    }
   }
   > p {
-    color: #fff;
+    color: #bebebe;
+    opacity: 75%;
     font-family: 'Outfit', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     text-align: left;
     margin-bottom: 15px;
+  }
+  > p:hover {
+    opacity: 100%;
   }
   > div {
     display: flex;
@@ -85,8 +96,9 @@
     margin-bottom: 15px;
     > p {
       color: #fff;
+      opacity: 93%;
       font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-style: normal;
       font-weight: 300;
       line-height: normal;
@@ -97,7 +109,8 @@
   > div::before {
     content: '';
     width: 100%;
-    border-bottom: 1px solid #bebebe;
+    border-bottom: 1px solid #fff;
+    opacity: 80%;
     position: absolute;
     bottom: -5px;
   }
@@ -117,10 +130,11 @@
   height: 50px;
   > p {
     color: #bebebe;
+    opacity: 75%;
     font-family: 'Outfit', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 300;
     line-height: normal;
     vertical-align: middle;
     margin: 0;
