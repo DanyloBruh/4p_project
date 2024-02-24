@@ -42,7 +42,7 @@ function Order({
   useEffect(() => {
     if (addressFinder) {
       PostcodeLookup.setup({
-        apiKey: 'ak_ls0dm59drQLRxSMrdq7eDMB3nRAd7',
+        apiKey: process.env.POSTCODE_API_KEY,
         context: '#lookup_field',
         input: '#postcode_input',
         button: '#postcode_button',
