@@ -15,7 +15,8 @@
       padding-top: 1rem;
     }
     > .ornament-left {
-      height: calc(100vh - 274px);
+      min-height: calc(100vh - 95px);
+      height: calc(100% + 40px);
       width: 100px;
       background-image: url('../../Assets/ornaments/ornament-blog.png');
       background-size: 100%;
@@ -28,7 +29,8 @@
       }
     }
     > .ornament-rigth {
-      height: calc(100vh - 274px);
+      min-height: calc(100vh - 95px);
+      height: calc(100% + 40px);
       width: 100px;
       background-image: url('../../Assets/ornaments/ornament-blog.png');
       background-size: 100%;
