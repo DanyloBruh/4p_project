@@ -26,16 +26,22 @@
     width: 100%;
     height: 505px;
     position: relative;
-    background-image: url('../../Assets/recipe-bg.webp');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     align-items: center;
     justify-content: center;
     z-index: 1;
     background-color: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    > img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
   }
   &__container {
+    z-index: 2;
     > h2 {
       padding: 195px 0 0 0;
       margin: auto;

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { useEffect, useMemo, useState } from 'react';
 import {
@@ -12,6 +13,8 @@ import Recipe from '../../Components/Recipe/Recipe';
 import RecipeItemPlaceholder from '../../Components/RecipeItemPlaceholder/RecipeItemPlaceholder';
 import getSearchWith from '../../Helper/searchHelper';
 import ToastNotification from '../../Components/Toast/Toast';
+import ImageComponent from '../../Components/Image/ImageComponent';
+import RecipeBg from '../../Assets/recipe-bg.webp';
 
 function Recipes() {
   const [allRecipes, setAllRecipes] = useState();
@@ -50,6 +53,13 @@ function Recipes() {
   return !id ? (
     <div className="recipes">
       <div className="recipes__header">
+        <ImageComponent
+          src={RecipeBg}
+          alt="12"
+          hash="1XELW:}["
+          height={505}
+          width={window.innerWidth}
+        />
         <Container className="recipes__container">
           <h2>Search the recipe you need</h2>
           <div className="search-bar">
