@@ -47,7 +47,6 @@ function Recipes() {
 
     return [];
   }, [query, allRecipes]);
-  console.log(visibleRecipes);
   return !id ? (
     <div className="recipes">
       <div className="recipes__header">
