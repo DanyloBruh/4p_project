@@ -26,7 +26,7 @@
     width: 100%;
     height: 505px;
     position: relative;
-    background-image: url('../../Assets//recipe-bg.png');
+    background-image: url('../../Assets/recipe-bg.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -352,7 +352,8 @@
     }
   }
   > .ornament-left {
-    height: calc(100vh - 779px);
+    min-height: calc(100vh - 505px);
+    height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
     background-size: 100%;
@@ -365,7 +366,8 @@
     }
   }
   > .ornament-rigth {
-    height: calc(100vh - 779px);
+    min-height: calc(100vh - 505px);
+    height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
     background-size: 100%;

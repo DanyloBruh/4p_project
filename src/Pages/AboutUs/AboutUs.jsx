@@ -1,10 +1,10 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './AboutUs.scss';
-import Dumplings from '../../Assets/dumplings-about-us.jpg';
-import Shawerma from '../../Assets/shawarma.jpg';
-import Borsch from '../../Assets/borsch.jpg';
-import Dumplings2 from '../../Assets/dumplings-about-us_2.jpg';
+import Dumplings from '../../Assets/dumplings-about-us.webp';
+import Shawerma from '../../Assets/shawarma.webp';
+import Borsch from '../../Assets/borsch_1.webp';
+import Dumplings2 from '../../Assets/dumplings-about-us_2.webp';
 
 function AboutUs() {
   return (
