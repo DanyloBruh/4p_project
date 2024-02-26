@@ -4,6 +4,8 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './Contacts.scss';
+import ContactBg from '../../Assets/contacts-bg.webp';
+import ImageComponent from '../../Components/Image/ImageComponent';
 
 function Contacts() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -21,6 +23,13 @@ function Contacts() {
   }, []);
   return (
     <div className="contacts-content">
+      <ImageComponent
+        src={ContactBg}
+        alt="contact-bg"
+        hash="L5Ex;G.jn2xt1nxxD*R-u*xI?btR"
+        height="100%"
+        width="100%"
+      />
       <Container className="contact-card">
         <h2>Contacts</h2>
         <Row>
@@ -62,7 +71,9 @@ function Contacts() {
                 </svg>
                 <div className="contacts-info-text">
                   <h2>Email</h2>
-                  <a href="mailto:frompeople4@gmail.com">frompeople4@gmail.com</a>
+                  <a href="mailto:frompeople4@gmail.com">
+                    frompeople4@gmail.com
+                  </a>
                 </div>
               </Col>
               <Col md={12} sm={5} className="contacts-info">
@@ -125,6 +136,7 @@ function Contacts() {
           <Col md={6} sm={12} className="col-contacts-address">
             <div className="google-map">
               <iframe
+                name="map"
                 width={
                   windowSize <= 575
                     ? windowSize <= 370
@@ -142,7 +154,10 @@ function Contacts() {
                 <a href="https://www.gps.ie/">gps trackers</a>
               </iframe>
             </div>
-            <p className="address-map">you can find us at | Cambridge House, Highgate, Forest Row, RH18 5BA</p>
+            <p className="address-map">
+              you can find us at | Cambridge House, Highgate, Forest Row, RH18
+              5BA
+            </p>
           </Col>
         </Row>
       </Container>

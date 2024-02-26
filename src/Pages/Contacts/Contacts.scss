@@ -1,11 +1,12 @@
 .contacts-content {
   min-height: 820px;
   height: 90vh;
-  background-image: url('../../Assets/contacts-bg.webp');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: bottom;
   position: relative;
+  > img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
   @media (max-width: 575px) {
     height: 95vh;
     min-height: 750px;

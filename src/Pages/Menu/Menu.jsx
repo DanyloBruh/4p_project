@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
@@ -18,6 +19,7 @@ import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/Menu
 import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
 import { offScroll, onScroll } from '../../redux/scrollSlice';
 import ToastNotification from '../../Components/Toast/Toast';
+import ImageComponent from '../../Components/Image/ImageComponent';
 
 function Menu() {
   const [menuItems, setMenuItems] = useState();
@@ -47,11 +49,7 @@ function Menu() {
     <div className="menu-content">
       <div className="menu-header">
         <Container className="menu-header__text-box">
-          <h2>
-            Lorem ipsum dolor sit amet.
-            <br />
-            Non animi minus ut eveniet illum et eligendi debitis.
-          </h2>
+          <h2>Greate food from good people</h2>
           <Link
             // activeClass="active"
             to="menu"
@@ -65,7 +63,13 @@ function Menu() {
         </Container>
         <Carousel>
           <Carousel.Item>
-            <img src={Varenyk} alt="" />
+            <ImageComponent
+              src={Varenyk}
+              alt="12"
+              hash="L4Bz5-Em0KIq~BkWE2D%009FM_IU"
+              height={505}
+              width="100%"
+            />
           </Carousel.Item>
           <Carousel.Item>
             <img src={Dumplings} alt="" />
