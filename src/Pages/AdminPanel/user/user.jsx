@@ -149,8 +149,6 @@ function User({
     setVisibleType('');
   }, []);
 
-  console.log(data);
-
   return (
     <>
       {visibleType === 'add' && (

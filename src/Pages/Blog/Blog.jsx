@@ -15,7 +15,6 @@ import ToastNotification from '../../Components/Toast/Toast';
 
 function Blog() {
   const [allBlogs, setAllBlogs] = useState();
-  console.log(allBlogs);
   const { id } = useParams();
   useEffect(() => {
     if (!id && !allBlogs) {

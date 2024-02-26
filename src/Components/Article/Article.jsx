@@ -29,7 +29,6 @@ function Article({ blog }) {
       navigate(from, { replace: true });
     }
   }, []);
-  console.log(blogInfo);
   return (
     <div className="article">
       <Container>

@@ -11,7 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Layout() {
   const location = useLocation();
-  console.log(location);
   // eslint-disable-next-line
   if (location.pathname.match('/contacts')) {
     return (
