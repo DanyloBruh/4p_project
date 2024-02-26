@@ -8,55 +8,65 @@ function PrivacyPolicy() {
     <div className="privacy-policy">
       <Container>
         <h1>Privacy Policy</h1>
-        <p className="update-time">Last updated: January 2, 2024</p>
+        <p className="update-time">Last updated: February 26, 2024</p>
         <p className="info-text">
-          We are committed to maintaining the accuracy, confidentiality, and
-          security of your personally identifiable information (Personal
-          Information). As part of this commitment, our privacy policy governs
-          our actions as they relate to the collection, use and disclosure of
-          Personal Information. Our privacy policy is based upon the values set
-          by the Canadian Standards Associations Model Code for the Protection
-          of Personal Information and Canadas Personal Information Protection
-          and Electronic Documents Act.
+          This policy sets out how you may use our website and how 4rom PEOPLE
+          uses and protects any information that you give us when you use this
+          website. 4rom PEOPLE is registered in England, no 11254066.
         </p>
         <hr />
         <div className="info-section">
-          <h2>Introduction</h2>
+          <h2>Visiting our website</h2>
           <p className="info-text">
-            We are responsible for maintaining and protecting the Personal
-            Information under our control. We have designated an individual or
-            individuals who is/are responsible for compliance with our privacy
-            policy.
+            By visiting www.4rompeople.com you agree that you will not
+            reproduce, copy, emulate or create derivative works from the content
+            of the website. When using our website you must not introduce any
+            files containing malicious code including, but not limited to,
+            viruses, Trojan Horses, spyware or malware. You must not attempt to
+            gain unauthorized access to our website or attack our website,
+            servers, computers or databases in any way. You further agree that
+            you will not act in a manner which may be perceived as damaging to
+            the reputation of 4rom PEOPLE. The information displayed on our
+            website is provided without any guarantees, conditions or warranties
+            as to its accuracy.
           </p>
           <hr />
         </div>
         <div className="info-section">
-          <h2>Identifying Purposes</h2>
+          <h2>Your privacy</h2>
           <p className="info-text">
-            We collect, use and disclose Personal Information to provide you
-            with the product or service you have requested and to offer you
-            additional products and services we believe you might be interested
-            in. The purposes for which we collect Personal Information will be
-            identified before or at the time we collect the information. In
-            certain circumstances, the purposes for which information is
-            collected may be clear, and consent may be implied, such as where
-            your name, address and payment information is provided as part of
-            the order process.
+            4rom PEOPLE is committed to ensuring that your privacy is protected.
+            Should we ask you to provide certain information by which you can be
+            identified when using this website then you can be assured that it
+            will only be used in accordance with this privacy statement. We will
+            never pass your details on to any third party without asking for
+            your permission, unless we are required to do so by law. Online
+            ordering If you order a product delivery via our website, we collect
+            the following personal information: • Name • Address • Telephone
+            number • Email address • Any other information you choose to provide
+            Your information will be used for the sole purpose of fulfilling
+            your order. For further information or to withdraw your consent for
+            us to store your personal information please contact us.
+            (www.4rompeople.com/contact/)
           </p>
           <hr />
         </div>
         <div className="info-section">
-          <h2>Consent</h2>
+          <h2>Secure payments via Paymentsense</h2>
           <p className="info-text">
-            Knowledge and consent are required for the collection, use or
-            disclosure of Personal Information except where required or
-            permitted by law. Providing us with your Personal Information is
-            always your choice. However, your decision not to provide certain
-            information may limit our ability to provide you with our products
-            or services. We will not require you to consent to the collection,
-            use, or disclosure of information as a condition to the supply of a
-            product or service, except as required to be able to supply the
-            product or service.
+            Card payments are securely processed on our behalf by Paymentsense.
+            As such, The Anchor does not see nor store your card details.
+          </p>
+          <hr />
+        </div>
+        <div className="info-section">
+          <h2>Server security</h2>
+          <p className="info-text">
+            4rom PEOPLE website is hosted on servers managed by Clook.
+            (https://www.clook.net/) All data transferred between users and the
+            Clook servers is encrypted. Only technical staff at Clook and our
+            website management company have access to the data stored on the
+            server.
           </p>
           <hr />
         </div>

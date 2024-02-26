@@ -44,7 +44,7 @@ function Contacts() {
                 </svg>
                 <div className="contacts-info-text">
                   <h2>Phone</h2>
-                  <a href="tel:+442058971574">+442058971574</a>
+                  <a href="tel:+447867256198">+447867256198</a>
                 </div>
               </Col>
               <Col md={12} sm={7} className="contacts-info">
@@ -62,7 +62,7 @@ function Contacts() {
                 </svg>
                 <div className="contacts-info-text">
                   <h2>Email</h2>
-                  <a href="mailto:example@gmail.com">example@gmail.com</a>
+                  <a href="mailto:frompeople4@gmail.com">frompeople4@gmail.com</a>
                 </div>
               </Col>
               <Col md={12} sm={5} className="contacts-info">
@@ -142,7 +142,7 @@ function Contacts() {
                 <a href="https://www.gps.ie/">gps trackers</a>
               </iframe>
             </div>
-            <p className="address-map">you can find us at | 5 Wellesley Ct</p>
+            <p className="address-map">you can find us at | Cambridge House, Highgate, Forest Row, RH18 5BA</p>
           </Col>
         </Row>
       </Container>
