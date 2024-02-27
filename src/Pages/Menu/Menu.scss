@@ -167,7 +167,7 @@
   }
   &__product {
     > .col-sm-6 {
-      @media (max-width: 576px) {
+      @media (max-width: 575px) {
         flex: 0 0 auto;
         width: 50%;
       }
