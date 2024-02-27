@@ -47,7 +47,7 @@ function AddBlog({ setData, fileOptions, close }) {
             )
             .test(
               'fileFormat',
-              'Unsupported Format',
+              'Unsupported Format | Suported .webp format',
               (value) => value && fileOptions.supportedFormats.includes(value.type),
             ),
         ),
