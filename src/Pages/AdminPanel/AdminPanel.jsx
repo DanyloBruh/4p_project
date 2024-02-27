@@ -75,7 +75,7 @@ function AdminPanel() {
   const fileOptions = useMemo(
     () => ({
       fileSize: 5242880,
-      supportedFormats: ['image/jpg', 'image/jpeg', 'image/png'],
+      supportedFormats: ['image/webp'],
     }),
     [],
   );

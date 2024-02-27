@@ -62,7 +62,7 @@ function EditProduct({ item, setData, fileOptions, close }) {
             if (!value.size) return true;
             return value.size <= fileOptions.fileSize;
           })
-          .test('fileFormat', 'Unsupported format', (value) => {
+          .test('fileFormat', 'Unsupported format | Suported .webp format', (value) => {
             if (!value.type) return true;
             return fileOptions.supportedFormats.includes(value.type);
           }),
