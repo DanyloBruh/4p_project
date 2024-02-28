@@ -42,7 +42,9 @@ function MenuProduct({ product, setSelectItems }) {
       </button>
 
       <div className="product__text">
-        <h2>{product.name}</h2>
+        <button type="button" className="poroduct-name-button" onClick={() => setSelectItems(product.id)}>
+          {product.name}
+        </button>
         <p id="price">{`PRICE | ${product.price}$`}</p>
         <p>{product.description}</p>
         <div className="btn-group">

@@ -175,7 +175,6 @@ function EditBlog({
                 <Form.Group className="form-element">
                   <FloatingLabel controlId="floatingInput" label="Edit title">
                     <Form.Control
-                      required
                       type="text"
                       onChange={handleChange}
                       value={values.name}
