@@ -14,7 +14,7 @@ import {
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Product from './product';
 import { orderComplite } from '../../Helper/requests';
 import { deleteOrderData } from '../../redux/orderDataSlice';
@@ -36,6 +36,8 @@ function Order({
 }) {
   const [products, setProducts] = useState([]);
   const [addressFinder, setAddressFinder] = useState(false);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const location = useLocation();
   const [schema, setSchema] = useState({});
   const dispath = useDispatch();
 
@@ -107,6 +109,14 @@ function Order({
     setProducts(productDedux);
   }, [productDedux]);
 
+  useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+      return;
+    }
+    setOrderVisibleFalse();
+  }, [location]);
+
   const handleHideOrder = (event) => {
     if (event.target === event.currentTarget) {
       setOrderVisibleFalse();
@@ -161,6 +171,9 @@ function Order({
     await orderComplite(request)
       .then(() => {
         dispath(deleteOrderData());
+        // eslint-disable-next-line no-undef
+        const myStorage = window.localStorage;
+        myStorage.setItem('order', JSON.stringify([]));
         ToastNotification(
           'success',
           'Thank you for your order! we will call you back soon',
