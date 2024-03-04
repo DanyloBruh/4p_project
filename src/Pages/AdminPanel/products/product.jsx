@@ -32,7 +32,6 @@ function Product({
   const [visibleType, setVisibleType] = useState('');
   const [editItem, setEditItem] = useState();
 
-  console.log(data);
   useEffect(() => {
     setData((state) => ({ nodes }));
   }, [nodes]);

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
@@ -6,9 +7,9 @@ import { NavLink } from 'react-router-dom';
 import './Menu.scss';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import Varenyk from '../../Assets/varenyk.png';
-import Dumplings from '../../Assets/dumplings.png';
-import Borsch from '../../Assets/borsch.png';
+import Varenyk from '../../Assets/main-varenyk.webp';
+import Dumplings from '../../Assets/main-dumplings.webp';
+import Borsch from '../../Assets/main-borsch.webp';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import ProductCard from '../../Components/ProductCard/ProductCard';
@@ -18,6 +19,7 @@ import MenuProductPlaceholder from '../../Components/MenuProductPlaceholder/Menu
 import SecondaryArticlePlaceholder from '../../Components/SecondaryArticlePlaceholder/SecondaryArticlePlaceholder';
 import { offScroll, onScroll } from '../../redux/scrollSlice';
 import ToastNotification from '../../Components/Toast/Toast';
+import ImageComponent from '../../Components/Image/ImageComponent';
 
 function Menu() {
   const [menuItems, setMenuItems] = useState();
@@ -47,11 +49,7 @@ function Menu() {
     <div className="menu-content">
       <div className="menu-header">
         <Container className="menu-header__text-box">
-          <h2>
-            Lorem ipsum dolor sit amet.
-            <br />
-            Non animi minus ut eveniet illum et eligendi debitis.
-          </h2>
+          <h2>From people to people</h2>
           <Link
             // activeClass="active"
             to="menu"
@@ -65,7 +63,13 @@ function Menu() {
         </Container>
         <Carousel>
           <Carousel.Item>
-            <img src={Varenyk} alt="" />
+            <ImageComponent
+              src={Varenyk}
+              alt="12"
+              hash="L4Bz5-Em0KIq~BkWE2D%009FM_IU"
+              height={505}
+              width="100%"
+            />
           </Carousel.Item>
           <Carousel.Item>
             <img src={Dumplings} alt="" />
@@ -78,12 +82,7 @@ function Menu() {
       <Container className="menu-main">
         <div id="menu">
           <h2>Menu</h2>
-          <p>
-            Non voluptas minima et nobis debitis vel dolor nisi? Et esse
-            similique
-            <br />
-            ut corrupti repellat ea enim harum.
-          </p>
+          <p>Explore Ukrainian cuisine now!</p>
           <Row className="menu-main__product">
             {menuItems?.map((item) => (
               <Col key={item.id} xxl={4} xl={4} lg={4} md={6} sm={6}>
@@ -110,9 +109,9 @@ function Menu() {
           <Row className="main-page-about-us main-page-about-us__revers">
             <Col lg={7} md={6}>
               <p>
-                Passion for cooking, love for Ukrainian cuisine, desire to be
-                useful and give joy to others - this is what prompted us to
-                found 4p
+                We are Ukrainians who have relocated to the United Kingdom, not
+                in pursuit of a brighter future, but as a result of the war that
+                commenced on February 24, 2022, in our beloved Ukraine
               </p>
             </Col>
             <Col lg={5} md={6}>
@@ -125,17 +124,19 @@ function Menu() {
             </Col>
             <Col lg={7} md={6}>
               <p>
-                4P - delivery of Ukrainian food in London with premium quality,
-                impeccable service and its own philosophy.
+                The core long term form of our activity will is selling of
+                Ukrainian frozen food. One pound from each food item sold will
+                help to fund our therapeutic classes for Ukrainian PTSD
+                sufferers.
               </p>
             </Col>
           </Row>
           <Row className="main-page-about-us main-page-about-us__revers">
             <Col lg={7} md={6}>
               <p>
-                Our menu combines classic Ukrainian cuisine and the chefs
-                original recipes.We cook for you exclusively from the freshest
-                and highest quality products.
+                We plan to hold events at various venues in which real homemade
+                Ukrainian food made by Ukrainians can be tested and will give
+                British people change to savour our delicious food
               </p>
             </Col>
             <Col lg={5} md={6}>
@@ -155,19 +156,19 @@ function Menu() {
           <h2>more about our activities</h2>
           <Row>
             {blogItems
-              && blogItems?.map((item) => (
-                <Col key={item.id} lg={4} sm={6}>
-                  <SecondaryArticle
-                    id={item.id}
-                    title={item.name}
-                    text={item.text}
-                    createdBy={item.User.name}
-                    image={item.Images[0].imageData}
-                    imageName={item.Images[0].imageName}
-                    createdAt={moment(item.createdAt).format('DD/MM/YY')}
-                  />
-                </Col>
-              ))}
+            && blogItems?.map((item) => (
+              <Col key={item.id} lg={4} sm={6}>
+                <SecondaryArticle
+                  id={item.id}
+                  title={item.name}
+                  text={item.text}
+                  createdBy={item.User.name}
+                  image={item.Images[0].imageData}
+                  imageName={item.Images[0].imageName}
+                  createdAt={moment(item.createdAt).format('DD/MM/YY')}
+                />
+              </Col>
+            ))}
             {!blogItems && (
               <>
                 <Col lg={4} sm={6}>

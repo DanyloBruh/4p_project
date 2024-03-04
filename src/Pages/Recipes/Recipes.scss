@@ -26,16 +26,22 @@
     width: 100%;
     height: 505px;
     position: relative;
-    background-image: url('../../Assets//recipe-bg.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     align-items: center;
     justify-content: center;
     z-index: 1;
     background-color: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    > img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
   }
   &__container {
+    z-index: 2;
     > h2 {
       padding: 195px 0 0 0;
       margin: auto;
@@ -48,7 +54,7 @@
       line-height: normal;
       text-transform: capitalize;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       > h2 {
         font-size: 2.5rem;
       }
@@ -62,7 +68,7 @@
       margin-top: 38px;
       display: flex;
       justify-content: center;
-      align-items: center; 
+      align-items: center;
     }
   }
 
@@ -104,6 +110,7 @@
       > img {
         width: 500px;
         height: 300px;
+        object-fit: contain;
       }
       > .placeholder-img {
         background-color: #3d3d3d;
@@ -201,7 +208,14 @@
           width: 350px;
           height: 100%;
         }
-
+        > .placeholder-img {
+          width: 350px;
+          height: 100%;
+        }
+        > .carousel-placeholder-text {
+          width: calc(100% - 350px);
+          padding: 0 30px;
+        }
         > .carousel-text {
           margin-left: 0;
           padding: 0 20px;
@@ -218,6 +232,18 @@
           width: calc(100% - 60px);
           height: 250px;
           object-fit: cover;
+        }
+        > .placeholder-img {
+          margin: 20px 30px 0 30px;
+          width: calc(100% - 60px);
+          height: 250px;
+        }
+        > .carousel-placeholder-text {
+          width: 100%;
+          padding: 0 30px;
+          > .btn {
+            width: 100%;
+          }
         }
         > .carousel-text {
           height: calc(100% - 250px - 20px);
@@ -332,6 +358,7 @@
     }
   }
   > .ornament-left {
+    min-height: calc(100vh - 505px);
     height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');
@@ -345,6 +372,7 @@
     }
   }
   > .ornament-rigth {
+    min-height: calc(100vh - 505px);
     height: 100%;
     width: 100px;
     background-image: url('../../Assets/ornaments/ornament-recipe.png');

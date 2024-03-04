@@ -26,7 +26,6 @@ function Login() {
   });
 
   const loginHandler = async (e) => {
-    console.log(e);
     try {
       const response = await login({
         email: e.email,

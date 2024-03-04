@@ -13,16 +13,16 @@ a {
     margin-bottom: 10px;
     overflow: hidden;
     margin-top: 0 !important;
-    @media (min-width: 1200px) {
+    @media (min-width: 1199px) {
       height: 300px;
     }
-    @media (min-width: 1400px) {
+    @media (min-width: 1399px) {
       height: 350px;
     }
-    @media (max-width: 992px) {
+    @media (max-width: 991px) {
       height: 250px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       height: 220px;
     }
     @media (max-width: 575px) {

@@ -4,21 +4,23 @@
   position: relative;
   .menu-header {
     width: 100%;
-    height: 80vh;
+    height: 505px;
+    max-height: 900px;
     overflow: hidden;
     position: relative;
     &__text-box {
-      top: 50%;
-      transform: translateY(-50%);
+      bottom: 39%;
+      left: 50%;
+      position: absolute !important;
+      transform: translate(-50%, 50%);
       display: flex;
       flex-direction: column;
       z-index: 10;
-      margin: 0 5%;
       @media (max-width: 700px) {
-        margin: 0 35px;
+        padding: 0 35px;
       }
       @media (max-width: 575px) {
-        margin: 0;
+        padding: 0 10px;
       }
     }
     &__btn {
@@ -67,8 +69,9 @@
     .carousel-item {
       > img {
         width: 100%;
-        height: 80vh;
+        height: 505px;
         object-fit: cover;
+        object-position: 40%;
       }
     }
     .carousel-control-prev,
@@ -109,7 +112,7 @@
     background-size: 100%;
     position: absolute;
     z-index: -1;
-    top: 80vh;
+    top: 505px;
     left: 18px;
     @media (max-width: 1590px) {
       display: none;
@@ -122,7 +125,7 @@
     background-size: 100%;
     position: absolute;
     z-index: -1;
-    top: 80vh;
+    top: 505px;
     right: 18px;
     @media (max-width: 1590px) {
       display: none;
@@ -141,16 +144,16 @@
       font-style: normal;
       font-weight: 200;
       line-height: normal;
-      margin-bottom: 15px;
     }
     > p {
       color: #fff;
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 1.5rem;
+      font-size: 2.2rem;
       font-style: normal;
       font-weight: 200;
       line-height: normal;
+      margin-bottom: 1.2rem;
     }
   }
   hr {
@@ -164,7 +167,7 @@
   }
   &__product {
     > .col-sm-6 {
-      @media (max-width: 576px) {
+      @media (max-width: 575px) {
         flex: 0 0 auto;
         width: 50%;
       }
@@ -213,6 +216,9 @@
     line-height: normal;
     display: block;
     margin: auto 0;
+    @media (max-width: 430px) {
+      font-size: 1.1rem;
+    }
   }
   img {
     width: 100%;
@@ -221,6 +227,9 @@
     @media (max-width: 767px) {
       height: auto;
       margin-bottom: 25px;
+    }
+    @media (max-width: 430px) {
+      margin-bottom: 0;
     }
   }
   &__revers {

@@ -15,31 +15,42 @@ function Footer() {
           <Col md={2} sm={2} className="footer-col">
             <h2>4P</h2>
             <Link to="/">
-              <p>menu</p>
+              <p>Menu</p>
             </Link>
             <Link to="blog">
-              <p>blog</p>
+              <p>Blog</p>
+            </Link>
+            <Link to="recipes">
+              <p>Recipes</p>
+            </Link>
+          </Col>
+          <Col md={2} sm={2} className="footer-col">
+            <Link to="contacts">
+              <h2>CONTACTS</h2>
+            </Link>
+            <a href="mailto:frompeople4@gmail.com">
+              <p>Email</p>
+            </a>
+            <a href="https://www.instagram.com/4rom_people/">
+              <p>Instagram </p>
+            </a>
+            <a href="https://www.facebook.com/from.people.4">
+              <p>Facebook</p>
+            </a>
+          </Col>
+          <Col md={2} sm={2} className="footer-col">
+            <Link to="aboutus">
+              <h2>USEFUL INFO</h2>
             </Link>
             <Link to="aboutus">
-              <p>about</p>
+              <p>About Us</p>
             </Link>
-          </Col>
-          <Col md={2} sm={2} className="footer-col">
-            <h2>contacts</h2>
-            <p>email</p>
-            <p>instagram </p>
-            <p>twitter</p>
-          </Col>
-          <Col md={2} sm={2} className="footer-col">
-            <h2>useful info</h2>
-            <p>return policy</p>
-            <p>delivery</p>
             <Link to="privacy-policy">
-              <p>privacy policy</p>
+              <p>Privacy Policy</p>
             </Link>
           </Col>
           <Col md={3} sm={4} className="footer-col footer-hours">
-            <h2>opening hours</h2>
+            <h2>OPENING HOURS</h2>
             <div>
               <p>Mon-Fri:</p>
               <p>8am - 9pm</p>

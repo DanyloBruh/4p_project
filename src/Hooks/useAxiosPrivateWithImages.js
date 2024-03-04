@@ -11,7 +11,6 @@ const useAxiosPrivateImages = () => {
   useEffect(() => {
     const requestIntercept = axiosPrivateConfig.interceptors.request.use(
       async (config) => {
-        console.log(config);
         if (!config.headers.Authorization) {
           config.headers.Authorization = `Bearer ${auth?.accesToken}`;
         }
