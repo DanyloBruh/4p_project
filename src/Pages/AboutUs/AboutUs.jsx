@@ -16,7 +16,7 @@ function AboutUs() {
         <ImageComponent
           src={HeaderImg}
           alt="dumplings with sour cream and greens"
-          hash="2CD[@6~A4T"
+          hash="ACEB~b~B?aa{"
           height={410}
           width="100%"
         />
@@ -29,7 +29,7 @@ function AboutUs() {
             <ImageComponent
               src={AboutUs1}
               alt="vareniks with onions"
-              hash="L7Du-.?b00M{0MR*xut78wNG_MtR"
+              hash="L9E.CG^O00VY~Vn$D*s;8{Rjs.%2"
               height={330}
               width="100%"
               className="about-us__content__img right"
@@ -65,7 +65,7 @@ function AboutUs() {
             <ImageComponent
               src={AboutUs2}
               alt="molded dumplings"
-              hash="LUHng7?wpJtRE%%3XTxapIi{Won~"
+              hash="CACip$x]02s.~qofD*f+"
               height={330}
               width="100%"
               className="about-us__content__img right"
@@ -77,7 +77,7 @@ function AboutUs() {
             <ImageComponent
               src={AboutUs3}
               alt="happy employees"
-              hash="LEHnQnyW-:xH1,xvIpX8~Br?M{Sg"
+              hash="CD9aBQ~qxuxuxuxuRjWB"
               height={330}
               width="100%"
               className="about-us__content__img left"
@@ -113,7 +113,7 @@ function AboutUs() {
             <ImageComponent
               src={AboutUs4}
               alt="dumplings with sour cream and greens"
-              hash="2CD[@6~A4T"
+              hash="L7Db{6X{ELD~u6%5Djoh00ah?a%N"
               height={330}
               width="100%"
               className="about-us__content__img left"

@@ -26,7 +26,7 @@ function Contacts() {
       <ImageComponent
         src={ContactBg}
         alt="contact-bg"
-        hash="L5Ex;G.jn2xt1nxxD*R-u*xI?btR"
+        hash="LIIN%9_4NHrp16j^ofkCtSInn%kr"
         height="100%"
         width="100%"
       />

@@ -56,7 +56,7 @@ function Recipes() {
         <ImageComponent
           src={RecipeBg}
           alt="vareniks with onions"
-          hash="1XELW:}["
+          hash="36E.FN}?00Qn"
           height={505}
           width={window.innerWidth}
         />

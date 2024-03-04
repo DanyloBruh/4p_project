@@ -68,7 +68,7 @@ function Menu() {
             <ImageComponent
               src={Varenyk}
               alt="varenyks with sour cream and onions"
-              hash="L4Bz5-Em0KIq~BkWE2D%009FM_IU"
+              hash="L5G*4o~18^%g19yYIAM{02=#.9E1"
               height={505}
               width="100%"
             />
