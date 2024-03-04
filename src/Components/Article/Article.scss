@@ -125,6 +125,21 @@
       font-style: normal;
       font-weight: 300;
       line-height: normal;
+      font-size: 1.3rem;
+    }
+    > ul {
+      > li {
+        > p {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    > ol {
+      > li {
+        > p {
+          font-size: 1.3rem;
+        }
+      }
     }
   }
   &__img-placeholder {
