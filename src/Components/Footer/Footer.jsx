@@ -20,20 +20,31 @@ function Footer() {
             <Link to="blog">
               <p>Blog</p>
             </Link>
-            <Link to="aboutus">
-              <p>About</p>
+            <Link to="recipes">
+              <p>Recipes</p>
             </Link>
           </Col>
           <Col md={2} sm={2} className="footer-col">
-            <h2>CONTACTS</h2>
-            <p>Email</p>
-            <p>Instagram </p>
-            <p>Twitter</p>
+            <Link to="contacts">
+              <h2>CONTACTS</h2>
+            </Link>
+            <a href="mailto:frompeople4@gmail.com">
+              <p>Email</p>
+            </a>
+            <a href="https://www.instagram.com/4rom_people/">
+              <p>Instagram </p>
+            </a>
+            <a href="https://www.facebook.com/from.people.4">
+              <p>Facebook</p>
+            </a>
           </Col>
           <Col md={2} sm={2} className="footer-col">
-            <h2>USEFUL INFO</h2>
-            <p>Return Policy</p>
-            <p>Delivery</p>
+            <Link to="aboutus">
+              <h2>USEFUL INFO</h2>
+            </Link>
+            <Link to="aboutus">
+              <p>About Us</p>
+            </Link>
             <Link to="privacy-policy">
               <p>Privacy Policy</p>
             </Link>
