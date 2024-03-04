@@ -46,7 +46,7 @@ function Menu() {
   }, []);
 
   return (
-    <div className="menu-content">
+    <div className="menu-content" id="top">
       <div className="menu-header">
         <Container className="menu-header__text-box">
           <h2>From people to people</h2>
@@ -156,19 +156,19 @@ function Menu() {
           <h2>more about our activities</h2>
           <Row>
             {blogItems
-            && blogItems?.map((item) => (
-              <Col key={item.id} lg={4} sm={6}>
-                <SecondaryArticle
-                  id={item.id}
-                  title={item.name}
-                  text={item.text}
-                  createdBy={item.User.name}
-                  image={item.Images[0].imageData}
-                  imageName={item.Images[0].imageName}
-                  createdAt={moment(item.createdAt).format('DD/MM/YY')}
-                />
-              </Col>
-            ))}
+              && blogItems?.map((item) => (
+                <Col key={item.id} lg={4} sm={6}>
+                  <SecondaryArticle
+                    id={item.id}
+                    title={item.name}
+                    text={item.text}
+                    createdBy={item.User.name}
+                    image={item.Images[0].imageData}
+                    imageName={item.Images[0].imageName}
+                    createdAt={moment(item.createdAt).format('DD/MM/YY')}
+                  />
+                </Col>
+              ))}
             {!blogItems && (
               <>
                 <Col lg={4} sm={6}>

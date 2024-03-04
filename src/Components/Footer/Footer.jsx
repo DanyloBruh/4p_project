@@ -1,7 +1,9 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import './Footer.scss';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-scroll';
+
 import Logo from '../../Assets/logo.png';
 
 function Footer() {
@@ -13,21 +15,23 @@ function Footer() {
             <img src={Logo} alt="logo-footer" className="footer-logo" />
           </Col>
           <Col md={2} sm={2} className="footer-col">
-            <h2>4P</h2>
-            <Link to="/">
+            <Link to="top" duration={200} className="scroll-link">
+              4P
+            </Link>
+            <NavLink to="/">
               <p>Menu</p>
-            </Link>
-            <Link to="blog">
+            </NavLink>
+            <NavLink to="blog">
               <p>Blog</p>
-            </Link>
-            <Link to="recipes">
+            </NavLink>
+            <NavLink to="recipes">
               <p>Recipes</p>
-            </Link>
+            </NavLink>
           </Col>
           <Col md={2} sm={2} className="footer-col">
-            <Link to="contacts">
+            <NavLink to="contacts">
               <h2>CONTACTS</h2>
-            </Link>
+            </NavLink>
             <a href="mailto:frompeople4@gmail.com">
               <p>Email</p>
             </a>
@@ -39,15 +43,15 @@ function Footer() {
             </a>
           </Col>
           <Col md={2} sm={2} className="footer-col">
-            <Link to="aboutus">
+            <NavLink to="aboutus">
               <h2>USEFUL INFO</h2>
-            </Link>
-            <Link to="aboutus">
+            </NavLink>
+            <NavLink to="aboutus">
               <p>About Us</p>
-            </Link>
-            <Link to="privacy-policy">
+            </NavLink>
+            <NavLink to="privacy-policy">
               <p>Privacy Policy</p>
-            </Link>
+            </NavLink>
           </Col>
           <Col md={3} sm={4} className="footer-col footer-hours">
             <h2>OPENING HOURS</h2>
