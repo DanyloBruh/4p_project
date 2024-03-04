@@ -8,8 +8,10 @@ import './Menu.scss';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import Varenyk from '../../Assets/main-varenyk.webp';
-import Dumplings from '../../Assets/main-dumplings.webp';
 import Borsch from '../../Assets/main-borsch.webp';
+import AboutUs1 from '../../Assets/aboutus-1.webp';
+import AboutUs2 from '../../Assets/aboutus-2.webp';
+import AboutUs3 from '../../Assets/aboutus-3.webp';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import ProductCard from '../../Components/ProductCard/ProductCard';
@@ -72,9 +74,6 @@ function Menu() {
             />
           </Carousel.Item>
           <Carousel.Item>
-            <img src={Dumplings} alt="" />
-          </Carousel.Item>
-          <Carousel.Item>
             <img src={Borsch} alt="" />
           </Carousel.Item>
         </Carousel>
@@ -115,12 +114,12 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={Dumplings} alt="" />
+              <img src={AboutUs1} alt="" />
             </Col>
           </Row>
           <Row className="main-page-about-us">
             <Col lg={5} md={6}>
-              <img src={Varenyk} alt="" />
+              <img src={AboutUs2} alt="" />
             </Col>
             <Col lg={7} md={6}>
               <p>
@@ -140,7 +139,7 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={Borsch} alt="" />
+              <img src={AboutUs3} alt="" />
             </Col>
           </Row>
 

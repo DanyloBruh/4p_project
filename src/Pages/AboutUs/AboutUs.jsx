@@ -7,6 +7,7 @@ import HeaderImg from '../../Assets/aboutus-bg.webp';
 import AboutUs1 from '../../Assets/aboutus-1.webp';
 import AboutUs2 from '../../Assets/aboutus-2.webp';
 import AboutUs3 from '../../Assets/aboutus-3.webp';
+import AboutUs4 from '../../Assets/aboutus-4.webp';
 
 function AboutUs() {
   return (
@@ -110,7 +111,7 @@ function AboutUs() {
           </Col>
           <Col lg={6}>
             <ImageComponent
-              src={HeaderImg}
+              src={AboutUs4}
               alt="borsch"
               hash="2CD[@6~A4T"
               height={330}

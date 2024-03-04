@@ -123,11 +123,11 @@ function Contacts() {
                   <h2>working hours</h2>
                   <div>
                     <p>Mon-Fri:</p>
-                    <p>8am-9pm</p>
+                    <p>10:00 am - 5:00 pm</p>
                   </div>
                   <div>
                     <p>Sat-Sun:</p>
-                    <p>8am-1am</p>
+                    <p>10:00 am - 5:00 pm</p>
                   </div>
                 </div>
               </Col>
