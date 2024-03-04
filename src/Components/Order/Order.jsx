@@ -4,7 +4,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import './Order.scss';
 import { PostcodeLookup } from '@ideal-postcodes/postcode-lookup';
 import {
@@ -34,75 +36,51 @@ function Order({
   decCount,
 }) {
   const [products, setProducts] = useState([]);
-  const [addressFinder, setAddressFinder] = useState(false);
+  // const [addressFinder, setAddressFinder] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const location = useLocation();
-  const [schema, setSchema] = useState({});
+  const schema = useMemo(() => (
+    Yup.object().shape({
+      name: Yup.string()
+        .min(2, 'Name must be minimum 2')
+        .max(100, 'Name must not be more than 100 characters')
+        .required('Name is required'),
+      phone: Yup.string()
+        .required('Phone is required')
+        .matches(regexes.regexPhone, 'Phone number is not valid'),
+      postcode: Yup.string()
+        .required('Postcode is required')
+        .matches(regexes.regexPostcode, 'Postcode number is not valid'),
+      addressLine1: Yup.string().required(),
+      addressLine2: Yup.string(),
+      addressLine3: Yup.string(),
+      town: Yup.string().required(),
+      terms: Yup.bool().required().oneOf([true], 'Terms must be accepted'),
+      delivery: Yup.string()
+        .required('required')
+        .oneOf(['self', 'courier'], 'required'),
+      payment: Yup.string()
+        .required('required')
+        .oneOf(['card', 'cash'], 'required'),
+    })
+  ), []);
   const dispath = useDispatch();
 
   useEffect(() => {
-    if (addressFinder) {
-      PostcodeLookup.setup({
-        apiKey: process.env.POSTCODE_API_KEY,
-        context: '#lookup_field',
-        input: '#postcode_input',
-        button: '#postcode_button',
-        outputFields: {
-          line_1: '#line_1',
-          line_2: '#line_2',
-          line_3: '#line_3',
-          post_town: '#post_town',
-          postcode: '#postcode',
-        },
-      });
-
-      setSchema(
-        Yup.object().shape({
-          name: Yup.string()
-            .min(2, 'Name must be minimum 2')
-            .max(100, 'Name must not be more than 100 characters')
-            .required('Name is required'),
-          phone: Yup.string()
-            .required('Phone is required')
-            .matches(regexes.regexPhone, 'Phone number is not valid'),
-          postcode: Yup.string()
-            .required('Postcode is required')
-            .matches(regexes.regexPostcode, 'Postcode number is not valid'),
-          addressLine1: Yup.string().required(),
-          addressLine2: Yup.string(),
-          addressLine3: Yup.string(),
-          town: Yup.string().required(),
-          terms: Yup.bool().required().oneOf([true], 'Terms must be accepted'),
-          delivery: Yup.string()
-            .required('required')
-            .oneOf(['self', 'courier'], 'required'),
-          payment: Yup.string()
-            .required('required')
-            .oneOf(['card', 'cash'], 'required'),
-        }),
-      );
-    } else {
-      setSchema(
-        Yup.object().shape({
-          name: Yup.string()
-            .min(2, 'Name must be minimum 2')
-            .max(50, 'Name must not be more than 50 characters')
-            .required('Name is required'),
-          phone: Yup.string()
-            .required('Phone is required')
-            .matches(regexes.regexPhone, 'Phone number is not valid'),
-          comment: Yup.string(),
-          terms: Yup.bool().required().oneOf([true], 'Terms must be accepted'),
-          delivery: Yup.string()
-            .required('required')
-            .oneOf(['self', 'courier'], 'required'),
-          payment: Yup.string()
-            .required('required')
-            .oneOf(['card', 'cash'], 'required'),
-        }),
-      );
-    }
-  }, [addressFinder]);
+    PostcodeLookup.setup({
+      apiKey: process.env.POSTCODE_API_KEY,
+      context: '#lookup_field',
+      input: '#postcode_input',
+      button: '#postcode_button',
+      outputFields: {
+        line_1: '#line_1',
+        line_2: '#line_2',
+        line_3: '#line_3',
+        post_town: '#post_town',
+        postcode: '#postcode',
+      },
+    });
+  }, []);
 
   useEffect(() => {
     setProducts(productDedux);
@@ -276,9 +254,9 @@ function Order({
                         </InputGroup>
                       </Form.Group>
                       <div className="order__checkBoxes">
-                        <div className="order__checkBoxes__group">
-                          <Form.Group controlId="floatingInput">
-                            <h2 className="order__radioTitle">Payment</h2>
+                        <Form.Group controlId="floatingInput">
+                          <h2 className="order__radioTitle">Payment</h2>
+                          <div className="items">
                             <label className="sq-radio">
                               Cash
                               <input
@@ -299,192 +277,13 @@ function Order({
                               />
                               <span className="checkmark" />
                             </label>
-                            {errors.payment && touched.payment && (
+                          </div>
+                          {errors.payment && touched.payment && (
                             <div className="errorRadio">{errors.payment}</div>
-                            )}
-                          </Form.Group>
-                        </div>
-                        <div className="order__checkBoxes__group">
-                          <Form.Group controlId="floatingInput">
-                            <h2 className="order__radioTitle">Delivery</h2>
-                            <label className="sq-radio">
-                              Self pickup
-                              <input
-                                type="radio"
-                                name="delivery"
-                                value="self"
-                                onChange={(e) => {
-                                  setAddressFinder(false);
-                                  handleChange(e);
-                                }}
-                              />
-                              <span className="checkmark" />
-                            </label>
-                            <label className="sq-radio">
-                              Courier delivery
-                              <input
-                                type="radio"
-                                name="delivery"
-                                value="courier"
-                                onChange={(e) => {
-                                  setAddressFinder(true);
-                                  handleChange(e);
-                                }}
-                              />
-                              <span className="checkmark" />
-                            </label>
-                            {errors.delivery && touched.delivery && (
-                            <div className="errorRadio">
-                              {errors.delivery}
-                            </div>
-                            )}
-                          </Form.Group>
-                        </div>
+                          )}
+                        </Form.Group>
                       </div>
-                      {addressFinder && (
-                      <>
-                        <div className="order__postcode">
-                          <Form.Group controlId="floatingInput">
-                            <InputGroup hasValidation>
-                              <FloatingLabel
-                                controlId="floatingInput"
-                                label="Postcode"
-                                className="order__input"
-                              >
-                                <Form.Control
-                                  type="text"
-                                  name="postcode"
-                                  placeholder="Postcode"
-                                  id="postcode_input"
-                                  value={values.postcode}
-                                  onChange={handleChange}
-                                  isValid={
-                                      touched.postcode && !errors.postcode
-                                    }
-                                  isInvalid={
-                                      touched.postcode && errors.postcode
-                                    }
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                  {errors.postcode}
-                                </Form.Control.Feedback>
-                              </FloatingLabel>
-                            </InputGroup>
-                          </Form.Group>
-                          <Button
-                            type="button"
-                            className="order__button order__button--findPostcode"
-                            variant="outline-light"
-                            id="postcode_button"
-                          >
-                            Find
-                          </Button>
-                        </div>
-                        <div id="lookup_field" />
-                        <Form.Group controlId="floatingInput">
-                          <InputGroup hasValidation>
-                            <FloatingLabel
-                              controlId="floatingInput"
-                              label="Address Line 1"
-                              className="order__input"
-                            >
-                              <Form.Control
-                                type="text"
-                                name="addressLine1"
-                                placeholder="Address Line 1"
-                                id="line_1"
-                                value={values.addressLine1}
-                                onChange={handleChange}
-                                isValid={
-                                    touched.addressLine1 && !errors.addressLine1
-                                  }
-                                isInvalid={
-                                    touched.addressLine1 && errors.addressLine1
-                                  }
-                              />
-                              <Form.Control.Feedback type="invalid">
-                                {errors.addressLine1}
-                              </Form.Control.Feedback>
-                            </FloatingLabel>
-                          </InputGroup>
-                        </Form.Group>
-                        <Form.Group controlId="floatingInput">
-                          <InputGroup hasValidation>
-                            <FloatingLabel
-                              controlId="floatingInput"
-                              label="Address Line 2"
-                              className="order__input"
-                            >
-                              <Form.Control
-                                type="text"
-                                name="addressLine2"
-                                id="line_2"
-                                placeholder="Address Line 2"
-                                value={values.addressLine2}
-                                onChange={handleChange}
-                                isValid={
-                                    touched.addressLine2 && !errors.addressLine2
-                                  }
-                                isInvalid={
-                                    touched.addressLine2 && errors.addressLine2
-                                  }
-                              />
-                              <Form.Control.Feedback type="invalid">
-                                {errors.addressLine2}
-                              </Form.Control.Feedback>
-                            </FloatingLabel>
-                          </InputGroup>
-                        </Form.Group>
-                        <Form.Group controlId="floatingInput">
-                          <InputGroup hasValidation>
-                            <FloatingLabel
-                              controlId="floatingInput"
-                              label="Address Line 3"
-                              className="order__input"
-                            >
-                              <Form.Control
-                                type="text"
-                                name="addressLine3"
-                                id="line_3"
-                                placeholder="Address Line 3"
-                                value={values.addressLine3}
-                                onChange={handleChange}
-                                isValid={
-                                    touched.addressLine3 && !errors.addressLine3
-                                  }
-                                isInvalid={
-                                    touched.addressLine3 && errors.addressLine3
-                                  }
-                              />
-                              <Form.Control.Feedback type="invalid">
-                                {errors.addressLine3}
-                              </Form.Control.Feedback>
-                            </FloatingLabel>
-                          </InputGroup>
-                        </Form.Group>
-                        <Form.Group controlId="floatingInput">
-                          <InputGroup hasValidation>
-                            <FloatingLabel
-                              controlId="floatingInput"
-                              label="Town"
-                              className="order__input"
-                            >
-                              <Form.Control
-                                type="text"
-                                name="town"
-                                id="post_town"
-                                placeholder="Town"
-                                value={values.town}
-                                onChange={handleChange}
-                                isValid={touched.town && !errors.town}
-                                isInvalid={touched.town && errors.town}
-                              />
-                              <Form.Control.Feedback type="invalid">
-                                {errors.town}
-                              </Form.Control.Feedback>
-                            </FloatingLabel>
-                          </InputGroup>
-                        </Form.Group>
+                      <div className="order__postcode">
                         <Form.Group controlId="floatingInput">
                           <InputGroup hasValidation>
                             <FloatingLabel
@@ -495,14 +294,16 @@ function Order({
                               <Form.Control
                                 type="text"
                                 name="postcode"
-                                id="postcode"
                                 placeholder="Postcode"
+                                id="postcode_input"
                                 value={values.postcode}
                                 onChange={handleChange}
-                                isValid={touched.postcode && !errors.postcode}
+                                isValid={
+                                      touched.postcode && !errors.postcode
+                                    }
                                 isInvalid={
-                                    touched.postcode && errors.postcode
-                                  }
+                                      touched.postcode && errors.postcode
+                                    }
                               />
                               <Form.Control.Feedback type="invalid">
                                 {errors.postcode}
@@ -510,8 +311,145 @@ function Order({
                             </FloatingLabel>
                           </InputGroup>
                         </Form.Group>
-                      </>
-                      )}
+                        <Button
+                          type="button"
+                          className="order__button order__button--findPostcode"
+                          variant="outline-light"
+                          id="postcode_button"
+                        >
+                          Find
+                        </Button>
+                      </div>
+                      <div id="lookup_field" />
+                      <Form.Group controlId="floatingInput">
+                        <InputGroup hasValidation>
+                          <FloatingLabel
+                            controlId="floatingInput"
+                            label="Address Line 1"
+                            className="order__input"
+                          >
+                            <Form.Control
+                              type="text"
+                              name="addressLine1"
+                              placeholder="Address Line 1"
+                              id="line_1"
+                              value={values.addressLine1}
+                              onChange={handleChange}
+                              isValid={
+                                    touched.addressLine1 && !errors.addressLine1
+                                  }
+                              isInvalid={
+                                    touched.addressLine1 && errors.addressLine1
+                                  }
+                            />
+                            <Form.Control.Feedback type="invalid">
+                              {errors.addressLine1}
+                            </Form.Control.Feedback>
+                          </FloatingLabel>
+                        </InputGroup>
+                      </Form.Group>
+                      <Form.Group controlId="floatingInput">
+                        <InputGroup hasValidation>
+                          <FloatingLabel
+                            controlId="floatingInput"
+                            label="Address Line 2"
+                            className="order__input"
+                          >
+                            <Form.Control
+                              type="text"
+                              name="addressLine2"
+                              id="line_2"
+                              placeholder="Address Line 2"
+                              value={values.addressLine2}
+                              onChange={handleChange}
+                              isValid={
+                                    touched.addressLine2 && !errors.addressLine2
+                                  }
+                              isInvalid={
+                                    touched.addressLine2 && errors.addressLine2
+                                  }
+                            />
+                            <Form.Control.Feedback type="invalid">
+                              {errors.addressLine2}
+                            </Form.Control.Feedback>
+                          </FloatingLabel>
+                        </InputGroup>
+                      </Form.Group>
+                      <Form.Group controlId="floatingInput">
+                        <InputGroup hasValidation>
+                          <FloatingLabel
+                            controlId="floatingInput"
+                            label="Address Line 3"
+                            className="order__input"
+                          >
+                            <Form.Control
+                              type="text"
+                              name="addressLine3"
+                              id="line_3"
+                              placeholder="Address Line 3"
+                              value={values.addressLine3}
+                              onChange={handleChange}
+                              isValid={
+                                    touched.addressLine3 && !errors.addressLine3
+                                  }
+                              isInvalid={
+                                    touched.addressLine3 && errors.addressLine3
+                                  }
+                            />
+                            <Form.Control.Feedback type="invalid">
+                              {errors.addressLine3}
+                            </Form.Control.Feedback>
+                          </FloatingLabel>
+                        </InputGroup>
+                      </Form.Group>
+                      <Form.Group controlId="floatingInput">
+                        <InputGroup hasValidation>
+                          <FloatingLabel
+                            controlId="floatingInput"
+                            label="Town"
+                            className="order__input"
+                          >
+                            <Form.Control
+                              type="text"
+                              name="town"
+                              id="post_town"
+                              placeholder="Town"
+                              value={values.town}
+                              onChange={handleChange}
+                              isValid={touched.town && !errors.town}
+                              isInvalid={touched.town && errors.town}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                              {errors.town}
+                            </Form.Control.Feedback>
+                          </FloatingLabel>
+                        </InputGroup>
+                      </Form.Group>
+                      <Form.Group controlId="floatingInput">
+                        <InputGroup hasValidation>
+                          <FloatingLabel
+                            controlId="floatingInput"
+                            label="Postcode"
+                            className="order__input"
+                          >
+                            <Form.Control
+                              type="text"
+                              name="postcode"
+                              id="postcode"
+                              placeholder="Postcode"
+                              value={values.postcode}
+                              onChange={handleChange}
+                              isValid={touched.postcode && !errors.postcode}
+                              isInvalid={
+                                    touched.postcode && errors.postcode
+                                  }
+                            />
+                            <Form.Control.Feedback type="invalid">
+                              {errors.postcode}
+                            </Form.Control.Feedback>
+                          </FloatingLabel>
+                        </InputGroup>
+                      </Form.Group>
                       <Form.Group controlId="floatingInput">
                         <InputGroup hasValidation>
                           <FloatingLabel
@@ -534,7 +472,6 @@ function Order({
                           </FloatingLabel>
                         </InputGroup>
                       </Form.Group>
-
                       <Form.Group className="terms">
                         <div className="termsGroup">
                           <div className="checkbox-wrapper-23">
