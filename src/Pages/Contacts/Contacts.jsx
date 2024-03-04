@@ -92,10 +92,10 @@ function Contacts() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <div className="contacts-info-text">
+                <div className="contacts-info-text social-media">
                   <h2>social media</h2>
-                  <p>instagram</p>
-                  <p>twitter</p>
+                  <a href="https://www.instagram.com/4rom_people/">instagram</a>
+                  <a href="https://www.facebook.com/from.people.4">facebook</a>
                 </div>
               </Col>
               <Col md={12} sm={7} className="contacts-info">
