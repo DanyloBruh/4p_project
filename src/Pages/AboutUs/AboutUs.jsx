@@ -15,7 +15,7 @@ function AboutUs() {
       <div className="about-us__header">
         <ImageComponent
           src={HeaderImg}
-          alt="12"
+          alt="dumplings with sour cream and greens"
           hash="2CD[@6~A4T"
           height={410}
           width="100%"
@@ -28,7 +28,7 @@ function AboutUs() {
           <Col lg={6}>
             <ImageComponent
               src={AboutUs1}
-              alt="12"
+              alt="vareniks with onions"
               hash="L7Du-.?b00M{0MR*xut78wNG_MtR"
               height={330}
               width="100%"
@@ -64,7 +64,7 @@ function AboutUs() {
           <Col lg={6}>
             <ImageComponent
               src={AboutUs2}
-              alt="shawerma"
+              alt="molded dumplings"
               hash="LUHng7?wpJtRE%%3XTxapIi{Won~"
               height={330}
               width="100%"
@@ -76,7 +76,7 @@ function AboutUs() {
           <Col lg={6}>
             <ImageComponent
               src={AboutUs3}
-              alt="borsch"
+              alt="happy employees"
               hash="LEHnQnyW-:xH1,xvIpX8~Br?M{Sg"
               height={330}
               width="100%"
@@ -112,7 +112,7 @@ function AboutUs() {
           <Col lg={6}>
             <ImageComponent
               src={AboutUs4}
-              alt="borsch"
+              alt="dumplings with sour cream and greens"
               hash="2CD[@6~A4T"
               height={330}
               width="100%"

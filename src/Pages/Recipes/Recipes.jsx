@@ -55,7 +55,7 @@ function Recipes() {
       <div className="recipes__header">
         <ImageComponent
           src={RecipeBg}
-          alt="12"
+          alt="vareniks with onions"
           hash="1XELW:}["
           height={505}
           width={window.innerWidth}

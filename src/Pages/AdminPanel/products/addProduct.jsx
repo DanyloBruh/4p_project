@@ -252,7 +252,7 @@ function AddProduct({ setData, fileOptions, close }) {
                       alt="add img"
                     />
                   ) : (
-                    <img alt="" />
+                    <img alt="add img" />
                   )}
                 </Form.Group>
                 <hr />

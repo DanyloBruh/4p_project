@@ -9,11 +9,6 @@ import './RecipeItemPlaceholder.scss';
 function RecipeItemPlaceholder() {
   return (
     <div className="product-placeholder">
-      {/* <img
-        onClick={() => handlerSelectProduct(4322)}
-        src={`data:image/png;base64,${image}`}
-        alt="dumplings-bg"
-      /> */}
       <div className="product-placeholder__img-placeholder" />
       <div className="product-placeholder__text">
         <h2>

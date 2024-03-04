@@ -67,14 +67,14 @@ function Menu() {
           <Carousel.Item>
             <ImageComponent
               src={Varenyk}
-              alt="12"
+              alt="varenyks with sour cream and onions"
               hash="L4Bz5-Em0KIq~BkWE2D%009FM_IU"
               height={505}
               width="100%"
             />
           </Carousel.Item>
           <Carousel.Item>
-            <img src={Borsch} alt="" />
+            <img src={Borsch} alt="borsch" />
           </Carousel.Item>
         </Carousel>
       </div>
@@ -114,12 +114,12 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={AboutUs1} alt="" />
+              <img src={AboutUs1} alt="vareniks with onions" />
             </Col>
           </Row>
           <Row className="main-page-about-us">
             <Col lg={5} md={6}>
-              <img src={AboutUs2} alt="" />
+              <img src={AboutUs2} alt="molded dumplings" />
             </Col>
             <Col lg={7} md={6}>
               <p>
@@ -139,7 +139,7 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={AboutUs3} alt="" />
+              <img src={AboutUs3} alt="happy employees" />
             </Col>
           </Row>
 

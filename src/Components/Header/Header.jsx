@@ -22,7 +22,7 @@ function Header() {
     <div className={`header ${color ? 'header__bg-black' : 'header__bg'}`}>
       <Container className="header__container">
         <Link to="/" className="header__logo">
-          <img src={Logo} alt="logo" />
+          <img src={Logo} alt="4p-logo" />
         </Link>
         <Navbar data-bs-theme="dark" className="header__navbar">
           <Navbar.Collapse id="basic-navbar-nav">

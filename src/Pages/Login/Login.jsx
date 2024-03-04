@@ -78,7 +78,7 @@ function Login() {
   return (
     <div className="login">
       <div className="login__content">
-        <img src={Logo} alt="4P logo" />
+        <img src={Logo} alt="4P-logo" />
         <h1>LOGIN</h1>
         <p>Please enter your login and password</p>
         <Formik
