@@ -7,6 +7,7 @@ import HeaderImg from '../../Assets/aboutus-bg.webp';
 import AboutUs1 from '../../Assets/aboutus-1.webp';
 import AboutUs2 from '../../Assets/aboutus-2.webp';
 import AboutUs3 from '../../Assets/aboutus-3.webp';
+import AboutUs4 from '../../Assets/aboutus-4.webp';
 
 function AboutUs() {
   return (
@@ -14,8 +15,8 @@ function AboutUs() {
       <div className="about-us__header">
         <ImageComponent
           src={HeaderImg}
-          alt="12"
-          hash="2CD[@6~A4T"
+          alt="dumplings with sour cream and greens"
+          hash="ACEB~b~B?aa{"
           height={410}
           width="100%"
         />
@@ -27,8 +28,8 @@ function AboutUs() {
           <Col lg={6}>
             <ImageComponent
               src={AboutUs1}
-              alt="12"
-              hash="L7Du-.?b00M{0MR*xut78wNG_MtR"
+              alt="vareniks with onions"
+              hash="L9E.CG^O00VY~Vn$D*s;8{Rjs.%2"
               height={330}
               width="100%"
               className="about-us__content__img right"
@@ -63,8 +64,8 @@ function AboutUs() {
           <Col lg={6}>
             <ImageComponent
               src={AboutUs2}
-              alt="shawerma"
-              hash="LUHng7?wpJtRE%%3XTxapIi{Won~"
+              alt="molded dumplings"
+              hash="CACip$x]02s.~qofD*f+"
               height={330}
               width="100%"
               className="about-us__content__img right"
@@ -75,8 +76,8 @@ function AboutUs() {
           <Col lg={6}>
             <ImageComponent
               src={AboutUs3}
-              alt="borsch"
-              hash="LEHnQnyW-:xH1,xvIpX8~Br?M{Sg"
+              alt="happy employees"
+              hash="CD9aBQ~qxuxuxuxuRjWB"
               height={330}
               width="100%"
               className="about-us__content__img left"
@@ -110,9 +111,9 @@ function AboutUs() {
           </Col>
           <Col lg={6}>
             <ImageComponent
-              src={HeaderImg}
-              alt="borsch"
-              hash="2CD[@6~A4T"
+              src={AboutUs4}
+              alt="dumplings with sour cream and greens"
+              hash="L7Db{6X{ELD~u6%5Djoh00ah?a%N"
               height={330}
               width="100%"
               className="about-us__content__img left"

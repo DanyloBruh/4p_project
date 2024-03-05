@@ -12,7 +12,7 @@ function SideBar({ openSideBar, setOpenSideBar }) {
   }, [location]);
   return (
     <div className={`sideBar ${openSideBar ? 'open' : 'close'}`}>
-      <img src={Logo} alt="4p logo" />
+      <img src={Logo} alt="4p-logo" />
       <Navbar data-bs-theme="dark" className="sideBar-navbar">
         <Navbar.Collapse id="sidenbar-navbar-nav">
           <Nav className="me-auto">

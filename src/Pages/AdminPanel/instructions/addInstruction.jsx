@@ -433,7 +433,7 @@ function AddInstruction({ setData, fileOptions, close }) {
                       alt="add img"
                     />
                   ) : (
-                    <img alt="" />
+                    <img alt="add img" />
                   )}
                 </Form.Group>
                 <Form.Group className="form-element">

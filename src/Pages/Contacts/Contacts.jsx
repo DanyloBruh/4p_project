@@ -26,7 +26,7 @@ function Contacts() {
       <ImageComponent
         src={ContactBg}
         alt="contact-bg"
-        hash="L5Ex;G.jn2xt1nxxD*R-u*xI?btR"
+        hash="LIIN%9_4NHrp16j^ofkCtSInn%kr"
         height="100%"
         width="100%"
       />
@@ -123,11 +123,11 @@ function Contacts() {
                   <h2>working hours</h2>
                   <div>
                     <p>Mon-Fri:</p>
-                    <p>8am-9pm</p>
+                    <p>10:00 am - 5:00 pm</p>
                   </div>
                   <div>
                     <p>Sat-Sun:</p>
-                    <p>8am-1am</p>
+                    <p>10:00 am - 5:00 pm</p>
                   </div>
                 </div>
               </Col>
@@ -149,7 +149,7 @@ function Contacts() {
                 scrolling="no"
                 marginHeight="0"
                 marginWidth="0"
-                src="https://maps.google.com/maps?width=350&amp;height=350&amp;hl=en&amp;q=5%20Wellesley%20Ct,%20London%20W9%201RG,%20United%20Kingdom+(4P)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                src="https://maps.google.com/maps?width=350&amp;height=350&amp;hl=en&amp;q=2%20Pavilion%20Cottages,%20Highgate,%20Forest%20Row%20RH18%205BA+(4P)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               >
                 <a href="https://www.gps.ie/">gps trackers</a>
               </iframe>

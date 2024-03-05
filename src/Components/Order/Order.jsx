@@ -83,7 +83,6 @@ function Order({
     });
   }, []);
 
-
   useEffect(() => {
     setProducts(productDedux);
   }, [productDedux]);
@@ -509,16 +508,7 @@ function Order({
                           </div>
                           <p className="termsGroup__text">
                             By clicking the button, you agree to the
-                            <Link
-                              to="privacy-policy"
-                              onClick={setOrderVisibleFalse}
-                              className="termsGroup__link"
-                            >
-                              {' '}
-                              public offer agreement
-                              {' '}
-                            </Link>
-                            and
+
                             <Link
                               to="privacy-policy"
                               onClick={setOrderVisibleFalse}

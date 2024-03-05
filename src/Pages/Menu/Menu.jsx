@@ -8,8 +8,10 @@ import './Menu.scss';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import Varenyk from '../../Assets/main-varenyk.webp';
-import Dumplings from '../../Assets/main-dumplings.webp';
 import Borsch from '../../Assets/main-borsch.webp';
+import AboutUs1 from '../../Assets/aboutus-1.webp';
+import AboutUs2 from '../../Assets/aboutus-2.webp';
+import AboutUs3 from '../../Assets/aboutus-3.webp';
 import MenuProduct from '../../Components/MenuProduct/MenuProduct';
 import SecondaryArticle from '../../Components/SecondaryArticle/SecondaryArticle';
 import ProductCard from '../../Components/ProductCard/ProductCard';
@@ -46,7 +48,7 @@ function Menu() {
   }, []);
 
   return (
-    <div className="menu-content">
+    <div className="menu-content" id="top">
       <div className="menu-header">
         <Container className="menu-header__text-box">
           <h2>From people to people</h2>
@@ -65,17 +67,14 @@ function Menu() {
           <Carousel.Item>
             <ImageComponent
               src={Varenyk}
-              alt="12"
-              hash="L4Bz5-Em0KIq~BkWE2D%009FM_IU"
+              alt="varenyks with sour cream and onions"
+              hash="L5G*4o~18^%g19yYIAM{02=#.9E1"
               height={505}
               width="100%"
             />
           </Carousel.Item>
           <Carousel.Item>
-            <img src={Dumplings} alt="" />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img src={Borsch} alt="" />
+            <img src={Borsch} alt="borsch" />
           </Carousel.Item>
         </Carousel>
       </div>
@@ -115,12 +114,12 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={Dumplings} alt="" />
+              <img src={AboutUs1} alt="vareniks with onions" />
             </Col>
           </Row>
           <Row className="main-page-about-us">
             <Col lg={5} md={6}>
-              <img src={Varenyk} alt="" />
+              <img src={AboutUs2} alt="molded dumplings" />
             </Col>
             <Col lg={7} md={6}>
               <p>
@@ -140,7 +139,7 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={Borsch} alt="" />
+              <img src={AboutUs3} alt="happy employees" />
             </Col>
           </Row>
 
@@ -156,19 +155,19 @@ function Menu() {
           <h2>more about our activities</h2>
           <Row>
             {blogItems
-            && blogItems?.map((item) => (
-              <Col key={item.id} lg={4} sm={6}>
-                <SecondaryArticle
-                  id={item.id}
-                  title={item.name}
-                  text={item.text}
-                  createdBy={item.User.name}
-                  image={item.Images[0].imageData}
-                  imageName={item.Images[0].imageName}
-                  createdAt={moment(item.createdAt).format('DD/MM/YY')}
-                />
-              </Col>
-            ))}
+              && blogItems?.map((item) => (
+                <Col key={item.id} lg={4} sm={6}>
+                  <SecondaryArticle
+                    id={item.id}
+                    title={item.name}
+                    text={item.text}
+                    createdBy={item.User.name}
+                    image={item.Images[0].imageData}
+                    imageName={item.Images[0].imageName}
+                    createdAt={moment(item.createdAt).format('DD/MM/YY')}
+                  />
+                </Col>
+              ))}
             {!blogItems && (
               <>
                 <Col lg={4} sm={6}>
