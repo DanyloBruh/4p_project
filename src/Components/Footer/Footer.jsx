@@ -12,7 +12,9 @@ function Footer() {
       <Container>
         <Row className="footer-row">
           <Col md={3} sm={2} className="footer-col logo">
-            <img src={Logo} alt="4p-logo" className="footer-logo" />
+            <Link to="top" duration={200} className="scroll-link">
+              <img src={Logo} alt="4p-logo" className="footer-logo" />
+            </Link>
           </Col>
           <Col md={2} sm={2} className="footer-col">
             <Link to="top" duration={200} className="scroll-link">
