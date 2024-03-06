@@ -57,9 +57,6 @@ function Order({
       addressLine3: Yup.string(),
       town: Yup.string().required(),
       terms: Yup.bool().required().oneOf([true], 'Terms must be accepted'),
-      delivery: Yup.string()
-        .required('required')
-        .oneOf(['self', 'courier'], 'required'),
       payment: Yup.string()
         .required('required')
         .oneOf(['card', 'cash'], 'required'),
@@ -141,7 +138,7 @@ function Order({
       adress: addressLine,
       comment: values.comment,
       paymentType: values.payment,
-      deliveryType: values.delivery,
+      deliveryType: 'courier',
       totalAmount: total,
       productIds,
     };
@@ -174,7 +171,6 @@ function Order({
     addressLine3: '',
     town: '',
     comment: '',
-    delivery: '',
     payment: '',
     terms: '',
   };
