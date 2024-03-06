@@ -66,7 +66,7 @@ function Order({
 
   useEffect(() => {
     PostcodeLookup.setup({
-      apiKey: process.env.POSTCODE_API_KEY,
+      apiKey: 'ak_lt1j7ip3Ru2e4rWsDCVy8jivmubXG',
       context: '#lookup_field',
       input: '#postcode_input',
       button: '#postcode_button',
