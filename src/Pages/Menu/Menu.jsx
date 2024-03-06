@@ -74,7 +74,13 @@ function Menu() {
             />
           </Carousel.Item>
           <Carousel.Item>
-            <img src={Borsch} alt="borsch" />
+            <ImageComponent
+              src={Borsch}
+              alt="borsch"
+              hash="LFFEy7yE%L$%u6x^Ncj@-;soRQWV"
+              height={505}
+              width="100%"
+            />
           </Carousel.Item>
         </Carousel>
       </div>
@@ -114,12 +120,24 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={AboutUs1} alt="vareniks with onions" />
+              <ImageComponent
+                src={AboutUs1}
+                alt="vareniks with onions"
+                hash="L9E.CG^O00VY~Vn$D*s;8{Rjs.%2"
+                height={250}
+                width="100%"
+              />
             </Col>
           </Row>
           <Row className="main-page-about-us">
             <Col lg={5} md={6}>
-              <img src={AboutUs2} alt="molded dumplings" />
+              <ImageComponent
+                src={AboutUs2}
+                alt="molded dumplings"
+                hash="CACip$x]02s.~qofD*f+"
+                height={250}
+                width="100%"
+              />
             </Col>
             <Col lg={7} md={6}>
               <p>
@@ -139,7 +157,13 @@ function Menu() {
               </p>
             </Col>
             <Col lg={5} md={6}>
-              <img src={AboutUs3} alt="happy employees" />
+              <ImageComponent
+                src={AboutUs3}
+                alt="happy employees"
+                hash="CD9aBQ~qxuxuxuxuRjWB"
+                height={250}
+                width="100%"
+              />
             </Col>
           </Row>
 

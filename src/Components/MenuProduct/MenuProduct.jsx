@@ -45,7 +45,7 @@ function MenuProduct({ product, setSelectItems }) {
         <button type="button" className="poroduct-name-button" onClick={() => setSelectItems(product.id)}>
           {product.name}
         </button>
-        <p id="price">{`PRICE | ${product.price}$`}</p>
+        <p id="price">{`PRICE | ${product.price}£`}</p>
         <p>{product.description}</p>
         <div className="btn-group">
           <Counter count={count} decr={decCount} incr={incCount} />
