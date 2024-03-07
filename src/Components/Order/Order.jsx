@@ -83,7 +83,6 @@ function Order({
     });
   }, []);
 
-
   useEffect(() => {
     setProducts(productDedux);
   }, [productDedux]);
