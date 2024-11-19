@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/4p_project/static/css/main.f880111a.css",
+    "main.js": "/4p_project/static/js/main.b45f66dd.js",
+    "static/media/aboutus-bg.webp": "/4p_project/static/media/aboutus-bg.d1a88d4e5795bbdc8e91.webp",
+    "static/media/recipe-bg.webp": "/4p_project/static/media/recipe-bg.d048bbbd2bd75dc93448.webp",
+    "static/media/main-varenyk.webp": "/4p_project/static/media/main-varenyk.cbbbbd97c1dadec79004.webp",
+    "static/media/contacts-bg.webp": "/4p_project/static/media/contacts-bg.9cd918ae9481b4963355.webp",
+    "static/media/aboutus-2.webp": "/4p_project/static/media/aboutus-2.3e36cd0c55d82b5eda54.webp",
+    "static/media/aboutus-4.webp": "/4p_project/static/media/aboutus-4.acdc0ba32bac4d4d68c7.webp",
+    "static/media/main-borsch.webp": "/4p_project/static/media/main-borsch.5ceb447717c5d494d3a4.webp",
+    "static/media/not-found-bg.png": "/4p_project/static/media/not-found-bg.1c23eb641695605a7492.png",
+    "static/media/aboutus-1.webp": "/4p_project/static/media/aboutus-1.d33bf0b68b860784e2ba.webp",
+    "static/media/aboutus-3.webp": "/4p_project/static/media/aboutus-3.165fbcc5289c01b8fa0e.webp",
+    "static/media/ornament-menu.png": "/4p_project/static/media/ornament-menu.a02b056b5c2e395128b7.png",
+    "static/media/paketOrder.svg": "/4p_project/static/media/paketOrder.5c1366842bbd42e47769.svg",
+    "static/media/cross.svg": "/4p_project/static/media/cross.baea0e1f1907cd753d1b.svg",
+    "static/media/crossorder.svg": "/4p_project/static/media/crossorder.fb2518fae625f02f1c74.svg",
+    "index.html": "/4p_project/index.html",
+    "static/media/down-chevron.svg": "/4p_project/static/media/down-chevron.216cd41fad8e82a2a5ac.svg",
+    "main.f880111a.css.map": "/4p_project/static/css/main.f880111a.css.map",
+    "main.b45f66dd.js.map": "/4p_project/static/js/main.b45f66dd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f880111a.css",
+    "static/js/main.b45f66dd.js"
+  ]
+}
