@@ -94,10 +94,10 @@ function AdminPanel() {
     };
 
     socket.onmessage = (event) => {
+      ToastNotification('info', 'A new order has been created');
       const id = JSON.parse(event.data);
       if (category === 'order') {
         getDataByCategoryId('order', id, axiosPrivate).then((order) => {
-          ToastNotification('info', 'A new order has been created');
           setData((d) => [order, ...d]);
         });
       }

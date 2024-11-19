@@ -1,18 +1,18 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'https://www.4rompeople.com:99',
+  baseURL: process.env.REACT_APP_BASE_URL,
   withCredentials: true,
 });
 
 export const axiosPrivate = axios.create({
-  baseURL: 'https://www.4rompeople.com:99',
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
 });
 
 export const axiosPrivateConfig = axios.create({
-  baseURL: 'https://www.4rompeople.com:99',
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: { 'Content-Type': 'multipart/form-data' },
   withCredentials: true,
 });
