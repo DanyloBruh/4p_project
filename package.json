@@ -1,4 +1,5 @@
 {
+  "homepage": "http://danylobruh.github.io/4p_project/",
   "name": "4p_project",
   "version": "0.1.0",
   "private": true,
@@ -51,7 +52,9 @@
     "format": "prettier . --ignore-path .gitignore --write",
     "lint": "eslint . --ext .js,.jsx --ignore-pattern .gitignore --fix",
     "fix-style": "npm run lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
@@ -72,6 +75,7 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^6.2.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "prettier": "3.1.1"
